@@ -1,0 +1,44 @@
+.rojo {
+    color:red;
+}
+.resaltado {
+    background:lightgray;
+}
+#tc {
+    font-style: italic;
+}
+img[src$=".png"] {
+    background: #000000 ;
+}
+h1 {
+    background: #b71234;
+    color: #bfbfbf;
+}
+td {
+    padding: 4px;
+}
+table {
+    background-color: lightgray;
+    border-style: solid;
+    border-color: white;
+    border-collapse: separate;
+    text-align: center;
+}
+.lg {
+    background: #adff2f ;
+}
+.g {
+    background: #9acd32 ;
+}
+.lb {
+    background: #ffd700 ;
+}
+.b {
+    background: #daa520 ;
+}
+.lp {
+    background: #dda0dd ;
+}
+.p {
+    background: #da70d6;
+}
