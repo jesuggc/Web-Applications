@@ -1,0 +1,29 @@
+html {
+    font-family: Arial;
+}
+div {
+    background-color: plum;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 20px;
+}
+textarea {
+    height: 10em;
+    width: 100%;
+    
+}
+fieldset {
+   background-color: plum;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 20px;
+    border-color: transparent;
+    
+}
+legend{
+    background-color:black;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    opacity: 90%;
+}

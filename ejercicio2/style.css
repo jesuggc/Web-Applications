@@ -1,3 +1,10 @@
+html {
+    font-family: Arial;
+}
+td, th {
+    border: 2px solid white;
+}
+
 .rojo {
     color:red;
 }
@@ -6,6 +13,10 @@
 }
 #tc {
     font-style: italic;
+    background-color: white;
+    border-collapse: collapse;
+    border:3px solid lightgray;
+    text-align: center;
 }
 img[src$=".png"] {
     background: #000000 ;
@@ -17,28 +28,21 @@ h1 {
 td {
     padding: 4px;
 }
-table {
-    background-color: lightgray;
-    border-style: solid;
-    border-color: white;
-    border-collapse: separate;
-    text-align: center;
+th {
+    background: lightgray;
 }
 .lg {
     background: #adff2f ;
 }
-.g {
-    background: #9acd32 ;
-}
 .lb {
     background: #ffd700 ;
-}
-.b {
-    background: #daa520 ;
 }
 .lp {
     background: #dda0dd ;
 }
-.p {
-    background: #da70d6;
+.link {
+    padding: 8px;
+    background: black ;
+    text-decoration: none;
+    color:white;
 }

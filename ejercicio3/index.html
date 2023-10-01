@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Suscripción a la revista</h1>
+    <form>
+        <fieldset>
+            <legend>Datos personales</legend>
+
+
+            <label for="">Nombre: <input type="form"> Primer apellido: <input type="form"> Segundo apellido: <input
+                    type="form"></label>
+            <p><label>Dirección: <input type="form" placeholder="Calle o plaza, número y piso"></label></p>
+            <p><label>E-mail: <input type="form" placeholder="@"></label></p>
+            <p>Contraseña: <input type="password"></p>
+            <p>Sexo:</p>
+            <label> <input type="radio"> Varón </label>
+            <br>
+            <label> <input type="radio"> Mujer </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Nivel de estudios e intereses</legend>
+            <label>Nivel de estudios</label>
+            <br>
+            <select>
+                <option>ESO</option>
+                <option>Bachiller/Grado medio</option>
+                <option>Universidad/Grado superior</option>
+                <option>Doctorado/Master</option>
+                <option>Estudiante de AW</option>
+            </select>
+            <p><label>Recibir articulos sobre los siguientes temas:</label></p>
+            <input type="checkbox"><label>Música</label> <br>
+            <input type="checkbox"><label>Deportes</label> <br>
+            <input type="checkbox"><label>Cine</label> <br>
+            <input type="checkbox"><label>Libros</label> <br>
+            <input type="checkbox"><label>Ciencia</label>
+        </fieldset>
+        <fieldset>
+            <legend>Datos sobre la revista</legend>
+            <label>Frecuencia con la que se recibirá la revista:</label>
+            <p>
+                <select>
+                    <option>Semanal</option>
+                    <option>Mensual</option>
+                    <option>Trimestral</option>
+                    <option>Anual</option>
+                </select>
+            </p>
+            <p>Puedes mandar tu artículo sobre cualquier tema de los que tratamos. Nosotros lo valoraremos para que
+                pueda ser publicado.</p>
+            <p>Mandar artículo: <input value="s" type="file"></p>
+            <p>Si deseas mandar simplemente una opinión o comentario escribelo aquí.</p>
+            <textarea placeholder="Escribe tu comentario:"></textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Comenzar de nuevo</legend>
+            <p>Borrar todos los datos del formulario y volver a empezar: <button>Borrar todo</button></p>
+        </fieldset>
+        <fieldset>
+            <legend>Enviar</legend>
+            <p>Enviar formulario por correo electrónico: Al pulsar en el botón se abrirá la página de envio de correo:
+                en esa página pulsa en enviar:</p>
+            <p><button>Enviar por correo</button></p>
+        </fieldset>
+    </form>
+</body>
+
+</html>

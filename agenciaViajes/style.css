@@ -1,4 +1,23 @@
+body {
+    font-family: Arial;
+    background-color: #B4CDED;
+}
 li {
     list-style-type: none;
     margin-left:-30px; /*TODO cambiar*/
+}
+.richBlack {
+    background-color: #071E22;
+}
+.skobeloff {
+    background-color: #1D7874;
+}
+.naplesyellow {
+    background-color: #F9DB6D;
+}
+.oldrose {
+    background-color: #CE796B;
+}
+.powderblue {
+    background-color: #B4CDED;
 }
