@@ -2,24 +2,22 @@ body {
     font-family: Arial;
     background-color: #B4CDED;
 }
-img{
-    border-radius: 2%;
-}
-.navbar{
+
+/*Formulario reserva*/
+.resVuelo{
+    background-color: #1D7874;
     
+    color: aliceblue;
+}
+.form-group{
+    padding: 1%;
+}
+.btn{
     background-color: #F9DB6D;
-    position: sticky;
-    top: 0;
-    z-index: 100; /* Asegura que el navbar esté por encima del contenido */
+    align-self: flex-end;
 }
-.nav-item{
-    
-}
-.nav-link{
-    color: #071E22;
-    font-weight: bolder;
-    
-}
+
+/*NAVBAR*/
 .navbar:hover .nav-item{
     filter:blur(1.5px);
     opacity:0.5;
@@ -33,15 +31,22 @@ img{
     box-shadow:0 8px 20px 0px #1D7874;
     font-weight: bolder;
 }
-.footer{
-    background-color: #b1911d;
-    opacity: 75%;
+.nav-link{
+    color: #071E22;
+    font-weight: bolder;  
 }
+.navbar{
+    background-color: #F9DB6D;
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Asegura que el navbar esté por encima del contenido */
+}
+
+/*DESTINOS*/
 .card:hover{
     background-color: #1D7874 ;
     text-indent: 25%;
-    transition: ease 1s;
-    
+    transition: ease 1s;  
 }
 .card{
     background-color: #071E22;
@@ -56,12 +61,21 @@ img{
     
 }
 .img-fluid{
-    height: 15em;
+    height: 75%;
+    border-radius: 2%;
+}
+
+/*FOOTER*/
+.footer{
+    background-color: #b1911d;
+    opacity: 75%;
 }
 li {
     list-style-type: none;
     margin-left:-30px; /*TODO cambiar*/
 }
+
+/*Colores*/
 .richBlack {
     background-color: #071E22;
 }
