@@ -1,0 +1,27 @@
+header {
+    height: 10em;
+}
+footer {
+    height: 5em;
+}
+.options {
+    width: 30%;
+}
+.navbar {
+    height: 3em;
+}
+.parent {
+    display: flex;
+}
+.content, .options {
+    height: 27em;
+}
+.parent, header, .content, footer, .navbar {
+    width: 100%;
+}
+header, footer, .content, .options, .navbar {
+    background-color: cornflowerblue;
+    margin: 2px;
+    border-radius: 20px;
+
+}

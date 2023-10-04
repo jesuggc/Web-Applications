@@ -1,0 +1,40 @@
+header {
+    height: 10em;
+    vertical-align: middle;
+    align-content: center;
+}
+footer {
+    height: 5em;
+}
+.options {
+    width: 30%;
+}
+.navbar {
+    height: 3em;
+}
+.parent {
+    display: flex;
+}
+.logo {
+    height: 80%;
+    width: 15%;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 2em;
+}
+
+.art {
+    height: 49%;
+    width: 20em;
+}
+.content, .options {
+    height: 27em;
+}
+.parent, header, .content, footer, .navbar {
+    width: 100%;
+}
+header, footer, .content, .options, .navbar, .art{
+    background-color: darkslateblue;
+    margin: 2px;
+    border-radius: 20px;
+}

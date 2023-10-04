@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="container-fluid">
         <!--LOGO-->
         <header>
             <div class="p-4 ">
@@ -49,54 +49,43 @@
                 </ul>
             </div>
         </nav>
-        <!--RESERVA VUELO-->
-        <div class="resVuelo container my-2">
+        <!--BUSCADOR-->
+        <div class="resVuelo my-2">
             <form>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="origen">Origen:</label>
-                            <input type="text" class="form-control" id="origen" placeholder="Origen" required>
-                        </div>
+                <div class="row m-auto ">
+                    <div class="col-md-2 form-group">
+                        <label for="origen">Origen:</label>
+                        <input type="text" class="form-control" id="origen" placeholder="Origen" required>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="destino">Destino:</label>
-                            <input type="text" class="form-control" id="destino" placeholder="Destino" required>
-                        </div>
+                    <div class="col-md-2 form-group">
+                        <label for="destino">Destino:</label>
+                        <input type="text" class="form-control" id="destino" placeholder="Destino" required>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fecha-ida">Fecha de Ida:</label>
-                            <input type="date" class="form-control" id="fecha-ida" required>
-                        </div>
+                    <div class="col-md-2 form-group">
+                        <label for="fecha-ida">Fecha de Ida:</label>
+                        <input type="date" class="form-control" id="fecha-ida" required>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="fecha-vuelta">Fecha de Vuelta:</label>
-                            <input type="date" class="form-control" id="fecha-vuelta" required>
-                        </div>
+                    <div class="col-md-2 form-group">
+                        <label for="fecha-vuelta">Fecha de Vuelta:</label>
+                        <input type="date" class="form-control" id="fecha-vuelta" required>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="pasajeros">Número de Pasajeros:</label>
+                        <input type="number" class="form-control" id="pasajeros" placeholder="Cantidad de pasajeros"
+                            required>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="pasajeros">Número de Pasajeros:</label>
-                            <input type="number" class="form-control" id="pasajeros" placeholder="Cantidad de pasajeros" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn col-2 my-2 btn-lg">Registrar Vuelo</button>
+                    <button type="submit" class="btn col-6 m-auto my-2 btn-lg">Registrar Vuelo</button>
                 </div>
             </form>
         </div>
-        
+
         <!--Destinos, España-->
         <div class="container">
             <div class=" row">
                 <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
-                    <img src="imagenes\madrid.jpg" class="img-fluid card-img-top" alt="Imagen de madrid">
+                    <img src="imagenes\madrid.jpg" class="img-fluid" alt="Imagen de madrid">
                     <div class="card-body">
                         <h5 class="text-center card-title">Madrid</h5>
                     </div>

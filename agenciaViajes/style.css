@@ -3,6 +3,7 @@ body {
     background-color: #B4CDED;
 }
 
+
 /*Formulario reserva*/
 .resVuelo{
     background-color: #1D7874;
@@ -14,7 +15,7 @@ body {
 }
 .btn{
     background-color: #F9DB6D;
-    align-self: flex-end;
+    /* align-self: flex-end; */
 }
 
 /*NAVBAR*/

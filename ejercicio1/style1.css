@@ -4,22 +4,19 @@ header {
 footer {
     height: 5em;
 }
-
 .parent {
-    display: flex;
-    align-content: center;
+    width: 60%;
+    margin:auto;
 }
 .content {
     height: 27em;
-    width: 60%;
-    margin: auto;
+    width: 20em;
 }
-.parent, header, footer {
+ header, footer, .content {
     width: 100%;
 }
 header, footer, .content {
     background-color: lightgreen;
     margin: 2px;
     border-radius: 20px;
-
 }
