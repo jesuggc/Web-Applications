@@ -1,0 +1,25 @@
+header {
+    height: 10em;
+}
+footer {
+    height: 5em;
+}
+
+.parent {
+    display: flex;
+    align-content: center;
+}
+.content {
+    height: 27em;
+    width: 60%;
+    margin: auto;
+}
+.parent, header, footer {
+    width: 100%;
+}
+header, footer, .content {
+    background-color: lightgreen;
+    margin: 2px;
+    border-radius: 20px;
+
+}
