@@ -1,0 +1,24 @@
+header {
+    height: 10em;
+}
+footer {
+    height: 5em;
+}
+.options {
+    width: 30%;
+}
+.parent {
+    display: flex;
+}
+.content, .options {
+    height: 27em;
+}
+.parent, header, .content, footer {
+    width: 100%;
+}
+header, footer, .content, .options {
+    background-color: #E077FD;
+    margin: 2px;
+    border-radius: 20px;
+
+}
