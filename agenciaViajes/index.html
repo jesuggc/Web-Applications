@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div>
         <!--LOGO-->
         <header>
             <div class="p-4 ">
@@ -23,34 +23,30 @@
             </div>
         </header>
 
-        <div>
-            <img class="mx-auto d-block" src="imagenes/logo.png" />
-        </div>
-
         <!--NAVBAR-->
         <nav class="navbar navbar-expand-lg ">
             <div class="mx-auto">
                 <ul class="navbar-nav">
-                    <li class="nav-item px-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#">Home</a>
                     </li>
-                    <li class="nav-item px-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#">Destinos</a>
                     </li>
-                    <li class="nav-item px-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#">España</a>
                     </li>
-                    <li class="nav-item px-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#">Ofertas</a>
                     </li>
-                    <li class="nav-item px-3">
+                    <li class="nav-item mx-3">
                         <a class="nav-link" href="#">Somos</a>
                     </li>
                 </ul>
             </div>
         </nav>
         <!--BUSCADOR-->
-        <div class="resVuelo my-2">
+        <div class="resVuelo">
             <form>
                 <div class="row m-auto ">
                     <div class="col-md-2 form-group">
@@ -69,114 +65,113 @@
                         <label for="fecha-vuelta">Fecha de Vuelta:</label>
                         <input type="date" class="form-control" id="fecha-vuelta" required>
                     </div>
-                    <div class="col-md-3 form-group">
-                        <label for="pasajeros">Número de Pasajeros:</label>
-                        <input type="number" class="form-control" id="pasajeros" placeholder="Cantidad de pasajeros"
-                            required>
+                    <div class="col-md-1 form-group">
+                        <label for="pasajeros">Pasajeros:</label>
+                        <input type="number" min= 0 class="form-control" id="pasajeros" placeholder="0" required>
                     </div>
-                </div>
-                <div class="row">
-                    <button type="submit" class="btn col-6 m-auto my-2 btn-lg">Registrar Vuelo</button>
+                    <button type="submit" class="btn col-2 ms-4 my-4 btn-lg" style="height: 3em;">Registrar Vuelo</button>
                 </div>
             </form>
         </div>
 
         <!--Destinos, España-->
-        <div class="container">
-            <div class=" row">
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+        <div class="container-fluid">
+            <div class="row mx-auto">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-4">
                     <img src="imagenes\madrid.jpg" class="img-fluid" alt="Imagen de madrid">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Madrid</h5>
+                        <h2 class="text-center card-title mt-2">Madrid</h2>
+                        <p class="hiddenhover ">Hola bienvenido a madrid</p>
                     </div>
+                    
                 </div>
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-4">
                     <img src="imagenes\cadiz.jpg" class="img-fluid card-img-top" alt="Imagen de cadiz">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Cádiz</h5>
+                        <h2 class="text-center card-title mt-2">Cádiz</h2>
                     </div>
                 </div>
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-4">
                     <img src="imagenes\barcelona.jpg" class="img-fluid card-img-top" alt="Imagen de barcelona">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Barcelona</h5>
+                        <h2 class="text-center card-title mt-2">Barcelona</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-3">
                     <img src="imagenes\ibiza.jpg" class="img-fluid card-img-top" alt="Imagen de ibiza">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Ibiza</h5>
+                        <h2 class="text-center card-title mt-2">Ibiza</h2>
                     </div>
                 </div>
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-3">
                     <img src="imagenes\valencia.jpg" class="img-fluid card-img-top" alt="Imagen de valencia">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Valencia</h5>
+                        <h2 class="text-center card-title mt-2">Valencia</h2>
                     </div>
                 </div>
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-3">
                     <img src="imagenes\asturias.jpg" class="img-fluid card-img-top" alt="Imagen de asturias">
                     <div class="card-body">
-                        <h5 class="text-center card-title">Asturias</h5>
+                        <h2 class="text-center card-title mt-2">Asturias</h2>
                     </div>
                 </div>
             </div>
-            <div class="row ">
-                <div class="card my-4 mx-auto p-2 col-sm-1 col-md-2 col-lg-3">
+            <!-- <div class="row ">
+                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-3">
                     <img src="imagenes\sevilla.jpg" class="img-fluid card-img-top" alt="Imagen de sevilla">
                     <div class="card-body">
                         <h5 class="text-center card-title">Sevilla</h5>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
-        <footer>
-            <div class="footer">
-                <div class="row p-4 mx-4">
-                    <div class="col">
-                        <h2> Contacto </h2>
-                        </br>
-                        <ul>
-                            <li>hola@agenciadevuelos.com</li>
-                            <li>+34 658095541</li>
-
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h2>Conócenos</h2>
-                        </br>
-                        <ul>
-                            <li>Quienes somos</li>
-                            <li>Nuestro equipo</li>
-                            <li>Trabaja con nosotros</li>
-                        </ul>
-                    </div>
-                    <div class="col ">
-                        <h2> Ofertas </h2>
-                        </br>
-                        <ul>
-                            <li>Tercera edad</li>
-                            <li>Estudiantes</li>
-                            <li>Familias</li>
-
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h2> Información legal </h2>
-                        </br>
-                        <ul>
-                            <li>Aviso legal</li>
-                            <li>Cookies</li>
-                            <li>Privacidad</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 </body>
+<footer>
+    <div class="footer richBlack">
+        <div class="row p-4 mx-4">
+            <div class="col">
+                <h2> Contacto </h2>
+                </br>
+                <ul>
+                    <li>hola@agenciadevuelos.com</li>
+                    <li>+34 658095541</li>
+
+                </ul>
+            </div>
+            <div class="col">
+                <h2>Conócenos</h2>
+                </br>
+                <ul>
+                    <li>Quienes somos</li>
+                    <li>Nuestro equipo</li>
+                    <li>Trabaja con nosotros</li>
+                </ul>
+            </div>
+            <div class="col ">
+                <h2> Ofertas </h2>
+                </br>
+                <ul>
+                    <li>Tercera edad</li>
+                    <li>Estudiantes</li>
+                    <li>Familias</li>
+
+                </ul>
+            </div>
+            <div class="col">
+                <h2> Información legal </h2>
+                </br>
+                <ul>
+                    <li>Aviso legal</li>
+                    <li>Cookies</li>
+                    <li>Privacidad</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </html>

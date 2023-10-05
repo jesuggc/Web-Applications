@@ -2,6 +2,7 @@ header {
     height: 10em;
     vertical-align: middle;
     align-content: center;
+    vertical-align: center;
 }
 footer {
     height: 5em;

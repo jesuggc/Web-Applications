@@ -15,7 +15,9 @@ body {
 }
 .btn{
     background-color: #F9DB6D;
-    /* align-self: flex-end; */
+}
+.btn:hover{
+    background-color: #CE796B;
 }
 
 /*NAVBAR*/
@@ -35,6 +37,7 @@ body {
 .nav-link{
     color: #071E22;
     font-weight: bolder;  
+    
 }
 .navbar{
     background-color: #F9DB6D;
@@ -44,32 +47,59 @@ body {
 }
 
 /*DESTINOS*/
-.card:hover{
+.mycard:hover{
     background-color: #1D7874 ;
-    text-indent: 25%;
+    
     transition: ease 1s;  
 }
-.card{
+.mycard{
     background-color: #071E22;
+    width: 29%;
 }
 .card-title{
     color: #B4CDED;
+
 }
-.card:hover .card-title {
+.mycard:hover {
+    background-color: red;
+    overflow: visible;
+    
+
+}
+
+.hiddenhover {
+    display: none;
+    background-color: white;
+    
+}
+.mycard:hover .hiddenhover {
+    display: block;
+    color:black;
+}
+
+.mycard:hover .card-title .img-fluid {
     transition: linear 0.5s;
     font-weight: bolder;
     color:#5c96e1;
     
 }
+.mycard {
+    background-color: black;
+    padding:0;
+    border-radius: 1em;
+    height: 15em;
+}
 .img-fluid{
     height: 75%;
-    border-radius: 2%;
+    border-top-left-radius: 1em;
+    border-top-right-radius:1em;
+    width:100%;
 }
 
 /*FOOTER*/
 .footer{
-    background-color: #b1911d;
-    opacity: 75%;
+    color: white;
+    /* opacity: 75%; */
 }
 li {
     list-style-type: none;
