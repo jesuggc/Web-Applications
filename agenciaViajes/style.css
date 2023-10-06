@@ -44,45 +44,25 @@ body {
 /*DESTINOS*/
 .mycard:hover{
     background-color: #1D7874 ;
-    
     transition: ease 1s;  
 }
 .mycard{
     background-color: #071E22;
-    width: 29%;
+    padding:0;
+    border-radius: 1em;
+    height: 15em;
 }
+
 .card-title{
     color: #B4CDED;
 
 }
-.mycard:hover {
-    background-color: red;
-    overflow: visible;
-    
 
-}
-
-.hiddenhover {
-    display: none;
-    background-color: white;
-    
-}
-.mycard:hover .hiddenhover {
-    display: block;
-    color:black;
-}
-
-.mycard:hover .card-title .img-fluid {
+.mycard:hover .card-title  {
     transition: linear 0.5s;
     font-weight: bolder;
     color:#5c96e1;
     
-}
-.mycard {
-    background-color: black;
-    padding:0;
-    border-radius: 1em;
-    height: 15em;
 }
 .img-fluid{
     height: 75%;
@@ -94,11 +74,14 @@ body {
 /*FOOTER*/
 .footer{
     color: white;
-    /* opacity: 75%; */
 }
 li {
     list-style-type: none;
-    margin-left:-30px; /*TODO cambiar*/
+    margin-left:-30px; 
+}
+a {
+    text-decoration: none;
+    color:white;
 }
 
 /*Colores*/
