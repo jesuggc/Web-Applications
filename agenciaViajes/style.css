@@ -3,19 +3,14 @@ body {
     background-color: #B4CDED;
 }
 
-
 /*Formulario reserva*/
-.resVuelo{
-    background-color: #1D7874;
-    
+.resVuelo{  
     color: aliceblue;
 }
 .form-group{
     padding: 1%;
 }
-.btn{
-    background-color: #F9DB6D;
-}
+
 .btn:hover{
     background-color: #CE796B;
 }
