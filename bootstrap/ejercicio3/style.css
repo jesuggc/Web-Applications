@@ -4,7 +4,7 @@ body {
 } 
 
 .rPanel {
-    background-repeat: repeat;
+    background-repeat: repeatl;
     background-image: url("./perro.jpg");
     z-index: 10;
     background-size: 10% 10%;
