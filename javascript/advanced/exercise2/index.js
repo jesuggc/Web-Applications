@@ -22,9 +22,7 @@ function sequence3 (a, x, right=false) {
         }
         return x;
     }
-    else{
-        return sequence2(a,x);
-    }
+    else return sequence2(a,x);
 }
 
 
