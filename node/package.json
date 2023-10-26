@@ -1,0 +1,15 @@
+{
+  "name": "exercise2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  
+  "scripts": {
+    "test": "test"
+  },
+  "author": "jesuggc",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}

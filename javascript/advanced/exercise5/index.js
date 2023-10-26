@@ -14,3 +14,4 @@ console.log(concatenar("-")) // Devuelve la cadena vacía
 console.log(concatenar("-","uno")) // Devuelve “uno-”
 console.log(concatenar("-","uno","dos","tres")) // Devuelve “uno-dos-tres-”
 
+let paco = {[2,4],[[],[]]}
