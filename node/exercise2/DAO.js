@@ -1,4 +1,3 @@
-// La consulta funciona
 class DAO {
     
     constructor(pool) {
@@ -23,6 +22,27 @@ class DAO {
 
             })
     }
+
+    insertarUsuario(usuario) {
+        this.pool.getConnection(function(err,connection) {
+            if (err) console.log("Error al obtener la conexion: ", err.messages)
+            else {
+                let queryString = `INSERT INTO USUARIOS VALUES (NULL, "${usuario.nombre}", "${usuario.correo}", "${usuario.telefono}");`
+                connection.query(queryString, function (err, resultado) {
+                    connection.release()
+                    if (err) console.log("Error en la consulta")
+                    else {
+                        console.log(`${usuario.nombre} con id: ${resultado.insertId} insertado con exito)`)
+                        usuario.id = resultado.insertId
+                    }
+                })
+            }
+            
+        })
+
+
+    }
+
 }
 
 module.exports = DAO
