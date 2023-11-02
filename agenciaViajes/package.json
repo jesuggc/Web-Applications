@@ -1,0 +1,27 @@
+{
+  "name": "agenciaviajes",
+  "version": "1.0.0",
+  "description": "A flight agency website project",
+  "main": "./scripts/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "authors": [
+    {
+      "name": "Jesus Gonzalez",
+      "email": "jesugo11@ucm.es",
+      "url": "https://github.com/jesuggc"
+    },
+    {
+      "name": "Elena Caridad",
+      "email": "elencari@ucm.es",
+      "url": "https://github.com/xlenyit"
+    }
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
