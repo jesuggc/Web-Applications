@@ -11,10 +11,18 @@ class DAO {
     }
 
 
-    prueba(){
+    listAll(callback){
         this.pool.getConnection((err, connection) => {
-            if(err) console.log("No funciono", err)
-            else console.log("Funciono")
+            if(err) callback(err,null)
+            else {
+                let stringQuery = "SELECT * FROM destinos"
+                connection.query(stringQuery,function(err, resultado) {
+                    if(err) callback(err,null)
+                    else {
+                        callback(null, resultado)
+                    }
+                })
+            }
         })
     }
 
