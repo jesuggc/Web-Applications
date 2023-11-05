@@ -3,6 +3,21 @@ body {
     background-color: #B4CDED;
 }
 
+.form-control {
+    border: 2px solid;
+    border-color: black;
+}
+
+.form-control-wrong {
+    border: 2px solid;
+    border-color: red;
+}
+
+.form-control-correct {
+    border: 2px solid;
+    border-color: green;
+}
+
 /*Formulario reserva*/
 .resVuelo{  
     color: aliceblue;
@@ -64,6 +79,13 @@ body {
     border-top-left-radius: 1em;
     border-top-right-radius:1em;
     width:100%;
+}
+
+.inputError{
+    color:red;
+}
+.inputCorrect{
+    color:green;
 }
 
 /*FOOTER*/

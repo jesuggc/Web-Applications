@@ -1,188 +1,33 @@
 <!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="app.js"> </script>
-    <link rel="stylesheet" href="../styles/style.css">
-    <title>Volanding</title>
-</head>
-
+    <%- include ("partials/head") %>
 <body>
     <div>
-        <!--LOGO-->
-        <header>
-            <div class="p-4 ">
-                <img class="mx-auto d-block" src="../imagenes/simplelogo.png" alt="Imagen del logo de la empresa">
-
-            </div>
-        </header>
-
-        <!--NAVBAR-->
-        <nav class="navbar navbar-expand-lg navbar-expand-md">
-            <div class="mx-auto">
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="./cargarVisor?data=madrid" id="Madrid" data-origen="Destinoss">Destinos</a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">España</a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">Ofertas</a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a class="nav-link" href="#">Somos</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--BUSCADOR-->
-        <div class="resVuelo skobeloff">
-            <form>
-                <div class="row m-auto ">
-                    <div class="col-md-2 form-group">
-                        <label for="origen">Origen:</label>
-                        <input type="text" class="form-control" id="origen" placeholder="Origen" required>
+        <%- include ("partials/header") %>
+        <%- include ("partials/navbar") %>
+        
+        <div class="container-lg">
+        <% for(let i=0; i<destinos.length; i++){ %>
+            <% if(i%3==0) {%>
+                <div class="row">
+            <%}%>
+            <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
+                        <a href="./visorDestinos?data=<%=destinos[i].nombre%>">
+                        <img src="<%=destinos[i].imagen%>" class="img-fluid" alt="Imagen de <%=destinos[i].nombre%>">
+                        <div class="card-body">
+                            <h2 class="text-center card-title mt-2"><%=destinos[i].nombre%></h2>
+                        </div>
+                        
+                    </a>
                     </div>
-                    <div class="col-md-2 form-group">
-                        <label for="destino">Destino:</label>
-                        <input type="text" class="form-control" id="destino" placeholder="Destino" required>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <label for="fecha-ida">Fecha de Ida:</label>
-                        <input type="date" class="form-control" id="fecha-ida" required>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <label for="fecha-vuelta">Fecha de Vuelta:</label>
-                        <input type="date" class="form-control" id="fecha-vuelta" required>
-                    </div>
-                    <div class="col-md-1 form-group">
-                        <label for="pasajeros">Pasajeros:</label>
-                        <input type="number" min=0 max=9 class="form-control" id="pasajeros" placeholder="0" required>
-                    </div>
-                    <button type="submit" class="btn naplesyellow col-2 ms-4 my-4 btn-lg" style="height: 3em;">Registrar Vuelo</button>
+            <% if(i%3==2) {%>
                 </div>
-            </form>
-        </div>
-        <!-- <div> -->
-             
-            <% destinos.forEach(ele => { %>
-                <p> <%=ele%></p> 
-                <%})%>
-        <!-- </div>
-                
-                <% destinos.forEach(function(destino) { %>
-                    <p><%= destino %></p>
-        <% }); %> -->
-        <!--Destinos, España-->
-
-        <!--<div class="container-lg">
-            <div class="row">         
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/madrid.jpg" class="img-fluid" alt="Imagen de madrid">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Madrid</h2>
-                    </div>
-                    
-                </div>
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/cadiz.jpg" class="img-fluid card-img-top" alt="Imagen de cadiz">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Cádiz</h2>
-                    </div>
-                </div>
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/barcelona.jpg" class="img-fluid card-img-top" alt="Imagen de barcelona">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Barcelona</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/ibiza.jpg" class="img-fluid card-img-top" alt="Imagen de ibiza">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Ibiza</h2>
-                    </div>
-                </div>
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/valencia.jpg" class="img-fluid card-img-top" alt="Imagen de valencia">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Valencia</h2>
-                    </div>
-                </div>
-                <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                    <img src="imagenes/asturias.jpg" class="img-fluid card-img-top" alt="Imagen de asturias">
-                    <div class="card-body">
-                        <h2 class="text-center card-title mt-2">Asturias</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="mycard my-4 mx-auto col-sm-1 col-md-2 col-lg-3">
-                    <img src="imagenes\sevilla.jpg" class="img-fluid card-img-top" alt="Imagen de sevilla">
-                    <div class="card-body">
-                        <h5 class="text-center card-title">Sevilla</h5>
-                    </div>
-                </div>
-            </div> 
-        </div>-->
-
-    </div>
-
-    <footer>
-        <div class="footer richBlack">
-            <div class="row p-4 mx-4">
-                <div class="col">
-                    <h2> Contacto </h2>
-                    <br>
-                    <ul>
-                        <li><a href="mailto:hola@volanding.com">hola@volanding.com</a></li>
-                        <li><a href="tel:658095541">+34 658095541</a></li>
-
-                    </ul>
-                </div>
-                <div class="col">
-                    <h2>Conócenos</h2>
-                    <br>
-                    <ul>
-                        <li><a href="#">Quienes somos</a></li>
-                        <li><a href="#">Nuestro equipo</a></li>
-                        <li><a href="#">Trabaja con nosotros</a></li>
-                    </ul>
-                </div>
-                <div class="col ">
-                    <h2> Ofertas </h2>
-                    <br>
-                    <ul>
-                        <li><a href="#">Tercera edad</a></li>
-                        <li><a href="#">Estudiantes</a></li>
-                        <li><a href="#">Familias</a></li>
-
-                    </ul>
-                </div>
-                <div class="col">
-                    <h2> Información legal </h2>
-                    <br>
-                    <ul>
-                        <li><a href="#">Aviso legal</a></li>
-                        <li><a href="#">Cookies</a></li>
-                        <li><a href="#">Privacidad</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+            <%}%>
+        <%}%>
+        </div>    
+        
+    </div>    
+    <%- include ("partials/footer") %>
 </body>
 
 </html>
