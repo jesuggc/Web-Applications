@@ -3,21 +3,21 @@ const sql = require("mysql")
 class DAO {
     constructor(host, user, password, database) {
         this.pool = sql.createPool({
-            host:host,
-            user:user,
-            password:password,
-            database:database
+            host: host,
+            user: user,
+            password: password,
+            database: database
         })
     }
 
 
-    listAll(callback){
+    listAll(callback) {
         this.pool.getConnection((err, connection) => {
-            if(err) callback(err,null)
+            if (err) callback(err, null)
             else {
                 let stringQuery = "SELECT * FROM destinos"
-                connection.query(stringQuery,function(err, resultado) {
-                    if(err) callback(err,null)
+                connection.query(stringQuery, function (err, resultado) {
+                    if (err) callback(err, null)
                     else {
                         callback(null, resultado)
                     }
@@ -26,21 +26,21 @@ class DAO {
         })
     }
 
-    find(nombre, callback){
-            this.pool.getConnection((err, connection) => {
-                if(err) callback(err,null)
-                else {
-                    let stringQuery = "SELECT * FROM destinos WHERE nombre = ?"
-                    connection.query(stringQuery,nombre,function(err, resultado) {
-                        if(err) callback(err,null)
-                        else {
-                            callback(null, resultado)
-                        }
-                    })
-                }
-            })
-        }
-    
+    find(nombre, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM destinos WHERE nombre = ?"
+                connection.query(stringQuery, nombre, function (err, resultado) {
+                    if (err) callback(err, null)
+                    else {
+                        callback(null, resultado)
+                    }
+                })
+            }
+        })
+    }
+
     readIdByName(nombre, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -65,13 +65,25 @@ class DAO {
                 connection.query(stringQuery, [destino, reserva.nombre, reserva.correo, reserva.fecha], function (err, resultado) {
                     if (err) callback(err, null)
                     else {
-                        //console.log("AQUI: ", reserva);
-                        callback(null, resultado)
+                        callback(null, resultado.insertId)
                     }
                 })
             }
             connection.release();
         })
     }
+    prueba(callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT codigo FROM informacion where id = 1";
+                connection.query(stringQuery, function (err, resultado) {
+                    if (err) callback(err, null)
+                    else callback(null, resultado)
+                })
+            }
+            connection.release();
+        })
     }
+}
 module.exports = DAO

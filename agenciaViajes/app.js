@@ -37,6 +37,21 @@ app.get("/visorDestinos", function (request, response) {
     })
     
 });
+app.get("/confirmacionRes", function (request, response) {
+    //Añadir info mas adelante con el buscador
+    response.render("confirmacionRes")
+    
+});
+
+app.get("/informacion", function (request, response) {
+    midao.prueba(function (err, resultado) {
+        if(err) console.log("Error al buscar ", err.toString())
+        else {
+            response.status(200)
+            response.render("informacion", {resultado})
+        }
+    })    
+});
 
 app.post("/submitForm", function (request, response) {
     midao.readIdByName(request.body.destino,function(err,id){
@@ -46,7 +61,10 @@ app.post("/submitForm", function (request, response) {
                 if(err) console.log("Error al crear reserva ", err.toString())
                 else {
                     response.status(200)   
-                    console.log("Reserva realizada con exito");
+                    console.log("Reserva realizada con exito ");
+                    let reserva = request.body
+                    let idReserva = resultado
+                    response.render("confirmacionRes", {reserva : {idReserva,reserva}})
                 }
             })    
         }
