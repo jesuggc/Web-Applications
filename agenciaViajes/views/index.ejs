@@ -1,33 +1,27 @@
 <!doctype html>
 <html lang="es">
     <%- include ("partials/head") %>
-<body>
-    <div>
-        <%- include ("partials/header") %>
-        <%- include ("partials/navbar") %>
-        
-        <div class="container-lg">
-        <% for(let i=0; i<destinos.length; i++){ %>
-            <% if(i%3==0) {%>
-                <div class="row">
-            <%}%>
-            <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
-                        <a href="./visorDestinos?data=<%=destinos[i].nombre%>">
-                        <img src="<%=destinos[i].imagen%>" class="img-fluid" alt="Imagen de <%=destinos[i].nombre%>">
-                        <div class="card-body">
-                            <h2 class="text-center card-title mt-2"><%=destinos[i].nombre%></h2>
+    <body>
+        <div>
+            <%- include ("partials/header") %>
+            <%- include ("partials/navbar") %>
+            <div class="container-lg">
+                <!-- LISTA DESTINOS EN BBDD -->
+                <!-- Ante la necesidad de extraer los destinos de la BD y generar un grid que los vaya agrupando de 3 en 3 tenemos un if que incorpora una etiqueta div cada 3 destinos -->
+                <% for(let i=0; i<destinos.length; i++){ %>
+                    <% if(i%3==0) {%> <div class="row"> <%}%>
+                        <div class="mycard my-4 mx-auto col-sm-8 col-md-8 col-lg-3">
+                            <a href="./visorDestinos?data=<%=destinos[i].nombre%>">
+                                <img src="<%=destinos[i].imagen%>" class="img-fluid" alt="Imagen de <%=destinos[i].nombre%>">
+                                <div class="card-body">
+                                    <h2 class="text-center card-title mt-2"> <%=destinos[i].nombre%> </h2>
+                                </div>
+                            </a>
                         </div>
-                        
-                    </a>
-                    </div>
-            <% if(i%3==2) {%>
-                </div>
-            <%}%>
-        <%}%>
-        </div>    
-        
-    </div>    
+                    <% if(i%3==2) {%> </div> <%}%>
+                <%}%>
+            </div>
+        </div>
     <%- include ("partials/footer") %>
-</body>
-
+    </body>
 </html>

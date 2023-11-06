@@ -5,7 +5,11 @@ const midao = new dao("localhost","admin_aw","","viajes")
 var router = express.Router();
 
 router.get("/", function(request,response ) {
-    
+    response.status(200);
+    response.render("home");
+})
+
+router.get("/destinos", function(request,response) {
     midao.listAll(function (err, resultado){
         if(err) console.log("Error al listar ", err.toString())
         else {
@@ -16,20 +20,14 @@ router.get("/", function(request,response ) {
     })
 })
 
-
 router.get("/visorDestinos", function (request, response) {
-    midao.find(request.query.data,function (err, resultado){
+    midao.findDestinoByNombre(request.query.data,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
         else {
             response.status(200)
             response.render("visorDestinos", {resultado})
         }
     })
-    
-});
-router.get("/confirmacionRes", function (request, response) {
-    //Añadir info mas adelante con el buscador
-    response.render("confirmacionRes")
     
 });
 
@@ -42,6 +40,19 @@ router.get("/informacion", function (request, response) {
         }
     })    
 });
+router.post("/submitSearch", function (request, response) {
+    //console.log("SOY LA REQUEST:",request.body.search)
+    midao.findDestinoByNombre(request.body.search,function (err, resultado){
+        if(err) console.log("Error al buscar ", err.toString())
+        else {
+            if(resultado.length === 0) 
+            response.render("home", resultado)
+            else 
+            //console.log("SOY RESULTADO:",resultado)
+            response.render("visorDestinos", {resultado})
+        }
+    })
+});
 
 router.post("/submitForm", function (request, response) {
     midao.readIdByName(request.body.destino,function(err,id){
@@ -51,7 +62,6 @@ router.post("/submitForm", function (request, response) {
                 if(err) console.log("Error al crear reserva ", err.toString())
                 else {
                     response.status(200)   
-                    console.log("Reserva realizada con exito ");
                     let reserva = request.body
                     let idReserva = resultado
                     response.render("confirmacionRes", {reserva : {idReserva,reserva}})
@@ -63,7 +73,3 @@ router.post("/submitForm", function (request, response) {
 });
 
 module.exports = router;
-// router.listen(3000, (error) => { 
-//     if(!error) console.log("Server is Successfully Running, and App is listening on port "+ 3000) 
-//     else console.log("Error occurred, server can't start ", error); 
-// }); 

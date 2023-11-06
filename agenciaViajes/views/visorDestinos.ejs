@@ -4,78 +4,60 @@
   <body>
     <div>
       <%- include ("partials/header") %>
-        <%- include ("partials/navbar") %>
-        
-        <div style="max-width:100%; overflow-x: hidden;" class="">
-          <div class="row">
-            <div class="col">
-              
-              <%- include ("partials/carousel") %>
+      <%- include ("partials/navbar") %>
+
+      <div style="max-width:100%; overflow-x: hidden;">
+        <div class="row">
+          <div class="col">
+            <%- include ("partials/carousel") %>
+          </div>
+          <!--INFO DESTINO DE LA BBDD-->
+          <div class="col me-4 ">
+            <div class="oldrose p-4 rounded-4 mt-4 row">
+              <div class="fw-bold">
+                <h1 class="text-center p-3"> <%=resultado[0].nombre%> </h1>
               </div>
-              <div class="col me-4 ">
-                <div class="oldrose p-4 rounded-4 mt-4 row">
-                  <div class=" fw-bold ">
-                    <h1 class="text-center p-3">
-                      <%=resultado[0].nombre%>
-                    </h1>
-                  </div>
-                  <div class="">
-                    <p class="h5">
-                      <%=resultado[0].description%>
-                    </p>
-                  </div>
-                </div>
-                <!--RESERVA-->
-                <div class="row  mt-2">
-                  <div class="resVuelo skobeloff rounded-4">
-                    <form id="form" method="POST" action="submitForm">
-                      <div class="row m-auto ">
-                        <!--<div class="col-md-2 form-group">
-                                        <label for="origen">Origen:</label>
-                                        <input type="text" class="form-control" id="destino" placeholder="Origen" required>
-                                    </div>-->
-                        <div class="col-md-2 form-group">
-                          <label for="destino">Destino:</label>
-                          <input type="text" class="form-control" id="destino" name="destino" placeholder="Destino"
-                            required>
-                        </div>
-                        <div class="col-md-2 form-group">
-                          <label for="fecha-ida">Fecha de Ida:</label>
-                          <input type="date" class="form-control" id="fecha" name="fecha" required>
-                        </div>
-                        <div class="col-md-2 form-group">
-                          <label for="nombre">Nombre:</label>
-                          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
-                            required>
-                        </div>
-                        <div class="col-md-2 form-group">
-                          <label for="correo">Correo:</label>
-                          <input type="email" class="form-control" id="correo" name="correo" placeholder="@gmail.com"
-                            required>
-                        </div>
-                        <!--<div class="col-md-2 form-group">
-                                        <label for="fecha-vuelta">Fecha de Vuelta:</label>
-                                        <input type="date" class="form-control" id="fecha-vuelta" required>
-                                    </div>-->
-                        <!--<div class="col-md-1 form-group">
-                                        <label for="pasajeros">Pasajeros:</label>
-                                        <input type="number" min=0 max=9 class="form-control" id="pasajeros" placeholder="0" required>
-                                    </div>-->
-                        <div class="col ">
-                          <button type="submit" id="submitButton"" class=" btn naplesyellow ms-4 my-4 btn-lg"
-                            style="height: 3em; width: 75%;">Registrar Vuelo</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+              <div>
+                <p class="h5"> <%=resultado[0].description%> </p>
               </div>
             </div>
-
+            <!--RESERVA-->
+            <div class="row mt-2">
+              <div class="resVuelo skobeloff rounded-4">
+                <form id="form" method="POST" action="submitForm">
+                  <div class="row m-auto ">
+                    <div class="col-md-2 form-group">
+                      <label for="destino">Destino:</label>
+                      <input type="text" class="form-control" id="destino" name="destino" placeholder="Destino"
+                        required>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <label for="fecha-ida">Fecha de Ida:</label>
+                      <input type="date" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <label for="nombre">Nombre:</label>
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+                        required>
+                    </div>
+                    <div class="col-md-2 form-group">
+                      <label for="correo">Correo:</label>
+                      <input type="email" class="form-control" id="correo" name="correo" placeholder="@gmail.com"
+                        required>
+                    </div>
+                    <div class="col ">
+                      <button type="submit" id="submitButton" class=" btn naplesyellow ms-4 my-4 btn-lg"
+                        style="height: 3em; width: 75%;">Registrar Vuelo</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
     </div>
     <%- include ("partials/footer") %>
-      <script src="../javascripts/comprobarForm.js"> </script>
   </body>
-
+  <script src="../javascripts/comprobarForm.js"> </script>
 </html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+    <%- include ("partials/head") %>
+    <body>
+
+    <%- include ("partials/header") %>
+    <%- include ("partials/navbar") %>
+    <%# if(resultado.length  ===0) window.alert("¡Lo sentimos! No tenemos ese destino")%>
+    <!--IMAGEN GRANDE-->
+    <!--BARRA BUSQUEDA POR NOMBRE DESTINO-->
+    <form method="POST" action="submitSearch">
+        <input type="text" placeholder="Buscar destino.."  id="search" name="search" >
+        <button type="submit">LUPA</button>
+    </form>
+    <!--TEXTO VACACIONES-->
+    <h1 style="font-size:20em"class="display-1 align-center">HOME</h1>
+    <%- include ("partials/footer") %>
+    </body>
+</html>

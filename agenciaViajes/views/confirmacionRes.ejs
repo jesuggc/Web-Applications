@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include ("partials/head") %>
+<%- include ("partials/head") %>
+
   <body>
     <div>
       <%- include ("partials/header") %>
-        <%- include ("partials/navbar") %>
-        
-        <div style="max-width:100%; overflow-x: hidden;" class="">
-          <div class="row">
-            <div class="col">
-              <%- include ("partials/carousel") %>
-              </div>
-              <div class="col me-4 ">
-                <div class="row skobeloff rounded-4 p-4 my-2" style="color: aliceblue;">
-                  <h1 style="color: #CE796B"> ¡Todo listo <strong><%=reserva.reserva.nombre%></strong>!</h1>
-                  <div>
-                    <p>¡Gracias por reservar su vuelo con Volanding! Estamos emocionados de tenerlo a bordo. Antes de su viaje, es importante asegurarse de que tenga toda la documentación necesaria para un viaje sin problemas. 
-                    A continuación, le proporcionamos una lista de los documentos esenciales que debe llevar consigo:</p>
-                    <ol>
-                      <li>Pasaporte: Asegúrese de que su pasaporte esté vigente durante toda su estadía en su destino.</li>
-                      <li>Visas y Permisos: Compruebe si su destino requiere una visa y, en su caso, solicítela con suficiente antelación.</li>
-                    </ol>
-                  </div>
-                  <h1 style="color: #CE796B"> Sobre el vuelo </h1>
-                  <p> Tu vuelo a <strong><%=reserva.reserva.destino%></strong> el día <strong><%=new Date(reserva.reserva.fecha).getDate()%> de <%=new Date(reserva.reserva.fecha).toLocaleString('default', { month: 'long' })%> del <%=new Date(reserva.reserva.fecha).getFullYear()%> </strong>ya está reservado</p>
-                  <p> Cuando falten 3 dias te mandaremos informacion adicional sobre el vuelo a <strong><%=reserva.reserva.correo%> </strong>con el código <strong><%=reserva.idReserva%></strong></p>
-                  <p> Asegurate de comprobar las medidas permitidas del equipaje</p>
-                  <div class="row" >
+      <%- include ("partials/navbar") %>
 
-                    <img class=col-4 src="/imagenes/articulo-personal-dimensiones.svg" alt="Descripción del SVG" st>
-                    <img class=col-4 src="/imagenes/equipaje-mano-dimensiones.svg" alt="Descripción del SVG">
-                    <img class=col-4 src="/imagenes/equipaje-bodega-dimensiones.svg" alt="Descripción del SVG"> 
-                  </div>
-                  
-                </div>
+      <div style="max-width:100%; overflow-x: hidden;" class="">
+        <div class="row">
+          <!--Carousel-->
+          <div class="col">
+            <%- include ("partials/carousel") %>
+          </div>
+          <!--Informacion de reserva confirmada-->
+          <div class="col me-4 ">
+            <div class="row skobeloff rounded-4 p-4 my-2" style="color: aliceblue;">
+              <h1 style="color: #CE796B"> ¡Todo listo <strong> <%=reserva.reserva.nombre%> </strong>!</h1>
+              <div>
+                <p>¡Gracias por reservar su vuelo con Volanding! Estamos emocionados de tenerlo a bordo. Antes de su viaje, es importante asegurarse de que tenga toda la documentación necesaria para un viaje sin problemas. A continuación, le proporcionamos una lista de los documentos esenciales que debe llevar consigo: </p>
+                <ol>
+                  <li>Pasaporte: Asegúrese de que su pasaporte esté vigente durante toda su estadía en su destino. </li>
+                  <li>Visas y Permisos: Compruebe si su destino requiere una visa y, en su caso, solicítela con suficiente antelación.</li>
+                </ol>
+              </div>
+              <h1 style="color: #CE796B"> Sobre el vuelo </h1>
+              <p> Tu vuelo a <strong> <%=reserva.reserva.destino%> </strong> el día <strong> <%=new Date(reserva.reserva.fecha).getDate()%> de <%=new Date(reserva.reserva.fecha).toLocaleString('default', { month: 'long' })%> del <%=new Date(reserva.reserva.fecha).getFullYear()%> </strong>ya está reservado</p>
+              <p> Cuando falten 3 dias te mandaremos informacion adicional sobre el vuelo a <strong> <%=reserva.reserva.correo%> </strong>con el código <strong> <%=reserva.idReserva%> </strong></p>
+              <p> Asegurate de comprobar las medidas permitidas del equipaje</p>
+              <div class="row">
+                <img class=col-4 src="/imagenes/dimArtPersonal.svg" alt="Dimensiones articulo personal" st>
+                <img class=col-4 src="/imagenes/dimMano.svg" alt="Dimensiones equipaje de mano">
+                <img class=col-4 src="/imagenes/dimBodega.svg" alt="Dimensiones equipaje bodega">
               </div>
             </div>
-
           </div>
+        </div>
+      </div>
     </div>
     <%- include ("partials/footer") %>
       <script src="../javascripts/comprobarForm.js"> </script>
