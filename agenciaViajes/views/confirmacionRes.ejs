@@ -23,7 +23,7 @@
                     </ol>
                   </div>
                   <h1 style="color: #CE796B"> Sobre el vuelo </h1>
-                  <p> Tu vuelo a <strong><%=reserva.reserva.destino%></strong> el día <strong><%=reserva.reserva.fecha%> </strong>ya está reservado</p>
+                  <p> Tu vuelo a <strong><%=reserva.reserva.destino%></strong> el día <strong><%=new Date(reserva.reserva.fecha).getDate()%> de <%=new Date(reserva.reserva.fecha).toLocaleString('default', { month: 'long' })%> del <%=new Date(reserva.reserva.fecha).getFullYear()%> </strong>ya está reservado</p>
                   <p> Cuando falten 3 dias te mandaremos informacion adicional sobre el vuelo a <strong><%=reserva.reserva.correo%> </strong>con el código <strong><%=reserva.idReserva%></strong></p>
                   <p> Asegurate de comprobar las medidas permitidas del equipaje</p>
                   <div class="row" >

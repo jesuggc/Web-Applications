@@ -1,77 +1,49 @@
-const dao = require("./scripts/DAO.js")
-const express = require("express")
-const app = express()
+// var createError = require('http-errors');
+var express = require('express');
+// var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
- const midao = new dao("localhost","admin_aw","","viajes")
+var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 
-app.use(express.static('public'))
+var app = express();
+
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
+
+app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 
-function cb_listAll(err, resultado){
-    if(err) console.log("Error al listar ", err.toString())
-    else return resultado.map(ele => ele.nombre)
-}
+// view engine setup
 
-app.get("/", function(request,response ) {
-    
-    midao.listAll(function (err, resultado){
-        if(err) console.log("Error al listar ", err.toString())
-        else {
-            let destinos = resultado.map(ele => ele) 
-            response.status(200)
-            response.render("index", {destinos});
-        } 
-    })
-})
+app.use(logger('dev'));
+app.use(express.json());
+app.use(cookieParser());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
-app.get("/visorDestinos", function (request, response) {
-    midao.find(request.query.data,function (err, resultado){
-        if(err) console.log("Error al buscar ", err.toString())
-        else {
-            response.status(200)
-            response.render("visorDestinos", {resultado})
-        }
-    })
-    
-});
-app.get("/confirmacionRes", function (request, response) {
-    //Añadir info mas adelante con el buscador
-    response.render("confirmacionRes")
-    
-});
+// catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
-app.get("/informacion", function (request, response) {
-    midao.prueba(function (err, resultado) {
-        if(err) console.log("Error al buscar ", err.toString())
-        else {
-            response.status(200)
-            response.render("informacion", {resultado})
-        }
-    })    
-});
+// error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.post("/submitForm", function (request, response) {
-    midao.readIdByName(request.body.destino,function(err,id){
-        if(err) console.log("Error al buscar por nombre ", err.toString())
-        else {
-            midao.createReserva(id,request.body,function (err, resultado){
-                if(err) console.log("Error al crear reserva ", err.toString())
-                else {
-                    response.status(200)   
-                    console.log("Reserva realizada con exito ");
-                    let reserva = request.body
-                    let idReserva = resultado
-                    response.render("confirmacionRes", {reserva : {idReserva,reserva}})
-                }
-            })    
-        }
-    })
-    
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
 app.listen(3000, (error) => { 
-    if(!error) console.log("Server is Successfully Running, and App is listening on port "+ 3000) 
-    else console.log("Error occurred, server can't start ", error); 
-}); 
+        if(!error) console.log("Server is Successfully Running, and App is listening on port "+ 3000) 
+        else console.log("Error occurred, server can't start ", error); 
+    }); 
+
+module.exports = app;
