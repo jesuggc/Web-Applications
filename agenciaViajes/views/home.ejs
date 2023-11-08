@@ -7,13 +7,37 @@
     <%- include ("partials/navbar") %>
     <%# if(resultado.length  ===0) window.alert("¡Lo sentimos! No tenemos ese destino")%>
     <!--IMAGEN GRANDE-->
+    
+   <!-- <img src="../imagenes/vacaciones2.jpeg" class="mx-auto d-block" alt="Imagen principal vacacional">-->
+
+    
     <!--BARRA BUSQUEDA POR NOMBRE DESTINO-->
-    <form method="POST" action="submitSearch">
-        <input type="text" placeholder="Buscar destino.."  id="search" name="search" >
-        <button type="submit">LUPA</button>
-    </form>
-    <!--TEXTO VACACIONES-->
-    <h1 style="font-size:20em"class="display-1 align-center">HOME</h1>
+    <div class="row my-5  container-sm text-center bg-danger " id="buscar" style="height:40em;width:100%;background-image:url('../imagenes/vacaciones2.jpeg'); background-repeat: no-repeat;">
+        <form method="POST" action="submitSearch" >
+            <input type="text" placeholder="Buscar destino.."  id="search" name="search" >
+            <button type="submit" class="btn">
+                <i class="fa fa-search "></i>
+            </button>
+        </form>
+    </div>
+    <!--TEXTO INTRODUCTORIO-->
+    <div  class="text-center mx-5" >
+        <p>¡Bienvenidos a Volanding, tu puerta de entrada al mundo de los viajes y la aventura!
+            En Volanding, creemos que cada viaje es una oportunidad para crear recuerdos inolvidables
+            y explorar nuevos horizontes. Ya sea que estés planeando unas merecidas vacaciones, 
+            un viaje de negocios o una escapada de fin de semana, estamos aquí para hacer que tus 
+            sueños de volar se hagan realidad.</p>
+        <p>Explora nuestro sitio web para descubrir una amplia selección de destinos, 
+            ofertas especiales y consejos de viaje. Ya sea que sueñes con playas de arena blanca, 
+            ciudades históricas, aventuras en la naturaleza o destinos exóticos, 
+            en Volanding te ayudaremos a encontrar la mejor opción para ti.
+        </p>
+        <p>Así que, ¿qué estás esperando? Únete a la familia de Volanding y prepárate para 
+            despegar hacia tus próximas aventuras. ¡Estamos emocionados de ser tu compañero
+            de viaje en cada paso del camino!
+        </p>
+    </div>
+    <!-- <h1 style="font-size:20em"class="display-1 align-center">HOME</h1> -->
     <%- include ("partials/footer") %>
-    </body>
+</body>
 </html>

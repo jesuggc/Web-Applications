@@ -74,8 +74,10 @@ class DAO {
             else {
                 let stringQuery = "SELECT codigo FROM informacion where id = 1";
                 connection.query(stringQuery, function (err, resultado) {
+                    let resultadoDeEjemplo1 = "<h1> Hola </h1> <p> Tengo una estructura </p>"
+                    let resultadoDeEjemplo2 = "<h2> Yo </h2> <h2> Tengo una estructura completamente distinta y dificilmente generalizable </h2>"
                     if (err) callback(err, null)
-                    else callback(null, resultado)
+                    else callback(null, {resultado:resultadoDeEjemplo1})
                 })
             }
             connection.release();

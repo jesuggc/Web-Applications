@@ -87,7 +87,15 @@ body {
 .inputCorrect{
     color:green;
 }
+/*Barra de busqueda*/
+#search{
+    width: 60%;
+    height: 3em;
 
+}
+.btn {
+    background-color: #1D7874;
+}
 /*FOOTER*/
 .footer{
     color: white;
