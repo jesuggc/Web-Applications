@@ -19,8 +19,6 @@ router.get("/destinos", function(request,response) {
     })
 })
 
-
-
 router.get("/informacion", function (request, response) {
     response.status(200)
     let pag = request.query.data
@@ -92,21 +90,19 @@ router.post("/submitForm", function (request, response) {
                 if(err) console.log("Error al crear reserva ", err)
                 else {
                     midao.findCarouselById(id,function (err,res) {
-                    if(err) console.log("Error al abrrir carrousel ", err.toString())
-                    else {
-                        response.status(200)
-                        let reserva = request.body
-                        reserva.idReserva = resultado
-                        reserva.imagenes = res
-                        response.render("confirmacionRes", {resultado:reserva})
-                    }
-                })
-            
+                        if(err) console.log("Error al abrrir carrousel ", err.toString())
+                        else {
+                            response.status(200)
+                            let reserva = request.body
+                            reserva.idReserva = resultado
+                            reserva.imagenes = res
+                            response.render("confirmacionRes", {resultado:reserva})
+                        }
+                    })
                 }
             })    
         }
     })
-    
 });
 
 module.exports = router;
