@@ -40,6 +40,7 @@ class DAO {
                 let stringQuery = "SELECT * FROM destinos WHERE nombre = ?"
                 connection.query(stringQuery, nombre, function (err, resultado) {
                     if (err) callback(err, null)
+                    else if (!resultado.length) callback(null,resultado)
                     else {
                         let res = {
                             id:resultado[0].id,

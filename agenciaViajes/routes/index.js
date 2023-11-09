@@ -31,8 +31,18 @@ router.post("/submitSearch", function (request, response) {
     midao.findDestinoByNombre(request.body.search,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
         else {
+            console.log("Aaaa",resultado)
             if(!resultado.length) response.render("home", {resultado})
-            else response.render("visorDestinos", {resultado})
+            else {
+                midao.findCarouselById(resultado.id,function (err,res) {
+                    if(err) console.log("Error al abrrir carrousel ", err.toString())
+                    else {
+                        resultado.imagenes = res
+                        resultado.error=err
+                        response.render("visorDestinos", {resultado})
+                    }
+                })
+            }
         }
     })
 });
@@ -47,7 +57,6 @@ router.get("/visorDestinos", function (request, response) {
                 else {
                     resultado.imagenes = res
                     resultado.error=err
-                    console.log("AIDSJHFIDJB",resultado)
                     response.render("visorDestinos", {resultado})
                 }
             })
