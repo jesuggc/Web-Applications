@@ -15,17 +15,17 @@
           <div class="col me-4 ">
             <div class="oldrose p-4 rounded-4 mt-4 row">
               <div class="fw-bold">
-                <h1 class="text-center p-3"> <%=resultado[0].nombre%> </h1>
+                <h1 class="text-center p-3"> <%=resultado.nombre%> </h1>
               </div>
               <div>
-                <p class="h5"> <%=resultado[0].description%> </p>
+                <p class="h5"> <%=resultado.description%> </p>
               </div>
             </div>
             <!--RESERVA-->
-            <div class="row mt-2">
+            <div class="row my-2">
               <div class="resVuelo skobeloff rounded-4">
-                <form id="form" method="POST" action="submitForm">
-                  <div class="row m-auto ">
+                <form id="form" method="POST" action="submitForm?data=<%=resultado.nombre%>">
+                  <div class="row m-auto">
                     <div class="col-md-2 form-group">
                       <label for="destino">Destino:</label>
                       <input type="text" class="form-control" id="destino" name="destino" placeholder="Destino"
@@ -51,6 +51,9 @@
                     </div>
                   </div>
                 </form>
+                <%if(resultado.error){%>
+                  <h4 class="text-white rounded-2 text-center font-weight-bold bg-danger">El destino no existe</h4>
+                <%}%>              
               </div>
             </div>
           </div>
