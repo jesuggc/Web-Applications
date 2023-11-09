@@ -32,13 +32,9 @@ router.get("/visorDestinos", function (request, response) {
 });
 
 router.get("/informacion", function (request, response) {
-    midao.prueba(function (err, resultado) {
-        if(err) console.log("Error al buscar ", err.toString())
-        else {
-            response.status(200)
-            response.render("informacion", {resultado})
-        }
-    })    
+    response.status(200)
+    let pag = request.query.data
+    response.render("informacion", {pag})
 });
 router.post("/submitSearch", function (request, response) {
     //console.log("SOY LA REQUEST:",request.body.search)

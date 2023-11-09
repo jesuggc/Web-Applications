@@ -5,9 +5,28 @@
     <div>
         <%- include ("partials/header") %>
         <%- include ("partials/navbar") %>
-        <div class="container-lg bg-info text-white p-4" id="miElemento">
-            <!-- Se intenta incorporar codigo subido a la bd e incorporarlo directamente -->
-            <%-resultado[0].codigo%>
+        <div class="container-lg richBlack text-white p-4 rounded-4 my-4" id="miElemento">
+            <% if(pag === "aboutus"){ %>
+                <%- include ("partials/info/aboutus") %>
+            <% }else if (pag === "ourteam") {%>
+                <%- include ("partials/info/ourteam") %>
+            <% }else if (pag === "workhere") {%>
+                <%- include ("partials/info/workhere") %>
+            <% }else if (pag === "students") {%>
+                <%- include ("partials/info/students") %>
+            <% }else if (pag === "elders") {%>
+                <%- include ("partials/info/elders") %>
+            <% }else if (pag === "familys") {%>
+                <%- include ("partials/info/familys") %>
+            <% }else if (pag === "legalpolicy") {%>
+                <%- include ("partials/info/legalpolicy") %>
+            <% }else if (pag === "cookies") {%>
+                <%- include ("partials/info/cookies") %>
+            <% }else if (pag === "privacy") {%>
+                <%- include ("partials/info/privacy") %>
+            <% } else { %>
+                <h1> Aqui no hay nada que ver ... </h1>
+            <% } %>
         </div>          
     </div>    
     <%- include ("partials/footer") %>

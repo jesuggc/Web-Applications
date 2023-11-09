@@ -41,7 +41,7 @@ app.use('/', indexRouter);
 //   res.render('error');
 // });
 
-app.listen(3001, (error) => { 
+app.listen(3000, (error) => { 
     if(error) console.log("Error occurred, server can't start ", error);   
     else console.log("Server is Successfully Running, and App is listening on port "+ 3000)
 }); 

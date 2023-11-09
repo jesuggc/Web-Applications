@@ -1,7 +1,7 @@
 const formulario = document.getElementById("form");
 const inputs = document.querySelectorAll("#form input");
 const fecha = document.getElementById("fecha");
-
+let validado=true;
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -26,10 +26,12 @@ const validarCampo = (expresion, input, campo) => {
 		document.getElementById(`${campo}`).classList.remove("form-control-wrong");
 		document.getElementById(`${campo}`).classList.add("form-control-correct");
 		document.getElementById("submitButton").disabled = false
+		
 	} else {
-        document.getElementById(`${campo}`).classList.remove("form-control-correct");
+		document.getElementById(`${campo}`).classList.remove("form-control-correct");
 		document.getElementById(`${campo}`).classList.add("form-control-wrong");
 		document.getElementById("submitButton").disabled = true
+		
 	}
 }
 
@@ -49,10 +51,12 @@ const validarFecha = (e) => {
 		fecha.classList.add("form-control-correct");
 		fecha.classList.remove("form-control-wrong");
 		document.getElementById("submitButton").disabled = false
+		
 	} else {
 		fecha.classList.remove("form-control-correct");
 		fecha.classList.add("form-control-wrong");
 		document.getElementById("submitButton").disabled = true
+		
 	}
 }
 
