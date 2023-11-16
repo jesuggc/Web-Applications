@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <%-include('partials/head') %>
+  <body class="bg-info">
+    
+    <!-- <%-include('partials/notas') %> -->
+
+    <form method="GET" action="login">
+      <!-- <input type="text" name="nombre" placeholder="Nombre"> -->
+      <!-- <input type="text" name="apellido" placeholder="Apellido"> -->
+      <!-- <input type="text" name="edad" placeholder="Edad"> -->
+      <input type="text" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit"  value="Enviar">
+    </form>
   </body>
 </html>

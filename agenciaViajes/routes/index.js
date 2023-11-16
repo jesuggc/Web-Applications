@@ -29,7 +29,6 @@ router.post("/submitSearch", function (request, response) {
     midao.findDestinoByNombre(request.body.search,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
         else {
-            console.log("Aaaa",resultado)
             if(!resultado.length) response.render("home", {resultado})
             else {
                 midao.findCarouselById(resultado.id,function (err,res) {
