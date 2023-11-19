@@ -5,10 +5,13 @@
     
     <!-- <%-include('partials/notas') %> -->
 
+    <form method="GET" action="submitLogin">
       <!-- <input type="text" name="nombre" placeholder="Nombre"> -->
       <!-- <input type="text" name="apellido" placeholder="Apellido"> -->
       <!-- <input type="text" name="edad" placeholder="Edad"> -->
-      <a href="/login" class="btn btn-primary">Go to Login Page</a>
-      <a href="/register" class="btn btn-secondary">Go to Register Page</a>
+      <input type="text" name="email" placeholder="Email">
+      <input type="password" name="contrasena" placeholder="Contraseña">
+      <input type="submit"  value="Enviar">
+    </form>
   </body>
 </html>

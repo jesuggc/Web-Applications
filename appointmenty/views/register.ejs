@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body class="bg-info">
+    
+    <!-- <%-include('partials/notas') %> -->
+
+    <form method="POST" action="submitRegister">
+      <input class="input" type="text" name="nombre" placeholder="Nombre">
+      <input type="text" name="apellido1" placeholder="Apellido 1">
+      <input type="text" name="apellido2" placeholder="Apellido 2">
+      <input type="text" name="email" placeholder="Email">
+      <input type="password" name="contrasena" placeholder="Contraseña">
+      <input type="submit"  value="Enviar">
+    </form>
+  </body>
+</html>

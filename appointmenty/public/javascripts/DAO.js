@@ -34,21 +34,38 @@ class DAO {
                 connection.query(stringQuery, mail, (err, resultado) => {
                     if (err) callback(err, null)
                     else {
-                        let res = {
-                            id:resultado[0].id,
-                            nombre:resultado[0].nombre,
-                            apellido1:resultado[0].apellido1,
-                            apellido2:resultado[0].apellido2,
-                            correo:resultado[0].correo,
-                            contrasena:resultado[0].contrasena,
+                        if (resultado.length === 0) callback(null, null)
+                        else {
+                            let res = {
+                                id:resultado[0].id,
+                                nombre:resultado[0].nombre,
+                                apellido1:resultado[0].apellido1,
+                                apellido2:resultado[0].apellido2,
+                                correo:resultado[0].correo,
+                                contrasena:resultado[0].contrasena,
+                            }
+                            callback(null, res)
                         }
-                        callback(null, res)
                     }
                 })
             }
         })
     }
 
-    
-}
+    createUser(user,callback) {
+            this.pool.getConnection((err, connection) => {
+                if (err) callback(err, null)
+                else {
+                    let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena) VALUES (?,?,?,?,?)"
+                    connection.query(stringQuery, Object.values(user), (err, resultado) => {
+                        if (err) callback(err, null)
+                        else {
+                            let id = resultado.insertId
+                            callback(null, id)
+                        }
+                    })
+                }
+            })
+        }
+    }
 module.exports = DAO
