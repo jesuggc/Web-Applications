@@ -1,36 +1,39 @@
 const facInput = document.getElementById("facultad")
 
 $(document).on('change', '#facultad', function() {
-    const id = $(this).data('id');
+    let value = $(this).val();
+    
     $.ajax({
-        url: 'groups/',
+        url: 'group/' + value,
         type: 'GET',
         success: function(response) {
-            console.log(response.resultado);
-
-            var o = new Option(response.resultado[0].nombre, 1);
-            /// jquerify the DOM object 'o' so we can use the html method
-            $(o).html(response.resultado[0].nombre);
-            $("#prueba").append(o);
-
-            $('#prueba').append($('<option>', {
-                value: 1,
-                text: response.resultado[0].nombre
+            $('#grado').empty();
+            response.resultado.forEach(ele => {
+            $('#grado').append($('<option>', {
+                value: ele.dobleGrado,
+                text: ele.nombre
             },'</option>'));
-            $('#prueba').append($('<option>', {
-                value: 1,
-                text: response.resultado[1].nombre
-            }));
-            $('#prueba').append($('<option>', {
-                value: 1,
-                text: response.resultado[2].nombre
-            }));
-
+           });
+        $('#gradoDiv').removeClass('d-none');
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
         }
     })
-    document.getElementById("prueba").style.display = null;
+    // document.getElementById("prueba").style.display = null;
     // document.getElementById("prueba").visible = "true"
+})
+
+
+$(document).on('change', '#grado', function() {
+    let value = $(this).val();
+    console.log(value)
+    $('#curso').empty();
+    for(let i = 1; i <= 4 + 2*value; i++) {
+        $('#curso').append($('<option>', {
+            value: i,
+            text: `Curso ${i}`
+        },'</option>'));
+    }
+    $('#cursoDiv').removeClass('d-none');
 })

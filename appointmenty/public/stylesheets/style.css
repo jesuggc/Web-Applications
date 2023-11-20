@@ -3,6 +3,7 @@ a {
   color: #00B7FF;
 }
 
+
 input {
   border-radius: 12px;
   padding: 8px; 
@@ -31,4 +32,10 @@ input {
 
 .redInput {
   font-size: 1.4vw;
+}
+
+select{
+  height: 3em; 
+  border-radius: 12px;
+  width: 75%;
 }

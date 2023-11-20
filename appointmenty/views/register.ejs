@@ -5,83 +5,88 @@
   <body>
     <%-include('partials/header') %>
       <!-- <%-include('partials/notas') %> -->
-      <div class="row-xs col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
-        <h1>Registro</h1>
-        <form method="POST" action="submitRegister">
-          <div class="row">
-            <div class="col">
-              <h4 class="my-3">Nombre</h4>
-              <input class="input" type="text" name="nombre" placeholder="Nombre">
-            </div>
-            <div class="col">
-              <h4 class="my-3">Correo</h4>
-              <input type="text" name="email" placeholder="example@ucm.es">
+    <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
+      <h1>Registro</h1>
+      <form method="POST" action="submitRegister">
+        <!--NOMBRE Y APELLIDOS-->
+        <div class="row">
+          <div class="col">
+            <h4 class="my-3">Nombre</h4>
+            <input type="text" name="nombre" placeholder="Nombre">
+          </div>
+          <div class="col">
+            <h4 class="my-3">Primer apellido</h4>
+            <input type="text" name="apellido1" placeholder="Apellido 1">
+          </div>
+          <div class="col">
+            <h4 class="my-3">Segundo apellido</h4>
+            <input type="text" name="apellido2" placeholder="Apellido 2">
+          </div>
+        </div>
+        <!--CORREO E IMAGEN-->
+        <div class="row">
+          <div class="col">
+            <h4 class="my-3">Correo</h4>
+            <input class="w-100" type="text" name="email" placeholder="example@ucm.es">
+          </div>
+          <div class="col">
+            <h4 class="my-3">Imagen de perfil</h4>
+            <input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
+          </div>
+        </div>
+        <!--CONTRASEÑA Y CONFIRMAR-->
+        <div class="row">
+          <div class="col">
+            <h4 class="my-3">Contraseña</h4>
+            <div class="input-group" >
+              <input type="password" name="contrasena" id="password" placeholder="Contraseña">
+              <button type="button" style="border-radius: 0px 12px 12px 0px;" id="togglePassword">Mostrar</button>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col">
-              <h4 class="my-3">Primer apellido</h4>
-              <input type="text" name="apellido1" placeholder="Apellido 1">
-            </div>
-            <div class="col">
-              <h4 class="my-3">Segundo apellido</h4>
-              <input type="text" name="apellido2" placeholder="Apellido 2">
+          <div class="col">
+            <h4 class="my-3">Confirma la contraseña</h4>
+            <div class="input-group">
+              <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
+              <button type="button" style="border-radius: 0px 12px 12px 0px; " id="toggleConfirmPassword">Mostrar</button>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col">
-              <h4 class="my-3">Facultad</h4>
-              <select id="facultad" style="height: 3em; border-radius: 12px;" name="Curso">
-                <option hidden selected>Selecciona una opción</option>
-                <% resultado.forEach( ele=> { %>
-                  <option value="<%=ele%>"><%=ele%></option>
-                  <%})%>
-              </select>
-            </div>
-            <div style="display:none;" id="prueba" class="col">
-              <h4 class="my-3">Grupo</h4>
-              <select style="height: 3em; border-radius: 12px;" name="Curso">
-                <option hidden selected>Selecciona una opción</option>
-                  <option value=""></option>
-              </select>
-            </div>
+        </div>
+          
+        <!--FACULTAD-->
+        <div class="row">
+          <h4 class="my-3">Facultad</h4>
+          <select id="facultad" name="Curso" class="w-100">
+            <option hidden selected>Selecciona una opción</option>
+            <% resultado.forEach( ele=> { %>
+              <option value="<%=ele.id%>"><%=ele.nombre%></option>
+            <%})%>
+          </select>
+        </div>
+            
+        <!--GRADO Y CURSO-->
+        <div class="row">
+          <div class="col d-none" id="gradoDiv" >
+            <h4 class="my-3">Grado</h4>
+            <select id="grado" name="Grado">
+              <option hidden selected>Selecciona una opción</option>
+            </select>
           </div>
-          <div class="row">
-            <div class="col">
-              <h4 class="my-3">Contraseña</h4>
-              <div class="input-group">
-                <input type="password" name="contrasena" id="password" placeholder="Contraseña">
-                <button class="bi bi-eye " id="togglePassword">Mostrar</button>
-              </div>
-            </div>
+          <div class="col d-none" id="cursoDiv" >
+            <h4 class="my-3">Curso</h4>
+            <select id="curso" name="Curso">
+              <option hidden selected>Selecciona una opción</option>
+            </select>
           </div>
-          <div class="row">
-
-            <div class="col">
-              <h4 class="my-3">Imagen de perfil</h4>
-              <input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
-            </div>
-
-            <div class="col">
-              <h4 class="my-3">Registrarme</h4>
-              <input type="submit" value="Enviar">
-            </div>
-          </div>
-      </div>
+        </div>
+        <!--BOTON-->
+        <div class="row d-flex my-4">
+          <input class="row w-50 bg-primary  mx-auto d-block" type="submit" value="Enviar">
+        </div>
       </form>
-      </div>
-      <script>
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', () => {
-          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-          password.setAttribute('type', type);
-        });
-      </script>
-      <script src="javascripts/getGroups.js"></script>
+    </div>
+    <script src="javascripts/showPswd.js"></script>
+    <script src="javascripts/getGroups.js"></script>
+    <%-include('partials/footer') %>
   </body>
 
 </html>

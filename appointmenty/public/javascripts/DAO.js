@@ -15,25 +15,23 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT Nombre FROM ucm_aw_riu_fac_facultades"
+                let stringQuery = "SELECT * FROM ucm_aw_riu_fac_facultades"
                 connection.query(stringQuery, function (err, resultado) {
                     if (err) callback(err, null)
-                    else callback(null, resultado.map(ele=>ele.Nombre))
+                    else callback(null,resultado.map(ele => ({ id: ele.id, nombre: ele.nombre })))
                 })
             }
         })
     }
 
-    getGrados(callback){
+    getGrados(idFacultad, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT * FROM ucm_aw_riu_gra_grados"
-                connection.query(stringQuery, function (err, resultado) {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_gra_grados WHERE idFacultad = ?"
+                connection.query(stringQuery, idFacultad, function (err, resultado) {
                     if (err) callback(err, null)
-                    else {
-                        callback(null,resultado)
-                    }
+                    else callback(null,resultado.map(ele => ({nombre: ele.nombre, dobleGrado: ele.dobleGrado})))
                 })
             }
         })

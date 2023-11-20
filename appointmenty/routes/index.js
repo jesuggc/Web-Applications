@@ -8,13 +8,14 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 router.get("/login", (request, response) => {
-    response.status(200)
-    response.render('login');
-  }
-)
+  response.status(200)
+  response.render('login');
+ 
+})
 
-router.get("/groups", (request, response) => {
-  midao.getGrados((err,resultado)=> {
+router.get("/group/:idFacultad", (request, response) => {
+  let idFacultad = request.params.idFacultad
+  midao.getGrados(idFacultad, (err,resultado)=> {
     if(err) console.log("Error: ", err)
     else response.json({resultado:resultado});
   })
@@ -25,9 +26,7 @@ router.get("/register", (request, response) => {
     response.status(200)
     midao.getFacultades((err,resultado)=> {
       if(err) console.log("Error: ", err)
-      else {
-        response.render('register', {resultado});
-      }
+      else response.render('register', {resultado});
     })
   }
 )
@@ -39,7 +38,8 @@ router.post("/submitRegister", function (request, response) {
     apellido1: request.body.apellido1,
     apellido2: request.body.apellido2,
     email: request.body.email,
-    contrasena: request.body.contrasena
+    contrasena: request.body.contrasena,
+    contrasenaConf: request.body.contrasenaConf
   }
   console.log("1: user: ", user)
   midao.findByMail(user.email, (err, res) => {
