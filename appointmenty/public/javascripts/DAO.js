@@ -11,15 +11,28 @@ class DAO {
         })
     }
 
-    findQueco(callback) {
+    getFacultades(callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios"
+                let stringQuery = "SELECT Nombre FROM ucm_aw_riu_fac_facultades"
+                connection.query(stringQuery, function (err, resultado) {
+                    if (err) callback(err, null)
+                    else callback(null, resultado.map(ele=>ele.Nombre))
+                })
+            }
+        })
+    }
+
+    getGrados(callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_gra_grados"
                 connection.query(stringQuery, function (err, resultado) {
                     if (err) callback(err, null)
                     else {
-                        callback(null, resultado)
+                        callback(null,resultado)
                     }
                 })
             }

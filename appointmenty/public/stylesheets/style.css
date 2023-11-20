@@ -1,13 +1,34 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
 a {
   color: #00B7FF;
 }
 
 input {
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 12px;
+  padding: 8px; 
+  font-size: 20px;
+  border-width: 1px;
+  border-color: black;
+}
+
+.divImage {
+  background-color: #990033;
+  height:12em;
+  display: flex;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode:multiply; 
+  /*overlay, multiply, screen, soft-light */
+}
+
+.innerShadow {
+  /* box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px; */
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.redInput {
+  font-size: 1.4vw;
 }

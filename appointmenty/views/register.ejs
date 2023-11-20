@@ -1,17 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <%-include('partials/head') %>
-  <body class="bg-info">
-    
-    <!-- <%-include('partials/notas') %> -->
+<%-include('partials/head') %>
 
-    <form method="POST" action="submitRegister">
-      <input class="input" type="text" name="nombre" placeholder="Nombre">
-      <input type="text" name="apellido1" placeholder="Apellido 1">
-      <input type="text" name="apellido2" placeholder="Apellido 2">
-      <input type="text" name="email" placeholder="Email">
-      <input type="password" name="contrasena" placeholder="Contraseña">
-      <input type="submit"  value="Enviar">
-    </form>
+  <body>
+    <%-include('partials/header') %>
+      <!-- <%-include('partials/notas') %> -->
+      <div class="row-xs col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
+        <h1>Registro</h1>
+        <form method="POST" action="submitRegister">
+          <div class="row">
+            <div class="col">
+              <h4 class="my-3">Nombre</h4>
+              <input class="input" type="text" name="nombre" placeholder="Nombre">
+            </div>
+            <div class="col">
+              <h4 class="my-3">Correo</h4>
+              <input type="text" name="email" placeholder="example@ucm.es">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <h4 class="my-3">Primer apellido</h4>
+              <input type="text" name="apellido1" placeholder="Apellido 1">
+            </div>
+            <div class="col">
+              <h4 class="my-3">Segundo apellido</h4>
+              <input type="text" name="apellido2" placeholder="Apellido 2">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <h4 class="my-3">Facultad</h4>
+              <select id="facultad" style="height: 3em; border-radius: 12px;" name="Curso">
+                <option hidden selected>Selecciona una opción</option>
+                <% resultado.forEach( ele=> { %>
+                  <option value="<%=ele%>"><%=ele%></option>
+                  <%})%>
+              </select>
+            </div>
+            <div style="display:none;" id="prueba" class="col">
+              <h4 class="my-3">Grupo</h4>
+              <select style="height: 3em; border-radius: 12px;" name="Curso">
+                <option hidden selected>Selecciona una opción</option>
+                  <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h4 class="my-3">Contraseña</h4>
+              <div class="input-group">
+                <input type="password" name="contrasena" id="password" placeholder="Contraseña">
+                <button class="bi bi-eye " id="togglePassword">Mostrar</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <h4 class="my-3">Imagen de perfil</h4>
+              <input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
+            </div>
+
+            <div class="col">
+              <h4 class="my-3">Registrarme</h4>
+              <input type="submit" value="Enviar">
+            </div>
+          </div>
+      </div>
+      </form>
+      </div>
+      <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', () => {
+          const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+          password.setAttribute('type', type);
+        });
+      </script>
+      <script src="javascripts/getGroups.js"></script>
   </body>
+
 </html>

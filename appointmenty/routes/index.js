@@ -15,9 +15,23 @@ router.get("/login", (request, response) => {
     response.render('login');
   }
 )
+
+router.get("/groups", (request, response) => {
+  midao.getGrados((err,resultado)=> {
+    if(err) console.log("Error: ", err)
+    else response.json({resultado:resultado});
+  })
+  
+})
+
 router.get("/register", (request, response) => {
     response.status(200)
-    response.render('register');
+    midao.getFacultades((err,resultado)=> {
+      if(err) console.log("Error: ", err)
+      else {
+        response.render('register', {resultado});
+      }
+    })
   }
 )
 
@@ -52,6 +66,8 @@ router.get("/submitLogin", function (request, response) {
   midao.findByMail(email, (err, res) => {
     if (err) console.log("Error: ", err)
     else {
+      console.log(email)
+      console.log(contrasena)
       if(!res) console.log("Error: correo incorrecto")
       else if(res.contrasena === contrasena) console.log("Bienvenido señor",res.nombre)
       else console.log("Contraseña erronea")
