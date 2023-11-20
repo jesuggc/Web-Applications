@@ -4,11 +4,8 @@ const dao = require("../public/javascripts/DAO.js")
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // midao.findQueco((err,ele) => {
-  //   console.log(ele)
-  // })
   console.log("BIENVENIDO A LA PAGINA DE RESERVAS")
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 router.get("/login", (request, response) => {
     response.status(200)
