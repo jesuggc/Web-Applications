@@ -39,9 +39,9 @@ router.post("/submitRegister", function (request, response) {
     apellido2: request.body.apellido2,
     email: request.body.email,
     contrasena: request.body.contrasena,
-    contrasenaConf: request.body.contrasenaConf
+    facultad: request.body
+    
   }
-  console.log("1: user: ", user)
   midao.findByMail(user.email, (err, res) => {
     if (err) console.log("Error: ", err)
     else {
@@ -63,8 +63,6 @@ router.get("/submitLogin", function (request, response) {
   midao.findByMail(email, (err, res) => {
     if (err) console.log("Error: ", err)
     else {
-      console.log(email)
-      console.log(contrasena)
       if(!res) console.log("Error: correo incorrecto")
       else if(res.contrasena === contrasena) console.log("Bienvenido señor",res.nombre)
       else console.log("Contraseña erronea")

@@ -2,51 +2,26 @@
 <html>
   <%-include('partials/head') %>
   <body >
-    
-    <!-- <%-include('partials/notas') %> -->
     <%-include('partials/header') %>
     <div class="row">
-      
       <div class="col-4 bg-primary">
-        
         <h1>Bienvenido al servicio de reservas de la UCM</h1>
-    </div>
-    <div class="col-8 container-lg" >
-
-      <div style="background-image: url('/images/laboratorio.jfif');background-color: #990032 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
-        <h1 class="mx-auto color-white">Laboratorios</h1>
       </div>
-      <div style="background-image: url('/images/salaDeGrados.jfif');background-color: #7f9900 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
-        <h1 class="mx-auto color-white">Salas de grados</h1>
+      <div class="col-8 container-lg" >
+        <div style="background-image: url('/images/laboratorio.jfif');background-color: #990032 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
+          <h1 class="mx-auto color-white">Laboratorios</h1>
+        </div>
+        <div style="background-image: url('/images/salaDeGrados.jfif');background-color: #7f9900 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
+          <h1 class="mx-auto color-white">Salas de grados</h1>
+        </div>
+        <div style="background-image: url('/images/salaDeReunion.jfif');background-color: #009966 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
+          <h1 class="mx-auto color-white">Salas de reunion</h1>
+        </div>
+        <div style="background-image: url('/images/salonDeActos.jfif');background-color: #190099 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
+          <h1 class="mx-auto color-white">Salon de actos</h1>
+        </div>      
       </div>
-      <div style="background-image: url('/images/salaDeReunion.jfif');background-color: #009966 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
-        <h1 class="mx-auto color-white">Salas de reunion</h1>
-      </div>
-      <div style="background-image: url('/images/salonDeActos.jfif');background-color: #190099 ;" class="divImage justify-content rounded-4 text-center text-light my-2">
-        <h1 class="mx-auto color-white">Salon de actos</h1>
-      </div>
-      
-      
-      
-      <a href="/register" id="register" class="btn btn-secondary">Go to Register Page</a>
-      <a id="tutorial" class="btn btn-secondary">Push me uwu</a>
-    </div>
-  </div>
-      <!-- PAGINAS NECESARIAS
-        Config sistema Personalizar la apariencia del sistema con nombre, dirección e icono de la organización(ADMIN)
-        Creacion instalacion Crear nuevas instalaciones con nombre, disponibilidad horaria, tipo de reserva (individual o colectiva), y aforo (si aplica). Adjuntar fotografía/icono a la instalación (ADMIN)
-        Registrar (Usuario)
-        Validar registro usuario, enviar correo de confirmación de registro a los usuarios validados. Asignar roles de administrador a usuarios específicos(Admin)
-        Inicio de sesion (A y U)
-        Cierre de sesion (A y U)
-        Reservar instalacion (U)
-        Ver historial de reservas de usuario (A)
-    Ver historial de reservas de instalacion (A)
-    ----
-    Correo interno, mandar mensajes, como los necesarios en gestion de lista de espera(A), a traves de buzon interno. Ver recibidos, y mandar nuevos (U)
-    Listar usuarios, reservas y busqueda avanzada con filtros para listar (A)
-    -->
-    
+    </div>   
     <script src="javascripts/mydriver.js"></script>
     <%-include('partials/footer') %>
   </body>

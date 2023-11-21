@@ -20,14 +20,11 @@ $(document).on('change', '#facultad', function() {
             console.log(textStatus, errorThrown);
         }
     })
-    // document.getElementById("prueba").style.display = null;
-    // document.getElementById("prueba").visible = "true"
 })
 
 
 $(document).on('change', '#grado', function() {
     let value = $(this).val();
-    console.log(value)
     $('#curso').empty();
     for(let i = 1; i <= 4 + 2*value; i++) {
         $('#curso').append($('<option>', {

@@ -39,3 +39,7 @@ select{
   border-radius: 12px;
   width: 75%;
 }
+
+.passButton {
+  border-radius: 0px 12px 12px 0px;
+}

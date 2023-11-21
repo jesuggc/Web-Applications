@@ -4,7 +4,6 @@
 
   <body>
     <%-include('partials/header') %>
-      <!-- <%-include('partials/notas') %> -->
     <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
       <h1>Registro</h1>
       <form method="POST" action="submitRegister">
@@ -40,14 +39,14 @@
             <h4 class="my-3">Contraseña</h4>
             <div class="input-group" >
               <input type="password" name="contrasena" id="password" placeholder="Contraseña">
-              <button type="button" style="border-radius: 0px 12px 12px 0px;" id="togglePassword">Mostrar</button>
+              <button type="button" class="passButton" id="togglePassword">Mostrar</button>
             </div>
           </div>
           <div class="col">
             <h4 class="my-3">Confirma la contraseña</h4>
             <div class="input-group">
               <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
-              <button type="button" style="border-radius: 0px 12px 12px 0px; " id="toggleConfirmPassword">Mostrar</button>
+              <button type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
             </div>
           </div>
         </div>
