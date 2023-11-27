@@ -3,6 +3,26 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js")
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 /* GET home page. */
+
+const session = require("express-session")
+const sessionSQL = require("express-mysql-session")
+const mysqlStore = sessionSQL(session)
+const poolelementoSQL = new mysqlStore({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "UCM_RIU",
+  port: port
+})
+
+const middlewareSession = session({
+  saveUninitialized: false,
+  secret: "1234", 
+  resave: false,  
+  store: poolelementoSQL
+})
+
+
 router.get('/', function(req, res, next) {
   console.log("BIENVENIDO A LA PAGINA DE RESERVAS")
   res.render('index');
@@ -30,7 +50,10 @@ router.get("/register", (request, response) => {
     })
   }
 )
+router.post("/loggedUser", function (request, response) {
+  response.render("prueba")
 
+})
 router.post("/submitRegister", function (request, response) {
   response.status(200)
   let user = {
@@ -42,6 +65,7 @@ router.post("/submitRegister", function (request, response) {
     facultad: request.body
     
   }
+  console.log("USER :", user)
   midao.findByMail(user.email, (err, res) => {
     if (err) console.log("Error: ", err)
     else {
@@ -64,7 +88,11 @@ router.get("/submitLogin", function (request, response) {
     if (err) console.log("Error: ", err)
     else {
       if(!res) console.log("Error: correo incorrecto")
-      else if(res.contrasena === contrasena) console.log("Bienvenido señor",res.nombre)
+      else if(res.contrasena === contrasena) {
+        console.log("Bienvenido señor",res.nombre)
+        request.session.user = email
+        response.redirect("/loggedUser")
+      }
       else console.log("Contraseña erronea")
     }
   })
