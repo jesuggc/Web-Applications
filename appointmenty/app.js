@@ -9,6 +9,26 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const session = require("express-session")
+const sessionSQL = require("express-mysql-session")
+const mysqlStore = sessionSQL(session)
+const sessionStore = new mysqlStore({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "UCM_RIU"
+})
+
+const middlewareSession = session({
+  saveUninitialized: false,
+  secret: "1234", 
+  resave: false,  
+  store: sessionStore
+})
+
+app.use(middlewareSession)
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
