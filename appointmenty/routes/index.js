@@ -6,10 +6,24 @@ const midao = new dao("localhost","root","","UCM_RIU","3306")
 
 // ------------ MIDDLEWARE ---------------
 const amIlogged = (request,response,next) => {
-  console.log("???",request.session)
+  console.log("???",request.session.userId)
   if(request.session.userId) response.redirect("/indexLogged")
   else next()
 }
+
+const amISignedIn = (request,response,next) => {
+  if(!request.session.userId) response.redirect("/login")
+  else next()
+}
+
+router.get("/reservations", amISignedIn, (request,response) => {
+  response.redirect("users/reservations")
+})
+
+router.get("/logOut", (request,response) => {
+  request.session.destroy();
+  response.redirect("/")
+})
 
 router.get("/indexLogged", (request,response) => {
   response.render("indexLogged")

@@ -3,6 +3,10 @@ a {
   color: #00B7FF;
 }
 
+a,div {
+  text-decoration: none;
+}
+
 
 input {
   border-radius: 12px;
@@ -42,4 +46,9 @@ select{
 
 .passButton {
   border-radius: 0px 12px 12px 0px;
+}
+
+html body{
+  max-width: 100%;
+  overflow-x: hidden;
 }
