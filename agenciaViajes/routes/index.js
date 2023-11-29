@@ -59,31 +59,11 @@ router.get("/visorDestinos", function (request, response) {
             })
         }
     })
-    
 });
 
 router.post("/submitForm", function (request, response) {
-    midao.readIdByName(request.body.destino,function(err,id){
-        if(err){
-            let errorMsg=err.message
-            if(errorMsg ==="Unexistent destiny") {
-                midao.findDestinoByNombre(request.query.data,function (err, resultado){
-                    if(err) console.log("Error al buscar ", err.toString())
-                    else {
-                        response.status(200)
-                        midao.findCarouselById(resultado.id,function (err,res) {
-                            if(err) console.log("Error al abrrir carrousel ", err.toString())
-                            else {
-                                resultado.imagenes = res
-                                resultado.error=errorMsg
-                                response.render("visorDestinos", {resultado})
-                            }
-                        })
-                    }
-                })              
-            }
-            else console.log("Error al buscar por nombre ", err)
-        } 
+    midao.readIdByName(request.query.data,function(err,id){
+        if(err) console.log("ERROR: ", err)
         else {
             midao.createReserva(id,request.body,function (err, resultado){
                 if(err) console.log("Error al crear reserva ", err)
@@ -95,6 +75,7 @@ router.post("/submitForm", function (request, response) {
                             let reserva = request.body
                             reserva.idReserva = resultado
                             reserva.imagenes = res
+                            reserva.destino = request.query.data
                             response.render("confirmacionRes", {resultado:reserva})
                         }
                     })
@@ -103,5 +84,41 @@ router.post("/submitForm", function (request, response) {
         }
     })
 });
-
+router.get("/login", function (request, response) {
+    response.status(200)
+    response.render('login');
+});
+router.get("/register", (request, response) => {
+    response.status(200)
+    response.render('register');
+});
+router.post("/submitRegister", function (request, response) {
+    response.status(200)
+    let user = {
+      nombre: request.body.nombre,
+      apellido1: request.body.apellido,
+      email: request.body.email,
+      contrasena: request.body.contrasena
+    }
+    console.log("USER :", user)
+    midao.findByMail(user.email, (err, res) => {
+      if (err) console.log("Error: ", err)
+      else {
+        if(res) {
+            console.log("Correo ya existente") 
+            response.redirect("/register");
+        }
+        else {
+          midao.createUser(user, (err,resu) => {
+            if (err) console.log("Error: ", err)
+            else{
+             console.log("Creado con exito, id: ", resu)
+            //  request.session.userId = res.id
+            response.redirect("/");
+            }
+          })
+        }
+      }
+    })
+  });
 module.exports = router;

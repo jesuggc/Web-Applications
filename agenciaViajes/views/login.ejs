@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body>
+    <%-include('partials/header') %>
+      <div class="col-lg-3 oldrose mx-auto rounded-4 p-4 my-4 text-center">
+        <h1>Inicio de sesión</h1>
+        <form method="GET" action="submitLogin">
+          <div class="row my-2">
+            <h4>Correo</h4>
+            <input class="w-100 " type="text" name="email" placeholder="example@email.es">
+          </div>
+          <div class="row my-2">
+            <h4>Contraseña</h4>
+            <input class="w-100" type="password" name="contrasena" placeholder="Contraseña">
+          </div>
+          <div class="row my-4 d-flex justify-content-center align-items-center">
+            <div class="col-7">
+                <input class="rounded-3 bg-primary w-100" type="submit" value="Iniciar sesión">
+            </div>
+            <div class="col-5">
+                <input class="rounded-3 bg-secondary w-100 text-wrap" type="submit" formaction="/register" value="¿No tienes cuenta?">
+            </div>
+          </div>
+        </form>
+    </div>
+    <%-include('partials/footer') %>
+  </body>
+</html>

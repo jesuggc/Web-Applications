@@ -1,4 +1,0 @@
-como guardar un texto enorme, y con un formato especifico? estilo BOE
-
-Como guardar varias imagenes para carousel de cada destino?
-duda pendiente: porque id no vuelve a 1 despues de borrar varias filas?

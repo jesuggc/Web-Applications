@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<%-include('partials/head') %>
+  <body>
+    <%-include('partials/header') %>
+    <div class="col-lg-3 oldrose mx-auto rounded-4 p-4 my-4 text-center">
+      <h1>Registro</h1>
+      <form method="POST" action="submitRegister">
+        <div class="row my-2">
+            <h4>Nombre</h4>
+            <input type="text" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="row my-2">
+          <h4>Apellidos</h4>
+          <input type="text" name="apellido" placeholder="Apellidos">
+        </div>
+        <div class="row my-2">
+            <h4>Correo</h4>
+            <input  type="text" name="email" placeholder="example@mail.com">
+        </div>
+        <div class="row my-2">
+            <h4>Contraseña</h4>
+                <input class="col-9" type="password" name="contrasena" id="password" placeholder="Contraseña">
+                <button class="col-3" type="button" class="passButton" id="togglePassword">Mostrar</button>
+        </div>
+        <div class="row my-2">
+            <h4>Confirmar contraseña</h4>
+              <input class="col-9" type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
+              <button class="col-3" type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
+        </div>
+        <!--BOTON-->
+        <div class="row d-flex my-4">
+          <input class="row w-50 bg-primary mx-auto d-block" type="submit" value="Enviar">
+        </div>
+      </form>
+    </div>
+    <%-include('partials/footer') %>
+  </body>
+  <!-- <script src="javascripts/showPswd.js"></script> -->
+</html>

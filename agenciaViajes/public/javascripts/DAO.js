@@ -96,6 +96,45 @@ class DAO {
             }
         })
     }
-    
+    createUser(user,callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO usuarios (nombre,apellidos,correo,contrasena) VALUES (?,?,?,?)"
+                connection.query(stringQuery, Object.values(user), (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        let id = resultado.insertId
+                        callback(null, id)
+                    }
+                })
+            }
+        })
+    }
+
+    findByMail(mail,callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM usuarios WHERE correo = ?"
+                connection.query(stringQuery, mail, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        if (resultado.length === 0) callback(null, null)
+                        else {
+                            let res = {
+                                id:resultado[0].id,
+                                nombre:resultado[0].nombre,
+                                apellido1:resultado[0].apellido,
+                                correo:resultado[0].correo,
+                                contrasena:resultado[0].contrasena,
+                            }
+                            callback(null, res)
+                        }
+                    }
+                })
+            }
+        })
+    }
 }
 module.exports = DAO

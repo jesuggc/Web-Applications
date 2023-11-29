@@ -5,17 +5,15 @@ const fecha = document.getElementById("fecha");
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-    destino: /^[a-zA-ZÀ-ÿ\s]{1,40}$/
 }
 
 let nombreValidado = false;
 let correoValidado = false;
-let destinoValidado = false;
 let fechaValidado = false;
 
 const gestionarBoton = () =>
  {
-	let valid = nombreValidado === true && correoValidado === true && destinoValidado === true && fechaValidado === true
+	let valid = nombreValidado === true && correoValidado === true && fechaValidado === true
 	if (valid === true) document.getElementById("submitButton").disabled = false
 	else document.getElementById("submitButton").disabled = true
 }
@@ -26,9 +24,6 @@ const validarFormulario = (e) => {
 		break;
 		case "correo":
 			correoValidado = validarCampo(expresiones.correo, e.target, "correo");
-		break;
-		case "destino":
-			destinoValidado = validarCampo(expresiones.destino, e.target, "destino");
 		break;
 		case "fecha":
 			fechaValidado = validarFecha();

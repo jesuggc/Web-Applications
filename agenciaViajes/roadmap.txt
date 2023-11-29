@@ -1,0 +1,20 @@
+HITO 1
+- Meter sesiones
+HITO 2
+- Opcion de reserva con sesion
+- Añadir todas las paginas necesarias de sesion 
+- Modificar header con/sin sesion
+HITO 3
+- Agregar seccion de comentarios (AJAX)
+    - Mostrar los 3 primeros
+    - Boton de mostrar más 
+    - Apartado para añadir tu comentarios
+
+
+    - Añadir alguna animación
+    - Alguna funcion asincrona más
+- Añadir ida y vuelta
+- Incorporar middlewares aunque sean de error
+
++ Comprobar response.length
++ Incorporar los precios de los destinos
