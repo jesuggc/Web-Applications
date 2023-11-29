@@ -1,14 +1,24 @@
 var express = require('express');
 var router = express.Router();
-const dao = require("../public/javascripts/DAO.js")
+const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 /* GET home page. */
 
+// ------------ MIDDLEWARE ---------------
+const amIlogged = (request,response,next) => {
+  console.log("???",request.session)
+  if(request.session.userId) response.redirect("/indexLogged")
+  else next()
+}
 
-router.get('/', function(req, res, next) {
-  console.log("BIENVENIDO A LA PAGINA DE RESERVAS")
+router.get("/indexLogged", (request,response) => {
+  response.render("indexLogged")
+})
+
+router.get('/', amIlogged, function(req, res, next) {
   res.render('index');
 });
+
 router.get("/login", (request, response) => {
   response.status(200)
   response.render('login');
@@ -73,8 +83,8 @@ router.get("/submitLogin", function (request, response) {
       else if(res.contrasena === contrasena) {
         console.log("Bienvenido señor",res.nombre)
         console.log(res)
-        request.session.user = res
-        response.redirect("/loggedUser")
+        request.session.userId = res.id
+        response.redirect("/indexLogged")
       }
       else console.log("Contraseña erronea")
     }
