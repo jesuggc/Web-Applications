@@ -5,7 +5,7 @@
     <%-include('partials/header') %>
       <div class="col-lg-3 oldrose mx-auto rounded-4 p-4 my-4 text-center">
         <h1>Inicio de sesión</h1>
-        <form method="GET" action="submitLogin">
+        <form method="POST" action="login">
           <div class="row my-2">
             <h4>Correo</h4>
             <input class="w-100 " type="text" name="email" placeholder="example@email.es">
@@ -19,7 +19,7 @@
                 <input class="rounded-3 bg-primary w-100" type="submit" value="Iniciar sesión">
             </div>
             <div class="col-5">
-                <input class="rounded-3 bg-secondary w-100 text-wrap" type="submit" formaction="/register" value="¿No tienes cuenta?">
+                <input class="rounded-3 bg-secondary w-100 text-wrap" type="submit" formaction="register" value="¿No tienes cuenta?">
             </div>
           </div>
         </form>

@@ -10,6 +10,28 @@ class DAO {
         })
     }
 
+    checkUser(correo, contrasena, callback) {
+        this.pool.getConnection((err, connection) => {
+            console.log("1")
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?"
+                connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback("No encontrado", null)
+                    else {
+                        let user = { 
+                            id:resultado.id,
+                            nombre:resultado.nombre,
+                            apellidos:resultado.apellidos,
+                            correo:resultado.correo
+                        }
+                        callback(null, user)
+                    } 
+                })
+            }
+        })
+    }
 
     listAll(callback) {
         this.pool.getConnection((err, connection) => {
@@ -125,7 +147,7 @@ class DAO {
                             let res = {
                                 id:resultado[0].id,
                                 nombre:resultado[0].nombre,
-                                apellido1:resultado[0].apellido,
+                                apellidos:resultado[0].apellidos,
                                 correo:resultado[0].correo,
                                 contrasena:resultado[0].contrasena,
                             }

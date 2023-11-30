@@ -2,7 +2,7 @@
     <div class="carousel-inner">
       <%resultado.imagenes.forEach(ele => { %>
           <div class="carousel-item <%if (resultado.imagenes.indexOf(ele) === 0){%>active<%}%>" data-bs-interval="6500">
-            <img src="<%=ele%>" class="d-block w-100" style="height:100%; object-fit:cover;" alt="Primera imagen del destino">
+            <img src="images/carousel/<%=resultado.nombre%>/<%=ele%>" class="d-block w-100" style="height:100%; object-fit:cover;" alt="Primera imagen del destino">
           </div>
       <%})%>
     </div>
