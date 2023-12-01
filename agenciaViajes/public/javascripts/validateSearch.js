@@ -8,7 +8,6 @@ $(document).ready(function(){
             type: 'GET',
             data: {destino},
             success: function(response) {
-                console.log(response)
                 if(!response.existe)
                 {
                     $("#formSearch").prepend(`<h3 id="mensaje-error">No existe el destino buscado</h3>`)
