@@ -169,7 +169,7 @@ class DAO {
                 let stringQuery = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?"
                 connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
                     if (err) callback(err, null)
-                    else if (resultado.length === 0) callback("No encontrado", null)
+                    else if (resultado.length === 0) callback("No AQUI encontrado", null)
                     else {
                         let user = { 
                             id:resultado[0].id,
