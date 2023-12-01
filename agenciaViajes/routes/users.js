@@ -26,7 +26,7 @@ router.get("/login", function (request, response) {
 
 router.post("/login", function (request, response) {
   response.status(200)
-  midao.checkUser(request.body.email,request.body.contrasena,(err, res) => {
+  midao.checkUser(request.body.email,request.body.password,(err, res) => {
     if (err) console.log("Error: ", err)
     else {
       let user = {
@@ -37,7 +37,7 @@ router.post("/login", function (request, response) {
       }
       request.session.user = user
       response.locals.user = user
-      response.redirect("/")
+      response.json(true)
     }
   })
 });

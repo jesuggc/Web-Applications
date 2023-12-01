@@ -37,8 +37,7 @@ router.get("/checkDestino", function(request,response){
         response.json({existe})
     })
 })
-router.post("/submitSearch", function (request, response) {
-    
+router.post("/submitSearch", function (request, response) { 
     midao.findDestinoByNombre(request.body.search,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
         else {
@@ -104,7 +103,7 @@ router.post("/submitForm", function (request, response) {
 });
 //Usuarios
 router.get("/checkEmail", function (request, response) {
-    midao.checkEmail(request.query.correo, (err, resultado) => {
+    midao.checkEmail(request.query.email, (err, resultado) => {
         let existe = (err) ? false : true
         response.json({existe})
     })

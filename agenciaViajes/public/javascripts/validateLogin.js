@@ -1,13 +1,27 @@
 $(function() {
     $("#login").click( function() {
-        let correo = $("#email").val()
+        var email = $('#email').val();
+        var password = $('#password').val();
+        
+        $('#errorMessage').remove();
+        
         $.ajax({
             url: "/checkEmail",
             type: "GET",
-            data: {correo},
+            data: {email},
             success: function(response) {
-                $("#emailContainer").append(`<h3>${response.existe}</h3>`)
-               
+                console.log(response.existe)
+                if(response.existe === false) $("#emailContainer").append(`<p id="errorMessage" style="color:yellow">Correo no existente</p>`)
+                else {
+                    $.ajax({
+                        url: "/users/login",
+                        type: "POST",
+                        data: {email,password},
+                        success: function(response) {
+                            window.location.href = "/"
+                        }
+                    })
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
