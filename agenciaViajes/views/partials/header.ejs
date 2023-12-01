@@ -1,12 +1,26 @@
 <header>
-    <div class="p-4 d-flex justify-content-between">
+    <div class="mx-4 d-flex justify-content-between d-flex align-items-center">
         <div>
-            <a href="./">
+            <a href="/">
                 <img src="../images/simplelogo.png" alt="Imagen del logo de la empresa" >
             </a>  
         </div>
-        <div class="">
-            <button class="btn"><a href="users/login">Iniciar sesión</a></button>
+        <% if(!locals.user) { %>
+        <div class="my-2">
+            <a href="users/login"><button class="btn">Iniciar sesión</button></a>
         </div>
+        <% } else { %>
+        <div class="justify-content-end my-2 text-center">
+            <div class="row d-flex align-items-center mb-1">
+                <div class="col">
+                    <img class="rounded-circle" style="max-width: 3em;"src="images/noPicture.jpg">
+                </div>
+                <div class="col">
+                    <h3><%=locals.user.nombre%></h3>
+                </div>
+            </div>
+            <a href="users/logout"><button class="btn">Cerrar sesión</button></a>
+        </div>
+        <% } %>
     </div>
 </header>

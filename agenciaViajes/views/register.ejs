@@ -2,7 +2,7 @@
 <html>
 <%-include('partials/head') %>
   <body>
-    <%-include('partials/header') %>
+    <div style="height:5em"></div>
     <div class="col-lg-3 oldrose mx-auto rounded-4 p-4 my-4 text-center">
       <h1>Registro</h1>
       <form method="POST" action="register">
@@ -12,7 +12,7 @@
         </div>
         <div class="row my-2">
           <h4>Apellidos</h4>
-          <input type="text" name="apellido" placeholder="Apellidos">
+          <input type="text" name="apellidos" placeholder="Apellidos">
         </div>
         <div class="row my-2">
             <h4>Correo</h4>
@@ -28,13 +28,14 @@
               <input class="col-9" type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
               <button class="col-3" type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
         </div>
-        <!--BOTON-->
         <div class="row d-flex my-4">
           <input class="row w-50 bg-primary mx-auto d-block" type="submit" value="Enviar">
         </div>
       </form>
+      <div class="d-flex justify-content-start">
+        <a href="login">Volver</a>
+      </div>
     </div>
-    <%-include('partials/footer') %>
   </body>
-  <!-- <script src="javascripts/showPswd.js"></script> -->
+   <script src="javascripts/showPswd.js"></script> 
 </html>

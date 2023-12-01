@@ -15,42 +15,94 @@
           <div class="col me-4 ">
             <div class="oldrose p-4 rounded-4 mt-4 row">
               <div class="fw-bold">
-                <h1 class="text-center p-3"> <%=resultado.nombre%> </h1>
+                <h1 data-id="<%=resultado.id %>" id="destino" class="text-center p-3"> <%=resultado.nombre%> </h1>
               </div>
               <div>
                 <p class="h5"> <%=resultado.description%> </p>
               </div>
             </div>
             <!--RESERVA-->
-            <div class="row my-2">
-              <div class="resVuelo skobeloff rounded-4">
-                <form id="form" method="POST" action="submitForm?data=<%=resultado.nombre%>">
-                  <div class="row m-auto">
-                    <div class="col-md-2 form-group">
+            <div class="row my-2 resVuelo skobeloff rounded-4">
+              <form class="px-4" id="form" method="POST" action="submitForm?data=<%=resultado.nombre%>">
+                <div class="col">
+                  <!--Nombre y apellidos-->
+                  <div class="row ">
+                    <div class="col form-group">
+                      <label for="nombre">Nombre:</label>
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="col form-group">
+                      <label for="nombre">Apellidos:</label>
+                      <input type="text" class=" form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                    </div>
+                  </div>
+                  <!--Correo-->
+                  <div class="row form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" class="  form-control" id="correo" name="correo" placeholder="@gmail.com"required>
+                  </div>
+                  <!--Fechas-->
+                  <div class="row">
+                    <div class="col form-group">
                       <label for="fecha-ida">Fecha de Ida:</label>
                       <input type="date" class="form-control" id="fecha" name="fecha" required>
                     </div>
-                    <div class="col-md-2 form-group">
-                      <label for="nombre">Nombre:</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
-                        required>
-                    </div>
-                    <div class="col-md-2 form-group">
-                      <label for="correo">Correo:</label>
-                      <input type="email" class="form-control" id="correo" name="correo" placeholder="@gmail.com"
-                        required>
-                    </div>
-                    <div class="col ">
-                      <button type="submit" id="submitButton" class=" btn naplesyellow ms-4 my-4 btn-lg"
-                        style="height: 3em; width: 75%;">Registrar Vuelo</button>
+                    <div class="col form-group">
+                      <label for="fecha-ida">Fecha de Vuelta:</label>
+                      <input type="date" class="form-control" id="fechaV" name="fechaV" required>
                     </div>
                   </div>
-                </form>
-                <%if(resultado.error){%>
-                  <h4 class="text-white rounded-2 text-center font-weight-bold bg-danger">El destino no existe</h4>
-                <%}%>              
-              </div>
+                  <!--Boton-->
+                  <div class="row ">
+                    <button type="submit" id="submitButton" class=" btn naplesyellow my-4 btn-lg">Registrar Vuelo</button>
+                  </div>
+                </div>
+              </form>         
             </div>
+          </div>
+        </div>
+        <!--COMENTARIOS-->
+        <div class="container oldrose rounded-4 p-2 my-4">
+          <h2 class="text-center my-4"><strong>Comentarios</strong></h2>
+            <div class="input-group">
+              <textarea id="textArea" class="form-control" aria-label="With textarea" placeholder="No dudes en compartir tu experiencia!"></textarea>
+              <input id="postComment" class="input-group-text" type="submit" value="Enviar">
+            </div>
+          <div id="comentariosContainer">
+            <% if (!resultado.comentarios) { %>
+              <div class="card my-2">
+                <div class="card-header">
+                  <div class="text-center">
+                    <h3> Aun no hay ningún comentario, se el primero en dejar tu opinión </h3>
+                  </div>
+                </div>
+              </div>
+            <% } else { %>
+            <% resultado.comentarios.forEach(ele=> { %>
+              <div class="card my-2">
+                <div class="card-header">
+                  <div class="justify-content-between d-flex">
+                    <h3><%=ele.nombre%></h3>
+                    <h3><%=ele.fecha%></h3>
+                  </div>
+                  <div class="d-flex">
+                    <a id="likes" data-id="<%ele.id%>" href="/"><img style="max-height: 2em;" src="images/nothumbup.png"></a>
+                    <p> A <%=ele.likes%> personas les ha resultado util </p>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p><%=ele.comentario%></p>
+                    <footer class="blockquote-footer"><%=ele.hora%></footer>
+                  </blockquote>
+                </div>
+              </div>
+            <% }) %>
+              <div id="moreDiv" class="text-center">
+                <a id="show_more" href="#">Mostrar todos</a>
+
+              </div>
+            <% } %>
           </div>
         </div>
       </div>
@@ -58,4 +110,6 @@
     <%- include ("partials/footer") %>
   </body>
   <script src="../javascripts/comprobarForm.js"> </script>
+  <script src="../javascripts/showComments.js"> </script>
+  <script src="../javascripts/postComment.js"> </script>
 </html>

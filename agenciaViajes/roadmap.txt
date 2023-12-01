@@ -1,14 +1,14 @@
-HITO 1
-- Meter sesiones
+HITO 1 ---------------------------------------------------------------------------------
+- Meter sesiones -----------------------------------------------------------------------
 HITO 2
 - Opcion de reserva con sesion
-- Añadir todas las paginas necesarias de sesion 
-- Modificar header con/sin sesion
+- Añadir todas las paginas necesarias de sesion ----------------------------------------
+- Modificar header con/sin sesion ------------------------------------------------------
 HITO 3
 - Agregar seccion de comentarios (AJAX)
-    - Mostrar los 3 primeros
-    - Boton de mostrar más 
-    - Apartado para añadir tu comentarios
+    - Mostrar los 3 primeros -----------------------------------------------------------
+    - Boton de mostrar más -------------------------------------------------------------
+    - Apartado para añadir tu comentarios ----------------------------------------------
 
 
     - Añadir alguna animación
@@ -18,3 +18,6 @@ HITO 3
 
 + Comprobar response.length
 + Incorporar los precios de los destinos
++ Mensajes de registro con exito ? feedback a usuario
+
+/ El buscador no funciona

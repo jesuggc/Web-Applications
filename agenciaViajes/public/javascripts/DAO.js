@@ -10,29 +10,7 @@ class DAO {
         })
     }
 
-    checkUser(correo, contrasena, callback) {
-        this.pool.getConnection((err, connection) => {
-            console.log("1")
-            if (err) callback(err, null)
-            else {
-                let stringQuery = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?"
-                connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
-                    if (err) callback(err, null)
-                    else if (resultado.length === 0) callback("No encontrado", null)
-                    else {
-                        let user = { 
-                            id:resultado.id,
-                            nombre:resultado.nombre,
-                            apellidos:resultado.apellidos,
-                            correo:resultado.correo
-                        }
-                        callback(null, user)
-                    } 
-                })
-            }
-        })
-    }
-
+    //DESTINOS
     listAll(callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -91,7 +69,7 @@ class DAO {
             }
         })
     }
-
+    //RESERVAS
     createReserva(destino, reserva, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -105,7 +83,7 @@ class DAO {
             connection.release();
         })
     }
-
+    //CAROUSEL
     findCarouselById(id,callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -118,6 +96,8 @@ class DAO {
             }
         })
     }
+
+    //USUARIOS
     createUser(user,callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -151,6 +131,109 @@ class DAO {
                                 correo:resultado[0].correo,
                                 contrasena:resultado[0].contrasena,
                             }
+                            callback(null, res)
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    checkUser(correo, contrasena, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM usuarios WHERE correo = ? AND contrasena = ?"
+                connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback("No encontrado", null)
+                    else {
+                        let user = { 
+                            id:resultado[0].id,
+                            nombre:resultado[0].nombre,
+                            apellidos:resultado[0].apellidos,
+                            correo:resultado[0].correo
+                        }
+                         callback(null, user)
+                    } 
+                })
+            }
+        })
+    }
+    //COMENTARIOS
+    postComment(nombre,destino,comentario,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO comentarios (destino_id,nombre_usuario,comentario) VALUES (?,?,?)"
+                connection.query(stringQuery, [destino,nombre,comentario], (err, resultado) => {
+                    if (err) callback(err, null)
+                    else callback(null, resultado.insertId)
+                })
+            }
+        })
+    }
+    updateLikes(id, likes, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE comentarios SET LIKES = ? WHERE id = ?"
+                connection.query(stringQuery, [id,likes], (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        if (resultado.length === 0) callback(null, "No hay comentarios aún")
+                        else callback(null, res)
+                    }
+                })
+            }
+        })  
+    }
+    
+    // Funcion que recoge SOLO los 3 primeros comentarios para que no afecte al tiempo de renderizado de la pagina
+    getFirstComments(destino,callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM comentarios WHERE destino_id = ? ORDER BY fecha_comentario DESC LIMIT 3"
+                connection.query(stringQuery, destino, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        if (resultado.length === 0) callback("No hay comentarios aún", null)
+                        else {
+                            
+                            let res = resultado.map(ele => ({ 
+                                nombre: ele.nombre_usuario,
+                                comentario: ele.comentario,
+                                fecha: ele.fecha_comentario.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0],
+                                hora: ele.fecha_comentario.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[1],
+                                likes: ele.likes,
+                                id: ele.id
+                            }))
+                            callback(null, res)
+                        }
+                    }
+                })
+            }
+        })
+    }
+    getAllComments(destino,callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM comentarios WHERE destino_id = 1 ORDER BY fecha_comentario DESC"
+                connection.query(stringQuery, destino, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        if (resultado.length === 0) callback("No hay comentarios aún", null)
+                        else {
+                            let res = resultado.map(ele => ({ 
+                                nombre: ele.nombre_usuario,
+                                comentario: ele.comentario,
+                                fecha: ele.fecha_comentario.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0],
+                                hora: ele.fecha_comentario.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[1],
+                                likes: ele.likes,
+                                id: ele.id
+                            }))
                             callback(null, res)
                         }
                     }

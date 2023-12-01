@@ -3,8 +3,20 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js")
 const midao = new dao("localhost","admin_aw","","viajes")
 /* GET users listing. */
+
+router.use((request, response, next) => {
+  response.locals.user = request.session.user;
+  next();
+});
+
 router.get('/', function(req, res, next) {
   console.log("LO recoge usuarios")
+});
+
+router.get("/logout", function (request, response) {
+  request.session.destroy()
+  response.locals.user = null
+  response.redirect("/")
 });
 
 router.get("/login", function (request, response) {
@@ -23,10 +35,9 @@ router.post("/login", function (request, response) {
         nombre: res.nombre,
         apellidos: res.apellidos
       }
-      
       request.session.user = user
       response.locals.user = user
-      response.redirect("index")
+      response.redirect("/")
     }
   })
 });
@@ -44,7 +55,6 @@ router.post("/register", function (request, response) {
     email: request.body.email,
     contrasena: request.body.contrasena
   }
-  console.log("USER :", user)
   midao.findByMail(user.email, (err, res) => {
     if (err) console.log("Error: ", err)
     else {

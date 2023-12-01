@@ -2,7 +2,9 @@
 <html>
   <%-include('partials/head') %>
   <body>
-    <%-include('partials/header') %>
+      <div style="height:5em">
+
+      </div>
       <div class="col-lg-3 oldrose mx-auto rounded-4 p-4 my-4 text-center">
         <h1>Inicio de sesión</h1>
         <form method="POST" action="login">
@@ -19,11 +21,15 @@
                 <input class="rounded-3 bg-primary w-100" type="submit" value="Iniciar sesión">
             </div>
             <div class="col-5">
-                <input class="rounded-3 bg-secondary w-100 text-wrap" type="submit" formaction="register" value="¿No tienes cuenta?">
+                <!--<input class="rounded-3 bg-secondary w-100 text-wrap" type="submit" formaction="register" value="¿No tienes cuenta?">-->
+                <a href="register"><button type="button" class="rounded-3 bg-secondary w-100 text-wrap"> ¿No tienes cuenta?</button></a>
             </div>
           </div>
-        </form>
+          </form>
+          <div class="d-flex justify-content-start">
+            <a href="/">Volver</a>
+          </div>
     </div>
-    <%-include('partials/footer') %>
   </body>
+  
 </html>
