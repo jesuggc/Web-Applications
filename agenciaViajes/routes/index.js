@@ -103,6 +103,12 @@ router.get("/getAllComments", function (request, response) {
          
     })
 });
+router.get("/checkEmail", function (request, response) {
+    midao.checkEmail(request.query.correo, (err, resultado) => {
+        let existe = (err) ? false : true
+        response.json({existe})
+    })
+})
 
 router.post("/postComment", function (request, response) {
     let destino = request.body.id

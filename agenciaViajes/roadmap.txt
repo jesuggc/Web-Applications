@@ -21,3 +21,4 @@ HITO 3
 + Mensajes de registro con exito ? feedback a usuario
 
 / El buscador no funciona
+/ El comprobar form no va

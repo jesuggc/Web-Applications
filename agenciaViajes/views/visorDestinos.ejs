@@ -99,7 +99,7 @@
               </div>
             <% }) %>
               <div id="moreDiv" class="text-center">
-                <a id="show_more" href="#">Mostrar todos</a>
+                <a id="show_more" href="#" onclick="removeEvent(event);">Mostrar todos</a>
 
               </div>
             <% } %>
@@ -112,4 +112,8 @@
   <script src="../javascripts/comprobarForm.js"> </script>
   <script src="../javascripts/showComments.js"> </script>
   <script src="../javascripts/postComment.js"> </script>
+  <script>
+    function removeEvent(evt) {
+    evt.preventDefault();
+  } </script>
 </html>

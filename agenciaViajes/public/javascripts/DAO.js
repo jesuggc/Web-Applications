@@ -139,6 +139,29 @@ class DAO {
         })
     }
 
+    checkEmail(correo, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM usuarios WHERE correo = ?"
+                connection.query(stringQuery, correo, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta", null)
+                    else {
+                        let user = { 
+                            id:resultado[0].id,
+                            nombre:resultado[0].nombre,
+                            apellidos:resultado[0].apellidos,
+                            correo:resultado[0].correo
+                        }
+                        callback(null, user)
+                    } 
+                })
+            }
+        })
+    }
+
+
     checkUser(correo, contrasena, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -160,6 +183,7 @@ class DAO {
             }
         })
     }
+
     //COMENTARIOS
     postComment(nombre,destino,comentario,callback){
         this.pool.getConnection((err, connection) => {
