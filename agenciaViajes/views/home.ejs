@@ -5,13 +5,13 @@
 
     <%- include ("partials/header") %>
     <%- include ("partials/navbar") %>
-    <%# if(resultado.length  ===0) window.alert("¡Lo sentimos! No tenemos ese destino")%>
+    
     
     <!--BARRA BUSQUEDA POR NOMBRE DESTINO-->
-    <div class="row m-3 text-center rounded-4" id="buscar" style="overflow: hidden;height:35em;background-image:url('../images/vacaciones-2.jpg'); background-repeat: no-repeat;background-position: right;">
-        <form  class="my-auto  "method="POST" action="submitSearch" >
+    <div class="row m-3 text-center rounded-4" id="buscar" style="overflow: hidden;height:35em;background-image:url('../images/vacaciones-2.jpg'); background-repeat: no-repeat;background-position: center;background-size: cover;">
+        <form id="formSearch" class="my-auto  "method="POST" action="submitSearch" >
             <input class="p-4 rounded-4"style="border:0px; font-size:1.5em"type="text" placeholder="Buscar destino.."  id="search" name="search" >
-            <button type="submit" class="btn btn-lg py-3 px-4">
+            <button id="btnSearch" type="button" class="btn btn-lg py-3 px-4">
                 <i class="fa fa-search "></i>
             </button>
         </form>
@@ -26,4 +26,5 @@
     </div>
     <%- include ("partials/footer") %>
 </body>
+<script src="javascripts/validateSearch.js"></script>
 </html>

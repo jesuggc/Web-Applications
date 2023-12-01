@@ -20,6 +20,12 @@ body {
     border-color: green;
 }
 
+#mensaje-error {
+    background-color: white;
+    padding: 10px; 
+    
+}
+
 /*Formulario reserva*/
 .resVuelo{  
     color: aliceblue;

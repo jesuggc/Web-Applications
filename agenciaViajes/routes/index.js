@@ -14,6 +14,14 @@ router.get("/", function(request,response ) {
     response.render("home");
 })
 
+
+router.get("/informacion", function (request, response) {
+    response.status(200)
+    let pag = request.query.data
+    response.render("informacion", {pag})
+});
+
+//Destinos
 router.get("/destinos", function(request,response) {
     midao.listAll(function (err, resultado){
         if(err) console.log("Error al listar ", err.toString())
@@ -23,18 +31,18 @@ router.get("/destinos", function(request,response) {
         } 
     })
 })
-
-router.get("/informacion", function (request, response) {
-    response.status(200)
-    let pag = request.query.data
-    response.render("informacion", {pag})
-});
-
+router.get("/checkDestino", function(request,response){
+    midao.findDestinoByNombre(request.query.destino, function(err,resultado){
+        let existe = (err) ? false : true
+        response.json({existe})
+    })
+})
 router.post("/submitSearch", function (request, response) {
+    
     midao.findDestinoByNombre(request.body.search,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
         else {
-            if(!resultado.length) response.render("home", {resultado})
+            if(resultado.length===0) response.redirect("/");//response.render("home", {resultado})
             else {
                 midao.findCarouselById(resultado.id,function (err,res) {
                     if(err) console.log("Error al abrrir carrousel ", err.toString())
@@ -48,7 +56,6 @@ router.post("/submitSearch", function (request, response) {
         }
     })
 });
-
 router.get("/visorDestinos", function (request, response) {
     midao.findDestinoByNombre(request.query.data,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
@@ -70,7 +77,7 @@ router.get("/visorDestinos", function (request, response) {
         }
     })
 });
-
+//Reservas
 router.post("/submitForm", function (request, response) {
     midao.readIdByName(request.query.data,function(err,id){
         if(err) console.log("ERROR: ", err)
@@ -95,7 +102,14 @@ router.post("/submitForm", function (request, response) {
         }
     })
 });
-
+//Usuarios
+router.get("/checkEmail", function (request, response) {
+    midao.checkEmail(request.query.correo, (err, resultado) => {
+        let existe = (err) ? false : true
+        response.json({existe})
+    })
+});
+//Comentarios
 router.get("/getAllComments", function (request, response) {
     midao.getAllComments(request.query.id,function (err, resultado){
         if(err) console.log("Error al buscar ", err.toString())
@@ -103,13 +117,6 @@ router.get("/getAllComments", function (request, response) {
          
     })
 });
-router.get("/checkEmail", function (request, response) {
-    midao.checkEmail(request.query.correo, (err, resultado) => {
-        let existe = (err) ? false : true
-        response.json({existe})
-    })
-})
-
 router.post("/postComment", function (request, response) {
     let destino = request.body.id
     let comentario = request.body.comment

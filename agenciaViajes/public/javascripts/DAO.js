@@ -35,12 +35,12 @@ class DAO {
 
     findDestinoByNombre(nombre, callback) {
         this.pool.getConnection((err, connection) => {
-            if (err) callback(err, null)
+            if (err) callback(err, null);          
             else {
                 let stringQuery = "SELECT * FROM destinos WHERE nombre = ?"
                 connection.query(stringQuery, nombre, function (err, resultado) {
                     if (err) callback(err, null)
-                    else if (!resultado.length) callback(null,resultado)
+                    else if (!resultado.length) callback("no existe",resultado)
                     else {
                         let res = {
                             id:resultado[0].id,

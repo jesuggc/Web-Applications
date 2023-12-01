@@ -1,0 +1,102 @@
+body {
+    font-family: Arial;
+    background-color: #B4CDED;
+}
+
+/*Formulario reserva*/
+.resVuelo{  
+    color: aliceblue;
+}
+.form-group{
+    padding: 1%;
+}
+
+.btn:hover{
+    background-color: #CE796B;
+}
+
+/*NAVBAR*/
+.navbar:hover .nav-item{
+    filter:blur(1.5px);
+    opacity:0.5;
+    transform: scale(.98);
+    box-shadow:none;
+}
+.navbar:hover .nav-item:hover{
+    transform:scale(1);
+    filter:blur(0px);
+    opacity:1;
+    box-shadow:0 8px 20px 0px #1D7874;
+    font-weight: bolder;
+}
+.nav-link{
+    color: #071E22;
+    font-weight: bolder;  
+    
+}
+.navbar{
+    background-color: #F9DB6D;
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Asegura que el navbar esté por encima del contenido */
+}
+
+/*DESTINOS*/
+.mycard:hover{
+    background-color: #1D7874 ;
+    transition: ease 1s;  
+}
+.mycard{
+    background-color: #071E22;
+    padding:0;
+    border-radius: 1em;
+    height: 15em;
+}
+
+.card-title{
+    color: #B4CDED;
+
+}
+
+.mycard:hover .card-title  {
+    transition: linear 0.5s;
+    font-weight: bolder;
+    color:#5c96e1;
+    
+}
+.img-fluid{
+    height: 75%;
+    border-top-left-radius: 1em;
+    border-top-right-radius:1em;
+    width:100%;
+}
+
+/*FOOTER*/
+.footer{
+    color: white;
+}
+li {
+    list-style-type: none;
+    margin-left:-30px; 
+}
+a {
+    text-decoration: none;
+    color:white;
+}
+
+/*Colores*/
+.richBlack {
+    background-color: #071E22;
+}
+.skobeloff {
+    background-color: #1D7874;
+}
+.naplesyellow {
+    background-color: #F9DB6D;
+}
+.oldrose {
+    background-color: #CE796B;
+}
+.powderblue {
+    background-color: #B4CDED;
+}
