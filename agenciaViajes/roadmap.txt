@@ -16,9 +16,9 @@ HITO 3
 - Añadir ida y vuelta
 - Incorporar middlewares aunque sean de error
 
-+ Comprobar response.length
++ Comprobar response.length ------------------------------------------------------------
 + Incorporar los precios de los destinos
 + Mensajes de registro con exito ? feedback a usuario
 
-/ El buscador no funciona
+/ El buscador no funciona --------------------------------------------------------------
 / El comprobar form no va
