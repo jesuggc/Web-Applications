@@ -37,6 +37,50 @@ class DAO {
         })
     }
 
+    checkEmail(correo, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE correo = ?"
+                connection.query(stringQuery, correo, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta", null)
+                    else {
+                        let user = { 
+                            id:resultado[0].id,
+                            nombre:resultado[0].nombre,
+                            apellido1:resultado[0].apellido1,
+                            apellido2:resultado[0].apellido2,
+                            correo:resultado[0].correo
+                        }
+                        callback(null, user)
+                    } 
+                })
+            }
+        })
+    }
+    checkUser(correo, contrasena, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE correo = ? AND contrasena = ?"
+                connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback("Ese usuario no esta registrado", null)
+                    else {
+                        let user = { 
+                            id:resultado[0].id,
+                            nombre:resultado[0].nombre,
+                            apellido1:resultado[0].apellido1,
+                            apellido2:resultado[0].apellido2,
+                            correo:resultado[0].correo
+                        }
+                         callback(null, user)
+                    } 
+                })
+            }
+        })
+    }
     findByMail(mail,callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)

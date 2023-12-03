@@ -3,12 +3,14 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 /* GET home page. */
-
+router.use((request, response, next) => {
+  response.locals.user = request.session.user;
+  next();
+});
 // ------------ MIDDLEWARE ---------------
 const amIlogged = (request,response,next) => {
-  console.log("???",request.session.userId)
-  if(request.session.userId) response.redirect("/indexLogged")
-  else next()
+  console.log("???",response.locals.user)
+   next()
 }
 
 const amISignedIn = (request,response,next) => {
@@ -25,19 +27,16 @@ router.get("/logOut", (request,response) => {
   response.redirect("/")
 })
 
-router.get("/indexLogged", (request,response) => {
-  response.render("indexLogged")
-})
 
-router.get('/', amIlogged, function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get("/login", (request, response) => {
-  response.status(200)
-  response.render('login');
+// router.get("/login", (request, response) => {
+//   response.status(200)
+//   response.render('login');
  
-})
+// })
 
 router.get("/group/:idFacultad", (request, response) => {
   let idFacultad = request.params.idFacultad
@@ -86,24 +85,7 @@ router.post("/submitRegister", function (request, response) {
   })
 });
 
-router.get("/submitLogin", function (request, response) {
-  response.status(200)
-  let email = request.query.email
-  let contrasena = request.query.contrasena
-  midao.findByMail(email, (err, res) => {
-    if (err) console.log("Error: ", err)
-    else {
-      if(!res) redirect("/login")
-      else if(res.contrasena === contrasena) {
-        console.log("Bienvenido señor",res.nombre)
-        console.log(res)
-        request.session.userId = res.id
-        response.redirect("/indexLogged")
-      }
-      else console.log("Contraseña erronea")
-    }
-  })
-});
+
 
 
 module.exports = router;

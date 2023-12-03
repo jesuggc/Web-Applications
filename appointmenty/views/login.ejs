@@ -5,23 +5,23 @@
     <%-include('partials/header') %>
     <div class="row mx-4">
       <div class="row-xs col-lg-3 innerShadow rounded-4 p-4 my-4 mx-auto d-flex">
-        <img class="img-fluid " style="object-fit: contain; "src="images/inicioDeSesion.png"></img>
+        <img class="img-fluid " style="object-fit: contain; " src="../images/inicioDeSesion.png">
       </div>  
       <div class="row-xs col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
         <h1>Inicio de sesión</h1>
-        <form method="GET" action="submitLogin">
-          <div>
+        <form >
+          <div id="emailContainer">
             <h4 class="my-3">Correo</h4>
-            <input class="w-100 " type="text" name="email" placeholder="example@ucm.es">
+            <input class="w-100 " type="text" name="email" id="email" placeholder="example@ucm.es">
           </div>
           <div>
             <h4 class="my-3">Contraseña</h4>
-            <input class="w-100" type="password" name="contrasena" placeholder="Contraseña">
+            <input class="w-100" type="password" name="contrasena" id="contrasena" placeholder="Contraseña">
           </div>
           <br>
           <div class="row my-4 d-flex justify-content-center ">
             <div class="col-8">
-              <input class="bg-primary w-100" type="submit" value="Iniciar sesión">
+              <input id="login" class="bg-primary w-100" type="button" value="Iniciar sesión">
             </div>
             <div class="col-4">
               <input class="bg-secondary w-100 text-wrap" type="submit" formaction="/register" value="¿No tienes cuenta?">
@@ -34,4 +34,5 @@
     </div>
     <%-include('partials/footer') %>
   </body>
+  <script src="../javascripts/validateLogin.js"></script>
 </html>
