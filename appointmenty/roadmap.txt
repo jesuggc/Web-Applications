@@ -1,0 +1,14 @@
+  PAGINAS NECESARIAS
+        Config sistema Personalizar la apariencia del sistema con nombre, dirección e icono de la organización(ADMIN)
+        Creacion instalacion Crear nuevas instalaciones con nombre, disponibilidad horaria, tipo de reserva (individual o colectiva), y aforo (si aplica). Adjuntar fotografía/icono a la instalación (ADMIN)
+        Registrar (Usuario)
+        Validar registro usuario, enviar correo de confirmación de registro a los usuarios validados. Asignar roles de administrador a usuarios específicos(Admin)
+        Inicio de sesion (A y U)
+        Cierre de sesion (A y U)
+        Reservar instalacion (U)
+        Ver historial de reservas de usuario (A)
+    Ver historial de reservas de instalacion (A)
+    
+    Correo interno, mandar mensajes, como los necesarios en gestion de lista de espera(A), a traves de buzon interno. Ver recibidos, y mandar nuevos (U)
+    Listar usuarios, reservas y busqueda avanzada con filtros para listar (A)
+    

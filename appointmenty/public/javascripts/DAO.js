@@ -43,8 +43,8 @@ class DAO {
             else {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE correo = ?"
                 connection.query(stringQuery, correo, (err, resultado) => {
-                    if (err) callback(err, null)
-                    else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta", null)
+                    if (err) callback(err)
+                    else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta")
                     else {
                         let user = { 
                             id:resultado[0].id,
@@ -66,7 +66,7 @@ class DAO {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE correo = ? AND contrasena = ?"
                 connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
                     if (err) callback(err, null)
-                    else if (resultado.length === 0) callback("Ese usuario no esta registrado", null)
+                    else if (resultado.length === 0) callback()
                     else {
                         let user = { 
                             id:resultado[0].id,

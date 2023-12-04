@@ -40,11 +40,12 @@
             <div class="input-group" >
               <input type="password" name="contrasena" id="password" placeholder="Contraseña">
               <button type="button" class="passButton" id="togglePassword">Mostrar</button>
+              <ul id="passContainer"></ul>
             </div>
           </div>
           <div class="col">
             <h4 class="my-3">Confirma la contraseña</h4>
-            <div class="input-group">
+            <div id="confirmContainer" class="input-group">
               <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
               <button type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
             </div>
@@ -54,7 +55,7 @@
         <!--FACULTAD-->
         <div class="row">
           <h4 class="my-3">Facultad</h4>
-          <select id="facultad" name="Curso" class="w-100 m-1">
+          <select id="facultad" name="Curso" class="input-group">
             <option hidden selected>Selecciona una opción</option>
             <% resultado.forEach( ele=> { %>
               <option value="<%=ele.id%>"><%=ele.nombre%></option>
@@ -84,6 +85,7 @@
       </form>
     </div>
     <script src="javascripts/showPswd.js"></script>
+    <script src="javascripts/checkPassword.js"></script>
     <script src="javascripts/getGroups.js"></script>
     <%-include('partials/footer') %>
   </body>

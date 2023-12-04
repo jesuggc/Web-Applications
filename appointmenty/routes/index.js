@@ -22,10 +22,10 @@ router.get("/reservations", amISignedIn, (request,response) => {
   response.redirect("users/reservations")
 })
 
-router.get("/logOut", (request,response) => {
-  request.session.destroy();
-  response.redirect("/")
-})
+// router.get("/logOut", (request,response) => {
+//   request.session.destroy();
+//   response.redirect("/")
+// })
 
 
 router.get('/', function(req, res, next) {

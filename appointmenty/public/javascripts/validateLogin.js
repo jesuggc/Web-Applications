@@ -2,22 +2,23 @@ $(function() {
     $("#login").click( function() {
         var email = $('#email').val();
         var password = $('#contrasena').val();
-        
-        $('#errorMessage').remove();
+        $('#wrongMail').remove();
+        $('#wrongPass').remove();
         
         $.ajax({
-            url: "/checkEmail",
+            url: "/users/checkEmail",
             type: "GET",
             data: {email},
             success: function(response) {
-                if(response.existe === false) $("#emailContainer").append(`<p id="errorMessage" style="color:yellow">Correo no existente</p>`)
+                if(response.existe === false) $("#emailContainer").append(`<p id="wrongMail" style="color:red">Correo no existente</p>`)
                 else {
                     $.ajax({
-                        url: "/submitLogin",
+                        url: "/users/login",
                         type: "POST",
                         data: {email,password},
                         success: function(response) {
-                            window.location.href = "/"
+                            if (response === false) $("#passContainer").append(`<p id="wrongPass" style="color:red">Contraseña incorrecta</p>`)
+                            else window.location.href = "/"
                         }
                     })
                 }

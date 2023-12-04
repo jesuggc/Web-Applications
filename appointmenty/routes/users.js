@@ -15,17 +15,25 @@ router.get('/reservations', function(req, response, next) {
   response.render('reservations');
 });
 
+router.get("/logout", (request, response) => {
+  request.session.destroy()
+  response.locals.user = request.session
+  response.status(200)
+  response.redirect('/');
+})
+
 router.get("/login", (request, response) => {
   response.status(200)
   response.render('login');
- 
 })
-router.post("/submitLogin", function (request, response) {
+
+router.post("/login", function (request, response) {
   response.status(200)
   let email = request.body.email
   let contrasena = request.body.password
   midao.checkUser(email,contrasena,(err, res) => {
     if (err) console.log("Error: ", err)
+    else if(!res) response.json(false)
     else {
       let user = {
         id: res.id,
