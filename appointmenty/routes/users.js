@@ -27,6 +27,18 @@ router.get("/login", (request, response) => {
   response.render('login');
 })
 
+router.get("/admin", (request, response) => {
+  response.status(200)
+  response.render('admin');
+})
+
+router.get("/solicitudes", (request, response) => {
+  midao.getRequests((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+
 router.post("/login", function (request, response) {
   response.status(200)
   let email = request.body.email
@@ -35,15 +47,8 @@ router.post("/login", function (request, response) {
     if (err) console.log("Error: ", err)
     else if(!res) response.json(false)
     else {
-      let user = {
-        id: res.id,
-        email: res.correo,
-        nombre: res.nombre,
-        apellido1: res.apellido1,
-        apellido2: res.apellido2
-      }
-      request.session.user = user
-      response.locals.user = user
+      request.session.user = res
+      response.locals.user = res
       response.json(true)
     }
   })

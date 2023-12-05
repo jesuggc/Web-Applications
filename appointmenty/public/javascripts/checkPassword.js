@@ -12,7 +12,7 @@ let sizeCheck = /^.{8,}$/
 let capitalCheck = /[A-ZÁÉÍÓÚ]/
 let specialCheck = /[^a-zA-Z0-9]/
 let numberCheck = /\d/
-let allChech = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
+let allCheck = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
 
 $("#password").on("keyup", () => {
     $("#capitalCheck").remove()
@@ -32,7 +32,7 @@ $("#password").on("keyup", () => {
     if(!numberCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="numberCheck">Debe contener 1 número</li>`)
     else $("#numberCheck").remove()
 
-    if(allChech.test($("#password").val())=== true) $("#register").prop('disabled', false)
+    if(allCheck.test($("#password").val())=== true) $("#register").prop('disabled', false)
     else $("#register").prop('disabled', true)
 })
 

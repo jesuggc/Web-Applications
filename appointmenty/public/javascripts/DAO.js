@@ -59,6 +59,31 @@ class DAO {
             }
         })
     }
+
+    getRequests(callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE verificado = 0"
+                connection.query(stringQuery, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback()
+                    else {
+                        callback(null, resultado.map(ele => ({  
+                            id:ele.id,
+                            nombre:ele.nombre,
+                            apellido1:ele.apellido1,
+                            apellido2:ele.apellido2,
+                            correo:ele.correo,
+                            verificado:ele.verificado,
+                            admin:ele.admin
+                        })))
+                    }
+                })
+            }
+        })
+    }
+            
     checkUser(correo, contrasena, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -73,9 +98,11 @@ class DAO {
                             nombre:resultado[0].nombre,
                             apellido1:resultado[0].apellido1,
                             apellido2:resultado[0].apellido2,
-                            correo:resultado[0].correo
+                            correo:resultado[0].correo,
+                            verificado:resultado[0].verificado,
+                            admin:resultado[0].admin
                         }
-                         callback(null, user)
+                        callback(null, user)
                     } 
                 })
             }

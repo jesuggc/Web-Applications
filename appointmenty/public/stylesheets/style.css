@@ -1,4 +1,9 @@
-
+header {
+  position: sticky;
+    z-index: 999;
+    top: -10px;
+    box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+}
 a {
   color: #00B7FF;
 }
@@ -51,4 +56,28 @@ select{
 html body{
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.shipGray {
+  background-color: #8A8D91;
+}
+
+.claret {
+  background-color: #990032;
+}
+
+.apricot {
+  background-color: #FFCAB1;
+}
+
+.dartmouth {
+  background-color: #0B5D1E;
+}
+
+.smoky {
+  background-color: #231C07;
+}
+
+.pistachio {
+  background-color: #BFB48F;
 }
