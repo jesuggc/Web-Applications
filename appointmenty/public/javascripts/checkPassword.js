@@ -9,22 +9,37 @@ $("#confirmPassword").on("keyup", () => {
 
 
 let sizeCheck = /^.{8,}$/
-let vowelCheck = /[A-ZÁÉÍÓÚ]/
-// let specialCheck = //
+let capitalCheck = /[A-ZÁÉÍÓÚ]/
+let specialCheck = /[^a-zA-Z0-9]/
+let numberCheck = /\d/
+let allChech = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
 
 $("#password").on("keyup", () => {
-    $("#vowelCheck").remove()
+    $("#capitalCheck").remove()
     $("#sizeCheck").remove()
+    $("#specialCheck").remove()
+    $("#numberCheck").remove()
 
-    //Un titulo que diga "La contraseña:" estaria bien
-
-    if(!vowelCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="vowelCheck">Debe contener una mayuscula</li>`)
-    else $("#vowelCheck").remove()
+    if(!capitalCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="capitalCheck">Debe contener una mayuscula</li>`)
+    else $("#capitalCheck").remove()
 
     if(!sizeCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="sizeCheck">Debe contener 8 caracteres</li>`)
     else $("#sizeCheck").remove()
 
-    //Habilitar el boton de registro si todo se cumple, inhabilitar en caso contrario
+    if(!specialCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="specialCheck">Debe contener 1 caracter especial</li>`)
+    else $("#specialCheck").remove()
 
-    // console.log(specialCheck.test($("#password").val()))
+    if(!numberCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="numberCheck">Debe contener 1 número</li>`)
+    else $("#numberCheck").remove()
+
+    if(allChech.test($("#password").val())=== true) $("#register").prop('disabled', false)
+    else $("#register").prop('disabled', true)
+})
+
+$("#email").on("blur", () => {
+    let numberCheck = /^\w*@ucm[.]es$/
+    $("#errorEmail").remove()
+
+    if(numberCheck.test($("#email").val()) === false) $("#emailContainer").append(`<p style="color:red" id="errorEmail">Solo correo UCM</p>`)
+    else $("#errorEmail").remove()
 })
