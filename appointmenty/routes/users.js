@@ -47,16 +47,34 @@ router.post("/login", function (request, response) {
     if (err) console.log("Error: ", err)
     else if(!res) response.json(false)
     else {
-      request.session.user = res
-      response.locals.user = res
-      response.json(true)
+      if(res.verificado === 1) {
+        request.session.user = res
+        response.locals.user = res
+      }
+      response.json({existe:true, nombre:res.nombre,correo:res.correo,verificado:res.verificado})
     }
   })
 });
+
 router.get("/checkEmail", function (request, response) {
   midao.checkEmail(request.query.email, (err, resultado) => {
       let existe = (err) ? false : true
       response.json({existe})
   })
 });
+
+router.post("/acceptRequest", (request,response) => {
+  midao.acceptRequest(request.body.id, (err,res) => {
+    if(err) console.log(err)
+    else response.json(res)
+  })
+})
+
+router.post("/dropRequest", (request,response) => {
+  midao.dropRequest(request.body.id, (err,res) => {
+    if(err) console.log(err)
+    else response.json(res)
+  })
+})
+
 module.exports = router;

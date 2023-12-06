@@ -6,27 +6,27 @@
     <%-include('partials/header') %>
     <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
       <h1>Registro</h1>
-      <form method="POST" action="submitRegister">
+      <form id="myForm" method="POST" action="submitRegister">
         <!--NOMBRE Y APELLIDOS-->
         <div class="row">
-          <div class="col">
-            <h4 class="my-3">Nombre</h4>
-            <input type="text" name="nombre" placeholder="Nombre">
+          <div class="col" id="nameContainer">
+            <h4  class="my-3">Nombre</h4>
+            <input id="name" type="text" name="nombre" placeholder="Nombre" required>
           </div>
-          <div class="col">
-            <h4 class="my-3">Primer apellido</h4>
-            <input type="text" name="apellido1" placeholder="Apellido 1">
+          <div class="col" id="surname1Container">
+            <h4  class="my-3">Primer apellido</h4>
+            <input id="surname1" type="text" name="apellido1" placeholder="Apellido 1" required>
           </div>
-          <div class="col">
+          <div class="col" id="surname2Container" >
             <h4 class="my-3">Segundo apellido</h4>
-            <input type="text" name="apellido2" placeholder="Apellido 2">
+            <input id="surname2" type="text" name="apellido2" placeholder="Apellido 2" required>
           </div>
         </div>
         <!--CORREO E IMAGEN-->
         <div class="row">
           <div class="col" id="emailContainer">
             <h4 class="my-3">Correo</h4>
-            <input id="email" class="w-100" type="text" name="email" placeholder="example@ucm.es">
+            <input id="email" class="w-100" type="text" name="email" placeholder="example@ucm.es" required>
           </div>
           <div class="col">
             <h4 class="my-3">Imagen de perfil</h4>
@@ -38,7 +38,7 @@
           <div class="col">
             <h4 class="my-3">Contraseña</h4>
             <div class="input-group" >
-              <input type="password" name="contrasena" id="password" placeholder="Contraseña">
+              <input type="password" name="contrasena" id="password" placeholder="Contraseña" required>
               <button type="button" class="passButton" id="togglePassword">Mostrar</button>
               <ul id="passContainer"></ul>
             </div>
@@ -46,7 +46,7 @@
           <div class="col">
             <h4 class="my-3">Confirma la contraseña</h4>
             <div id="confirmContainer" class="input-group">
-              <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña">
+              <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña" required>
               <button type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
             </div>
           </div>
@@ -55,37 +55,39 @@
         <!--FACULTAD-->
         <div class="row">
           <h4 class="my-3">Facultad</h4>
-          <select id="facultad" name="Curso" class="input-group">
+          <select id="facultad" name="Curso" class="" required>
             <option hidden selected>Selecciona una opción</option>
             <% resultado.forEach( ele=> { %>
-              <option value="<%=ele.id%>"><%=ele.nombre%></option>
+              <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
             <%})%>
           </select>
         </div>
             
-        <!--GRADO Y CURSO-->
         <div class="row">
+          <!--GRADO-->
           <div class="col d-none" id="gradoDiv" >
             <h4 class="my-3">Grado</h4>
-            <select id="grado" name="Grado">
+            <select id="grado" name="Grado" required>
               <option hidden selected>Selecciona una opción</option>
             </select>
           </div>
+          <!-- CURSO -->
           <div class="col d-none" id="cursoDiv" >
             <h4 class="my-3">Curso</h4>
-            <select id="curso" name="Curso">
+            <select id="curso" name="Curso" required>
               <option hidden selected>Selecciona una opción</option>
             </select>
           </div>
         </div>
+
         <!--BOTON-->
         <div class="row d-flex my-4">
-          <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="submit" value="Registrarme">
+          <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="submit" value="Registrarme" disabled>
         </div>
       </form>
     </div>
     <script src="javascripts/showPswd.js"></script>
-    <script src="javascripts/checkPassword.js"></script>
+    <script src="javascripts/validateRegister.js"></script>
     <script src="javascripts/getGroups.js"></script>
     <%-include('partials/footer') %>
   </body>

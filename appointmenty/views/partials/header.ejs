@@ -6,25 +6,24 @@
             
         <% if(!locals.user) { %>
             <div>
-                <a href="/users/login"><button class="btn btn-primary">Iniciar sesión</button></a>
+                <a href="/users/login"><button class="btn btn-primary me-3">Iniciar sesión</button></a>
             </div>
-        <% } else { %>
-            <% if(locals.user.admin) { %>
-                <div>
-                    <a href="/users/admin"><button class="btn btn-secondary">Panel de admin</button></a>
-                </div>
-            <% } %>          
-            <div class="text-center">
-                <div class="row d-flex align-items-center mb-1">
-                    <div class="col">
-                        <img class="rounded-circle" style="max-width: 3em;"src="/images/noPicture.jpg">
-                    </div>
-                    <div class="col">
-                        <h3><%=locals.user.nombre%></h3>
-                    </div>
-                </div>
-                <a href="/users/logout"><button class="btn btn-primary">Cerrar sesión</button></a>
-            </div>
+        <% } else { %>  
+            <div class="dropdown me-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    <img class="rounded-circle" style="max-width: 3em;"src="/images/noPicture.jpg">
+                </button>
+                <ul class="dropdown-menu text-center">
+                  
+                  <li><h5><%=locals.user.nombre%> <%=locals.user.apellido1%></h5><p><%=locals.user.correo%></p></li>
+                  <hr>
+                <% if(locals.user.admin) { %>
+                  <li><a class="dropdown-item bg-danger" href="/users/admin">Panel de administrador</a></li>
+                  <hr>
+                <% } %> 
+                  <li><a class="dropdown-item bg-danger" href="/users/logout">Cerrar sesión</a></li>
+                </ul>
+              </div>
         <% } %>
     </div>
 </header>

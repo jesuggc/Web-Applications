@@ -46,6 +46,7 @@ class DAO {
                     if (err) callback(err)
                     else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta")
                     else {
+                        // Esto es de pega
                         let user = { 
                             id:resultado[0].id,
                             nombre:resultado[0].nombre,
@@ -79,6 +80,43 @@ class DAO {
                             admin:ele.admin
                         })))
                     }
+                })
+            }
+        })
+    }
+    
+    acceptRequest(id,callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_usu_usuarios SET verificado = 1 WHERE id = ?"
+                connection.query(stringQuery, id,(err, resultado) => {
+                    if (err) callback(err)
+                    else callback(null, true)
+                })
+            }
+        })
+    }
+
+    dropRequest(id,callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "DELETE FROM ucm_aw_riu_usu_usuarios WHERE id = ?"
+                connection.query(stringQuery, id,(err, resultado) => {
+                    if (err) callback(err)
+                    else callback(null, true)
+                })
+            }
+        })
+    }acceptRequest(id,callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_usu_usuarios SET verificado = 1 WHERE id = ?"
+                connection.query(stringQuery, id,(err, resultado) => {
+                    if (err) callback(err)
+                    else callback(null, true)
                 })
             }
         })

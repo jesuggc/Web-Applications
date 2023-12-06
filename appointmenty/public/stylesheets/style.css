@@ -11,7 +11,9 @@ a {
 a,div {
   text-decoration: none;
 }
-
+.negrita{
+  font-weight: bold;
+}
 
 input {
   border-radius: 12px;
@@ -31,6 +33,12 @@ input {
   background-position: center;
   background-blend-mode:multiply; 
   /*overlay, multiply, screen, soft-light */
+}
+
+.prueba {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .innerShadow {
