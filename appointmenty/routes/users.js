@@ -27,18 +27,6 @@ router.get("/login", (request, response) => {
   response.render('login');
 })
 
-router.get("/admin", (request, response) => {
-  response.status(200)
-  response.render('admin');
-})
-
-router.get("/solicitudes", (request, response) => {
-  midao.getRequests((err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-
 router.post("/login", function (request, response) {
   response.status(200)
   let email = request.body.email
@@ -55,6 +43,62 @@ router.post("/login", function (request, response) {
     }
   })
 });
+
+
+router.get("/register", (request, response) => {
+  response.status(200)
+  midao.getFacultades((err,resultado)=> {
+    if(err) console.log("Error: ", err)
+    else response.render('register', {resultado});
+  })
+})
+
+router.post("/register", (request, response) => {
+  let user = {
+    nombre: request.body.nombre,
+    apellido1: request.body.apellido1,
+    apellido2: request.body.apellido2,
+    email: request.body.email,
+    password: request.body.password,
+    facultad: request.body.facultad,
+    grado: request.body.grado,
+    curso: request.body.curso
+  }
+  user.nombre = user.nombre.charAt(0).toUpperCase() + user.nombre.slice(1).toLowerCase()
+  user.apellido1 = user.apellido1.charAt(0).toUpperCase() + user.apellido1.slice(1).toLowerCase()
+  user.apellido2 = user.apellido2.charAt(0).toUpperCase() + user.apellido2.slice(1).toLowerCase()
+
+  midao.createUser(user, (err,res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(true)
+  })
+  
+});
+
+router.get("/admin", (request, response) => {
+  response.status(200)
+  response.render('admin');
+})
+router.get("/makeAdmin", (request, response) => {
+  midao.getVerifiedUsers((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+router.post("/makeAdmin", (request, response) => {
+  midao.updateAdmin(request.body.id,(err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+router.get("/solicitudes", (request, response) => {
+  midao.getRequests((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+
+
 
 router.get("/checkEmail", function (request, response) {
   midao.checkEmail(request.query.email, (err, resultado) => {

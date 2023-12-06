@@ -47,43 +47,8 @@ router.get("/group/:idFacultad", (request, response) => {
   
 })
 
-router.get("/register", (request, response) => {
-    response.status(200)
-    midao.getFacultades((err,resultado)=> {
-      if(err) console.log("Error: ", err)
-      else response.render('register', {resultado});
-    })
-  }
-)
-router.get("/loggedUser", function (request, response) {
-  response.render("prueba",{user:request.session.user})
 
-})
-router.post("/submitRegister", function (request, response) {
-  response.status(200)
-  let user = {
-    nombre: request.body.nombre,
-    apellido1: request.body.apellido1,
-    apellido2: request.body.apellido2,
-    email: request.body.email,
-    contrasena: request.body.contrasena,
-    facultad: request.body
-    
-  }
-  console.log("USER :", user)
-  midao.findByMail(user.email, (err, res) => {
-    if (err) console.log("Error: ", err)
-    else {
-      if(res) console.log("Correo ya existente") 
-      else {
-        midao.createUser(user, (err,resu) => {
-          if (err) console.log("Error: ", err)
-          else console.log("Creado con exito, id: ", resu)
-        })
-      }
-    }
-  })
-});
+
 
 
 

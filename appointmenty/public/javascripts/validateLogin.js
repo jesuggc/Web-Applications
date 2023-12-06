@@ -17,8 +17,6 @@ $(function() {
                         type: "POST",
                         data: {email,password},
                         success: function(response) {
-                            console.log(response.verificado)
-                            console.log(response.verificado==false)
                             if (response === false) $("#passContainer").append(`<p id="wrongPass" style="color:red">Contraseña incorrecta</p>`)
                             else if (response.verificado == false) {
                                 $("#mainDiv").empty()

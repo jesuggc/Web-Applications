@@ -11,6 +11,7 @@ var app = express();
 
 const session = require("express-session")
 const sessionSQL = require("express-mysql-session")
+const bodyParser = require("body-parser")
 const mysqlStore = sessionSQL(session)
 const sessionStore = new mysqlStore({
   host: "localhost",
@@ -27,6 +28,7 @@ const middlewareSession = session({
 })
 
 app.use(middlewareSession)
+app.use(bodyParser.json())
 
 
 // view engine setup

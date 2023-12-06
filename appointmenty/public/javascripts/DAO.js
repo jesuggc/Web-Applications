@@ -31,7 +31,7 @@ class DAO {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_gra_grados WHERE idFacultad = ?"
                 connection.query(stringQuery, idFacultad, function (err, resultado) {
                     if (err) callback(err, null)
-                    else callback(null,resultado.map(ele => ({nombre: ele.nombre, dobleGrado: ele.dobleGrado})))
+                    else callback(null,resultado.map(ele => ({id:ele.id,nombre: ele.nombre, dobleGrado: ele.dobleGrado})))
                 })
             }
         })
@@ -60,12 +60,11 @@ class DAO {
             }
         })
     }
-
-    getRequests(callback) { 
+    getVerifiedUsers(callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE verificado = 0"
+                let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 1 AND admin=0;"
                 connection.query(stringQuery, (err, resultado) => {
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback()
@@ -77,14 +76,54 @@ class DAO {
                             apellido2:ele.apellido2,
                             correo:ele.correo,
                             verificado:ele.verificado,
-                            admin:ele.admin
+                            admin:ele.admin,
+                            facultad:ele.nombreFacultad,
+                            grado:ele.nombreGrado, 
+                            curso:ele.curso
                         })))
                     }
                 })
             }
         })
     }
-    
+    getRequests(callback) { 
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 0;"
+                connection.query(stringQuery, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback()
+                    else {
+                        callback(null, resultado.map(ele => ({  
+                            id:ele.id,
+                            nombre:ele.nombre,
+                            apellido1:ele.apellido1,
+                            apellido2:ele.apellido2,
+                            correo:ele.correo,
+                            verificado:ele.verificado,
+                            admin:ele.admin,
+                            facultad:ele.nombreFacultad,
+                            grado:ele.nombreGrado, 
+                            curso:ele.curso
+                        })))
+                    }
+                })
+            }
+        })
+    }
+    updateAdmin(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_usu_usuarios SET admin = 1 WHERE id = ?"
+                connection.query(stringQuery, id,(err, resultado) => {
+                    if (err) callback(err)
+                    else callback(null, true)
+                })
+            }
+        })
+    }
     acceptRequest(id,callback) { 
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -109,7 +148,8 @@ class DAO {
                 })
             }
         })
-    }acceptRequest(id,callback) { 
+    }
+    acceptRequest(id,callback) { 
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
@@ -176,7 +216,7 @@ class DAO {
             this.pool.getConnection((err, connection) => {
                 if (err) callback(err, null)
                 else {
-                    let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena) VALUES (?,?,?,?,?)"
+                    let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso) VALUES (?,?,?,?,?,?,?,?)"
                     connection.query(stringQuery, Object.values(user), (err, resultado) => {
                         if (err) callback(err, null)
                         else {

@@ -4,13 +4,13 @@ $(document).on('change', '#facultad', function() {
     let value = $(this).val();
     let nombreFacultad = $("#facultad option:selected").text();
     $.ajax({
-        url: 'group/' + value,
+        url: '/group/' + value,
         type: 'GET',
         success: function(response) {
             $('#grado').empty(); //Si cambia de un grado a otro que no se queden los anteriores
             $('#grado').append("<option hidden selected>Selecciona una opción</option>");
             response.resultado.forEach(ele => {
-                $('#grado').append(`<option value="${ele.dobleGrado}#${ele.nombre}"> ${ele.nombre} </option>`)
+                $('#grado').append(`<option value="${ele.dobleGrado}#${ele.nombre}#${ele.id}"> ${ele.nombre} </option>`)
             });
             $('#gradoDiv').removeClass('d-none');
         },

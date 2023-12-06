@@ -1,24 +1,23 @@
 
-let nombre=false;
+let nombreBool=false;
 let emailBool=false;
 let surname1=false;
 let surname2=false;
 let passwordBool=false;
-let success=false
+let passwordCheckBool=false;
+let facultadReady=false
+let gradoReady=false
+let cursoReady=false
+
 $("#confirmPassword").on("keyup", () => {
     $("#errorConfirm").remove()
     let password = $("#password").val()
     let confirmPassword = $("#confirmPassword").val()
     
-    if(password !== confirmPassword){
-        $("#confirmContainer").append(`<p style="color:red" id="errorConfirm">Las contraseñas deben coincidir</p>`)
-        passwordBool=false;
-    } 
-    else {
-        passwordBool=true;
-        $("#errorConfirm").remove()
+    passwordCheckBool = password === confirmPassword
+    if(password !== confirmPassword) $("#confirmContainer").append(`<p style="color:red" id="errorConfirm">Las contraseñas deben coincidir</p>`)
+    else $("#errorConfirm").remove()
         
-    }
 })
 
 
@@ -26,6 +25,8 @@ let sizeCheck = /^.{8,}$/
 let capitalCheck = /[A-ZÁÉÍÓÚ]/
 let specialCheck = /[^a-zA-Z0-9]/
 let numberCheck = /\d/
+let nameLikeCheck = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/
+let nameLikeSizeCheck = /^.{3,}$/
 let allCheck = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
 
 $("#password").on("keyup", () => {
@@ -46,98 +47,129 @@ $("#password").on("keyup", () => {
     if(!numberCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="numberCheck">Debe contener 1 número</li>`)
     else $("#numberCheck").remove()
 
-    if(allCheck.test($("#password").val())=== true) {
-        $("#register").prop('disabled', false);
-        // passwordBool=false;
-    }
-    else $("#register").prop('disabled', true)
+    passwordBool = allCheck.test($("#password").val())
 })
 
-$("#email").on("blur", () => {
+$("#email").on("keyup", () => {
     let emailCheck = /^\w*@ucm[.]es$/
     $("#errorEmail").remove()
+    $("#wrongMail").remove()
+    emailBool = emailCheck.test($("#email").val())
 
     if(emailCheck.test($("#email").val()) === false) $("#emailContainer").append(`<p style="color:red" id="errorEmail">Solo correo UCM</p>`)
     else $("#errorEmail").remove()
-    var email = $('#email').val();
-        var password = $('#contrasena').val();
-        $('#wrongMail').remove();
-        $('#wrongPass').remove();
-        
-        $.ajax({
-            url: "/users/checkEmail",
-            type: "GET",
-            data: {email},
-            success: function(response) {
-                if(response.existe === true) $("#emailContainer").append(`<p id="wrongMail" style="color:red">Correo ya existente</p>`)
-                else emailBool=true;
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        })
 })
 
 $("#name").on("keyup",()=>{
-    let letterCheck = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/
-    let letterSizeCheck = /^.{3,}$/
-   
+
     $("#letterCheck").remove()
     $("#letterSizeCheck").remove()
-    if(letterCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterCheck">Solo puede contener letras</p>`)
-    else {
-        nombre=true;
-        $("#letterCheck").remove()
-    }
-    if(letterSizeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterSizeCheck">Nombre demasiado corto</p>`)
-    else {
-        $("#letterSizeCheck").remove()
-        nombre=true;
-    }
+
+    nombreBool = nameLikeCheck.test($("#name").val()) && nameLikeSizeCheck.test($("#name").val()) 
+   
+    if(nameLikeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterCheck">Solo puede contener letras</p>`)
+    else $("#letterCheck").remove()
+
+    if(nameLikeSizeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterSizeCheck">Nombre demasiado corto</p>`)
+    else $("#letterSizeCheck").remove()
+
 })
 $("#surname1").on("keyup",()=>{
-    let surname1Check = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/
-    let surname1sizeCheck = /^.{3,}$/
+
     $("#surname1Check").remove()
     $("#surname1SizeCheck").remove()
-    if(surname1Check.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1Check">Solo puede contener letras</p>`)
-    else {
-        $("#surname1Check").remove()
-        surname1=true;
-    }
-    if(surname1sizeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1SizeCheck">Apellido demasiado corto</p>`)
-    else {
-        $("#surname1SizeCheck").remove()
-        surname1=true;
-    }
+
+    surname1 = nameLikeCheck.test($("#surname1").val()) && nameLikeSizeCheck.test($("#surname1").val())
+
+    if(nameLikeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1Check">Solo puede contener letras</p>`)
+    else $("#surname1Check").remove()
+
+    if(nameLikeSizeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1SizeCheck">Apellido demasiado corto</p>`)
+    else $("#surname1SizeCheck").remove()
 })
-$("#surname2").on("keyup",()=>{
-    let surname2Check = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/
-    let surname2sizeCheck = /^.{3,}$/
+$("#surname2").on("change",()=>{
+
     $("#surname2Check").remove()
     $("#surname2SizeCheck").remove()
-    if(surname2Check.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2Check">Solo puede contener letras</p>`)
-    else {
-        $("#surname2Check").remove()
-        surname2=true;
-    }
-    if(surname2sizeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2SizeCheck">Apellido demasiado corto</p>`)
-    else {
-        $("#surname2SizeCheck").remove()
-        surname2=true;
-    }
+
+    surname2 = nameLikeCheck.test($("#surname2").val()) && nameLikeSizeCheck.test($("#surname2").val())
+
+    if(nameLikeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2Check">Solo puede contener letras</p>`)
+    else $("#surname2Check").remove()
+
+    if(nameLikeSizeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2SizeCheck">Apellido demasiado corto</p>`)
+    else $("#surname2SizeCheck").remove()
 })
 
 
-$('#myForm input').on('keyup', function() {
-    console.log("1",nombre)
-    console.log("2",passwordBool)
-    console.log("3",emailBool)
-    console.log("4",surname1)
-    console.log("5",surname2)
-    if(nombre && passwordBool && emailBool && surname1 && surname2) {
-        console.log("FALLO")
-        $('#register').prop('disabled', false);
-    }
+$('#myForm input, #myForm select').on('change', function() {
+    if(nombreBool && passwordBool && passwordCheckBool && emailBool && surname1 && surname2 && facultadReady && gradoReady && cursoReady) $('#register').prop('disabled', false);
     else $('#register').prop('disabled', true);
+});
+
+$("#register").on("click", () => {
+    // var email = $("#email").val()
+        let nombre = $("#name").val()
+        let apellido1 = $("#surname1").val()
+        let apellido2 = $("#surname2").val()
+        let email = $("#email").val()
+        let password = $("#password").val()
+        let facultad = $("#facultad option:selected").val().split("#")[0]
+        let grado = $("#grado option:selected").val().split("#")[2]
+        let curso = $("#curso option:selected").val()
+    $.ajax({
+        url: "/users/checkEmail",
+        type: "GET",
+        data: {email},
+        success: function(response) {
+            if(response.existe === true) $("#emailContainer").append(`<p id="wrongMail" style="color:red">Correo ya existente</p>`)
+            else {  
+                
+                $.ajax({
+                    url: "/users/register",
+                    type: "POST",
+                    data: {nombre,apellido1,apellido2,email,password,facultad,grado,curso},
+                    success: function(response) {
+                        window.location.href = "/"
+                    }
+                })
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    })
+})
+
+$("#facultad").on("input", () => {
+    facultadReady = true;
+})
+$("#grado").on("input", () => {
+    gradoReady = true;
+})
+$("#curso").on("input", () => {
+    cursoReady = true;
+})
+
+var formulario = document.getElementById("myForm");
+
+// Deshabilitar la funcionalidad de copiar
+formulario.addEventListener("copy", function (e) {
+    e.preventDefault();
+});
+
+// Deshabilitar la funcionalidad de pegar
+formulario.addEventListener("paste", function (e) {
+    e.preventDefault();
+});
+
+// Deshabilitar la funcionalidad de cortar
+formulario.addEventListener("cut", function (e) {
+    e.preventDefault();
+});
+document.addEventListener('keydown', function (e) {
+    // Desactivar pegar (Ctrl+V) y cortar (Ctrl+X)
+    if (e.ctrlKey && (e.key === 'v' || e.key === 'V' || e.key === 'x' || e.key === 'X'|| e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+    }
 });

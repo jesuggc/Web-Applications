@@ -6,7 +6,7 @@
     <%-include('partials/header') %>
     <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-4">
       <h1>Registro</h1>
-      <form id="myForm" method="POST" action="submitRegister">
+      <form id="myForm">
         <!--NOMBRE Y APELLIDOS-->
         <div class="row">
           <div class="col" id="nameContainer">
@@ -82,13 +82,13 @@
 
         <!--BOTON-->
         <div class="row d-flex my-4">
-          <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="submit" value="Registrarme" disabled>
+          <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="button" value="Registrarme" disabled>
         </div>
       </form>
     </div>
-    <script src="javascripts/showPswd.js"></script>
-    <script src="javascripts/validateRegister.js"></script>
-    <script src="javascripts/getGroups.js"></script>
+    <script src="/javascripts/showPswd.js"></script>
+    <script src="/javascripts/validateRegister.js"></script>
+    <script src="/javascripts/getGroups.js"></script>
     <%-include('partials/footer') %>
   </body>
 

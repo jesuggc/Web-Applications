@@ -16,6 +16,9 @@
     - Bloquear con middleware que puedas acceder a url login cuando ya estas iniciado
     - Hacer responsive
     - Hacer el dropdown del boton del perfil en header
+    - feedback registro correcto
+    - imagen registro (bd, dao...)
+    - convertir curso en solicitudes a ordinal
     
     Dropdown:
     [] Cerrar sesion
@@ -23,7 +26,7 @@
     [] Personalizar la apariencia del sistema con nombre, dirección e icono de la organización.
     [] a. Crear nuevas instalaciones con nombre, disponibilidad horaria, tipo de reserva (individual o colectiva), y aforo (si aplica).
        b. Adjuntar fotografía/icono a la instalación
-    [] a. Validar registros de usuarios nuevos para permitir su acceso a la plataforma.
+    [] ----a. Validar registros de usuarios nuevos para permitir su acceso a la plataforma.
        b. Asignar roles de administrador a usuarios específicos.
         
     [] a. Obtener estadísticas de reservas por usuario o por facultad.
