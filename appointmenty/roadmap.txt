@@ -15,23 +15,41 @@
   TODO
     - Bloquear con middleware que puedas acceder a url login cuando ya estas iniciado
     - Hacer responsive
-    - Hacer el dropdown del boton del perfil en header
+    - Hacer el dropdown del boton del perfil en header   ---------------------------------------------------------------------------------------------------
     - feedback registro correcto
     - imagen registro (bd, dao...)
-    - -------convertir curso en solicitudes a ordinal---
+    - -------convertir curso en solicitudes a ordinal    ---------------------------------------------------------------------------------------------------
     - feedback validacion solicitudes y makeadmin con exito
     
     Dropdown:
-    [] Cerrar sesion
+    [] Cerrar sesion    ------------------------------------------------------------------------------------------------------------------------------------
     Panel de admin:
     [] Personalizar la apariencia del sistema con nombre, dirección e icono de la organización.
     [] a. Crear nuevas instalaciones con nombre, disponibilidad horaria, tipo de reserva (individual o colectiva), y aforo (si aplica).
        b. Adjuntar fotografía/icono a la instalación
-    [] ----a. Validar registros de usuarios nuevos para permitir su acceso a la plataforma.
-       ----b. Asignar roles de administrador a usuarios específicos.
+    [] ----a. Validar registros de usuarios nuevos para permitir su acceso a la plataforma.  ---------------------------------------------------------------
+       ----b. Asignar roles de administrador a usuarios específicos. ---------------------------------------------------------------------------------------
         
     [] a. Obtener estadísticas de reservas por usuario o por facultad.
        b. Generar listados de usuarios por facultad. 
     [] a. Enviar mensajes a usuarios a través de un buzón de correo interno.
        b. Se enviará una notificación al primer usuario de la lista cuando haya habido alguna cancelación de reservas
-       //Solicitudes//Roles//Estadisticas//Enviar mensaje//Añadir instalaciones//Apariencia////////
+
+_____________________________________________________________________________________________________________________________________________
+
+-     Refactorizar DAO
+-     Refactorizar rutas
+-  A3 Correo confirmación al aceptar
+-  U2 Gestionar reservas
+-  C4 Feedback modales
+-  A8 Listado de usuarios
+-  A9 Historial de reservas
+-  A1 Personalizar apariencia
+-  A2 Nuevas instalaciones
+-  A5 Estadisticas y listados
+-  A6 Enviar correo
+-  A7 Correo lista de espera
+-  U3 Mensajeria
+-  C3 Registro con foto
+-  C6 Reserva interactiva
+-  C5 Responsive

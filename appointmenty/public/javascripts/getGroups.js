@@ -2,7 +2,6 @@ const facInput = document.getElementById("facultad")
 
 $(document).on('change', '#facultad', function() {
     let value = $(this).val();
-    let nombreFacultad = $("#facultad option:selected").text();
     $.ajax({
         url: '/group/' + value,
         type: 'GET',

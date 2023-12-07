@@ -105,8 +105,8 @@ router.get("/stats", (request, response) => {
 })
 
 router.get("/getStudents", (request, response) => {
-  console.log("en users", request.body)
-  midao.getStudentsByFacId(request.body.id,(err, res) => {
+  console.log("en users", request.query.id)
+  midao.getStudentsByFacId(request.query.id,(err, res) => {
     if (err) console.log("Error: ", err)
     else response.json(res)
   })

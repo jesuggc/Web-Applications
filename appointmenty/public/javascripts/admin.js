@@ -1,13 +1,29 @@
-function calcularCurso(curso) {
-    if(curso === 1) return "primer"
-    if(curso === 2) return "segundo"
-    if(curso === 3) return "tercer"
-    if(curso === 4) return "cuarto"
-    if(curso === 5) return "quinto"
-    if(curso === 6) return "sexto"
-}
 
+
+$(function() {
+    $("#inicio").trigger("click")
+});
+
+// INICIO
+$("#inicio").on("click", () => {
+    removeAllStrongs()
+    $("#inicio").addClass("negrita")
+    $("#panel").empty();
+    $("#panel").append(`
+            <div class="text-center">
+                <h1>Panel de administrador</h1>
+                <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
+                <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
+                <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
+                <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
+            </div>
+                `)
+})
+
+// SOLICITUDES
 $("#solicitudes").on("click", function(){
+    removeAllStrongs()
+    $("#solicitudes").addClass("negrita")
     $.ajax({
         url: "/users/solicitudes",
         method: "GET",
@@ -73,8 +89,10 @@ $("#panel").on("click", ".botonEliminar", function(){
 
 });
 
-
+// ROLES
 $("#roles").on("click", function(){
+    removeAllStrongs()
+    $("#roles").addClass("negrita")
     $.ajax({
         url: "/users/makeAdmin",
         method: "GET",
@@ -137,18 +155,11 @@ $("#panel").on("change", "#adminSwitch", function(){
         }
     })
 })
-//INICIO
-$("#inicio").on("click", ()=>{
-    $("#panel").empty();
-    $("#panel").append(`<h1>Panel de administrador</h1>
-            <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
-            <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
-            <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
-            <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
-        `)
-})
+
 //ESTADISTICAS
 $("#estadisticas").on("click", ()=>{
+    removeAllStrongs()
+    $("#estadisticas").addClass("negrita")
     $.ajax({
         url: "/users/stats",
         method: "GET",
@@ -160,54 +171,53 @@ $("#estadisticas").on("click", ()=>{
             });
 
             // Agregar el select al panel
-            $("#panel").empty();
+            $("#panel").empty()
             $("#panel").append(`
-                <div id="containerFac"class="container">
-                    <h4 class="my-3">Facultad</h4>
-                    <select id="facultadSelect" name="Curso" class="" required>
-                        ${optionsHtml}
-                    </select>
+                <div id="containerFac" class="col ms-4">
+                    <div class="row">
+                        <select id="facultadSelect" name="Curso" required>
+                            ${optionsHtml}
+                        </select>
+                    </div>
                 </div>
             `);
         }
     })  
 })
+
 $("#panel").on("change", "#facultadSelect", function(){
     let id= $(this).val();
     console.log("fac id: ", id)
+    $("#emptyMessage").remove()
     $.ajax({
         url: "/users/getStudents",
         method: "GET",
-        data: id,
+        data: {id},
         success: function(response){
-            if(!response) $("#containerFac").append(`<div class="row text-center"><h3>No hay estudiantes registrados de esa facultad</h3></div>`)
+            if(!response) $("#containerFac").append(`<div id="emptyMessage" class="row text-center"><h3>No hay estudiantes registrados de esa facultad</h3></div>`)
             else{
-                console.log(response[0])
+                console.log(response[0].facultad)
                 console.log($(this).text())
-                $("#containerFac").append(`${this.text()}`)
+                $("#containerFac").append(`
+                    <div class="row">
+                        <h4> Facultad de ${response[0].facultad} </h4>
+                    </div>
+                    <div class="row">
+                        <div id="lista" class="col-8">
+                            
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                    </div>
+                `)
+                response.forEach(ele => {
+                    $("#lista").append(`<div class="row">${ele.nombre} ${ ele.apellido1} ${ele.apellido2}</div>`)
+                })
+
             }
         }
     })
-})
-//NAVBAR
-$("#inicio").on("click", () => {
-    removeAllStrongs()
-    $("#inicio").addClass("negrita")
-})
-
-$("#solicitudes").on("click", () => {
-    removeAllStrongs()
-    $("#solicitudes").addClass("negrita")
-})
-
-$("#roles").on("click", () => {
-    removeAllStrongs()
-    $("#roles").addClass("negrita")
-})
-
-$("#estadisticas").on("click", () => {
-    removeAllStrongs()
-    $("#estadisticas").addClass("negrita")
 })
 
 $("#mensajes").on("click", () => {
@@ -233,4 +243,13 @@ function removeAllStrongs(){
     $("#mensajes").removeClass("negrita")
     $("#instalacion").removeClass("negrita")
     $("#apariencia").removeClass("negrita")
+}
+
+function calcularCurso(curso) {
+    if(curso === 1) return "primer"
+    if(curso === 2) return "segundo"
+    if(curso === 3) return "tercer"
+    if(curso === 4) return "cuarto"
+    if(curso === 5) return "quinto"
+    if(curso === 6) return "sexto"
 }

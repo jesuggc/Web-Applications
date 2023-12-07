@@ -108,15 +108,14 @@ $('#myForm input, #myForm select').on('change', function() {
 });
 
 $("#register").on("click", () => {
-    // var email = $("#email").val()
-        let nombre = $("#name").val()
-        let apellido1 = $("#surname1").val()
-        let apellido2 = $("#surname2").val()
-        let email = $("#email").val()
-        let password = $("#password").val()
-        let facultad = $("#facultad option:selected").val().split("#")[0]
-        let grado = $("#grado option:selected").val().split("#")[2]
-        let curso = $("#curso option:selected").val()
+    let nombre = $("#name").val()
+    let apellido1 = $("#surname1").val()
+    let apellido2 = $("#surname2").val()
+    let email = $("#email").val()
+    let password = $("#password").val()
+    let facultad = $("#facultad option:selected").val().split("#")[0]
+    let grado = $("#grado option:selected").val().split("#")[2]
+    let curso = $("#curso option:selected").val()
     $.ajax({
         url: "/users/checkEmail",
         type: "GET",

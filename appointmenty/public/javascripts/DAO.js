@@ -28,7 +28,7 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE u.facultad = ?"
+                let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE u.facultad = ? AND u.verificado=1"
                 connection.query(stringQuery, id,(err, resultado) => {
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback(null,null)
