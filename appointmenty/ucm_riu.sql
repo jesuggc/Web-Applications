@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2023 a las 01:39:08
+-- Tiempo de generación: 07-12-2023 a las 00:37:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ucm_riu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('91IAmP5lk-7n34tNq8F5xOc87Yi9uCK_', 1701989390, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"verificado\":1,\"admin\":1}}'),
+('By_c3X0s5WqPoZJxm7-lErq_5sNMI81c', 1701992106, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":2,\"nombre\":\"a\",\"apellido1\":\"a\",\"apellido2\":\"a\",\"correo\":\"a\",\"verificado\":1,\"admin\":0}}'),
+('KyuyuGsdp1MySNRi8OajGCHRxfUtNxUZ', 1701992020, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"verificado\":1,\"admin\":1}}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ucm_aw_riu_cor_correo`
+--
+
+CREATE TABLE `ucm_aw_riu_cor_correo` (
+  `id` int(12) NOT NULL,
+  `idOrigen` int(12) NOT NULL,
+  `idDestino` int(12) NOT NULL,
+  `asunto` varchar(100) NOT NULL,
+  `cuerpo` varchar(1200) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `leido` tinyint(1) NOT NULL DEFAULT 0,
+  `archivado` tinyint(1) NOT NULL DEFAULT 0,
+  `favorito` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -225,21 +264,42 @@ CREATE TABLE `ucm_aw_riu_usu_usuarios` (
   `apellido1` varchar(20) NOT NULL,
   `apellido2` varchar(20) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `contrasena` varchar(100) NOT NULL
+  `contrasena` varchar(100) NOT NULL,
+  `facultad` int(3) NOT NULL,
+  `grado` int(3) NOT NULL,
+  `curso` int(3) NOT NULL,
+  `verificado` tinyint(1) NOT NULL DEFAULT 0,
+  `admin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ucm_aw_riu_usu_usuarios`
 --
 
-INSERT INTO `ucm_aw_riu_usu_usuarios` (`id`, `nombre`, `apellido1`, `apellido2`, `correo`, `contrasena`) VALUES
-(1, 'Queco', 'Fernandez', 'Muller', 'quecoñete@ucm.es', 'PulpoGuitarra23'),
-(2, 'a', 'a', 'a', 'a', 'a'),
-(3, '', '', '', '', '');
+INSERT INTO `ucm_aw_riu_usu_usuarios` (`id`, `nombre`, `apellido1`, `apellido2`, `correo`, `contrasena`, `facultad`, `grado`, `curso`, `verificado`, `admin`) VALUES
+(1, 'Queco', 'Fernandez', 'Muller', 'quecoñete@ucm.es', 'PulpoGuitarra23', 3, 6, 2, 1, 1),
+(2, 'a', 'a', 'a', 'a', 'a', 7, 18, 3, 1, 0),
+(6, 'admin', 'adminez', 'adminez', 'admin@ucm.es', 'admin', 0, 0, 1, 1, 1),
+(9, 'Marcos', 'Lopez', 'Lope', 'al@ucm.es', 'Marcos12?', 9, 27, 4, 0, 0),
+(10, 'Sadasd', 'Asdads', 'Asdasd', 'a@ucm.es', 'Marcos12?', 1, 2, 1, 0, 0),
+(11, 'Marcos', 'Lopez', 'Lopezz', 'malo@ucm.es', 'Marcos12?', 1, 1, 3, 0, 0),
+(12, 'Jesús', 'González', 'Carrillo', 'jesugo11@ucm.es', 'Jesus12?', 20, 113, 4, 1, 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indices de la tabla `ucm_aw_riu_cor_correo`
+--
+ALTER TABLE `ucm_aw_riu_cor_correo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ucm_aw_riu_fac_facultades`
@@ -265,6 +325,12 @@ ALTER TABLE `ucm_aw_riu_usu_usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `ucm_aw_riu_cor_correo`
+--
+ALTER TABLE `ucm_aw_riu_cor_correo`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_fac_facultades`
 --
 ALTER TABLE `ucm_aw_riu_fac_facultades`
@@ -280,7 +346,7 @@ ALTER TABLE `ucm_aw_riu_gra_grados`
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_usu_usuarios`
 --
 ALTER TABLE `ucm_aw_riu_usu_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

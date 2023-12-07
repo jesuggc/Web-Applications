@@ -18,7 +18,8 @@
     - Hacer el dropdown del boton del perfil en header
     - feedback registro correcto
     - imagen registro (bd, dao...)
-    - convertir curso en solicitudes a ordinal
+    - -------convertir curso en solicitudes a ordinal---
+    - feedback validacion solicitudes y makeadmin con exito
     
     Dropdown:
     [] Cerrar sesion
@@ -27,7 +28,7 @@
     [] a. Crear nuevas instalaciones con nombre, disponibilidad horaria, tipo de reserva (individual o colectiva), y aforo (si aplica).
        b. Adjuntar fotografía/icono a la instalación
     [] ----a. Validar registros de usuarios nuevos para permitir su acceso a la plataforma.
-       b. Asignar roles de administrador a usuarios específicos.
+       ----b. Asignar roles de administrador a usuarios específicos.
         
     [] a. Obtener estadísticas de reservas por usuario o por facultad.
        b. Generar listados de usuarios por facultad. 

@@ -1,8 +1,8 @@
 <header class="sticky-top pistachio p-2" >
     <div class="d-flex justify-content-between align-items-center">
-        <div class="">
-            <a href="/"><img style="max-height: 4em;" src="../images/logo.png"></a>
-        </div>
+        
+            <a href="/"><img style="height: auto;max-height: 4em;" src="../images/logo.png"></a>
+        
             
         <% if(!locals.user) { %>
             <div>
@@ -20,7 +20,9 @@
                 <% if(locals.user.admin) { %>
                   <li><a class="dropdown-item bg-danger" href="/users/admin">Panel de administrador</a></li>
                   <hr>
-                <% } %> 
+                <% } else { %> 
+                  <li><a class="dropdown-item" href="/users/correo">Correo UCM</a></li>
+                <% } %>
                   <li><a class="dropdown-item bg-danger" href="/users/logout">Cerrar sesión</a></li>
                 </ul>
               </div>

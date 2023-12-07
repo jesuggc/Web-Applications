@@ -24,6 +24,33 @@ class DAO {
         })
     }
 
+    getStudentsByFacId(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE u.facultad = ?"
+                connection.query(stringQuery, id,(err, resultado) => {
+                    if (err) callback(err, null)
+                    else if (resultado.length === 0) callback(null,null)
+                    else {
+                        callback(null, resultado.map(ele => ({  
+                            id:ele.id,
+                            nombre:ele.nombre,
+                            apellido1:ele.apellido1,
+                            apellido2:ele.apellido2,
+                            correo:ele.correo,
+                            verificado:ele.verificado,
+                            admin:ele.admin,
+                            facultad:ele.nombreFacultad,
+                            grado:ele.nombreGrado, 
+                            curso:ele.curso
+                        })))
+                        
+                    }
+                })
+            }
+        })
+    }
     getGrados(idFacultad, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -67,7 +94,7 @@ class DAO {
                 let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 1 AND admin=0;"
                 connection.query(stringQuery, (err, resultado) => {
                     if (err) callback(err, null)
-                    else if (resultado.length === 0) callback()
+                    else if (resultado.length === 0) callback(null,null)
                     else {
                         callback(null, resultado.map(ele => ({  
                             id:ele.id,
@@ -81,6 +108,7 @@ class DAO {
                             grado:ele.nombreGrado, 
                             curso:ele.curso
                         })))
+                        
                     }
                 })
             }
@@ -93,7 +121,7 @@ class DAO {
                 let stringQuery = "SELECT u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 0;"
                 connection.query(stringQuery, (err, resultado) => {
                     if (err) callback(err, null)
-                    else if (resultado.length === 0) callback()
+                    else if (resultado.length === 0) callback(null,null)
                     else {
                         callback(null, resultado.map(ele => ({  
                             id:ele.id,
@@ -213,19 +241,51 @@ class DAO {
     }
 
     createUser(user,callback) {
-            this.pool.getConnection((err, connection) => {
-                if (err) callback(err, null)
-                else {
-                    let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso) VALUES (?,?,?,?,?,?,?,?)"
-                    connection.query(stringQuery, Object.values(user), (err, resultado) => {
-                        if (err) callback(err, null)
-                        else {
-                            let id = resultado.insertId
-                            callback(null, id)
-                        }
-                    })
-                }
-            })
-        }
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso) VALUES (?,?,?,?,?,?,?,?)"
+                connection.query(stringQuery, Object.values(user), (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        let id = resultado.insertId
+                        callback(null, id)
+                    }
+                })
+            }
+        })
     }
+        
+    getEmails(id,callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_cor_correo AS c JOIN ucm_aw_riu_usu_usuarios as u ON c.idOrigen = u.id WHERE idDestino = ?"
+                connection.query(stringQuery, id, (err, resultado) => {
+                    if (err) callback(err, null)
+                    else {
+                        if (resultado.length === 0) callback(null, null)
+                        else {
+                            callback(null, resultado.map(ele => ({  
+                                id:ele.id,
+                                idOrigen:ele.idOrigen,
+                                asunto:ele.asunto,
+                                cuerpo:ele.cuerpo,
+                                fecha:ele.fecha,
+                                leido:ele.leido,
+                                archivado:ele.archivado,
+                                favorito:ele.favorito,
+                                nombreOrigen:ele.nombre,
+                                apellido1Origen:ele.apellido1,
+                                apellido2Origen:ele.apellido2,
+                                correoOrigen:ele.correo
+                            })))
+                        }
+                    }
+                })
+            }
+        })
+    }
+}
+
 module.exports = DAO

@@ -97,9 +97,20 @@ router.get("/solicitudes", (request, response) => {
     else response.json(res)
   })
 })
+router.get("/stats", (request, response) => {
+  midao.getFacultades((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
 
-
-
+router.get("/getStudents", (request, response) => {
+  console.log("en users", request.body)
+  midao.getStudentsByFacId(request.body.id,(err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
 router.get("/checkEmail", function (request, response) {
   midao.checkEmail(request.query.email, (err, resultado) => {
       let existe = (err) ? false : true
@@ -118,6 +129,23 @@ router.post("/dropRequest", (request,response) => {
   midao.dropRequest(request.body.id, (err,res) => {
     if(err) console.log(err)
     else response.json(res)
+  })
+})
+
+
+router.get("/correo", (request, response) => {
+  response.status(200)
+  console.log(response.locals.user.id)
+  midao.getEmails(response.locals.user.id ,(err,emails) => {
+    if(err) console.log(err)
+    else {
+      emails.forEach(ele => {
+        ele.hora = ele.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[1].trim()
+        ele.fecha = ele.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]
+      });
+      console.log(emails)
+      response.render("correo",{emails})
+    } 
   })
 })
 

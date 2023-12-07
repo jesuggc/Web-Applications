@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a id="inicio" class="nav-link negrita"  href="#">Inicio</a>
+                        <a id="inicio" class="nav-link negrita"  style="cursor: pointer;">Inicio</a>
                     </li>
                     <li class="nav-item ">
                         <a id="solicitudes" class="nav-link" style="cursor: pointer;" >Solicitudes</a>
@@ -36,10 +36,14 @@
         <!-- --------------------- -->
         <!-- <div id="inicio">
         </div> -->
-        <div id="panel">
-            <h1>¡Hola <%=locals.user.nombre%>!</h1>
-        </div>
         
+        <div id="panel" class="text-center"style="text-align: justify;">
+            <h1>¡Hola <%=locals.user.nombre%>!</h1>
+            <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
+            <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
+            <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
+            <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
+        </div>
     </div>   
     <script src="/javascripts/mydriver.js"></script>
     <script src="/javascripts/admin.js"></script>

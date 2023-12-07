@@ -89,3 +89,26 @@ html body{
 .pistachio {
   background-color: #BFB48F;
 }
+header{
+
+  max-height: 10vh;
+}
+.scrollable {
+  max-height: 80vh;
+  overflow-y:scroll;
+}
+
+footer{
+  max-height: 10vh;
+  /* position: absolute;
+  bottom: 0;
+  width: 100%; */
+  
+}
+
+body,html {
+  overflow-y: hidden;
+  padding:0;
+  margin:0;
+  height:100%;
+}

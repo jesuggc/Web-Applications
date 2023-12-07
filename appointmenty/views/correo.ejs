@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body >
+    <%-include('partials/header') %>
+    <div class="col" style="background-color: #BFB48F;">
+      <div class="row">
+        <h1 class="ms-2">Mensajes</h1>        
+      </div>
+      <div class="row mx-4" style="max-height: 80vh;background-color: #BFB48F; height:2000px">
+        <div style="background-color: whitesmoke" class="col rounded-4 p-2 m-2">
+          <div class="row mx-2">
+            <div class="col-1">Principal</div>
+            <div class="col-9">Asunto</div>
+            <div class="col-2">Fecha</div>
+          </div>
+          <hr>
+          <% emails.forEach(ele => { %>
+            <div class="row mx-2">
+              <div class="col-1"><span><%=ele.nombreOrigen %></span></div>
+              <div class="col-8"><span><%=ele.asunto %></div>
+              <div class="col-2"><span><%=ele.fecha%></div>
+              <div class="col-1"><span><%=ele.hora%></div>
+            </div>
+          <% }) %>
+        </div>
+        <div hidden id="lector" class="col">
+          
+        </div>
+      </div>
+    </div>   
+    <script src="../javascripts/mydriver.js"></script>
+    <%-include('partials/footer') %>
+  </body>
+</html>
