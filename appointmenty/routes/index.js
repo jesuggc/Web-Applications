@@ -21,7 +21,6 @@ router.get("/reservations", amISignedIn, (request,response) => {
   response.redirect("users/reservations")
 })
 
-
 router.get('/', function(req, res, next) {
   midao.getOptions((err,options) => {
     if(err) console.log("Error: ", err)
@@ -43,6 +42,9 @@ router.get("/group/:idFacultad", (request, response) => {
   
 })
 
+router.get("/prueba", (request, response) => {
+    response.render("prueba")
+})
 
 
 

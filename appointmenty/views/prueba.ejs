@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener Títulos de Commits</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Últimos Commits</h1>
+    <ul id="commitList"></ul>
+
+    <script>
+        $(document).ready(function () {
+            var usuario = 'jesuggc';
+            var repositorio = 'Web-Applications';
+
+            // Endpoint de commits en la API de GitHub
+            var apiUrl = 'https://api.github.com/repos/' + usuario + '/' + repositorio + '/commits';
+
+            // Realizar la solicitud a la API de GitHub
+            $.get(apiUrl, function (commits) {
+                // Iterar sobre los últimos commits
+                commits.forEach(function (commit) {
+                    // Agregar el título del commit a la lista
+                    $('#commitList').append('<li>' + commit.commit.message + '</li>');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
