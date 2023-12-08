@@ -294,4 +294,22 @@ class DAO {
     }
 }
 
+getReservationsByDayAndInstallation(day,idInstallation,callback){
+    "SELECT * FROM `ucm_aw_riu_res_reservas` WHERE `idInstalacion` = 5 AND `fechaReserva` BETWEEN '2023-12-14 00:00:00.000000' AND '2023-12-14 23:59:59.999999' AND cancelado = 0"
+    this.pool.getConnection((err, connection) => {
+        if (err) callback(err, null)
+        else {
+            let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva BETWEEN '? 00:00:00' AND '? 23:59:59' AND cancelado = 0"
+            connection.query(stringQuery,[idInstallation, day,day], function (err, resultado) {
+                if (err) callback(err, null)
+                else callback(null,resultado.map(ele => ({
+                    nombre: ele.nombre,
+                    aforo: ele.aforo, 
+                    id: ele.id 
+                })))
+            })
+        }
+    })
+}
+
 module.exports = DAO

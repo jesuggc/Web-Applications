@@ -1,6 +1,5 @@
 let contador = 0;
 let lista = []
-let disabled = []
 
 function getMiddle(array) {
     return array.sort((a, b) => {
@@ -65,8 +64,9 @@ $("#sala").on("change", function(){
 })
 
 $("#calendario").on("input", () => {
-    let x = $("#calendario").val()
-    console.log("dia",typeof x )
+    let fecha = $("#calendario").val()
+    let idInstalacion = $("#sala").val().split("#")[0]
+    console.log(fecha,idInstalacion)
 })
 
 $("#enviar").on("click", () => {

@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obtener Títulos de Commits</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-</head>
+<%-include("partials/head")%>
 <body>
+    <div id="carouselExample" class="carousel slide bg-info">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h1>Noticias 2</h1>
+            <p>Hola que tal?</p>
+          </div>
+          <div class="carousel-item">
+            <h1>Noticias</h1>
+            <p>Hola</p>
+          </div>
+          <!-- <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+          </div> -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     <h1>Últimos Commits</h1>
     <ul id="commitList"></ul>
 
