@@ -8,16 +8,6 @@ $(function() {
 $("#inicio").on("click", () => {
     removeAllStrongs()
     $("#inicio").addClass("negrita")
-    $("#panel").empty();
-    $("#panel").append(`
-            <div class="text-center">
-                <h1>Panel de administrador</h1>
-                <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
-                <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
-                <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
-                <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
-            </div>
-                `)
 })
 
 // SOLICITUDES
@@ -25,7 +15,7 @@ $("#solicitudes").on("click", function(){
     removeAllStrongs()
     $("#solicitudes").addClass("negrita")
     $.ajax({
-        url: "/users/solicitudes",
+        url: "/admin/solicitudes",
         method: "GET",
         success: function(response){
             $("#panel").empty()
@@ -70,7 +60,7 @@ $("#solicitudes").on("click", function(){
 $("#panel").on("click", ".botonAceptar", function(){
     let id = $(this).attr('data-id');
     $.ajax({
-        url: "/users/acceptRequest",
+        url: "/admin/acceptRequest",
         method: "POST",
         data: {id}
     })
@@ -81,7 +71,7 @@ $("#panel").on("click", ".botonAceptar", function(){
 $("#panel").on("click", ".botonEliminar", function(){
     let id = $(this).attr('data-id');
     $.ajax({
-        url: "/users/dropRequest",
+        url: "/admin/dropRequest",
         method: "POST",
         data: {id}
     })
@@ -94,7 +84,7 @@ $("#roles").on("click", function(){
     removeAllStrongs()
     $("#roles").addClass("negrita")
     $.ajax({
-        url: "/users/makeAdmin",
+        url: "/admin/changeRols",
         method: "GET",
         success: function(response){
             $("#panel").empty()
@@ -138,7 +128,7 @@ $("#roles").on("click", function(){
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log("salta error",textStatus, errorThrown);
+            console.log(textStatus, errorThrown);
         }
     })
 })
@@ -146,7 +136,7 @@ $("#panel").on("change", "#adminSwitch", function(){
     let id= $(this).attr('data-id');
 
     $.ajax({
-        url: "/users/makeAdmin",
+        url: "/admin/changeRols",
         method: "POST",
         data: {id},
         success: function(response){
@@ -161,7 +151,7 @@ $("#estadisticas").on("click", ()=>{
     removeAllStrongs()
     $("#estadisticas").addClass("negrita")
     $.ajax({
-        url: "/users/stats",
+        url: "/admin/stats",
         method: "GET",
         success: function(response){
             // Construir las opciones del select en una cadena
@@ -187,7 +177,6 @@ $("#estadisticas").on("click", ()=>{
 
 $("#panel").on("change", "#facultadSelect", function(){
     let id= $(this).val();
-    console.log("fac id: ", id)
     $("#emptyMessage").remove()
     $.ajax({
         url: "/users/getStudents",
@@ -196,8 +185,6 @@ $("#panel").on("change", "#facultadSelect", function(){
         success: function(response){
             if(!response) $("#containerFac").append(`<div id="emptyMessage" class="row text-center"><h3>No hay estudiantes registrados de esa facultad</h3></div>`)
             else{
-                console.log(response[0].facultad)
-                console.log($(this).text())
                 $("#containerFac").append(`
                     <div class="row">
                         <h4> Facultad de ${response[0].facultad} </h4>

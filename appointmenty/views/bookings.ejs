@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body >
+    <%-include('partials/header')%>
+    <div class="row mx-2">
+      <h1>Sistema de reservas</h1>
+      <form>
+        <% if(locals.user) { %>
+          <% if(locals.user.admin === 1) { %>
+        <div class="row">
+          <div class="col">
+            <h4 class="my-3">Facultad:</h4>
+            <select id="facultad" name="facultad"  required>
+              <% facultades.forEach( ele=> { %>
+                <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
+                <%})%>
+              </select>
+            </div>
+          </div>
+          <% } %>
+        <% } %>
+        <div class="row">
+          <div class="col" id="tipoContainer">
+            <h4  class="my-3">Tipo de instalacion:</h4>
+            <select id="tipo" name="tipo"  required>
+              <option hidden selected>Selecciona una opción</option>
+              <% options.forEach( ele=> { %>
+                <option value="<%=ele.id%>#<%=ele.nombre%>#<%=ele.ini%>#<%=ele.fin%>"><%=ele.nombre%></option>
+              <%})%>
+            </select> 
+          </div>
+          <div class="col" id="salaContainer">
+            <h4 class="my-3">Sala:</h4>
+            <select id="sala" name="sala"  required>
+              <option hidden selected>Selecciona una opción</option>
+            </select>
+          </div>
+          <div class="col" id="numeroContainer">
+            <h4 class="my-3">Numero de usuarios:</h4>
+            <input id="aforo" type="number" name="numero" placeholder="Usuarios" min="1" required>
+          </div>
+          <div class="col" id="calendarContainer" >
+            <h4 class="my-3">Calendario:</h4>
+            <input id="calendario" type="date" name="dia" placeholder="Día" required>
+          </div>
+        </div>
+      </form>
+    </div>   
+
+    <div class="container">
+      <div id="horario" class="row d-flex justify-content-center m-2 claret p-2">
+        <div id="9"  style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="10" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="11" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="12" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="13" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="14" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="15" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="16" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="17" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="18" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="19" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+        <div id="20" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"></div>
+      </div>
+      <button id="enviar" class="btn btn-primary">Enviar</button>
+    </div>
+
+    
+    <script src="/javascripts/mydriver.js"></script>
+    <script src="/javascripts/calendar.js"></script>
+    <%-include('partials/footer') %>
+  </body>
+</html>

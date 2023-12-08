@@ -112,3 +112,17 @@ body,html {
   margin:0;
   height:100%;
 }
+
+.noDisponible {
+  background-color: black;
+}
+.ocupado {
+  background-color: red;
+}
+.seleccionado {
+  background-color: #094963;
+}
+
+.disponible {
+  background-color: white;
+}

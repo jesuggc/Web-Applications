@@ -16,10 +16,10 @@
     - Bloquear con middleware que puedas acceder a url login cuando ya estas iniciado
     - Hacer responsive
     - Hacer el dropdown del boton del perfil en header   ---------------------------------------------------------------------------------------------------
-    - feedback registro correcto
+    - feedback registro correcto                         ---------------------------------------------------------------------------------------------------
     - imagen registro (bd, dao...)
     - -------convertir curso en solicitudes a ordinal    ---------------------------------------------------------------------------------------------------
-    - feedback validacion solicitudes y makeadmin con exito
+    - feedback validacion solicitudes y makeadmin con exito, con modal? Complicado por cambiar funcionalidades de aceptar y eliminar 
     
     Dropdown:
     [] Cerrar sesion    ------------------------------------------------------------------------------------------------------------------------------------
@@ -37,11 +37,11 @@
 
 _____________________________________________________________________________________________________________________________________________
 
--     Refactorizar DAO
--     Refactorizar rutas
--  A3 Correo confirmación al aceptar
--  U2 Gestionar reservas
--  C4 Feedback modales
+-     Refactorizar DAO                 ------------------------------------------------------------------------------------------------------
+-     Refactorizar rutas               ------------------------------------------------------------------------------------------------------
+-  A3 Correo confirmación al aceptar   ------------------------------------------------------------------------------------------------------
+-  U2 Gestionar reservas            
+-  C4 Feedback modales                 ------------------------------------------------------------------------------------------------------
 -  A8 Listado de usuarios
 -  A9 Historial de reservas
 -  A1 Personalizar apariencia

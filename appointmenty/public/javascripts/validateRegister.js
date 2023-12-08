@@ -129,7 +129,7 @@ $("#register").on("click", () => {
                     type: "POST",
                     data: {nombre,apellido1,apellido2,email,password,facultad,grado,curso},
                     success: function(response) {
-                        window.location.href = "/"
+                        $("#modalLaunch").trigger("click")
                     }
                 })
             }

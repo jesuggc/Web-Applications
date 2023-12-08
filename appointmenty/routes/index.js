@@ -9,7 +9,6 @@ router.use((request, response, next) => {
 });
 // ------------ MIDDLEWARE ---------------
 const amIlogged = (request,response,next) => {
-  console.log("???",response.locals.user)
    next()
 }
 
@@ -22,21 +21,18 @@ router.get("/reservations", amISignedIn, (request,response) => {
   response.redirect("users/reservations")
 })
 
-// router.get("/logOut", (request,response) => {
-//   request.session.destroy();
-//   response.redirect("/")
-// })
-
 
 router.get('/', function(req, res, next) {
-  res.render('index');
+  midao.getOptions((err,options) => {
+    if(err) console.log("Error: ", err)
+    else {
+      options.forEach(ele => {
+        ele.imagen = ele.nombre.replace(/\s/g, '').toLowerCase()
+      });
+      res.render('index',{options});
+    } 
+  })
 });
-
-// router.get("/login", (request, response) => {
-//   response.status(200)
-//   response.render('login');
- 
-// })
 
 router.get("/group/:idFacultad", (request, response) => {
   let idFacultad = request.params.idFacultad

@@ -6,28 +6,26 @@ router.use((request, response, next) => {
   response.locals.user = request.session.user;
   next();
 });
-/* GET users listing. */
+
 router.get('/', function(req, res, next) {
-  console.log("LO recoge usuarios")
+  console.log("Pagina raiz")
 });
 
-router.get('/reservations', function(req, response, next) {
-  response.render('reservations');
-});
 
-router.get("/logout", (request, response) => {
+
+router.get("/logout", (request, response) => { //Redirige a pagina principal, cerrando sesion en locals y session
   request.session.destroy()
   response.locals.user = request.session
   response.status(200)
   response.redirect('/');
 })
 
-router.get("/login", (request, response) => {
+router.get("/login", (request, response) => {//Renderiza pagina de login
   response.status(200)
   response.render('login');
 })
 
-router.post("/login", function (request, response) {
+router.post("/login", function (request, response) {//Inicia sesion
   response.status(200)
   let email = request.body.email
   let contrasena = request.body.password
@@ -44,8 +42,7 @@ router.post("/login", function (request, response) {
   })
 });
 
-
-router.get("/register", (request, response) => {
+router.get("/register", (request, response) => {//Renderiza pagina de register
   response.status(200)
   midao.getFacultades((err,resultado)=> {
     if(err) console.log("Error: ", err)
@@ -53,7 +50,7 @@ router.get("/register", (request, response) => {
   })
 })
 
-router.post("/register", (request, response) => {
+router.post("/register", (request, response) => { //Crea el nuevo usuario tras submit en vista de register
   let user = {
     nombre: request.body.nombre,
     apellido1: request.body.apellido1,
@@ -75,67 +72,15 @@ router.post("/register", (request, response) => {
   
 });
 
-router.get("/admin", (request, response) => {
-  response.status(200)
-  response.render('admin');
-})
-router.get("/makeAdmin", (request, response) => {
-  midao.getVerifiedUsers((err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-router.post("/makeAdmin", (request, response) => {
-  midao.updateAdmin(request.body.id,(err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-router.get("/solicitudes", (request, response) => {
-  midao.getRequests((err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-router.get("/stats", (request, response) => {
-  midao.getFacultades((err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-
-router.get("/getStudents", (request, response) => {
-  console.log("en users", request.query.id)
-  midao.getStudentsByFacId(request.query.id,(err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-router.get("/checkEmail", function (request, response) {
+router.get("/checkEmail", function (request, response) {//En validar login y register
   midao.checkEmail(request.query.email, (err, resultado) => {
       let existe = (err) ? false : true
       response.json({existe})
   })
 });
 
-router.post("/acceptRequest", (request,response) => {
-  midao.acceptRequest(request.body.id, (err,res) => {
-    if(err) console.log(err)
-    else response.json(res)
-  })
-})
-
-router.post("/dropRequest", (request,response) => {
-  midao.dropRequest(request.body.id, (err,res) => {
-    if(err) console.log(err)
-    else response.json(res)
-  })
-})
-
-
-router.get("/correo", (request, response) => {
+router.get("/correo", (request, response) => { //Renderiza pagina de correo
   response.status(200)
-  console.log(response.locals.user.id)
   midao.getEmails(response.locals.user.id ,(err,emails) => {
     if(err) console.log(err)
     else {
@@ -143,7 +88,6 @@ router.get("/correo", (request, response) => {
         ele.hora = ele.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[1].trim()
         ele.fecha = ele.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]
       });
-      console.log(emails)
       response.render("correo",{emails})
     } 
   })
