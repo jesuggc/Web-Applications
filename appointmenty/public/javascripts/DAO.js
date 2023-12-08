@@ -299,7 +299,7 @@ getReservationsByDayAndInstallation(day,idInstallation,callback){
     this.pool.getConnection((err, connection) => {
         if (err) callback(err, null)
         else {
-            let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva BETWEEN '? 00:00:00' AND '? 23:59:59' AND cancelado = 0"
+            let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva BETWEEN '? 00:00:00' AND '? 23:59:59'"
             connection.query(stringQuery,[idInstallation, day,day], function (err, resultado) {
                 if (err) callback(err, null)
                 else callback(null,resultado.map(ele => ({
