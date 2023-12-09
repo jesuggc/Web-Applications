@@ -18,11 +18,12 @@
                   <li><h5><%=locals.user.nombre%> <%=locals.user.apellido1%></h5><p><%=locals.user.correo%></p></li>
                   <hr>
                 <% if(locals.user.admin) { %>
-                  <li><a class="dropdown-item bg-danger" href="admin/">Panel de administrador</a></li>
+                  <li><a class="dropdown-item bg-danger" href="/admin">Panel de administrador</a></li>
                   <hr>
-                <% } else { %> 
+                <% }%> 
                   <li><a class="dropdown-item" href="/users/correo">Correo UCM</a></li>
-                <% } %>
+                  <li><a class="dropdown-item" href="/bookings">Nueva reserva</a></li>
+                  <hr>
                   <li><a class="dropdown-item bg-danger" href="/users/logout">Cerrar sesión</a></li>
                 </ul>
               </div>

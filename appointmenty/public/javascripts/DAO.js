@@ -17,6 +17,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_fac_facultades"
                 connection.query(stringQuery, function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({ id: ele.id, nombre: ele.nombre })))
                 })
@@ -30,6 +31,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.verificado, u.admin, u.curso, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE u.facultad = 20 AND u.verificado=1"
                 connection.query(stringQuery, id,(err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback(null,null)
                     else {
@@ -58,6 +60,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT id FROM ucm_aw_riu_usu_usuarios WHERE correo = ?"
                 connection.query(stringQuery, correo, (err, resultado) => {
+                    connection.release();
                     if (err) callback(err)
                     else if (resultado.length === 0) callback("El correo no esta asociado a ninguna cuenta")
                     else callback(null, {user:resultado[0].id})
@@ -72,6 +75,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 1 AND admin=0"
                 connection.query(stringQuery, (err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback(null,null)
                     else {
@@ -98,6 +102,7 @@ class DAO {
             else {
                 let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso) VALUES (?,?,?,?,?,?,?,?)"
                 connection.query(stringQuery, Object.values(user), (err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else {
                         let id = resultado.insertId
@@ -113,6 +118,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 0"
                 connection.query(stringQuery, (err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback(null,null)
                     else {
@@ -138,6 +144,7 @@ class DAO {
             else {
                 let stringQuery = "UPDATE ucm_aw_riu_usu_usuarios SET admin = 1 WHERE id = ?"
                 connection.query(stringQuery, id,(err, resultado) => {
+                    connection.release();
                     if (err) callback(err)
                     else callback(null, true)
                 })
@@ -151,6 +158,7 @@ class DAO {
             else {
                 let stringQuery = "UPDATE ucm_aw_riu_usu_usuarios SET verificado = 1 WHERE id = ?"
                 connection.query(stringQuery, id,(err, resultado) => {
+                    connection.release();
                     if (err) callback(err)
                     else callback(null, true)
                 })
@@ -164,6 +172,7 @@ class DAO {
             else {
                 let stringQuery = "DELETE FROM ucm_aw_riu_usu_usuarios WHERE id = ?"
                 connection.query(stringQuery, id,(err, resultado) => {
+                    connection.release();
                     if (err) callback(err)
                     else callback(null, true)
                 })
@@ -177,6 +186,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_usu_usuarios WHERE correo = ? AND contrasena = ?"
                 connection.query(stringQuery, [correo, contrasena], (err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else if (resultado.length === 0) callback()
                     else {
@@ -206,6 +216,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT id,nombre,dobleGrado FROM ucm_aw_riu_gra_grados WHERE idFacultad = ?"
                 connection.query(stringQuery, idFacultad, function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({id:ele.id,nombre: ele.nombre, dobleGrado: ele.dobleGrado})))
                 })
@@ -220,6 +231,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT c.id, c.idOrigen, c.asunto, c.cuerpo, c.fecha, c.leido, c.archivado, c.favorito, u.nombre, u.apellido1, u.apellido2, u.correo FROM ucm_aw_riu_cor_correo AS c JOIN ucm_aw_riu_usu_usuarios AS u ON c.idOrigen = u.id WHERE idDestino = ?"
                 connection.query(stringQuery, id, (err, resultado) => {
+                    connection.release();
                     if (err) callback(err, null)
                     else {
                         if (resultado.length === 0) callback(null, null)
@@ -251,6 +263,7 @@ class DAO {
             else {
                 let stringQuery = "INSERT INTO ucm_aw_riu_cor_correo (idOrigen,idDestino,asunto,cuerpo) values (?,?,?,?)"
                 connection.query(stringQuery, [idOrigen,idDestino,asunto,cuerpo], function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,{idCorreo:resultado.insertId})
                 })
@@ -264,6 +277,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT * FROM ucm_aw_riu_tip_tipoinstalacion"
                 connection.query(stringQuery, function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({
                         nombre: ele.nombre,
@@ -282,6 +296,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT id, nombre,aforo FROM ucm_aw_riu_ins_instalaciones WHERE idTipo=? AND idFacultad=?"
                 connection.query(stringQuery,[idTipo, idFacultad], function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({
                         nombre: ele.nombre,
@@ -300,6 +315,7 @@ class DAO {
             else {
                 let stringQuery = "SELECT idUsuario,horaIni, horaFin FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva = ? AND cancelado = 0"
                 connection.query(stringQuery,[idInstallation,day], function (err, resultado) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({
                         idUsuario: ele.idUsuario,
@@ -317,11 +333,116 @@ class DAO {
             else {
                 let stringQuery = "INSERT INTO ucm_aw_riu_res_reservas (idUsuario, idInstalacion, fechaReserva, horaIni, horaFin) VALUES (?,?,?,?,?)"
                 connection.query(stringQuery,[idUsuario, idInstallation, fecha, horaIni, horaFin], function (err, res) {
+                    connection.release();
                     if (err) callback(err, null)
                     else callback(null,res.insertId)
                 })
             }
         })
     }
+
+    getReservationsByDayAndUser(day,idUsuario,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas WHERE idUsuario = ? AND fechaReserva = ? AND cancelado = 0"
+                connection.query(stringQuery,[idUsuario,day], function (err, resultado) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        console.log("DAO", resultado.length)
+                        let x = resultado.length > 0 ? true : false
+                        console.log("asdfijhsdjifhj", x)
+                        callback(null,x)
+                    }
+                })
+            }
+        })
+    }
+
+    createTypeInstallation(nombre, disponibilidadIni,disponibilidadFin,tipo, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO ucm_aw_riu_tip_tipoinstalacion (nombre, disponibilidadIni,disponibilidadFin,tipo) VALUES (?,?,?,?)"
+                connection.query(stringQuery,[nombre, disponibilidadIni,disponibilidadFin,tipo], function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res.insertId)
+                })
+            }
+        })
+    }
+
+    createInstallation(nombre, idFacultad, aforo, idTipo, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO ucm_aw_riu_ins_instalaciones (nombre, idFacultad, aforo, idTipo) VALUES (?,?,?,?)"
+                connection.query(stringQuery,[nombre, idFacultad, aforo, idTipo], function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res.insertId)
+                })
+            }
+        })
+    }
+
+    favEmail(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET favorito = 1 WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,true)
+                })
+            }
+        })
+    }
+
+    readEmail(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET leido = 1 WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,true)
+                })
+            }
+        })
+    }
+
+    archiveEmail(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET archivado = 1 WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,true)
+                })
+            }
+        })
+    }
+
+    getEmail(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT cuerpo FROM ucm_aw_riu_cor_correo WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res.cuerpo)
+                })
+            }
+        })
+    }
+
 }
 module.exports = DAO

@@ -72,4 +72,42 @@ router.get("/getStudents", (request, response) => {//Genera en vista de estadist
   })
 })
 
+router.get("/newInstallation", (request, response) => {
+  midao.getOptions(((err,options) => {
+    if(err) console.log("Error: ", err)
+    else {
+      midao.getFacultades(((err,facultades) => {
+        if(err) console.log("Error: ", err)
+        else response.render("newInstallation",{options,facultades});
+      }))
+    } 
+  }))
+})
+
+router.post("/newTypeInstallation", (request, response) => {
+  let horaIni = request.body.horaIni
+  let horaFin = request.body.horaFin
+  let tipo = request.body.tipo
+  let nombreTipo = request.body.nombreTipo
+  midao.createTypeInstallation(nombreTipo,horaIni, horaFin, tipo, (err,ok) => {
+    if(err) console.log("Error: ", err)
+    else response.json(ok)
+  })
+})
+
+router.post("/newInstallation", (request, response) => {
+  let nombre = request.body.nombreInstalacion
+  let idFacultad = request.body.idFacultad
+  let aforo = request.body.aforoMax
+  let idTipo = request.body.tipoInstalacion
+
+  midao.createInstallation(nombre, idFacultad, aforo, idTipo, (err,ok) => {
+    if(err) console.log("Error: ", err)
+    else response.json(ok)
+  })
+})
+
+
+
+
 module.exports = router;

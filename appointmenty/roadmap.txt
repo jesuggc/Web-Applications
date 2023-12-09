@@ -44,12 +44,13 @@ ________________________________________________________________________________
 -  C4 Feedback modales ------------------------------------------------------------------------------------------------------------------
 -  A8 Listado de usuarios
 -  A9 Historial de reservas
--  A1 Personalizar apariencia
--  A2 Nuevas instalaciones
+-  A2 Nuevas instalaciones --------------------------------------------------------------------------------------------------------------
 -  A5 Estadisticas y listados
 -  A6 Enviar correo
 -  U3 Mensajeria
 -  C3 Registro con foto -
+-  C7 Rehacer vista reservas
+-  A1 Personalizar apariencia
 -  A7 Correo lista de espera -
--  C6 Reserva interactiva ----------------------------------------------------------------------------------------------------------------
+-  C6 Reserva interactiva ---------------------------------------------------------------------------------------------------------------
 -  C5 Responsive

@@ -47,26 +47,52 @@
         </div>
       </form>
     </div>
-    <div id="horario" style="display:none" class="container  ">
+    <div id="horario"  style="display:none" class="container  ">
       <h4 class="my-3">Horas:</h4>
       <div class="row m-2 d-flex justify-content-center claret rounded-4 p-5 my-3">
-        <div id="9"  style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">9:00</p></div>
-        <div id="10" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">10:00</p></div>
-        <div id="11" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">11:00</p></div>
-        <div id="12" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">12:00</p></div>
-        <div id="13" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">13:00</p></div>
-        <div id="14" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">14:00</p></div>
-        <div id="15" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">15:00</p></div>
-        <div id="16" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">16:00</p></div>
-        <div id="17" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">17:00</p></div>
-        <div id="18" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">18:00</p></div>
-        <div id="19" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">19:00</p></div>
-        <div id="20" style="max-width:50px;height:45px; cursor:pointer" class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">20:00</p></div>
+        <div id="9"  style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">9:00</p></div>
+        <div id="10" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">10:00</p></div>
+        <div id="11" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">11:00</p></div>
+        <div id="12" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">12:00</p></div>
+        <div id="13" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">13:00</p></div>
+        <div id="14" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">14:00</p></div>
+        <div id="15" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">15:00</p></div>
+        <div id="16" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">16:00</p></div>
+        <div id="17" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">17:00</p></div>
+        <div id="18" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">18:00</p></div>
+        <div id="19" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">19:00</p></div>
+        <div id="20" style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">20:00</p></div>
         </div>
         <button id="enviar" class="btn btn-primary float-end me-2 btn-lg ">Reservar</button>
+        <dl class="ms-3 mt-4">
+          <dt class="ocupado rounded-2"></dt>
+          <dd>Ocupado</dd>
+          <dt class="noDisponible rounded-2"></dt>
+          <dd>No disponible</dd>
+          <dt class="reservado rounded-2"></dt>
+          <dd>Mis reservas</dd>
+          <dt class="disponible rounded-2"></dt>
+          <dd>Disponible</dd>
+          <dt class="seleccionado rounded-2"></dt>
+          <dd>Seleccionado</dd>
+        </dl>
     </div>
-
-
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm  modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header ">
+            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
       <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -76,7 +102,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-          Hello, world! This is a toast message.
+          
         </div>
       </div>
     </div>

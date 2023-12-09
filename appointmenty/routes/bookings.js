@@ -4,6 +4,7 @@ const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306");
 
 router.get('/', function(req, response, next) {
+  
     midao.getOptions(((err,options) => {
     if(err) console.log("Error: ", err)
     else {
@@ -21,8 +22,6 @@ router.get('/', function(req, response, next) {
 router.get('/instalaciones', (request, response) => {
   let facultad = response.locals.user.facultad
   if(response.locals.user.admin === 1) facultad = request.query.facultad
-  console.log("Facultad",facultad)
-  console.log("Facultad",request.query.tipo)
   midao.getInstallationsByOption(request.query.tipo,facultad,(err,instalaciones) => {
     if(err) console.log("Error: ", err)
     else response.json(instalaciones)
@@ -36,7 +35,17 @@ router.get("/busyHours", (request, response) => {
       horas.forEach(ele => {
         if(ele.idUsuario === response.locals.user.id) ele.reservaPropia = true
       })
-      response.json(horas)
+      if(response.locals.user.admin === 0) {
+        midao.getReservationsByDayAndUser(request.query.fecha, response.locals.user.id, (err, reservado) => {
+          if (err) console.log(err)
+          else {
+            response.json({horas,diaYaReservado:reservado}) 
+          }
+        })
+      } else {
+          response.json({horas,diaYaReservado:false})
+      }
+      
     }
   })
 })

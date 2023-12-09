@@ -93,4 +93,27 @@ router.get("/correo", (request, response) => { //Renderiza pagina de correo
   })
 })
 
+router.get("/emailContent", (request, response) => { //Renderiza pagina de correo
+  response.status(200)
+  midao.getEmail(request.query.id ,(err,cuerpo) => {
+    if(err) console.log(err)
+    else response.json(cuerpo)
+  })
+})
+
+router.post("/updateEmail", (request,response) => {
+  let id = request.body.id
+  let callback = (err,res) => {
+    if(err) console.log(err)
+    else response.json(res)
+  }
+  if(request.body.action === "fav") {
+    midao.favEmail(id,callback)
+  } else if (request.body.action === "archive") {
+    midao.archiveEmail(id,callback)
+  } else {
+    midao.readEmail(id,callback)  
+  }
+})
+
 module.exports = router;
