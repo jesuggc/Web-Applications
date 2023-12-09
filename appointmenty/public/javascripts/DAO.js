@@ -292,24 +292,36 @@ class DAO {
             }
         })
     }
-}
 
-getReservationsByDayAndInstallation(day,idInstallation,callback){
-    "SELECT * FROM `ucm_aw_riu_res_reservas` WHERE `idInstalacion` = 5 AND `fechaReserva` BETWEEN '2023-12-14 00:00:00.000000' AND '2023-12-14 23:59:59.999999' AND cancelado = 0"
-    this.pool.getConnection((err, connection) => {
-        if (err) callback(err, null)
-        else {
-            let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva BETWEEN '? 00:00:00' AND '? 23:59:59'"
-            connection.query(stringQuery,[idInstallation, day,day], function (err, resultado) {
-                if (err) callback(err, null)
-                else callback(null,resultado.map(ele => ({
-                    nombre: ele.nombre,
-                    aforo: ele.aforo, 
-                    id: ele.id 
-                })))
-            })
-        }
-    })
-}
 
+    getReservationsByDayAndInstallation(day,idInstallation,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT idUsuario,horaIni, horaFin FROM ucm_aw_riu_res_reservas WHERE idInstalacion = ? AND fechaReserva = ? AND cancelado = 0"
+                connection.query(stringQuery,[idInstallation,day], function (err, resultado) {
+                    if (err) callback(err, null)
+                    else callback(null,resultado.map(ele => ({
+                        idUsuario: ele.idUsuario,
+                        horaIni: ele.horaIni,
+                        horaFin: ele.horaFin
+                    })))
+                })
+            }
+        })
+    }
+
+    createBooking(idUsuario, idInstallation, fecha, horaIni, horaFin, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "INSERT INTO ucm_aw_riu_res_reservas (idUsuario, idInstalacion, fechaReserva, horaIni, horaFin) VALUES (?,?,?,?,?)"
+                connection.query(stringQuery,[idUsuario, idInstallation, fecha, horaIni, horaFin], function (err, res) {
+                    if (err) callback(err, null)
+                    else callback(null,res.insertId)
+                })
+            }
+        })
+    }
+}
 module.exports = DAO

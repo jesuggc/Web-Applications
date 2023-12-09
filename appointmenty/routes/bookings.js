@@ -28,4 +28,23 @@ router.get('/instalaciones', (request, response) => {
     else response.json(instalaciones)
   })
 })
+
+router.get("/busyHours", (request, response) => {
+  midao.getReservationsByDayAndInstallation(request.query.fecha,request.query.idInstalacion,(err, horas) => {
+    if(err) console.log(err)
+    else {
+      horas.forEach(ele => {
+        if(ele.idUsuario === response.locals.user.id) ele.reservaPropia = true
+      })
+      response.json(horas)
+    }
+  })
+})
+
+router.post("/createBooking", (request, response) => {
+  midao.createBooking(response.locals.user.id,request.body.idInstalacion, request.body.fecha, request.body.horaIni, request.body.horaFin,(err, res) => {
+    if(err) console.log(err)
+    else response.json(res)
+  })
+})
 module.exports = router;

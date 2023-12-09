@@ -100,9 +100,9 @@ header{
 
 footer{
   max-height: 10vh;
-  /* position: absolute;
+  position: absolute;
   bottom: 0;
-  width: 100%; */
+  width: 100%;
   
 }
 
@@ -115,9 +115,11 @@ body,html {
 
 .noDisponible {
   background-color: black;
+  cursor: not-allowed;
 }
 .ocupado {
-  background-color: red;
+  background-color: rgb(112, 111, 111);
+  cursor:none;
 }
 .seleccionado {
   background-color: #094963;
@@ -125,4 +127,8 @@ body,html {
 
 .disponible {
   background-color: white;
+}
+
+.reservado {
+  background-color: rgb(189, 213, 11);
 }

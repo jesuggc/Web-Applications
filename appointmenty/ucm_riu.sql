@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2023 a las 00:37:29
+-- Tiempo de generación: 08-12-2023 a las 19:47:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,9 +38,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('91IAmP5lk-7n34tNq8F5xOc87Yi9uCK_', 1701989390, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"verificado\":1,\"admin\":1}}'),
-('By_c3X0s5WqPoZJxm7-lErq_5sNMI81c', 1701992106, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":2,\"nombre\":\"a\",\"apellido1\":\"a\",\"apellido2\":\"a\",\"correo\":\"a\",\"verificado\":1,\"admin\":0}}'),
-('KyuyuGsdp1MySNRi8OajGCHRxfUtNxUZ', 1701992020, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"verificado\":1,\"admin\":1}}');
+('4FO2OVh_iw0WIN8RzyDmVzYdtLTrTZaR', 1702081746, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"facultad\":0,\"grado\":0,\"curso\":1,\"verificado\":1,\"admin\":1}}'),
+('7lRnqXA6OVoXB4grQWyF_Z54m3dd1gf1', 1702067431, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":9,\"nombre\":\"Marcos\",\"apellido1\":\"Lopez\",\"apellido2\":\"Lope\",\"correo\":\"al@ucm.es\",\"facultad\":9,\"grado\":27,\"curso\":4,\"verificado\":1,\"admin\":0}}'),
+('_QsK1NrUzyhKxXhiOWHcPcMZFC5o_sna', 1702146949, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"facultad\":0,\"grado\":0,\"curso\":1,\"verificado\":1,\"admin\":1}}');
 
 -- --------------------------------------------------------
 
@@ -53,12 +53,21 @@ CREATE TABLE `ucm_aw_riu_cor_correo` (
   `idOrigen` int(12) NOT NULL,
   `idDestino` int(12) NOT NULL,
   `asunto` varchar(100) NOT NULL,
-  `cuerpo` varchar(1200) NOT NULL,
-  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `cuerpo` varchar(2000) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `leido` tinyint(1) NOT NULL DEFAULT 0,
   `archivado` tinyint(1) NOT NULL DEFAULT 0,
   `favorito` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ucm_aw_riu_cor_correo`
+--
+
+INSERT INTO `ucm_aw_riu_cor_correo` (`id`, `idOrigen`, `idDestino`, `asunto`, `cuerpo`, `fecha`, `leido`, `archivado`, `favorito`) VALUES
+(1, 1, 2, 'Comprobando el sistema de correos UCM', 'Buenas a que tal? Cuanto tiempo que no hablamos. El motivo de mi mensaje es que los desarrolladores me tienen secuestrado generando mensajes automaticos. Llevan horas asi, dicen que o sigo escribiendo o revelaran a todo el mundo lo que hago en mi tiempo libre... Y ya sabes que no hago nada malo, tu y yo somos amigos de toda la vida y bien sabes que no es mas que un hobbie, pero me parece que nadie tiene por que saberlo, y mucho menos mis seres queridos. Volviendo al tema principal, lo mas duro de este trabajo es que ya no se que escribir. He mandado mensajes a todo el mundo, ni si quiera tengo tantos contactos... Por favor consigue ayuda!\r\nAtentamente tu amigo Queco', '2023-12-06 23:00:00', 0, 0, 0),
+(2, 1, 2, 'Vuelvo a mandar otro mensaje', 'Hey a que tal? Espero que leas pronto el mensaje anterior, porque me dicen que necesito seguir mandando, que no son suficientes...\r\nAtentamente tu cordial amigo Queco.', '2023-12-07 00:21:40', 0, 0, 0),
+(3, 6, 9, 'CONFIRMACION DE REGISTRO DE USUARIO', '<p>Es un placer darte la bienvenida al Servicio de Reservas de la Universidad Complutense de Madrid (UCM). Nos complace informarte que tu solicitud para la creación de cuenta ha sido aceptada, y ahora tienes acceso completo a nuestra plataforma de reservas.</p><p>Con este servicio, tendrás la oportunidad de gestionar de manera eficiente tus reservas de espacios y recursos en nuestras instalaciones. Ya sea que necesites reservar una sala de estudio, un laboratorio o cualquier otro recurso disponible, nuestro sistema está diseñado para hacer que el proceso sea simple y conveniente para ti.</p>\n<p>A continuación, te proporcionamos algunos pasos básicos para empezar a utilizar el servicio:</p><ol><li><strong>Inicia sesión en tu cuenta:</strong> Utiliza tus credenciales para iniciar sesión en nuestro portal de reservas <a href=\"/login\">aquí</a>.</li>\n<li><strong>Explora las opciones de reserva:</strong> Navega por la plataforma y descubre las diversas opciones de reservas disponibles. Puedes seleccionar el tipo de espacio que necesitas, la fecha y hora deseadas, y confirmar tu reserva de manera sencilla.</li>\n<li>Una vez realizada tu reserva, recibirás confirmaciones por correo electrónico y recordatorios antes del evento. Esto asegura que estés al tanto de tus reservas y puedas planificar tu tiempo de manera efectiva.</li>\n</ol><p>Estamos comprometidos a brindarte un servicio de calidad y facilitar tu experiencia en la Universidad. Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>\n<p>Agradecemos tu participación en el Servicio de Reservas de la UCM y esperamos que encuentres útil esta herramienta para optimizar tu uso de los recursos universitarios.</p>\n<p>¡Bienvenido y que tengas una excelente experiencia con nosotros!</p>\n<hr><p>Universidad Complutense de Madrid (UCM)</p>', '2023-12-07 18:12:46', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -255,6 +264,81 @@ INSERT INTO `ucm_aw_riu_gra_grados` (`id`, `idFacultad`, `nombre`, `dobleGrado`)
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ucm_aw_riu_ins_instalaciones`
+--
+
+CREATE TABLE `ucm_aw_riu_ins_instalaciones` (
+  `id` int(12) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `idFacultad` int(11) NOT NULL,
+  `aforo` int(11) NOT NULL,
+  `idTipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ucm_aw_riu_ins_instalaciones`
+--
+
+INSERT INTO `ucm_aw_riu_ins_instalaciones` (`id`, `nombre`, `idFacultad`, `aforo`, `idTipo`) VALUES
+(1, 'LaboratorioA', 20, 15, 1),
+(2, 'LaboratorioB', 20, 20, 1),
+(3, 'LaboratorioC', 20, 20, 1),
+(4, 'LaboratorioD', 20, 20, 1),
+(5, 'Pecera1', 20, 6, 3),
+(6, 'Pecera2', 20, 6, 3),
+(7, 'Pecera3', 20, 6, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ucm_aw_riu_res_reservas`
+--
+
+CREATE TABLE `ucm_aw_riu_res_reservas` (
+  `id` int(12) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idInstalacion` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fechaReserva` timestamp NOT NULL DEFAULT current_timestamp(),
+  `horaIni` int(11) NOT NULL,
+  `horaFin` int(11) NOT NULL,
+  `cancelado` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ucm_aw_riu_res_reservas`
+--
+
+INSERT INTO `ucm_aw_riu_res_reservas` (`id`, `idUsuario`, `idInstalacion`, `fecha`, `fechaReserva`, `horaIni`, `horaFin`, `cancelado`) VALUES
+(1, 1, 5, '2023-12-08 18:40:32', '2023-12-14 18:39:26', 14, 16, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ucm_aw_riu_tip_tipoinstalacion`
+--
+
+CREATE TABLE `ucm_aw_riu_tip_tipoinstalacion` (
+  `id` int(12) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `disponibilidadIni` int(11) NOT NULL,
+  `disponibilidadFin` int(11) NOT NULL,
+  `tipo` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ucm_aw_riu_tip_tipoinstalacion`
+--
+
+INSERT INTO `ucm_aw_riu_tip_tipoinstalacion` (`id`, `nombre`, `disponibilidadIni`, `disponibilidadFin`, `tipo`) VALUES
+(1, 'Laboratorios', 9, 20, 'colectivo'),
+(2, 'Salas de grados', 9, 19, 'colectivo'),
+(3, 'Salas de reunión', 13, 18, 'colectivo'),
+(4, 'Salón de actos', 12, 14, 'colectivo');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ucm_aw_riu_usu_usuarios`
 --
 
@@ -280,10 +364,15 @@ INSERT INTO `ucm_aw_riu_usu_usuarios` (`id`, `nombre`, `apellido1`, `apellido2`,
 (1, 'Queco', 'Fernandez', 'Muller', 'quecoñete@ucm.es', 'PulpoGuitarra23', 3, 6, 2, 1, 1),
 (2, 'a', 'a', 'a', 'a', 'a', 7, 18, 3, 1, 0),
 (6, 'admin', 'adminez', 'adminez', 'admin@ucm.es', 'admin', 0, 0, 1, 1, 1),
-(9, 'Marcos', 'Lopez', 'Lope', 'al@ucm.es', 'Marcos12?', 9, 27, 4, 0, 0),
+(9, 'Marcos', 'Lopez', 'Lope', 'al@ucm.es', 'Marcos12?', 9, 27, 4, 1, 0),
 (10, 'Sadasd', 'Asdads', 'Asdasd', 'a@ucm.es', 'Marcos12?', 1, 2, 1, 0, 0),
 (11, 'Marcos', 'Lopez', 'Lopezz', 'malo@ucm.es', 'Marcos12?', 1, 1, 3, 0, 0),
-(12, 'Jesús', 'González', 'Carrillo', 'jesugo11@ucm.es', 'Jesus12?', 20, 113, 4, 1, 1);
+(12, 'Jesús', 'González', 'Carrillo', 'jesugo11@ucm.es', 'Jesus12?', 20, 113, 4, 1, 1),
+(13, 'Elena', 'Caridad', 'Zingoni', 'elencari@ucm.es', 'Elena12?', 20, 113, 4, 1, 0),
+(14, 'Enri', 'Martinez', 'Sanchez', 'enri@ucm.es', 'Contraseña1', 7, 19, 3, 0, 0),
+(15, 'Sara', 'Sanchez', 'Dominguez', 'sarasa@ucm.es', 'Sara123?', 1, 1, 2, 0, 0),
+(16, 'Laura', 'Alonso', 'Quijano', 'lauralo@ucm.es', 'Laura12?', 1, 1, 2, 0, 0),
+(17, 'Laura', 'Merino', 'Palomares', 'laurame@ucm.es', 'Laura12?', 1, 1, 3, 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -315,6 +404,24 @@ ALTER TABLE `ucm_aw_riu_gra_grados`
   ADD KEY `idFacultad` (`idFacultad`);
 
 --
+-- Indices de la tabla `ucm_aw_riu_ins_instalaciones`
+--
+ALTER TABLE `ucm_aw_riu_ins_instalaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ucm_aw_riu_res_reservas`
+--
+ALTER TABLE `ucm_aw_riu_res_reservas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ucm_aw_riu_tip_tipoinstalacion`
+--
+ALTER TABLE `ucm_aw_riu_tip_tipoinstalacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `ucm_aw_riu_usu_usuarios`
 --
 ALTER TABLE `ucm_aw_riu_usu_usuarios`
@@ -328,7 +435,7 @@ ALTER TABLE `ucm_aw_riu_usu_usuarios`
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_cor_correo`
 --
 ALTER TABLE `ucm_aw_riu_cor_correo`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_fac_facultades`
@@ -343,10 +450,28 @@ ALTER TABLE `ucm_aw_riu_gra_grados`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
+-- AUTO_INCREMENT de la tabla `ucm_aw_riu_ins_instalaciones`
+--
+ALTER TABLE `ucm_aw_riu_ins_instalaciones`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `ucm_aw_riu_res_reservas`
+--
+ALTER TABLE `ucm_aw_riu_res_reservas`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ucm_aw_riu_tip_tipoinstalacion`
+--
+ALTER TABLE `ucm_aw_riu_tip_tipoinstalacion`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_usu_usuarios`
 --
 ALTER TABLE `ucm_aw_riu_usu_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
