@@ -95,9 +95,13 @@ router.get("/correo", (request, response) => { //Renderiza pagina de correo
 
 router.get("/emailContent", (request, response) => { //Renderiza pagina de correo
   response.status(200)
-  midao.getEmail(request.query.id ,(err,cuerpo) => {
+  midao.getEmail(request.query.id ,(err,email) => {
     if(err) console.log(err)
-    else response.json(cuerpo)
+    else {
+        email.hora = email.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[1].trim()
+        email.fecha = email.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]
+        response.json(email)
+    };
   })
 })
 

@@ -1,6 +1,5 @@
 $(".rowMail").on("click", function(){
-    let id= $(this).data("id");
-        //$("#lector").toggleClass("d-none")
+        let id = $(this).attr("data-id")
         $("#mostrar").removeClass("d-none")
 
         $("#listar").addClass("border-end")
@@ -22,7 +21,10 @@ $(".rowMail").on("click", function(){
         $.ajax({
             url:"/users/emailContent",
             type: "GET",
-            data:{id}
+            data:{id},
+            success: function(response) {
+                $('#cuerpo').html(response.cuerpo);
+            }
 
         })
     

@@ -434,11 +434,28 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT cuerpo FROM ucm_aw_riu_cor_correo WHERE id = ?"
+                let stringQuery = "SELECT c.*, u.nombre, u.apellido1, u.apellido2, u.admin,u.correo FROM ucm_aw_riu_cor_correo AS c JOIN ucm_aw_riu_usu_usuarios AS u on c.idOrigen=u.id WHERE c.id=?"
                 connection.query(stringQuery, id, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
-                    else callback(null,res.cuerpo)
+                    else {
+                        let email = {
+                            idOrigen:res[0].idOrigen,
+                            idDestino:res[0].idDestino, 
+                            asunto:res[0].asunto,
+                            cuerpo:res[0].cuerpo,
+                            fecha:res[0].fecha,
+                            leido:res[0].leido,
+                            archivado:res[0].archivado,
+                            favorito:res[0].favorito,
+                            correo:res[0].correo,
+                            nombre:res[0].nombre,
+                            apellido1:res[0].apellido1,
+                            apellido2:res[0].apellido2,
+                            admin:res[0].admin
+                        } 
+                        callback(null,email)
+                    }
                 })
             }
         })
