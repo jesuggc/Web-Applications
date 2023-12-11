@@ -6,20 +6,20 @@
     <%-include('partials/header') %>
     <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-2 scrollable">
       <h1>Registro</h1>
-      <form id="myForm">
+      <form id="myForm" enctype="multipart/form-data">
         <!--NOMBRE Y APELLIDOS-->
         <div class="row">
           <div class="col" id="nameContainer">
-            <h4  class="my-3">Nombre</h4>
-            <input id="name" type="text" name="nombre" placeholder="Nombre" required>
+            <h4 class="my-3">Nombre</h4>
+            <input  class="w-100" id="name" type="text" name="nombre" placeholder="Nombre" required>
           </div>
           <div class="col" id="surname1Container">
             <h4  class="my-3">Primer apellido</h4>
-            <input id="surname1" type="text" name="apellido1" placeholder="Apellido 1" required>
+            <input class="w-100" id="surname1" type="text" name="apellido1" placeholder="Apellido 1" required>
           </div>
           <div class="col" id="surname2Container" >
             <h4 class="my-3">Segundo apellido</h4>
-            <input id="surname2" type="text" name="apellido2" placeholder="Apellido 2" required>
+            <input class="w-100" id="surname2" type="text" name="apellido2" placeholder="Apellido 2" required>
           </div>
         </div>
         <!--CORREO E IMAGEN-->
@@ -30,7 +30,7 @@
           </div>
           <div class="col">
             <h4 class="my-3">Imagen de perfil</h4>
-            <input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
+            <input id="foto" type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
           </div>
         </div>
         <!--CONTRASEÑA Y CONFIRMAR-->
@@ -38,43 +38,46 @@
           <div class="col">
             <h4 class="my-3">Contraseña</h4>
             <div class="input-group" >
-              <input type="password" name="contrasena" id="password" placeholder="Contraseña" required>
-              <button type="button" class="passButton" id="togglePassword">Mostrar</button>
-              <ul id="passContainer"></ul>
+              <input class="w-75" type="password" name="contrasena" id="password" placeholder="Contraseña" required>
+              <button type="button" class="passButton w-25" id="togglePassword">Mostrar</button>
             </div>
+            <ul id="passContainer"></ul>
           </div>
-          <div class="col">
+          <div id="confirmContainer" class="col">
             <h4 class="my-3">Confirma la contraseña</h4>
-            <div id="confirmContainer" class="input-group">
-              <input type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña" required>
-              <button type="button" class="passButton" id="toggleConfirmPassword">Mostrar</button>
+            <div  class="input-group">
+              <input class="w-75" type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña" required>
+              <button type="button" class="passButton w-25" id="toggleConfirmPassword">Mostrar</button>
             </div>
           </div>
         </div>
           
         <!--FACULTAD-->
         <div class="row">
-          <h4 class="my-3">Facultad</h4>
-          <select id="facultad" name="Curso" class="" required>
-            <option hidden selected>Selecciona una opción</option>
-            <% resultado.forEach( ele=> { %>
-              <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
-            <%})%>
-          </select>
+          <div class="col">
+
+            <h4 class="my-3">Facultad</h4>
+            <select id="facultad" name="Curso" class="w-100" required>
+              <option hidden selected>Selecciona una opción</option>
+              <% resultado.forEach( ele=> { %>
+                <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
+                <%})%>
+              </select>
+            </div>
         </div>
             
         <div class="row">
           <!--GRADO-->
-          <div class="col d-none" id="gradoDiv" >
+          <div class="col d-none w-100" id="gradoDiv" >
             <h4 class="my-3">Grado</h4>
-            <select id="grado" name="Grado" required>
+            <select id="grado" name="Grado" class="w-100" required>
               <option hidden selected>Selecciona una opción</option>
             </select>
           </div>
           <!-- CURSO -->
-          <div class="col d-none" id="cursoDiv" >
+          <div class="col d-none w-100" id="cursoDiv" >
             <h4 class="my-3">Curso</h4>
-            <select id="curso" name="Curso" required>
+            <select id="curso" name="Curso" class="w-100" required>
               <option hidden selected>Selecciona una opción</option>
             </select>
           </div>

@@ -1,7 +1,7 @@
 $("#login").on("click", function(e) {
     e.preventDefault()
     var email = $('#email').val();
-    var password = $('#contrasena').val();
+    var password = $('#password').val();
     $('#wrongMail').remove();
     $('#wrongPass').remove();
     

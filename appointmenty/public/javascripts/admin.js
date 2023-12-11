@@ -95,7 +95,7 @@ $("#roles").on("click", function(){
                 response.forEach(ele => {
                     let anio = calcularCurso(ele.curso) 
                     $("#listPanel").append(`
-                    <div class="row">
+                    <div class="row ">
                         <div style="background-image: url('/images/prueba1.jpg');" class="prueba card my-2 col-2">
                             
                         </div>
@@ -138,12 +138,9 @@ $("#panel").on("change", "#adminSwitch", function(){
     $.ajax({
         url: "/admin/changeRols",
         method: "POST",
-        data: {id},
-        success: function(response){
-
-            $(this).closest(".row").remove();
-        }
+        data: {id}
     })
+    $(this).closest(".row").remove();
 })
 
 //ESTADISTICAS

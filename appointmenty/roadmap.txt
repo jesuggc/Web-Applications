@@ -17,7 +17,7 @@
     - Hacer responsive
     - Hacer el dropdown del boton del perfil en header   ---------------------------------------------------------------------------------------------------
     - feedback registro correcto                         ---------------------------------------------------------------------------------------------------
-    - imagen registro (bd, dao...)
+    - imagen registro (bd, dao...)                       ---------------------------------------------------------------------------------------------------
     - -------convertir curso en solicitudes a ordinal    ---------------------------------------------------------------------------------------------------
     - feedback validacion solicitudes y makeadmin con exito, con modal? Complicado por cambiar funcionalidades de aceptar y eliminar 
     
@@ -37,20 +37,32 @@
 
 _____________________________________________________________________________________________________________________________________________
 
--     Refactorizar DAO ------------------------------------------------------------------------------------------------------------------
--     Refactorizar rutas ----------------------------------------------------------------------------------------------------------------
--  A3 Correo confirmación al aceptar ----------------------------------------------------------------------------------------------------
--  U2 Gestionar reservas ----------------------------------------------------------------------------------------------------------------
--  C4 Feedback modales ------------------------------------------------------------------------------------------------------------------
--  A8 Listado de usuarios
--  A9 Historial de reservas
--  A2 Nuevas instalaciones --------------------------------------------------------------------------------------------------------------
--  A5 Estadisticas y listados
--  A6 Enviar correo
--  U3 Mensajeria
--  C3 Registro con foto -
--  C7 Rehacer vista reservas
--  A1 Personalizar apariencia
--  A7 Correo lista de espera -
--  C6 Reserva interactiva ---------------------------------------------------------------------------------------------------------------
--  C5 Responsive
+-     Refactorizar DAO ----------------------------------------------------------------------------------------------------------------------
+-     Refactorizar rutas --------------------------------------------------------------------------------------------------------------------
+-  A3    Correo confirmación al aceptar -----------------------------------------------------------------------------------------------------
+-  U2    Gestionar reservas -----------------------------------------------------------------------------------------------------------------
+-  C4    Feedback modales -------------------------------------------------------------------------------------------------------------------
+-  A2    Nuevas instalaciones ---------------------------------------------------------------------------------------------------------------
+-  C6    Reserva interactiva ----------------------------------------------------------------------------------------------------------------
+-  U3    Mensajeria -------------------------------------------------------------------------------------------------------------------------
+-  A6    Enviar correo ----------------------------------------------------------------------------------------------------------------------
+-  C3    Registro con foto ------------------------------------------------------------------------------------------------------------------
+-  C12   Mostrar contraseña en el login -----------------------------------------------------------------------------------------------------
+-  A1    Personalizar apariencia
+-  C7    Rehacer vista reservas
+-  A9    Historial de reservas
+-  A8    Listado de usuarios
+-  A5    Estadisticas y listados
+-  A7    Correo lista de espera -
+-  C5    Responsive --> Header Footer VH
+
+-  C8    Incorporar imagenes en la BBDD
+-  U4    Ver reservas pendientes
+-  C9    Hacer el footer
+-  C10   Redireccion a inicio de sesion con middleware
+-  C11   Noticias con carousel
+-  A10   Arregla navbar negrita
+-  C13   Añadir favoritos y archivados
+-  A11   No permitir que usuario normal entre en panel admin simplemente escribiendo /admin
+-  A12   PREGUNTAR enviar a todos los de la ucm, o a todos de una facultad
+-  A13   Nueva instalacion CON FOTO

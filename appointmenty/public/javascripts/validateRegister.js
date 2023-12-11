@@ -108,18 +108,28 @@ $('#myForm input, #myForm select').on('change', function() {
 });
 
 $("#register").on("click", () => {
-    let nombre = $("#name").val()
-    let apellido1 = $("#surname1").val()
-    let apellido2 = $("#surname2").val()
-    let email = $("#email").val()
+    // let nombre = $("#name").val()
+    // let apellido1 = $("#surname1").val()
+    // let apellido2 = $("#surname2").val()
+    // let email = $("#email").val()
     let password = $("#password").val()
     let facultad = $("#facultad option:selected").val().split("#")[0]
     let grado = $("#grado option:selected").val().split("#")[2]
     let curso = $("#curso option:selected").val()
+
+    let formData = new FormData($("#myForm")[0]);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
+    formData.append('facultad', facultad);
+    formData.append('grado', grado);
+    formData.append('curso', curso);
+   
     $.ajax({
         url: "/users/checkEmail",
         type: "GET",
-        data: {email},
+        data: {email: formData.get('email')},
+        processData: false,
+        contentType: false,
         success: function(response) {
             if(response.existe === true) $("#emailContainer").append(`<p id="wrongMail" style="color:red">Correo ya existente</p>`)
             else {  
@@ -127,7 +137,9 @@ $("#register").on("click", () => {
                 $.ajax({
                     url: "/users/register",
                     type: "POST",
-                    data: {nombre,apellido1,apellido2,email,password,facultad,grado,curso},
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
                         $("#modalLaunch").trigger("click")
                     }

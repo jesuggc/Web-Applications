@@ -100,7 +100,7 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso) VALUES (?,?,?,?,?,?,?,?)"
+                let stringQuery = "INSERT INTO ucm_aw_riu_usu_usuarios (nombre,apellido1,apellido2,correo,contrasena,facultad,grado,curso,foto) VALUES (?,?,?,?,?,?,?,?,?)"
                 connection.query(stringQuery, Object.values(user), (err, resultado) => {
                     connection.release();
                     if (err) callback(err, null)
@@ -116,7 +116,7 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 0"
+                let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, u.foto, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 0"
                 connection.query(stringQuery, (err, resultado) => {
                     connection.release();
                     if (err) callback(err, null)
@@ -131,7 +131,8 @@ class DAO {
                             admin:ele.admin,
                             facultad:ele.nombreFacultad,
                             grado:ele.nombreGrado, 
-                            curso:ele.curso
+                            curso:ele.curso,
+                            foto: ele.foto
                         })))
                     }
                 })
@@ -200,7 +201,8 @@ class DAO {
                             grado:resultado[0].grado,
                             curso:resultado[0].curso,
                             verificado:resultado[0].verificado,
-                            admin:resultado[0].admin
+                            admin:resultado[0].admin,
+                            foto: resultado[0].foto
                         }
                         callback(null, user)
                     } 
@@ -229,12 +231,12 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT c.id, c.idOrigen, c.asunto, c.cuerpo, c.fecha, c.leido, c.archivado, c.favorito, u.nombre, u.apellido1, u.apellido2, u.correo FROM ucm_aw_riu_cor_correo AS c JOIN ucm_aw_riu_usu_usuarios AS u ON c.idOrigen = u.id WHERE idDestino = ?"
+                let stringQuery = "SELECT c.id, c.idOrigen, c.asunto, c.cuerpo, c.fecha, c.leido, c.archivado, c.favorito, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin FROM ucm_aw_riu_cor_correo AS c JOIN ucm_aw_riu_usu_usuarios AS u ON c.idOrigen = u.id WHERE idDestino = ? ORDER BY c.fecha DESC"
                 connection.query(stringQuery, id, (err, resultado) => {
                     connection.release();
                     if (err) callback(err, null)
                     else {
-                        if (resultado.length === 0) callback(null, null)
+                        if (resultado.length === 0) callback(null, [])
                         else {
                             callback(null, resultado.map(ele => ({  
                                 id:ele.id,
@@ -246,9 +248,10 @@ class DAO {
                                 archivado:ele.archivado,
                                 favorito:ele.favorito,
                                 nombreOrigen:ele.nombre,
-                                apellido1Origen:ele.apellido1,
-                                apellido2Origen:ele.apellido2,
-                                correoOrigen:ele.correo
+                                apellido1:ele.apellido1,
+                                apellido2:ele.apellido2,
+                                correoOrigen:ele.correo,
+                                admin:ele.admin
                             })))
                         }
                     }
@@ -294,14 +297,16 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT id, nombre,aforo FROM ucm_aw_riu_ins_instalaciones WHERE idTipo=? AND idFacultad=?"
+                let stringQuery = "SELECT i.id, i.nombre,i.aforo, t.disponibilidadIni,t.disponibilidadFin FROM ucm_aw_riu_ins_instalaciones as i JOIN ucm_aw_riu_tip_tipoinstalacion as t on i.idTipo=t.id  WHERE idTipo=? AND idFacultad=?"
                 connection.query(stringQuery,[idTipo, idFacultad], function (err, resultado) {
                     connection.release();
                     if (err) callback(err, null)
                     else callback(null,resultado.map(ele => ({
                         nombre: ele.nombre,
                         aforo: ele.aforo, 
-                        id: ele.id 
+                        id: ele.id,
+                        ini: ele.disponibilidadIni,
+                        fin: ele.disponibilidadFin
                     })))
                 })
             }
@@ -350,9 +355,7 @@ class DAO {
                     connection.release();
                     if (err) callback(err, null)
                     else {
-                        console.log("DAO", resultado.length)
                         let x = resultado.length > 0 ? true : false
-                        console.log("asdfijhsdjifhj", x)
                         callback(null,x)
                     }
                 })
@@ -430,6 +433,20 @@ class DAO {
         })
     }
 
+    deleteEmail(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "DELETE FROM ucm_aw_riu_cor_correo WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,true)
+                })
+            }
+        })
+    }
+
     getEmail(id,callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -455,6 +472,95 @@ class DAO {
                             admin:res[0].admin
                         } 
                         callback(null,email)
+                    }
+                })
+            }
+        })
+    }
+    
+    getProfilePhoto(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT foto FROM ucm_aw_riu_usu_usuarios WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res[0].foto)
+                })
+            }
+        })
+    }
+    // getInstallationPhoto(id,callback){
+    //     this.pool.getConnection((err, connection) => {
+    //         if (err) callback(err, null)
+    //         else {
+    //             let stringQuery = "SELECT foto FROM ucm_aw_riu_ins_installation WHERE id = ?"
+    //             connection.query(stringQuery, id, function (err, res) {
+    //                 connection.release();
+    //                 if (err) callback(err, null)
+    //                 else callback(null,res[0].foto)
+    //             })
+    //         }
+    //     })
+    // }
+    
+    // getTypeInstallationPhoto(id,callback){
+        //     this.pool.getConnection((err, connection) => {
+        //         if (err) callback(err, null)
+        //         else {
+        //             let stringQuery = "SELECT foto FROM ucm_aw_riu_tip_tipoinstalacion WHERE id = ?"
+        //             connection.query(stringQuery, id, function (err, res) {
+        //                 connection.release();
+        //                 if (err) callback(err, null)
+        //                 else callback(null,res[0].foto)
+        //             })
+        //         }
+        //     })
+        // }
+
+    getIdByEmail(email, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT id FROM ucm_aw_riu_usu_usuarios WHERE correo LIKE ?"
+                connection.query(stringQuery, email, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        console.log(res[0].id)
+                        callback(null,res[0].id)
+                    }
+                })
+            }
+        })
+    }
+
+    getFacultadById(idFac, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT nombre FROM ucm_aw_riu_fac_facultades WHERE id = ?"
+                connection.query(stringQuery, idFac, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res[0].nombre)
+                })
+            }
+        })
+    }
+    getTipoById(idTipo,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT nombre FROM ucm_aw_riu_tip_tipoinstalacion WHERE id=?"
+                connection.query(stringQuery, idTipo, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        let tipo=res[0].nombre
+                        console.log("qpasa",tipo)
+                        callback(null,tipo)
                     }
                 })
             }

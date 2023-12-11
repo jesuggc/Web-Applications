@@ -1,6 +1,7 @@
 <div class="col-8 container-lg scrollable" >
   <% options.forEach( ele=> { %>
-    <a href="/bookings">
+    <a href="/bookings/<%=ele.id%>">
+      <!-- /bookings/installationPhoto/:<%=ele.id%> -->
       <div style="background-image: url('/images/<%=ele.imagen%>.jfif');" class="claret divImage justify-content rounded-4 text-center text-light my-2">
         <h1 class="mx-auto color-white"><%=ele.nombre%></h1>
       </div>

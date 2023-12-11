@@ -3,20 +3,40 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306");
 
-router.get('/', function(req, response, next) {
+router.get('/:id', function(req, response, next) {
+  let idTipo=req.params.id;
+  let idFac = response.locals.user.facultad
   
-    midao.getOptions(((err,options) => {
+  midao.getInstallationsByOption(idTipo,idFac, (err, installations)=>{
     if(err) console.log("Error: ", err)
     else {
-      options.forEach(ele => {
-        ele.imagen = ele.nombre.replace(/\s/g, '').toLowerCase()
-      });
-      midao.getFacultades(((err,facultades) => {
-        if(err) console.log("Error: ", err)
-        else response.render('bookings',{options,facultades});
-      }))
-    } 
-  }))
+      midao.getFacultadById(response.locals.user.facultad,(err,nombre) => {
+        if(err) console.log(err)
+        else {
+          midao.getTipoById(idTipo,(err,tipo) => {
+            if(err) console.log(err)
+            else {
+              let ini=installations[0].ini;
+              let fin= installations[0].fin;
+              response.render('bookings',{idTipo,installations,nombre,tipo,ini,fin}); 
+            }
+          })
+        }
+      })
+    }
+  })
+  //   midao.getOptions(((err,options) => {
+  //   if(err) console.log("Error: ", err)
+  //   else {
+  //     options.forEach(ele => {
+  //       ele.imagen = ele.nombre.replace(/\s/g, '').toLowerCase()
+  //     });
+  //     midao.getFacultades(((err,facultades) => {
+  //       if(err) console.log("Error: ", err)
+  //       else response.render('bookings',{options,facultades});
+  //     }))
+  //   } 
+  // }))
 });
 
 router.get('/instalaciones', (request, response) => {
@@ -28,7 +48,7 @@ router.get('/instalaciones', (request, response) => {
   })
 })
 
-router.get("/busyHours", (request, response) => {
+router.get("/:id/busyHours", (request, response) => {
   midao.getReservationsByDayAndInstallation(request.query.fecha,request.query.idInstalacion,(err, horas) => {
     if(err) console.log(err)
     else {
@@ -50,10 +70,28 @@ router.get("/busyHours", (request, response) => {
   })
 })
 
-router.post("/createBooking", (request, response) => {
+router.post("/:id/createBooking", (request, response) => {
   midao.createBooking(response.locals.user.id,request.body.idInstalacion, request.body.fecha, request.body.horaIni, request.body.horaFin,(err, res) => {
     if(err) console.log(err)
     else response.json(res)
   })
 })
+
+router.get("/installationPhoto/:id", (request,response) => { //Devuelve la foto de una instalacion o sala especifica
+  let id = Number(request.params.id)
+  midao.getInstallationPhoto(id,(err,foto) => {
+    if(err) console.log(err)
+    else response.end(foto)
+  })
+})
+
+router.get("/typeInstallationPhoto/:id", (request,response) => { //Devuelve la foto de una instalacion o sala especifica
+  let id = Number(request.params.id)
+  midao.getTypeInstallationPhoto(id,(err,foto) => {
+    if(err) console.log(err)
+    else response.end(foto)
+  })
+})
+
+
 module.exports = router;

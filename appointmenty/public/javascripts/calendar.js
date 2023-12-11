@@ -3,7 +3,7 @@ let lista = []
 let bloqueado = false
 let diaYaReservado = false
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance($("#liveToast"))
-
+let idTipo = $("#mainTitle").attr("data-id")
 function getMiddle(array) {
     return array.sort((a, b) => {
         return a - b;
@@ -46,58 +46,19 @@ $(".hora").on("click", function(e) {
     }
 })
 
-$("#tipo").on("change", function() {
-    let ini = $(this).val().split("#")[2];
-    let fin = $(this).val().split("#")[3];    
-    reset()
-    lockDisponibility(ini,fin)
-    let tipo = $(this).val().split("#")[0];
-    let facultad = null    
-    if($("#facultad").val()) facultad = $("#facultad").val().split("#")[0]
-
-    $.ajax({
-        url: '/bookings/instalaciones',
-        type: 'GET',
-        data: {tipo,facultad},
-        success: function(response) {
-            $("#sala").empty()
-            $("#sala").append(`<option hidden selected>Selecciona una opción</option>`)
-            response.forEach(ele => {
-                $("#sala").append(`<option value="${ele.id}#${ele.nombre}#${ele.aforo}">${ele.nombre}</option>`)
-            })
-
-        }
-    })
-})
-
-$("#sala").on("change", function(){
-    let aforo = $(this).val().split("#")[2]
-    $("#aforo").attr("max", aforo)
-    $("#aforo").val("1")
-
-})
-
 $("#calendario").on("change", () => {
     let fecha = $("#calendario").val()
-    let idInstalacion = $("#sala").val().split("#")[0]
+    let idInstalacion = $(".marcado").attr("data-id")
+    $("#calendario").addClass("horaSeleccionada")
     $("#horario").show()
-    resetBusy()
-    $.ajax({
-        url: "/bookings/busyHours",
-        method: "GET",
-        data: {fecha,idInstalacion},
-        success: function(response) {
-            lockBusy(response.horas)
-            diaYaReservado = response.diaYaReservado
-        }
-    })
+    callBusy(fecha,idInstalacion)
 })
 
 
 $("#enviar").on("click", () => {
     if(contador>0) {
         let fecha = $("#calendario").val()
-        let idInstalacion = $("#sala").val().split("#")[0]
+        let idInstalacion = $(".marcado").attr("data-id")
         lista.sort((a, b) => {
             return a - b;
         })
@@ -105,7 +66,7 @@ $("#enviar").on("click", () => {
         let horaFin = lista[contador-1]
     
         $.ajax({
-            url: "/bookings/createBooking",
+            url: `/bookings/${idTipo}/createBooking`,
             method: "POST",
             data: {fecha,idInstalacion,horaIni,horaFin},
             success: function(response) {
@@ -114,12 +75,42 @@ $("#enviar").on("click", () => {
                 $("#horario").hide()
 
                 $(".modal").modal("show")
-                
             }
         })
     }
     
 })
+
+$(".instalacion").on("click", function()  {
+    $(".instalacion").removeClass("marcado")
+    $(this).addClass("marcado")
+    $("#aforo").attr("max",$(".marcado > h5").text().split(":")[1].trim())
+    $("#aforo").val(0)
+    $("#optionsContainer").removeClass("d-none")
+    let ini = $("#title").attr("data-id").split("#")[0];
+    let fin = $("#title").attr("data-id").split("#")[1];    
+    reset()
+    lockDisponibility(ini,fin)
+    if($("#calendario").hasClass("horaSeleccionada")) {
+        $("#horario").show()
+        let fecha = $("#calendario").val()
+        let idInstalacion = $(".marcado").attr("data-id")
+        callBusy(fecha,idInstalacion)
+    }
+})
+
+function callBusy(fecha,idInstalacion) {
+    resetBusy()
+    $.ajax({
+        url: `/bookings/${idTipo}/busyHours`,
+        method: "GET",
+        data: {fecha,idInstalacion},
+        success: function(response) {
+            lockBusy(response.horas)
+            diaYaReservado = response.diaYaReservado
+        }
+    })
+}
 
 function fillToast(x) {
     
@@ -158,7 +149,6 @@ function resetBusy() {
         if(!$("#"+i).hasClass("noDisponible")) {
             $("#"+i).removeClass(["noDisponible","seleccionado","ocupado","disponible","reservado"])
             $("#"+i).addClass("disponible")
-
         }
     }
     contador = 0

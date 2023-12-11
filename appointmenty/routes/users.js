@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const multer=require('multer');
+const multerFactory= multer({storage: multer.memoryStorage()})
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 router.use((request, response, next) => {
@@ -11,7 +13,13 @@ router.get('/', function(req, res, next) {
   console.log("Pagina raiz")
 });
 
-
+router.get("/profilePhoto/:id", (request,response) => {
+  let id = Number(request.params.id)
+  midao.getProfilePhoto(id,(err,foto) => {
+    if(err) console.log(err)
+    else response.end(foto)
+  })
+})
 
 router.get("/logout", (request, response) => { //Redirige a pagina principal, cerrando sesion en locals y session
   request.session.destroy()
@@ -50,7 +58,7 @@ router.get("/register", (request, response) => {//Renderiza pagina de register
   })
 })
 
-router.post("/register", (request, response) => { //Crea el nuevo usuario tras submit en vista de register
+router.post("/register",multerFactory.single('imagen'), (request, response) => { //Crea el nuevo usuario tras submit en vista de register
   let user = {
     nombre: request.body.nombre,
     apellido1: request.body.apellido1,
@@ -59,8 +67,10 @@ router.post("/register", (request, response) => { //Crea el nuevo usuario tras s
     password: request.body.password,
     facultad: request.body.facultad,
     grado: request.body.grado,
-    curso: request.body.curso
+    curso: request.body.curso,
+    foto: null
   }
+  if(request.file) user.foto=request.file.buffer;
   user.nombre = user.nombre.charAt(0).toUpperCase() + user.nombre.slice(1).toLowerCase()
   user.apellido1 = user.apellido1.charAt(0).toUpperCase() + user.apellido1.slice(1).toLowerCase()
   user.apellido2 = user.apellido2.charAt(0).toUpperCase() + user.apellido2.slice(1).toLowerCase()
@@ -81,7 +91,8 @@ router.get("/checkEmail", function (request, response) {//En validar login y reg
 
 router.get("/correo", (request, response) => { //Renderiza pagina de correo
   response.status(200)
-  midao.getEmails(response.locals.user.id ,(err,emails) => {
+  
+  midao.getEmails(response.locals.user.id, (err,emails) => {
     if(err) console.log(err)
     else {
       emails.forEach(ele => {
@@ -115,9 +126,25 @@ router.post("/updateEmail", (request,response) => {
     midao.favEmail(id,callback)
   } else if (request.body.action === "archive") {
     midao.archiveEmail(id,callback)
+  } else if (request.body.action === "delete") {
+    midao.deleteEmail(id,callback)
   } else {
     midao.readEmail(id,callback)  
   }
+})
+
+router.post("/sendMessage", (request,response) => {
+  response.status(200)
+  let id = response.locals.user.id
+  midao.getIdByEmail(request.body.email, (err,idDestino) => {
+    if(err) console.log(err)
+    else {
+      midao.createMessage(id, idDestino, request.body.asunto, request.body.cuerpo, (err,res) => {
+        if(err) console.log(err)
+        else response.json(res)
+      })
+    }
+  })
 })
 
 module.exports = router;

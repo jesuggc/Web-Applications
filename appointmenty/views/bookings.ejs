@@ -3,51 +3,52 @@
   <%-include('partials/head') %>
   <body class="pistachio">
     <%-include('partials/header')%>
-    <div class="row pistachio mx-1">
-      <h1>Sistema de reservas</h1>
+    <div class="row pistachio mx-2">
+      <h1 id="mainTitle" data-id="<%=idTipo%>">Sistema de reservas</h1>
       <form>
-        <% if(locals.user) { %>
-          <% if(locals.user.admin === 1) { %>
-        <div class="row">
-          <div class="col">
-            <h4 class="my-3">Facultad:</h4>
-            <select id="facultad" name="facultad"  required>
-              <% facultades.forEach( ele=> { %>
-                <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
-                <%})%>
-              </select>
+          <% if(user.admin === 1) { %>
+            <div class="row">
+              <div class="col">
+                <h4 class="my-3">Facultad:</h4>
+                <select id="facultad" name="facultad"  required>
+                  <%# facultades.forEach( ele=> { %>
+                    <option value="<%#=ele.id%>#<%#=ele.nombre%>"><%#=ele.nombre%></option>
+                    <%#})%>
+                  </select>
+              </div>
             </div>
-          </div>
           <% } %>
-        <% } %>
-        <div class="row my-2">
-          <div class="col" id="tipoContainer">
-            <h4 class="my-3">Tipo de instalacion:</h4>
-            <select id="tipo" name="tipo"  required>
-              <option hidden selected>Selecciona una opción</option>
-              <% options.forEach( ele=> { %>
-                <option value="<%=ele.id%>#<%=ele.nombre%>#<%=ele.ini%>#<%=ele.fin%>"><%=ele.nombre%></option>
-              <%})%>
-            </select> 
+        <div class="row">
+          <h1 id="title" data-id="<%=ini%>#<%=fin%>"><%=nombre%> - <%=tipo%></h1>
+        </div>
+        <div class="row scrollable-x">
+          <div  class="d-flex justify-content-between ">
+          <% installations.forEach(function(ele, indice) { %>
+            <div class="instalacion col rounded-5 text-center me-2" style="background-color:white; height:200px;width:200px; max-width:200px;min-width:200px" data-id="<%=ele.id%>">
+              <br>
+              <br>
+              <h3><%=ele.nombre%></h1>
+              <br>
+              <h5>Aforo máximo: <%=ele.aforo%></h5>
+            </div> 
+          <% }) %>
           </div>
-          <div class="col" id="salaContainer">
-            <h4 class="my-3">Sala:</h4>
-            <select id="sala" name="sala"  required>
-              <option hidden selected>Selecciona una opción</option>
-            </select>
-          </div>
+        </div>
+        <div id="optionsContainer" class="row my-2 d-none">
           <div class="col" id="numeroContainer">
             <h4 class="my-3">Numero de usuarios:</h4>
             <input id="aforo" type="number" name="numero" placeholder="Usuarios" min="1" required>
           </div>
-          <div class="col" id="calendarContainer" >
+          <div class="col" id="calendarContainer">
             <h4 class="my-3">Calendario:</h4>
             <input id="calendario" type="date" name="dia" placeholder="Día" required>
           </div>
         </div>
       </form>
     </div>
-    <div id="horario"  style="display:none" class="container  ">
+
+
+    <div id="horario" style="display:none" class="container">
       <h4 class="my-3">Horas:</h4>
       <div class="row m-2 d-flex justify-content-center claret rounded-4 p-5 my-3">
         <div id="9"  style="max-width:50px;height:45px; " class="hora rounded-1 mx-2 col disponible"><h5 style="margin-left:-35px; margin-top: -30px">9:00</p></div>
@@ -77,6 +78,8 @@
           <dd>Seleccionado</dd>
         </dl>
     </div>
+
+    
     
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm  modal-dialog-centered">

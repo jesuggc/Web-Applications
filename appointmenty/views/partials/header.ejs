@@ -1,32 +1,32 @@
 <header class="sticky-top pistachio p-2" >
-    <div class="d-flex justify-content-between align-items-center">
-        
-            <a href="/"><img style="height: auto;max-height: 4em;" src="../images/logo.png"></a>
-        
-            
-        <% if(!locals.user) { %>
-            <div>
-                <a href="/users/login"><button class="btn btn-primary me-3">Iniciar sesión</button></a>
-            </div>
-        <% } else { %>  
-            <div class="dropdown me-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                    <img class="rounded-circle" style="max-width: 3em;"src="/images/noPicture.jpg">
-                </button>
-                <ul class="dropdown-menu text-center">
-                  
-                  <li><h5><%=locals.user.nombre%> <%=locals.user.apellido1%></h5><p><%=locals.user.correo%></p></li>
-                  <hr>
-                <% if(locals.user.admin) { %>
-                  <li><a class="dropdown-item bg-danger" href="/admin">Panel de administrador</a></li>
-                  <hr>
-                <% }%> 
-                  <li><a class="dropdown-item" href="/users/correo">Correo UCM</a></li>
-                  <li><a class="dropdown-item" href="/bookings">Nueva reserva</a></li>
-                  <hr>
-                  <li><a class="dropdown-item bg-danger" href="/users/logout">Cerrar sesión</a></li>
-                </ul>
-              </div>
-        <% } %>
-    </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <a href="/"><img style="height: auto;max-height: 4em;" src="../images/logo.png"></a>
+    <% if(!locals.user) { %>
+      <div>
+        <a href="/users/login"><button class="btn btn-primary me-3">Iniciar sesión</button></a>
+      </div>
+    <% } else { %>  
+      <div class="dropdown me-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          <%if(!locals.user.foto) { %>
+            <img class="rounded-circle" style="max-width: 3em; border: 2px solid black;"src="/images/noPicture.jpg">
+          <%} else {%>  
+            <img class="rounded-circle" style="max-width: 3em; border: 2px solid black;" src="/users/profilePhoto/<%=user.id%>">
+
+          <% }%> 
+        </button>
+        <ul class="dropdown-menu text-center">
+          <li><h5><%=locals.user.nombre%> <%=locals.user.apellido1%></h5><p><%=locals.user.correo%></p></li>
+          <hr>
+          <% if(locals.user.admin === 1) { %>
+            <li><a class="dropdown-item bg-danger" href="/admin">Panel de administrador</a></li>
+            <hr>
+          <% }%> 
+          <li><a class="dropdown-item" href="/users/correo">Correo UCM</a></li>
+          <hr>
+          <li><a class="dropdown-item bg-danger" href="/users/logout">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    <% } %>
+  </div>
 </header>
