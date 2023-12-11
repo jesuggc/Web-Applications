@@ -98,7 +98,7 @@ $("#calendario").on("change", () => {
     let fecha = $("#calendario").val()
     let idInstalacion = $(".marcado").attr("data-id")
     $("#calendario").addClass("horaSeleccionada")
-    $("#horario").show()
+    $("#horario").removeClass("d-none")
     callBusy(fecha,idInstalacion)
 })
 
@@ -120,7 +120,7 @@ $("#enviar").on("click", () => {
             success: function(response) {
                 $(".modal-body").empty()
                 $(".modal-body").append(`<p>Reserva creada con éxito con id ${response}`)
-                $("#horario").hide()
+                $("#horario").addClass("d-none")
 
                 $(".modal").modal("show")
             }
@@ -141,7 +141,7 @@ $(".instalacion").on("click", function()  {
     reset()
     lockDisponibility(ini,fin)
     if($("#calendario").hasClass("horaSeleccionada")) {
-        $("#horario").show()
+        $("#horario").removeClass("d-none")
         let fecha = $("#calendario").val()
         let idInstalacion = $(".marcado").attr("data-id")
         callBusy(fecha,idInstalacion)

@@ -26,7 +26,7 @@
             for (let indice = 0; indice < limite; indice++) {
               const ele = installations[indice] || {}; // Si no hay elemento en la posición, crea un objeto vacío
           %>
-            <div class="instalacion col rounded-5 text-center me-2 <%= indice >= installations.length ? 'd-none' : '' %>" style="background-color:white; height:200px;width:200px; max-width:200px;min-width:200px" data-id="<%= ele.id || '' %>">
+            <div class="col instalacion installationCard rounded-5 text-center me-2 <%= indice >= installations.length ? 'd-none' : '' %>" data-id="<%= ele.id || '' %>">
               <br>
               <br>
               <h3 class="nombreInstalacion"><%= ele.nombre || '' %></h1>
@@ -50,7 +50,7 @@
     </div>
 
 
-    <div id="horario" style="display:none" class="container">
+    <div id="horario" class="container d-none">
       <h4 class="my-3">Horas:</h4>
       <div class="row m-2 d-flex justify-content-center claret rounded-4 p-5 my-3">
         <div id="9"  class="hora rounded-1 mx-2 col disponible hoursDiv"><h5 class="hoursText">9:00</h5></div>
@@ -65,20 +65,20 @@
         <div id="18" class="hora rounded-1 mx-2 col disponible hoursDiv"><h5 class="hoursText">18:00</h5></div>
         <div id="19" class="hora rounded-1 mx-2 col disponible hoursDiv"><h5 class="hoursText">19:00</h5></div>
         <div id="20" class="hora rounded-1 mx-2 col disponible hoursDiv"><h5 class="hoursText">20:00</h5></div>
-        </div>
-        <button id="enviar" class="btn btn-primary float-end me-2 btn-lg ">Reservar</button>
-        <dl class="ms-3 mt-4">
-          <dt class="ocupado rounded-2"></dt>
-          <dd>Ocupado</dd>
-          <dt class="noDisponible rounded-2"></dt>
-          <dd>No disponible</dd>
-          <dt class="reservado rounded-2"></dt>
-          <dd>Mis reservas</dd>
-          <dt class="disponible rounded-2"></dt>
-          <dd>Disponible</dd>
-          <dt class="seleccionado rounded-2"></dt>
-          <dd>Seleccionado</dd>
-        </dl>
+      </div>
+      <button id="enviar" class="btn btn-primary float-end me-2 btn-lg ">Reservar</button>
+      <dl class="ms-3 mt-4">
+        <dt class="ocupado rounded-2"></dt>
+        <dd>Ocupado</dd>
+        <dt class="noDisponible rounded-2"></dt>
+        <dd>No disponible</dd>
+        <dt class="reservado rounded-2"></dt>
+        <dd>Mis reservas</dd>
+        <dt class="disponible rounded-2"></dt>
+        <dd>Disponible</dd>
+        <dt class="seleccionado rounded-2"></dt>
+        <dd>Seleccionado</dd>
+      </dl>
     </div>
 
     
