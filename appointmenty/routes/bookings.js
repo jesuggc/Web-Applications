@@ -15,6 +15,12 @@ router.get('/:id', function(req, response, next) {
         else {
           midao.getTipoById(idTipo,(err,tipo) => {
             if(err) console.log(err)
+            else if(installations.length===0) {
+              let ini=0;
+              let fin=0;
+              response.render('bookings',{idTipo,installations,nombre,tipo,ini,fin}); 
+
+            }
             else {
               let ini=installations[0].ini;
               let fin= installations[0].fin;

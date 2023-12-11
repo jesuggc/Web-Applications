@@ -46,7 +46,11 @@ router.get("/prueba", (request, response) => {
     response.render("prueba")
 })
 
-
+router.get("/informacion", function (request, response) {
+  response.status(200)
+  let pag = request.query.data
+  response.render("informacion", {pag})
+});
 
 
 

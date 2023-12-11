@@ -1,8 +1,28 @@
+/* ----------ELEMENTOS GENERALES---------- */
+
+body,html {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
+  padding:0;
+  margin:0;
+  height: 100vh;
+}
+
+select{
+  text-align:center;
+  height: 3em; 
+  border-radius: 12px;
+  width: 75%;
+}
+
+
 header {
+  max-height: 10vh;
   position: sticky;
-    z-index: 999;
-    top: -10px;
-    box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+  z-index: 999;
+  top: -10px;
+  box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
 }
 a {
   color: #00B7FF;
@@ -11,13 +31,47 @@ a {
 a,div {
   text-decoration: none;
 }
+
+dt {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+dd {
+  display: inline-block;
+  width: 10em;
+  margin: 0 0 0 1em;
+}
+/* ----------FOOTER---------- */
+footer{
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.25);
+
+}
+
+footer ul{
+  list-style: none;
+}
+
+footer a{
+  text-decoration: none;
+  color: white;
+}
+
+/* ----------CLASES---------- */
+
 .negrita{
   font-weight: bold;
 }
 .leido{
   background-color: #e8e8e8;
-  /* background-color: rgba(232, 232, 232, 0.679); */
 }
+
 input {
   border-radius: 12px;
   padding: 8px; 
@@ -35,7 +89,6 @@ input {
   background-size: cover;
   background-position: center;
   background-blend-mode:multiply; 
-  /*overlay, multiply, screen, soft-light */
 }
 
 .prueba {
@@ -45,8 +98,6 @@ input {
 }
 
 .innerShadow {
-  /* box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px; */
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
@@ -54,20 +105,8 @@ input {
   font-size: 1.4vw;
 }
 
-select{
-  text-align:center;
-  height: 3em; 
-  border-radius: 12px;
-  width: 75%;
-}
-
 .passButton {
   border-radius: 0px 12px 12px 0px;
-}
-
-html body{
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
 .shipGray {
@@ -93,12 +132,9 @@ html body{
 .pistachio {
   background-color: #BFB48F;
 }
-header{
 
-  max-height: 10vh;
-}
 .scrollable {
-  max-height: 80vh;
+  max-height: 90vh;
   overflow-y:scroll;
 }
 
@@ -106,29 +142,16 @@ header{
   display: none;
 }
 
-footer{
-  max-height: 10vh;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  
-}
-
-body,html {
-  overflow-y: hidden;
-  padding:0;
-  margin:0;
-  height:100%;
-}
-
 .noDisponible {
   background-color: black;
   cursor: not-allowed;
 }
+
 .ocupado {
   background-color: rgb(112, 111, 111);
   cursor:not-allowed;
 }
+
 .seleccionado {
   background-color: #094963;
   cursor:pointer;
@@ -143,33 +166,18 @@ body,html {
   background-color: rgb(189, 213, 11);
   cursor:not-allowed;
 }
-dt {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  overflow: hidden;
-}
-
-dd {
-  display: inline-block;
-  width: 10em;
-  margin: 0 0 0 1em;
-
-}
 
 .noLeido {
   font-weight: bold;
 }
 
-.shadow-25{
+.shadow-25 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .abierto {
-  /* background-color: #990033; */
   margin-right: -20em;
-  transform: translateX(25px); /* Desplazar 20px a la derecha al pasar el ratón sobre el elemento */
-
+  transform: translateX(25px); 
 }
 
 .rowMail {
@@ -180,28 +188,28 @@ dd {
   transform: translateX(20px); /* Desplazar 20px a la derecha al pasar el ratón sobre el elemento */
 }
 
- .eliminado {
+.eliminado {
   transition: transform 1.5s ease;
   transform: translateX(-1200px);
- } 
- .archivadoT {
+} 
+
+.archivadoT {
   transition: transform 1.5s ease;
   transform: translateX(1200px);
- }
+}
 
- .panelEnviar {
+.panelEnviar {
   position: fixed;
-    bottom: 0;
-    right:0;
-    margin-right:3vw;
-    width: 31%;
-    height: 60vh;
-    background-color: whitesmoke;
-    /*  */
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
- }
+  bottom: 0;
+  right:0;
+  margin-right:3vw;
+  width: 31%;
+  height: 60vh;
+  background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
 
- .nuevoCorreo {
+.nuevoCorreo {
   position: fixed;
   bottom: 0;
   right:0;
@@ -209,17 +217,40 @@ dd {
   margin-right: 2em;
   max-width: 6em;
   cursor:pointer;
- }
+}
 
- .instalacion:hover{
+.instalacion:hover{
   border: 2px solid black;
- } 
- .marcado{
+} 
+
+.marcado{
   border: 2px solid black;
- } 
- .scrollable-x{
+} 
+
+.scrollable-x {
   max-width: 100vw;
   overflow-x:auto;
-  
- }
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
  
+.borderProfile {
+  max-width: 3em;
+  border: 2px solid black;
+}
+
+.alignJustify {
+  text-align: justify;
+}
+
+.hoursDiv {
+  max-width: 50px;
+  height :45px;
+}
+
+.hoursText {
+  margin-left: -35px;
+  margin-top: -30px;
+}

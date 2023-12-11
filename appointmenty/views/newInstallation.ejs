@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-4 ">
-                <div class="row my-3">
+                <div class="row my-1">
                     <p>  
                         <span>Disponible desde las </span> <input class="w-25" id="horaIni" type="number" name="numero" value="9" min="9" max="19">
                         <span> hasta las </span> <input class="w-25" id="horaFin" type="number" name="numero" value="20" min="10" max="20"/>
@@ -31,7 +31,8 @@
                     </p>   
                 </div>    
                 <div class="row">
-                    <p><span>Imagen: </span><input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg"></p>
+                    <p><span>Imagen: </span><input class="form-control form-control-sm" type="file" id="formFile"></p>
+                    <!-- <p><span>Imagen: </span><input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg"></p> -->
                 </div>  
             </div>
             <div class="d-flex justify-content-center">
@@ -70,11 +71,17 @@
                     <p><span>Imagen: </span><input type="file" name="imagen" accept="image/png, image/jpg, image/jpeg"></p>
                 </div>                
             </div>
-            <div class="col-8">
-                <div class="claret divImage justify-content rounded-4 text-center text-light my-2">
+            <div class="col-8"> 
+                <div class="col rounded-5 text-center me-2" style="background-color:white; height:200px;width:200px; max-width:200px;min-width:200px">
+                    <br><br>
+                    <h3 contenteditable id="nombreInstalacion">Click para modificar</h1>
+                    <br>
+                    <h5>Aforo máximo:<span id="aforoInstalacion"> 2</span> </h5>
+                  </div>
+                <!-- <div class="claret divImage justify-content rounded-4 text-center text-light my-2">
                     <h1 id="nombreInstalacion" contenteditable="true" class="mx-auto color-white">Click para modificar</h1>
-                </div>
-            </div>
+                </div> -->
+            </div> <!---------------------->
             <div class="d-flex justify-content-center">
                 <button id="newInstallation" class="btn btn-lg btn-primary mb-2" type="submit" >Añadir instalación</button>
             </div> 
