@@ -48,13 +48,13 @@ ________________________________________________________________________________
 -  A6    Enviar correo ----------------------------------------------------------------------------------------------------------------------
 -  C3    Registro con foto ------------------------------------------------------------------------------------------------------------------
 -  C12   Mostrar contraseña en el login -----------------------------------------------------------------------------------------------------
+-  C7    Rehacer vista reservas -------------------------------------------------------------------------------------------------------------
 -  A1    Personalizar apariencia
--  C7    Rehacer vista reservas
 -  A9    Historial de reservas
 -  A8    Listado de usuarios
 -  A5    Estadisticas y listados
--  A7    Correo lista de espera -
 -  C5    Responsive --> Header Footer VH
+-  A7    Correo lista de espera -
 
 -  C8    Incorporar imagenes en la BBDD
 -  U4    Ver reservas pendientes
@@ -65,4 +65,4 @@ ________________________________________________________________________________
 -  C13   Añadir favoritos y archivados
 -  A11   No permitir que usuario normal entre en panel admin simplemente escribiendo /admin
 -  A12   PREGUNTAR enviar a todos los de la ucm, o a todos de una facultad
--  A13   Nueva instalacion CON FOTO
+-  A13   Nueva instalacion CON FOTO y añadir tarjetas de instalacion

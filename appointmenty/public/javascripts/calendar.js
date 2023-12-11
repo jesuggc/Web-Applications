@@ -10,6 +10,54 @@ function getMiddle(array) {
     })[1]
 }
 
+$(function() {
+    $.ajax({
+        url: "/admin/getFacultades",
+        type: "GET",
+        success: function(response) {
+            response.forEach(ele => {
+                $("#facultad").append(`<option value = ${ele.id}>${ele.nombre}</option>`)
+            })
+        }
+    })
+});
+
+$("#facultad").on("change", function() {
+    let idFacultad = $(this).val()
+    let facultadTitle = $("#facultad option:selected").text()
+    let tipoTitle = $("#title").text().split("-")[1]
+    $("#title").empty()
+    $("#title").append(`${facultadTitle} - ${tipoTitle}`)
+
+    $.ajax({
+        url: "/admin/getInstalaciones",
+        type: "GET",
+        data: {idFacultad,idTipo},
+        success: function(response) {
+            $(".instalacion").addClass("d-none")
+            $(".instalacion").each(function(i,ele) {
+                if(i < response.length) {
+                    $(ele).attr("data-id",response[i].id) 
+                }
+            })
+            $(".nombreInstalacion").empty()
+            $(".nombreInstalacion").each(function(i,ele) {
+                if(i < response.length) {
+                    $(ele).append(response[i].nombre) 
+                }
+            })
+            $(".aforoInstalacion").empty()
+            $(".aforoInstalacion").each(function(i,ele) {
+                if(i < response.length) {
+                    $(ele).append(`Aforo máximo:${response[i].aforo}`) 
+                    $(this).closest(".instalacion").removeClass("d-none")
+                }
+            })
+            
+        }
+    })
+})
+
 $(".hora").on("click", function(e) {
     if(!bloqueado && !diaYaReservado) {
         let id = parseInt($(this).attr("id"))
@@ -78,6 +126,7 @@ $("#enviar").on("click", () => {
             }
         })
     }
+    $(".instalacion").removeClass("marcado")
     
 })
 

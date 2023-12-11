@@ -107,6 +107,20 @@ router.post("/newInstallation", (request, response) => {
   })
 })
 
+router.get("/getFacultades", (request, response) => {
+  midao.getFacultades((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+
+router.get("/getInstalaciones", (request, response) => {
+  midao.getInstallationsByOption(request.query.idTipo,request.query.idFacultad,(err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.json(res)
+  })
+})
+
 
 
 

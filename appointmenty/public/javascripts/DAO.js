@@ -559,7 +559,6 @@ class DAO {
                     if (err) callback(err, null)
                     else {
                         let tipo=res[0].nombre
-                        console.log("qpasa",tipo)
                         callback(null,tipo)
                     }
                 })

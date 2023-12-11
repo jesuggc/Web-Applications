@@ -10,11 +10,9 @@
             <div class="row">
               <div class="col">
                 <h4 class="my-3">Facultad:</h4>
-                <select id="facultad" name="facultad"  required>
-                  <%# facultades.forEach( ele=> { %>
-                    <option value="<%#=ele.id%>#<%#=ele.nombre%>"><%#=ele.nombre%></option>
-                    <%#})%>
-                  </select>
+                <select class="w-25" id="facultad" name="facultad"  required>
+                  <option hidden>Selecciona una opción</option>
+                </select>
               </div>
             </div>
           <% } %>
@@ -23,15 +21,19 @@
         </div>
         <div class="row scrollable-x">
           <div  class="d-flex justify-content-between ">
-          <% installations.forEach(function(ele, indice) { %>
-            <div class="instalacion col rounded-5 text-center me-2" style="background-color:white; height:200px;width:200px; max-width:200px;min-width:200px" data-id="<%=ele.id%>">
+          <%
+            const limite = 10; // Establece el límite deseado
+            for (let indice = 0; indice < limite; indice++) {
+              const ele = installations[indice] || {}; // Si no hay elemento en la posición, crea un objeto vacío
+          %>
+            <div class="instalacion col rounded-5 text-center me-2 <%= indice >= installations.length ? 'd-none' : '' %>" style="background-color:white; height:200px;width:200px; max-width:200px;min-width:200px" data-id="<%= ele.id || '' %>">
               <br>
               <br>
-              <h3><%=ele.nombre%></h1>
+              <h3 class="nombreInstalacion"><%= ele.nombre || '' %></h1>
               <br>
-              <h5>Aforo máximo: <%=ele.aforo%></h5>
-            </div> 
-          <% }) %>
+              <h5 class="aforoInstalacion">Aforo máximo: <%= ele.aforo || '' %></h5>
+            </div>
+          <% } %>
           </div>
         </div>
         <div id="optionsContainer" class="row my-2 d-none">
