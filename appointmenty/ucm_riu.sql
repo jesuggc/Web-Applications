@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2023 a las 01:00:16
+-- Tiempo de generación: 11-12-2023 a las 14:19:43
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,9 +38,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('Z9jkwasDgpamSc1nEvP96M8Qw0iayjbB', 1702339143, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":2,\"nombre\":\"a\",\"apellido1\":\"a\",\"apellido2\":\"a\",\"correo\":\"a\",\"facultad\":20,\"grado\":113,\"curso\":3,\"verificado\":1,\"admin\":0,\"foto\":null}}'),
+('22ZK5f3ZpT71wEPWymBxDH7lEF3CsixK', 1702387045, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":12,\"nombre\":\"Jesús\",\"apellido1\":\"González\",\"apellido2\":\"Carrillo\",\"correo\":\"jesugo11@ucm.es\",\"facultad\":20,\"grado\":113,\"curso\":4,\"verificado\":1,\"admin\":1,\"foto\":null}}'),
 ('kVs6be41cMAMHEs2gXhbsH7bbO-QNPgP', 1702336019, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":13,\"nombre\":\"Elena\",\"apellido1\":\"Caridad\",\"apellido2\":\"Zingoni\",\"correo\":\"elencari@ucm.es\",\"facultad\":20,\"grado\":113,\"curso\":4,\"verificado\":1,\"admin\":0,\"foto\":null}}'),
-('zlvx3RdHRhvpUpg_lEcTfc5vvT9BuPHH', 1702336712, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":13,\"nombre\":\"Elena\",\"apellido1\":\"Caridad\",\"apellido2\":\"Zingoni\",\"correo\":\"elencari@ucm.es\",\"facultad\":20,\"grado\":113,\"curso\":4,\"verificado\":1,\"admin\":0,\"foto\":null}}');
+('zlvx3RdHRhvpUpg_lEcTfc5vvT9BuPHH', 1702340004, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":13,\"nombre\":\"Elena\",\"apellido1\":\"Caridad\",\"apellido2\":\"Zingoni\",\"correo\":\"elencari@ucm.es\",\"facultad\":20,\"grado\":113,\"curso\":4,\"verificado\":1,\"admin\":0,\"foto\":null}}');
 
 -- --------------------------------------------------------
 
@@ -321,7 +321,15 @@ INSERT INTO `ucm_aw_riu_ins_instalaciones` (`id`, `nombre`, `idFacultad`, `aforo
 (6, 'Pecera2', 20, 6, 3, NULL),
 (7, 'Pecera3', 20, 6, 3, NULL),
 (8, 'Sala Navarro', 20, 100, 4, NULL),
-(9, 'Sala Navarro', 20, 100, 4, NULL);
+(9, 'Sala Navarro', 20, 100, 4, NULL),
+(10, 'Acelerador', 6, 29, 1, NULL),
+(11, 'Juzgado A', 12, 50, 1, NULL),
+(12, 'Juzgado B', 12, 25, 1, NULL),
+(13, 'Juzgado C', 12, 50, 1, NULL),
+(14, 'Juzgado D', 12, 25, 1, NULL),
+(15, 'Juzgado E', 12, 50, 1, NULL),
+(16, 'Juzgado F', 12, 25, 1, NULL),
+(17, 'Sala de debate', 12, 8, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -352,7 +360,16 @@ INSERT INTO `ucm_aw_riu_res_reservas` (`id`, `idUsuario`, `idInstalacion`, `fech
 (6, 13, 7, '2023-12-09 11:54:28', '2023-12-16', 14, 14, 0),
 (15, 13, 2, '2023-12-09 13:14:56', '2023-12-15', 16, 18, 0),
 (16, 18, 5, '2023-12-09 13:27:55', '2023-12-09', 13, 13, 0),
-(17, 18, 5, '2023-12-09 13:29:16', '2023-12-14', 17, 17, 0);
+(17, 18, 5, '2023-12-09 13:29:16', '2023-12-14', 17, 17, 0),
+(18, 2, 6, '2023-12-11 00:44:23', '2023-12-14', 13, 15, 0),
+(19, 2, 7, '2023-12-11 00:44:59', '2023-12-16', 15, 16, 0),
+(20, 2, 6, '2023-12-11 00:47:06', '2023-12-26', 15, 16, 0),
+(21, 2, 6, '2023-12-11 00:49:33', '2023-12-21', 17, 17, 0),
+(22, 12, 2, '2023-12-11 00:58:21', '2023-12-15', 13, 15, 0),
+(23, 12, 3, '2023-12-11 00:58:29', '2023-12-15', 14, 16, 0),
+(24, 12, 10, '2023-12-11 13:06:51', '2023-12-14', 13, 15, 0),
+(25, 12, 10, '2023-12-11 13:09:23', '2023-12-15', 10, 11, 0),
+(26, 12, 11, '2023-12-11 13:16:37', '2023-12-15', 15, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -509,13 +526,13 @@ ALTER TABLE `ucm_aw_riu_gra_grados`
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_ins_instalaciones`
 --
 ALTER TABLE `ucm_aw_riu_ins_instalaciones`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_res_reservas`
 --
 ALTER TABLE `ucm_aw_riu_res_reservas`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_tip_tipoinstalacion`
