@@ -1,147 +1,37 @@
 
-
-$(function() {
-    $("#inicio").trigger("click")
-});
-
-// INICIO
-$("#inicio").on("click", () => {
-    removeAllStrongs()
-    $("#inicio").addClass("negrita")
-})
-
-// SOLICITUDES
-$("#solicitudes").on("click", function(){
-    removeAllStrongs()
-    $("#solicitudes").addClass("negrita")
-    $.ajax({
-        url: "/admin/solicitudes",
-        method: "GET",
-        success: function(response){
-            $("#panel").empty()
-            if(!response) $("#panel").append(`<div class="row text-center"><h3>No hay usuarios registrados aún</h3></div>`)
-            else{
-                $("#panel").append(`<div id="listPanel" class="container"></div>`)
-                response.forEach(ele => {
-                    let anio = calcularCurso(ele.curso)
-                    $("#listPanel").append(`
-                        <div class="row">
-                            <div style="background-image: url('/images/prueba1.jpg');" class="prueba card my-2 col-2">
-                                
-                            </div>
-                            <div class="card my-2 col-7">
-                                <div class="card-header">
-                                    <div class="justify-content-between d-flex">
-                                        <h3>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</h3>
-                                        <h3>${ele.correo}</h3>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote">
-                                        <p> Estudiante de la Facultad de <strong>${ele.facultad}</strong> el <strong>Grado de ${ele.grado}</strong> y actualmente cursa el <strong>${anio} año</strong></p>
-                                        <!-- <footer class="blockquote-footer"><p>hora</p></footer> -->
-                                    </blockquote>
-                                </div>
-                            </div>
-                            <div class="card my-2 col-2">
-                                <h2>Solicitud:</h2>
-                                <button data-id=${ele.id} type="button" class="botonAceptar btn btn-success mb-1">Aceptar</button>
-                                <button data-id=${ele.id} type="button" class="botonEliminar btn btn-danger">Eliminar</button>
-                                <p style="color:red">Esta accion no es reversible</p> 
-                            </div>
-                        </div>
-                    `)
-                });
-            }
-        }
-    })
-})
-
-$("#panel").on("click", ".botonAceptar", function(){
+$(".botonAceptar").on("click", function(){
     let id = $(this).attr('data-id');
     $.ajax({
         url: "/admin/acceptRequest",
         method: "POST",
         data: {id}
     })
-    $(this).closest(".row").remove();   
+    $(this).closest(".container").remove();   
 
 });
 
-$("#panel").on("click", ".botonEliminar", function(){
+$(".botonEliminar").on("click", function(){
     let id = $(this).attr('data-id');
     $.ajax({
         url: "/admin/dropRequest",
         method: "POST",
         data: {id}
     })
-    $(this).closest(".row").remove();   
+    $(this).closest(".container").remove();   
 
 });
 
 // ROLES
-$("#roles").on("click", function(){
-    removeAllStrongs()
-    $("#roles").addClass("negrita")
-    $.ajax({
-        url: "/admin/changeRols",
-        method: "GET",
-        success: function(response){
-            $("#panel").empty()
-
-            if(!response) $("#panel").append(`<div class="row text-center"><h3>No hay usuarios verificados aún</h3></div>`)
-            else{
-                $("#panel").append(`<div id="listPanel" class="container"></div>`)
-                response.forEach(ele => {
-                    let anio = calcularCurso(ele.curso) 
-                    $("#listPanel").append(`
-                    <div class="row ">
-                        <div style="background-image: url('/images/prueba1.jpg');" class="prueba card my-2 col-2">
-                            
-                        </div>
-                        <div class="card my-2 col-7">
-                            <div class="card-header">
-                                <div class="justify-content-between d-flex">
-                                    <h3>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</h3>
-                                    <h3>${ele.correo}</h3>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <blockquote class="blockquote">
-                                    <p> Estudiante de la Facultad de <strong>${ele.facultad}</strong> el <strong>Grado de ${ele.grado}</strong> y actualmente cursa el <strong>${anio} año</strong></p>
-                                    <!-- <footer class="blockquote-footer"><p>hora</p></footer> -->
-                                </blockquote>
-                            </div>
-                        </div>
-                            <div class="card my-2 col-2">
-                                <h2>Solicitud:</h2>
-                                <div class="form-check form-switch">
-                                    <input data-id=${ele.id} class=" form-check-input" type="checkbox" id="adminSwitch"> <!-- O checked -->
-                                    <p>Convertir en admin</p>
-                                </div>
-                                <p style="color:red">Esta accion no es reversible</p> 
-                            </div>
-                        </div>
-                    `)
-                
-                });
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-        }
-    })
-})
-$("#panel").on("change", "#adminSwitch", function(){
+$(".adminSwitch").on("change", function(){
     let id= $(this).attr('data-id');
-
     $.ajax({
         url: "/admin/changeRols",
         method: "POST",
         data: {id}
     })
-    $(this).closest(".row").remove();
+    $(this).closest(".container").remove();
 })
+
 
 //ESTADISTICAS
 $("#estadisticas").on("click", ()=>{
@@ -204,30 +94,6 @@ $("#panel").on("change", "#facultadSelect", function(){
     })
 })
 
-$("#mensajes").on("click", () => {
-    removeAllStrongs()
-    $("#mensajes").addClass("negrita")
-})
-
-$("#instalacion").on("click", () => {
-    removeAllStrongs()
-    $("#instalacion").addClass("negrita")
-})
-
-$("#apariencia").on("click", () => {
-    removeAllStrongs()
-    $("#apariencia").addClass("negrita")
-})
-
-function removeAllStrongs(){
-    $("#inicio").removeClass("negrita")
-    $("#solicitudes").removeClass("negrita")
-    $("#roles").removeClass("negrita")
-    $("#estadisticas").removeClass("negrita")
-    $("#mensajes").removeClass("negrita")
-    $("#instalacion").removeClass("negrita")
-    $("#apariencia").removeClass("negrita")
-}
 
 function calcularCurso(curso) {
     if(curso === 1) return "primer"

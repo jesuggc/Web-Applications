@@ -1,18 +1,20 @@
 <header class="sticky-top pistachio" >
   <div class="d-flex justify-content-between align-items-center">
-    <a href="/"><img class="h-auto" src="../images/logo.png"></a>
+    <div class="align-items-start">
+      <a href="/"><img class="h-auto " style="max-height: 10vh;" src="/images/logo.png"></a>
+
+    </div>
     <% if(!locals.user) { %>
       <div>
         <a href="/users/login"><button class="btn btn-primary me-3">Iniciar sesión</button></a>
       </div>
     <% } else { %>  
       <div class="dropdown me-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <button style="max-height: 10vh;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           <%if(!locals.user.foto) { %>
-            <img class="rounded-circle borderProfile" src="/images/noPicture.jpg">
+            <img style="max-height: 8vh;" class="rounded-circle borderProfile" src="/images/noPicture.jpg">
           <%} else {%>  
-            <img class="rounded-circle borderProfile" src="/users/profilePhoto/<%=user.id%>">
-
+            <img style="max-height: 8vh;" class="rounded-circle borderProfile" src="/users/profilePhoto/<%=user.id%>">
           <% }%> 
         </button>
         <ul class="dropdown-menu text-center">

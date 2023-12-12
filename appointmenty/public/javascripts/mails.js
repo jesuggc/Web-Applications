@@ -83,17 +83,22 @@ $("#favorito").on("click", () => {
     
 })
 $("#archivar").on("click", function() {
-    $
     $(".rowMail").each(function(index, elemento) {
         if($(elemento).hasClass("abierto")) {
             $(elemento).addClass("archivadoT")
             $(elemento).addClass("archivado")
+            
             setTimeout(function() {
                 $(elemento).addClass("d-none")
-                $("#mostrar").addClass("d-none")
+                
                 $(elemento).removeClass("archivadoT")
                 $(elemento).removeClass("abierto")
-              }, 1000)
+            }, 1000)
+            setTimeout(function() {
+                $("#mostrar").addClass("d-none")
+                $("#listar").addClass("rounded-4")
+            }, 1500)
+              
         }
     });
 })
@@ -106,8 +111,11 @@ $("#eliminar").on("click", () => {
             $(elemento).addClass("eliminado")
             setTimeout(function() {
                 $(elemento).addClass("d-none")
+            }, 1000)
+            setTimeout(function() {
                 $("#mostrar").addClass("d-none")
-              }, 1000)
+                $("#listar").addClass("rounded-4")
+            }, 1500)
         }
     });
     let action = "delete"
@@ -152,7 +160,7 @@ $("#enviarDestinatario").on("blur", () => {
             if(response.existe === true) $("#sendMail").attr("disabled", false);
             else {
                 $("#sendMail").attr("disabled", true);
-                $("#enviarDestinatario").append(`<p id="errorMail" style="font-size:12px; color:red">Correo incorrecto</p>`)
+                $("#enviarDestinatario").append(`<p id="errorMail" class="errorText">Correo incorrecto</p>`)
             }
         }
     })

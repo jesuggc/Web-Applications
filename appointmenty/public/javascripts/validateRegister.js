@@ -15,7 +15,7 @@ $("#confirmPassword").on("keyup", () => {
     let confirmPassword = $("#confirmPassword").val()
     
     passwordCheckBool = password === confirmPassword
-    if(password !== confirmPassword) $("#confirmContainer").append(`<p style="color:red" id="errorConfirm">Las contraseñas deben coincidir</p>`)
+    if(password !== confirmPassword) $("#confirmContainer").append(`<p class="red" id="errorConfirm">Las contraseñas deben coincidir</p>`)
     else $("#errorConfirm").remove()
         
 })
@@ -35,16 +35,16 @@ $("#password").on("keyup", () => {
     $("#specialCheck").remove()
     $("#numberCheck").remove()
 
-    if(!capitalCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="capitalCheck">Debe contener una mayuscula</li>`)
+    if(!capitalCheck.test($("#password").val()) === true) $("#passContainer").append(`<li class="red" id="capitalCheck">Debe contener una mayuscula</li>`)
     else $("#capitalCheck").remove()
 
-    if(!sizeCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="sizeCheck">Debe contener 8 caracteres</li>`)
+    if(!sizeCheck.test($("#password").val()) === true) $("#passContainer").append(`<li class="red" id="sizeCheck">Debe contener 8 caracteres</li>`)
     else $("#sizeCheck").remove()
 
-    if(!specialCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="specialCheck">Debe contener 1 caracter especial</li>`)
+    if(!specialCheck.test($("#password").val()) === true) $("#passContainer").append(`<li class="red" id="specialCheck">Debe contener 1 caracter especial</li>`)
     else $("#specialCheck").remove()
 
-    if(!numberCheck.test($("#password").val()) === true) $("#passContainer").append(`<li style="color:red" id="numberCheck">Debe contener 1 número</li>`)
+    if(!numberCheck.test($("#password").val()) === true) $("#passContainer").append(`<li class="red" id="numberCheck">Debe contener 1 número</li>`)
     else $("#numberCheck").remove()
 
     passwordBool = allCheck.test($("#password").val())
@@ -56,7 +56,7 @@ $("#email").on("keyup", () => {
     $("#wrongMail").remove()
     emailBool = emailCheck.test($("#email").val())
 
-    if(emailCheck.test($("#email").val()) === false) $("#emailContainer").append(`<p style="color:red" id="errorEmail">Solo correo UCM</p>`)
+    if(emailCheck.test($("#email").val()) === false) $("#emailContainer").append(`<p class="red" id="errorEmail">Solo correo UCM</p>`)
     else $("#errorEmail").remove()
 })
 
@@ -67,10 +67,10 @@ $("#name").on("keyup",()=>{
 
     nombreBool = nameLikeCheck.test($("#name").val()) && nameLikeSizeCheck.test($("#name").val()) 
    
-    if(nameLikeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterCheck">Solo puede contener letras</p>`)
+    if(nameLikeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p class="red" id="letterCheck">Solo puede contener letras</p>`)
     else $("#letterCheck").remove()
 
-    if(nameLikeSizeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p style="color:red" id="letterSizeCheck">Nombre demasiado corto</p>`)
+    if(nameLikeSizeCheck.test($("#name").val()) === false ) $("#nameContainer").append(`<p class="red" id="letterSizeCheck">Nombre demasiado corto</p>`)
     else $("#letterSizeCheck").remove()
 
 })
@@ -81,10 +81,10 @@ $("#surname1").on("keyup",()=>{
 
     surname1 = nameLikeCheck.test($("#surname1").val()) && nameLikeSizeCheck.test($("#surname1").val())
 
-    if(nameLikeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1Check">Solo puede contener letras</p>`)
+    if(nameLikeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p class="red" id="surname1Check">Solo puede contener letras</p>`)
     else $("#surname1Check").remove()
 
-    if(nameLikeSizeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p style="color:red" id="surname1SizeCheck">Apellido demasiado corto</p>`)
+    if(nameLikeSizeCheck.test($("#surname1").val()) === false ) $("#surname1Container").append(`<p class="red" id="surname1SizeCheck">Apellido demasiado corto</p>`)
     else $("#surname1SizeCheck").remove()
 })
 $("#surname2").on("change",()=>{
@@ -94,10 +94,10 @@ $("#surname2").on("change",()=>{
 
     surname2 = nameLikeCheck.test($("#surname2").val()) && nameLikeSizeCheck.test($("#surname2").val())
 
-    if(nameLikeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2Check">Solo puede contener letras</p>`)
+    if(nameLikeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p class="red" id="surname2Check">Solo puede contener letras</p>`)
     else $("#surname2Check").remove()
 
-    if(nameLikeSizeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p style="color:red" id="surname2SizeCheck">Apellido demasiado corto</p>`)
+    if(nameLikeSizeCheck.test($("#surname2").val()) === false ) $("#surname2Container").append(`<p class="red" id="surname2SizeCheck">Apellido demasiado corto</p>`)
     else $("#surname2SizeCheck").remove()
 })
 
@@ -131,7 +131,7 @@ $("#register").on("click", () => {
         processData: false,
         contentType: false,
         success: function(response) {
-            if(response.existe === true) $("#emailContainer").append(`<p id="wrongMail" style="color:red">Correo ya existente</p>`)
+            if(response.existe === true) $("#emailContainer").append(`<p id="wrongMail" class="red">Correo ya existente</p>`)
             else {  
                 
                 $.ajax({

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body>
+    <div class="fakeBody pistachio"> 
+      <%-include('partials/header') %>
+      <div class="row ">
+        <%-include('partials/adminNavbar') %>
+        <div id="panel" class="alignJustify mb-3">
+        <div class="scrollable-admin">
+        <% petitions.forEach(ele=> { %>
+            <div class="container whitesmoke rounded-4 my-2">
+                <div class="row">
+                    <div class="col-2 border-end">
+                        <% if (!ele.foto){ %>
+                        <img style="width: 12em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
+                        <% } else{ %>
+                        <img style="width: 12em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                        <% } %>
+                    </div>
+                    <div class="col-8 border-end">
+                        <div class="row">
+                            <div class="col">
+                                <h3><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></h3>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <h3><%=ele.correo%></h3>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h5> Estudiante de la Facultad de <strong><%=ele.facultad%></strong> el <strong>Grado de <%=ele.grado%></strong> y actualmente cursa el <strong><%=ele.anio%> año</strong></p>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center" >
+                        <div class="row">
+                            <button data-id="<%=ele.id%>" type="button" class="botonAceptar btn btn-success mb-1">Aceptar</button>
+                            <button data-id="<%=ele.id%>" type="button" class="botonEliminar btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%})%>
+        </div>
+        <!-- <% petitions.forEach(ele=>{ %>
+        <div class="row mb-4 w-75 ">
+            <div  class="prueba card my-2 col-2">
+                <% if (!ele.foto){ %>
+                <img class="loginImage" src="/images/noPicture.jpg">
+                <% } else{ %>
+                <img class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                <% } %>
+            </div>
+            <div class="card my-2 col-7">
+                <div class="card-header">
+                    <div class="justify-content-between d-flex">
+                        <h3><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></h3>
+                        <h3><%=ele.correo%></h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote">
+                        <p> Estudiante de la Facultad de <strong><%=ele.facultad%></strong> el <strong>Grado de <%=ele.grado%></strong> y actualmente cursa el <strong><%=ele.anio%> año</strong></p>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card my-2 col-2">
+                <h2>Solicitud:</h2>
+                <button data-id="<%=ele.id%>" type="button" class="botonAceptar btn btn-success mb-1">Aceptar</button>
+                <button data-id="<%=ele.id%>" type="button" class="botonEliminar btn btn-danger">Eliminar</button>
+                <p class="red">Esta accion no es reversible</p> 
+            </div>
+        </div>
+        <% }) %> -->
+        </div>
+      </div>   
+
+      <button hidden id="modalLaunch" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+      
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm  modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
+            </div>
+            <div class="modal-body">
+              <p>La cuenta ha sido creada con éxito</p>
+            </div>
+            <div class="modal-footer">
+              <a href="/"><button type="button" class="btn btn-primary">Entendido</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/mydriver.js"></script>
+    <script src="/javascripts/admin.js"></script>
+    <%-include('partials/footer') %>
+  </body>
+</html>

@@ -3,114 +3,117 @@
 <%-include('partials/head') %>
 
   <body>
-    <%-include('partials/header') %>
-    <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-2 scrollable">
-      <h1>Registro</h1>
-      <form id="myForm" enctype="multipart/form-data">
-        <!--NOMBRE Y APELLIDOS-->
-        <div class="row">
-          <div class="col" id="nameContainer">
-            <h4 class="my-3">Nombre</h4>
-            <input  class="w-100" id="name" type="text" name="nombre" placeholder="Nombre" required>
-          </div>
-          <div class="col" id="surname1Container">
-            <h4  class="my-3">Primer apellido</h4>
-            <input class="w-100" id="surname1" type="text" name="apellido1" placeholder="Apellido 1" required>
-          </div>
-          <div class="col" id="surname2Container" >
-            <h4 class="my-3">Segundo apellido</h4>
-            <input class="w-100" id="surname2" type="text" name="apellido2" placeholder="Apellido 2" required>
-          </div>
-        </div>
-        <!--CORREO E IMAGEN-->
-        <div class="row">
-          <div class="col" id="emailContainer">
-            <h4 class="my-3">Correo</h4>
-            <input id="email" class="w-100" type="text" name="email" placeholder="example@ucm.es" required>
-          </div>
-          <div class="col">
-            <h4 class="my-3">Imagen de perfil</h4>
-            <input id="foto" type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
-          </div>
-        </div>
-        <!--CONTRASEÑA Y CONFIRMAR-->
-        <div class="row">
-          <div class="col">
-            <h4 class="my-3">Contraseña</h4>
-            <div class="input-group" >
-              <input class="w-75" type="password" name="contrasena" id="password" placeholder="Contraseña" required>
-              <button type="button" class="passButton w-25" id="togglePassword">Mostrar</button>
+    <div class="fakeBody">
+      <%-include('partials/header') %>
+      <div class=" loginHeight d-flex align-items-center">
+        <div class="col-lg-6 innerShadow mx-auto rounded-4 p-4 my-2 scrollable">
+          <h1>Registro</h1>
+          <form id="myForm" enctype="multipart/form-data">
+            <!--NOMBRE Y APELLIDOS-->
+            <div class="row">
+              <div class="col" id="nameContainer">
+                <h4 class="my-3">Nombre</h4>
+                <input  class="w-100" id="name" type="text" name="nombre" placeholder="Nombre" required>
+              </div>
+              <div class="col" id="surname1Container">
+                <h4  class="my-3">Primer apellido</h4>
+                <input class="w-100" id="surname1" type="text" name="apellido1" placeholder="Apellido 1" required>
+              </div>
+              <div class="col" id="surname2Container" >
+                <h4 class="my-3">Segundo apellido</h4>
+                <input class="w-100" id="surname2" type="text" name="apellido2" placeholder="Apellido 2" required>
+              </div>
             </div>
-            <ul id="passContainer"></ul>
-          </div>
-          <div id="confirmContainer" class="col">
-            <h4 class="my-3">Confirma la contraseña</h4>
-            <div  class="input-group">
-              <input class="w-75" type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña" required>
-              <button type="button" class="passButton w-25" id="toggleConfirmPassword">Mostrar</button>
+            <!--CORREO E IMAGEN-->
+            <div class="row">
+              <div class="col" id="emailContainer">
+                <h4 class="my-3">Correo</h4>
+                <input id="email" class="w-100" type="text" name="email" placeholder="example@ucm.es" required>
+              </div>
+              <div class="col">
+                <h4 class="my-3">Imagen de perfil</h4>
+                <input id="foto" type="file" name="imagen" accept="image/png, image/jpg, image/jpeg">
+              </div>
             </div>
-          </div>
-        </div>
-          
-        <!--FACULTAD-->
-        <div class="row">
-          <div class="col">
-
-            <h4 class="my-3">Facultad</h4>
-            <select id="facultad" name="Curso" class="w-100" required>
-              <option hidden selected>Selecciona una opción</option>
-              <% resultado.forEach( ele=> { %>
-                <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
-                <%})%>
-              </select>
+            <!--CONTRASEÑA Y CONFIRMAR-->
+            <div class="row">
+              <div class="col">
+                <h4 class="my-3">Contraseña</h4>
+                <div class="input-group" >
+                  <input class="w-75" type="password" name="contrasena" id="password" placeholder="Contraseña" required>
+                  <button type="button" class="passButton w-25" id="togglePassword">Mostrar</button>
+                </div>
+                <ul id="passContainer"></ul>
+              </div>
+              <div id="confirmContainer" class="col">
+                <h4 class="my-3">Confirma la contraseña</h4>
+                <div  class="input-group">
+                  <input class="w-75" type="password" name="contrasenaConf" id="confirmPassword" placeholder="Contraseña" required>
+                  <button type="button" class="passButton w-25" id="toggleConfirmPassword">Mostrar</button>
+                </div>
+              </div>
             </div>
-        </div>
-            
-        <div class="row">
-          <!--GRADO-->
-          <div class="col d-none w-100" id="gradoDiv" >
-            <h4 class="my-3">Grado</h4>
-            <select id="grado" name="Grado" class="w-100" required>
-              <option hidden selected>Selecciona una opción</option>
-            </select>
-          </div>
-          <!-- CURSO -->
-          <div class="col d-none w-100" id="cursoDiv" >
-            <h4 class="my-3">Curso</h4>
-            <select id="curso" name="Curso" class="w-100" required>
-              <option hidden selected>Selecciona una opción</option>
-            </select>
-          </div>
+              
+            <!--FACULTAD-->
+            <div class="row">
+              <div class="col">
+
+                <h4 class="my-3">Facultad</h4>
+                <select id="facultad" name="Curso" class="w-100" required>
+                  <option hidden selected>Selecciona una opción</option>
+                  <% resultado.forEach( ele=> { %>
+                    <option value="<%=ele.id%>#<%=ele.nombre%>"><%=ele.nombre%></option>
+                    <%})%>
+                  </select>
+                </div>
+            </div>
+                
+            <div class="row">
+              <!--GRADO-->
+              <div class="col d-none w-100" id="gradoDiv" >
+                <h4 class="my-3">Grado</h4>
+                <select id="grado" name="Grado" class="w-100" required>
+                  <option hidden selected>Selecciona una opción</option>
+                </select>
+              </div>
+              <!-- CURSO -->
+              <div class="col d-none w-100" id="cursoDiv" >
+                <h4 class="my-3">Curso</h4>
+                <select id="curso" name="Curso" class="w-100" required>
+                  <option hidden selected>Selecciona una opción</option>
+                </select>
+              </div>
+            </div>
+
+            <!--BOTON-->
+            <div class="row d-flex my-4">
+              <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="button" value="Registrarme" disabled>
+            </div>
+          </form>
         </div>
 
-        <!--BOTON-->
-        <div class="row d-flex my-4">
-          <input id="register" class="row w-50 bg-primary  mx-auto d-block" type="button" value="Registrarme" disabled>
-        </div>
-      </form>
-    </div>
-
-    <button hidden id="modalLaunch" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm  modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header ">
-            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
-          </div>
-          <div class="modal-body">
-            <p>La cuenta ha sido creada con éxito</p>
-          </div>
-          <div class="modal-footer">
-            <a href="/"><button type="button" class="btn btn-primary">Entendido</button></a>
+        <button hidden id="modalLaunch" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm  modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header ">
+                <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
+              </div>
+              <div class="modal-body">
+                <p>La cuenta ha sido creada con éxito</p>
+              </div>
+              <div class="modal-footer">
+                <a href="/"><button type="button" class="btn btn-primary">Entendido</button></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
     <script src="/javascripts/showPswd.js"></script>
     <script src="/javascripts/validateRegister.js"></script>
     <script src="/javascripts/getGroups.js"></script>
-    <%-include('partials/footer') %>
   </body>
 
 </html>

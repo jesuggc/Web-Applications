@@ -2,38 +2,23 @@
 <html>
   <%-include('partials/head') %>
   <body >
-    <%-include('partials/header') %>
-    <div class="row pistachio">
-      <%-include('partials/adminNavbar') %>
-        <div id="panel" class="scrollable alignJustify">
-            <div class="text-center">
-                <h1>Panel de administrador</h1>
-                <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
-                <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
-                <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
-                <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
-            </div>
-        </div>
+    <div class="fakeBody pistachio"> 
+      <%-include('partials/header') %>
+      <div class="row pistachio ">
+        <%-include('partials/adminNavbar') %>
+          <div id="panel" class=" alignJustify mb-3">
+              <div class=" text-center">
+                  <h1>Panel de administrador</h1>
+                  <p>Como administrador tendrás que verificar las <strong>solicitudes</strong> de registro</p>
+                  <p>Dar privilegios de administrador a otros usuarios asignandoles el <strong>rol</strong></p>
+                  <p>Configura la <strong>apariencia</strong> de la página de reservas de la UCM, consulta <strong>estadísticas</strong> de facultades o usuarios</p>
+                  <p>Envia <strong>mensajes</strong> sobre las reservas a los usuarios, o añade nuevas opciones de <strong>instalaciones</strong></p>
+              </div>
+          </div>
+      </div>   
     </div>   
 
-    <button hidden id="modalLaunch" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm  modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header ">
-            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
-          </div>
-          <div class="modal-body">
-            <p>La cuenta ha sido creada con éxito</p>
-          </div>
-          <div class="modal-footer">
-            <a href="/"><button type="button" class="btn btn-primary">Entendido</button></a>
-          </div>
-        </div>
-      </div>
-    </div>
     <script src="/javascripts/mydriver.js"></script>
-    <script src="/javascripts/admin.js"></script>
     <%-include('partials/footer') %>
   </body>
 </html>

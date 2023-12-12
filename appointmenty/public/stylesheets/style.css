@@ -1,12 +1,9 @@
 /* ----------ELEMENTOS GENERALES---------- */
 
 body,html {
-  max-width: 100%;
   overflow-x: hidden;
-  /* overflow-y: hidden; */
   padding:0;
   margin:0;
-  height: 100vh;
 }
 
 select{
@@ -16,14 +13,27 @@ select{
   width: 75%;
 }
 
-
 header {
+  height: 10vh;
   max-height: 10vh;
   position: sticky;
   z-index: 999;
   top: -10px;
   box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
 }
+
+header img{
+  max-height: 10vh;
+}
+
+input {
+  border-radius: 12px;
+  padding: 8px; 
+  font-size: 20px;
+  border-width: 1px;
+  border-color: black;
+}
+
 a {
   color: #00B7FF;
 }
@@ -65,19 +75,32 @@ footer a{
 
 /* ----------CLASES---------- */
 
+.shipGray { background-color: #8A8D91; }
+
+.claret { background-color: #990032; }
+
+.apricot { background-color: #FFCAB1; }
+
+.dartmouth { background-color: #0B5D1E; }
+
+.smoky { background-color: #231C07; }
+
+.pistachio { background-color: #BFB48F; }
+
+.whitesmoke { background-color: whitesmoke; } 
+
+.red { color: red; } 
+
+.errorText {
+  font-size:12px;
+  color:red
+}
+
 .negrita{
   font-weight: bold;
 }
 .leido{
   background-color: #e8e8e8;
-}
-
-input {
-  border-radius: 12px;
-  padding: 8px; 
-  font-size: 20px;
-  border-width: 1px;
-  border-color: black;
 }
 
 .divImage {
@@ -109,33 +132,29 @@ input {
   border-radius: 0px 12px 12px 0px;
 }
 
-.shipGray {
-  background-color: #8A8D91;
-}
-
-.claret {
-  background-color: #990032;
-}
-
-.apricot {
-  background-color: #FFCAB1;
-}
-
-.dartmouth {
-  background-color: #0B5D1E;
-}
-
-.smoky {
-  background-color: #231C07;
-}
-
-.pistachio {
-  background-color: #BFB48F;
-}
-
 .scrollable {
   max-height: 90vh;
   overflow-y:scroll;
+}
+
+.scrollable-correo {
+  max-height: 81vh;
+  overflow-y:scroll;
+}
+
+.scrollable-correo::-webkit-scrollbar {
+  display: none;
+}
+.scrollable-admin {
+  max-height: 77vh;
+  overflow-y:scroll;
+}
+
+.scrollable-admin::-webkit-scrollbar {
+  display: none;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .scrollable::-webkit-scrollbar {
@@ -213,7 +232,7 @@ input {
   position: fixed;
   bottom: 0;
   right:0;
-  margin-bottom: 3.5em;
+  margin-bottom: 1.5em;
   margin-right: 2em;
   max-width: 6em;
   cursor:pointer;
@@ -255,20 +274,12 @@ input {
   margin-top: -30px;
 }
 
-.installationsCard {
+.installationCard {
   background-color:white;
   height:200px;
   width:200px;
   max-width:200px;
   min-width:200px;
-}
-
-.whitesmoke {
-  background-color: whitesmoke;
-} 
-
-.wasabipowder {
-  background-color: #BFB48F;
 }
 
 .mailImage {
@@ -291,6 +302,23 @@ input {
   overflow-y: auto;
 }
 
+.fakeBody {
+  height:100vh
+}
+
+.loginImage {
+  object-fit: contain;
+}
+
+.loginHeight {
+  height:90%;
+}
+
+.navAdminHeight {
+  height: 10vh;
+  max-height: 10vh;
+}
+/* -------------ID------------- */
 #cuerpo {
   text-align: justify;
   font-family: Arial, Helvetica, sans-serif;

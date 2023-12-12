@@ -73,11 +73,11 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 1 AND admin=0"
+                let stringQuery = "SELECT u.id, u.nombre, u.apellido1, u.apellido2, u.correo, u.admin, u.curso, u.foto, f.nombre as nombreFacultad, g.nombre as nombreGrado FROM ucm_aw_riu_usu_usuarios as u JOIN ucm_aw_riu_fac_facultades as f ON u.facultad = f.id JOIN ucm_aw_riu_gra_grados AS g ON u.grado = g.id WHERE verificado = 1 AND admin=0"
                 connection.query(stringQuery, (err, resultado) => {
                     connection.release();
                     if (err) callback(err, null)
-                    else if (resultado.length === 0) callback(null,null)
+                    // else if (resultado.length === 0) callback(null,null)
                     else {
                         callback(null, resultado.map(ele => ({  
                             id:ele.id,
@@ -88,7 +88,8 @@ class DAO {
                             admin:ele.admin,
                             facultad:ele.nombreFacultad,
                             grado:ele.nombreGrado, 
-                            curso:ele.curso
+                            curso:ele.curso,
+                            foto: ele.foto
                         })))
                         
                     }

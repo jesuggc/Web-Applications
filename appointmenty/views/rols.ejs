@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body class="bg-danger" >
+    <div class="fakeBody pistachio"> 
+      <%-include('partials/header') %>
+      <div class="row ">
+        <%-include('partials/adminNavbar') %>
+        <div id="panel" class="alignJustify mb-3">
+        <div class="scrollable-admin">
+        <% verifiedUsers.forEach(ele=> { %>
+            <div class="container whitesmoke rounded-4 my-2">
+                <div class="row">
+                    <div class="col-2 border-end">
+                        <% if (!ele.foto){ %>
+                        <img style="width: 12em;mix-blend-mode: darken;"class="loginImage" src="/images/noPicture.jpg">
+                        <% } else{ %>
+                        <img style="width: 12em; mix-blend-mode:darken;"class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                        <% } %>
+                    </div>
+                    <div class="col-8 border-end">
+                        <div class="row">
+                            <div class="col">
+                                <h3><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></h3>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <h3><%=ele.correo%></h3>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h5> Estudiante de la Facultad de <strong><%=ele.facultad%></strong> el <strong>Grado de <%=ele.grado%></strong> y actualmente cursa el <strong><%=ele.anio%> año</strong></p>
+                        </div>
+                    </div>
+                    <div class=" my-2 col-2">
+                        <h2>Solicitud:</h2>
+                        <div class="form-check form-switch">
+                            <input data-id="<%=ele.id%>" class=" form-check-input adminSwitch" type="checkbox" > <!-- O checked -->
+                            <p>Convertir en admin</p>
+                        </div>
+                        <p class="red">Esta accion no es reversible</p> 
+                    </div>
+                </div>
+            </div>
+        <%})%>
+        </div>
+        
+        </div>
+      </div>   
+
+      <button hidden id="modalLaunch" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+      
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm  modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Registro</h1>
+            </div>
+            <div class="modal-body">
+              <p>La cuenta ha sido creada con éxito</p>
+            </div>
+            <div class="modal-footer">
+              <a href="/"><button type="button" class="btn btn-primary">Entendido</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/mydriver.js"></script>
+    <script src="/javascripts/admin.js"></script>
+    <%-include('partials/footer') %>
+  </body>
+</html>

@@ -57,6 +57,31 @@ router.post("/dropRequest", (request,response) => {//Elimina el registro de un u
   })
 })
 
+router.get("/petitions", (request,response) => {
+  midao.getRequests((err, res) => {
+    if (err) console.log("Error: ", err)
+    else {
+      res.forEach(ele => {
+        if(ele.curso === 1) ele.anio = "primer"
+        else if(ele.curso === 2) ele.anio = "segundo"
+        else if(ele.curso === 3) ele.anio = "tercer"
+        else if(ele.curso === 4) ele.anio = "cuarto"
+        else if(ele.curso === 5) ele.anio = "quinto"
+        else ele.anio = "sexto"
+      })
+
+      response.render("petitions", {petitions:res})
+    }
+  })
+})
+
+router.get("/rols", (request, response) => {//Llama a vista de usuarios verificados para convertirlos en admin
+  midao.getVerifiedUsers((err, res) => {
+    if (err) console.log("Error: ", err)
+    else response.render("rols",{verifiedUsers:res})
+  })
+})
+
 //STATS
 router.get("/stats", (request, response) => {//Llama a vista de estadisticas (AJAX), presentando un select con todas las facultades
   midao.getFacultades((err, res) => {
