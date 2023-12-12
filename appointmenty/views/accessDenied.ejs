@@ -4,14 +4,10 @@
   <body>
     <div class="fakeBody pistachio">
       <%-include('partials/header')%>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center h-75">
           <div class="row pistachio text-center justify-content-center w-100">
-            <h1>Algo salio mal...</h1>
-            <p>Parece que ha habido algun problema, pero no te preocupes! Nuestros desarrolladores están trabajando para arreglarlo.</p>
-
-            <p><%= message %></h1>
-            <pre><%= error.stack %></pre>
-            <h5><%= error.status %></h2>
+            <h1>Acceso denegado</h1>
+            <p>No tienes permisos para acceder a esta página.</p>
           </div>   
       </div>
     </div>
@@ -19,4 +15,3 @@
     <script src="/javascripts/mydriver.js"></script>
   </body>
 </html>
-

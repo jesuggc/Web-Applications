@@ -4,16 +4,25 @@ const multer=require('multer');
 const multerFactory= multer({storage: multer.memoryStorage()})
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
-router.use((request, response, next) => {
-  response.locals.user = request.session.user;
+
+const passLocals = (req, res, next) => {
+  res.locals.user = req.session.user;
   next();
-});
+};
 
-router.get('/', function(req, res, next) {
-  console.log("Pagina raiz")
-});
+const isLoggedIn = (req, res, next) => {
+  if (res.locals.user) return next();
+  res.redirect('/users/login');
+};
 
-router.get("/profilePhoto/:id", (request,response) => {
+const alreadyLoggedIn = (req, res, next) => {
+  if (!res.locals.user) return next();
+  res.redirect('/');
+};
+
+router.use(passLocals)
+
+router.get("/profilePhoto/:id", isLoggedIn, (request,response) => {
   let id = Number(request.params.id)
   midao.getProfilePhoto(id,(err,foto) => {
     if(err) console.log(err)
@@ -21,14 +30,14 @@ router.get("/profilePhoto/:id", (request,response) => {
   })
 })
 
-router.get("/logout", (request, response) => { //Redirige a pagina principal, cerrando sesion en locals y session
+router.get("/logout", isLoggedIn, (request, response) => { //Redirige a pagina principal, cerrando sesion en locals y session
   request.session.destroy()
   response.locals.user = request.session
   response.status(200)
   response.redirect('/');
 })
 
-router.get("/login", (request, response) => {//Renderiza pagina de login
+router.get("/login", alreadyLoggedIn, (request, response) => {//Renderiza pagina de login
   response.status(200)
   response.render('login');
 })
@@ -50,7 +59,7 @@ router.post("/login", function (request, response) {//Inicia sesion
   })
 });
 
-router.get("/register", (request, response) => {//Renderiza pagina de register
+router.get("/register", alreadyLoggedIn ,(request, response) => {//Renderiza pagina de register
   response.status(200)
   midao.getFacultades((err,resultado)=> {
     if(err) console.log("Error: ", err)
@@ -58,7 +67,7 @@ router.get("/register", (request, response) => {//Renderiza pagina de register
   })
 })
 
-router.post("/register",multerFactory.single('imagen'), (request, response) => { //Crea el nuevo usuario tras submit en vista de register
+router.post("/register", multerFactory.single('imagen'), (request, response) => { //Crea el nuevo usuario tras submit en vista de register
   let user = {
     nombre: request.body.nombre,
     apellido1: request.body.apellido1,
@@ -82,14 +91,14 @@ router.post("/register",multerFactory.single('imagen'), (request, response) => {
   
 });
 
-router.get("/checkEmail", function (request, response) {//En validar login y register
+router.get("/checkEmail", isLoggedIn, function (request, response) {//En validar login y register
   midao.checkEmail(request.query.email, (err, resultado) => {
       let existe = (err) ? false : true
       response.json({existe})
   })
 });
 
-router.get("/correo", (request, response) => { //Renderiza pagina de correo
+router.get("/correo", isLoggedIn, (request, response) => { //Renderiza pagina de correo
   response.status(200)
   
   midao.getEmails(response.locals.user.id, (err,emails) => {
@@ -104,7 +113,7 @@ router.get("/correo", (request, response) => { //Renderiza pagina de correo
   })
 })
 
-router.get("/emailContent", (request, response) => { //Renderiza pagina de correo
+router.get("/emailContent", isLoggedIn, (request, response) => { //Renderiza pagina de correo
   response.status(200)
   midao.getEmail(request.query.id ,(err,email) => {
     if(err) console.log(err)
@@ -116,7 +125,7 @@ router.get("/emailContent", (request, response) => { //Renderiza pagina de corre
   })
 })
 
-router.post("/updateEmail", (request,response) => {
+router.post("/updateEmail", isLoggedIn, (request,response) => {
   let id = request.body.id
   let callback = (err,res) => {
     if(err) console.log(err)
@@ -133,7 +142,7 @@ router.post("/updateEmail", (request,response) => {
   }
 })
 
-router.post("/sendMessage", (request,response) => {
+router.post("/sendMessage", isLoggedIn, (request,response) => {
   response.status(200)
   let id = response.locals.user.id
   midao.getIdByEmail(request.body.email, (err,idDestino) => {

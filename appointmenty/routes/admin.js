@@ -3,18 +3,24 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 
-const isAdmin = (req, res, next) => {
-  // ESTO VA A PETAR SI LO INTENTAS SIN LA SESION INICIADA POR LO QUE HABRIA QUE HACER TAMBIEN UN
-  // AMILOGGED ADEMAS DE ESTE MIDDLEWARE
-  if (res.locals.user.admin === 1) {
-    return next();
-  }
-
-  //AQUI SE RENDERIZARIA UNA PAGINA DE ACCESO DENEGADO O ALGO ASI
-  res.status(403).send('Acceso no autorizado');
+const isLoggedIn = (req, res, next) => {
+  if (res.locals.user) return next();
+  res.redirect('/users/login');
 };
 
+const isAdmin = (req, res, next) => {
+  if (res.locals.user.admin === 1) return next();
+  res.render("accessDenied");
+};
+
+const passLocals = (req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+};
+
+router.use(isLoggedIn)
 router.use(isAdmin)
+router.use(passLocals)
 
 router.get("/", (request, response) => { //Renderiza pagina de admin
     response.status(200)

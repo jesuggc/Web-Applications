@@ -4,13 +4,17 @@ const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306");
 
 const isLoggedIn = (req, res, next) => {
-  if (res.locals.user) {
-    return next();
-  }
+  if (res.locals.user) return next();
   res.redirect('/users/login');
 };
 
+const passLocals = (req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+};
+
 router.use(isLoggedIn)
+router.use(passLocals)
 
 router.get('/:id', isLoggedIn, function(req, response, next) {
   let idTipo=req.params.id;

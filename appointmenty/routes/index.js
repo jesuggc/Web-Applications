@@ -2,24 +2,12 @@ var express = require('express');
 var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
-/* GET home page. */
-router.use((request, response, next) => {
-  response.locals.user = request.session.user;
+
+const passLocals = (req, res, next) => {
+  res.locals.user = req.session.user;
   next();
-});
-// ------------ MIDDLEWARE ---------------
-const amIlogged = (request,response,next) => {
-   next()
-}
-
-const amISignedIn = (request,response,next) => {
-  if(!request.session.userId) response.redirect("/login")
-  else next()
-}
-
-router.get("/reservations", amISignedIn, (request,response) => {
-  response.redirect("users/reservations")
-})
+};
+router.use(passLocals)
 
 router.get('/', function(req, res, next) {
   midao.getOptions((err,options) => {
@@ -39,7 +27,10 @@ router.get("/group/:idFacultad", (request, response) => {
     if(err) console.log("Error: ", err)
     else response.json({resultado:resultado});
   })
-  
+})
+
+router.get("/reservations", (request,response) => {
+  response.redirect("users/reservations")
 })
 
 router.get("/prueba", (request, response) => {
@@ -51,8 +42,5 @@ router.get("/informacion", function (request, response) {
   let pag = request.query.data
   response.render("informacion", {pag})
 });
-
-
-
 
 module.exports = router;

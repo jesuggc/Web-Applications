@@ -49,6 +49,9 @@ ________________________________________________________________________________
 -  C3    Registro con foto ------------------------------------------------------------------------------------------------------------------
 -  C12   Mostrar contraseña en el login -----------------------------------------------------------------------------------------------------
 -  C7    Rehacer vista reservas -------------------------------------------------------------------------------------------------------------
+-  C10   Redireccion a inicio de sesion con middleware --------------------------------------------------------------------------------------
+-  A11   No permitir que usuario normal entre en panel admin simplemente escribiendo /admin -------------------------------------------------
+-  C8    Incorporar imagenes en la BBDD -----------------------------------------------------------------------------------------------------
 -  A1    Personalizar apariencia
 -  A9    Historial de reservas
 -  A8    Listado de usuarios
@@ -56,19 +59,16 @@ ________________________________________________________________________________
 -  C5    Responsive --> Header Footer VH
 -  A7    Correo lista de espera -
 
--  C8    Incorporar imagenes en la BBDD
 -  U4    Ver reservas pendientes
 -  C9    Hacer el footer
--  C10   Redireccion a inicio de sesion con middleware
 -  C11   Noticias con carousel
 -  A10   Arregla navbar negrita
 -  C13   Añadir favoritos y archivados
--  A11   No permitir que usuario normal entre en panel admin simplemente escribiendo /admin
--  A12   PREGUNTAR enviar a todos los de la ucm, o a todos de una facultad
--  A13   Nueva instalacion CON FOTO y añadir tarjetas de instalacion
+-  A13   Nueva instalacion CON FOTO
 
 -- Añadir feedback cuando NO hay ninguna instalacion para esa facultad y de ese tipo
 -- Añadir la opción de llegar a las reservas desde el dropdown EJEMPLO:
+-- Comprobar que todas las fotos tengan alt
  
 EJEMPLO: (Dropdown dentro de dropdown)
 - Nueva reserva
