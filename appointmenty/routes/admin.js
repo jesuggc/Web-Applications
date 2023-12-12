@@ -153,6 +153,7 @@ router.get("/getFacultades", (request, response) => {
   })
 })
 
+
 router.get("/getInstalaciones", (request, response) => {
   midao.getInstallationsByOption(request.query.idTipo,request.query.idFacultad,(err, res) => {
     if (err) console.log("Error: ", err)
@@ -161,6 +162,12 @@ router.get("/getInstalaciones", (request, response) => {
 })
 
 
-
+//LIST USERS
+router.get("/listUsers", (request, response) => {
+  midao.getVerifiedUsers(((err,users) => {
+    if(err) console.log("Error: ", err)
+    else response.render("listUsers",{users});
+  }))
+})
 
 module.exports = router;

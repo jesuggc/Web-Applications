@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body>
+    <div class="fakeBody pistachio">
+      <%-include('partials/header') %>
+      <div class="row">
+        <%-include('partials/adminNavbar') %>
+        <div class="col pistachio mb-4">
+            <div class="row">
+            <h1 class="ms-4 my-2">Listar usuarios</h1>        
+            </div>
+            <div id="rowFiltros"class="row mt-2  d-flex justify-content-between">
+                <span >Filtrar por: </span>
+                <div contenteditable class="divEditable col-1 mx-5 mb-2  apricot rounded-2" >
+                    <span class="placeHolder">Facultad</span>
+                </div>
+            </div>
+            <div class="row m-4 ">
+                <div id="listar" class="col rounded-4 whitesmoke scrollable-listar">
+                    
+                    <hr class="mt-0">
+                    <% users.forEach(ele => { %>
+                    <div id="usuarios" class="border-bottom py-1  row mx-2 " data-id="<%=ele.id%>">
+                        <div class="col">
+                            <% if (!ele.foto){ %>
+                            <img style="width: 6em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
+                            <% } else{ %>
+                            <img style="width: 6em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                            <% } %>
+                        </div>
+                        <div class="col"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
+                        <div class="col"><span><%=ele.correo %></span></div>
+                        <div class="col"><span>Curso: <%=ele.curso %>º</span></div>
+                        <div class="col"><span><%=ele.facultad%>, grado de: <%=ele.grado%></span></div>
+                    </div>
+                    <% }) %>
+                    <br>
+                </div>
+            </div>
+
+        </div>  
+      </div> 
+    </div>
+    <script src="/javascripts/mydriver.js"></script>
+    <script>
+        $(".divEditable").on("click", function() {
+            var placeholder = $(".placeHolder");
+            if (placeholder.text().trim() === "Facultad") {
+                $(".placeHolder").html('');;
+            }
+        });
+    
+        $(".divEditable").on("blur", function() {
+            var placeholder = $(".placeHolder");
+            var facNombre = $(this).text().trim();
+            var idFac=null
+            console.log("facNombre", facNombre)
+            if ($(this).text().trim() === "") {
+                placeholder.html("Facultad");
+            }
+            else{
+                $.ajax({
+                    url:"/admin/getFacultades",
+                    type: "GET",
+                    success: function(response) {
+                        response.forEach(ele=>{
+                            if(ele.nombre=== facNombre) idFac=ele.id;
+                        })
+                        if(idFac){
+                            $.ajax({
+                                url:"/admin/getStudents", //Por Fac Id
+                                type: "GET",
+                                data: {idFac},
+                                success: function(res){
+                                    $("#listar").empty()
+                                    res.forEach(ele => { 
+                                        $("#listar").append(`
+                                                <div id="usuarios" class="border-bottom py-1  row mx-2 ">
+                                                <div class="col">`)
+                                                    if (! ele.foto){ 
+                                                        $("#usuarios").append(`<img style="width: 6em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">`)
+                                                    } else{ 
+                                                        $("#usuarios").append(`<img style="width: 6em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/${ele.id}">`)
+                                                    } 
+                                                $("#listar").append(`</div>
+                                                <div class="col"><span>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</span></div>
+                                                <div class="col"><span>${ele.correo }</span></div>
+                                                <div class="col"><span>Curso: ${ele.curso }º</span></div>
+                                                <div class="col"><span>${ele.facultad}, grado de: ${ele.grado}</span></div>
+                                            </div>
+                                            }) 
+                                            <br>
+                                        `)
+                                        $("#usuarios").attr("data-id", ele.id)
+                                        
+                                    })
+                                }
+                            })
+                        }
+                        else{
+                            $("#rowFiltros").append(`<p class="red mx-5">No se encontro esa Facultad<p>`)
+                        }
+                    }
+                })
+                
+            }
+        });
+    </script>
+    
+    <%-include('partials/footer') %>
+  </body>
+</html>

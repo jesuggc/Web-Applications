@@ -137,6 +137,13 @@ footer a{
   overflow-y:scroll;
 }
 
+.scrollable-listar{
+  max-height: 60vh;
+  overflow-y:scroll;
+}
+
+.scrollable-listar::-webkit-scrollbar { display: none; }
+
 .scrollable-correo {
   max-height: 81vh;
   overflow-y:scroll;
@@ -146,7 +153,7 @@ footer a{
   display: none;
 }
 .scrollable-admin {
-  max-height: 77vh;
+  max-height: 70vh;
   overflow-y:scroll;
 }
 
