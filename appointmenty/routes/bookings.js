@@ -3,7 +3,16 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306");
 
-router.get('/:id', function(req, response, next) {
+const isLoggedIn = (req, res, next) => {
+  if (res.locals.user) {
+    return next();
+  }
+  res.redirect('/users/login');
+};
+
+router.use(isLoggedIn)
+
+router.get('/:id', isLoggedIn, function(req, response, next) {
   let idTipo=req.params.id;
   let idFac = response.locals.user.facultad
   

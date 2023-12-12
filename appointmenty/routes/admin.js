@@ -3,18 +3,32 @@ var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
 
+const isAdmin = (req, res, next) => {
+  // ESTO VA A PETAR SI LO INTENTAS SIN LA SESION INICIADA POR LO QUE HABRIA QUE HACER TAMBIEN UN
+  // AMILOGGED ADEMAS DE ESTE MIDDLEWARE
+  if (res.locals.user.admin === 1) {
+    return next();
+  }
+
+  //AQUI SE RENDERIZARIA UNA PAGINA DE ACCESO DENEGADO O ALGO ASI
+  res.status(403).send('Acceso no autorizado');
+};
+
+router.use(isAdmin)
+
 router.get("/", (request, response) => { //Renderiza pagina de admin
     response.status(200)
     response.render('admin');
 })
 
-router.get("/changeRols", (request, response) => {//Llama a vista de usuarios verificados para convertirlo en admin (AJAX)
+router.get("/changeRols", (request, response) => { //Llama a vista de usuarios verificados para convertirlo en admin (AJAX)
   midao.getVerifiedUsers((err, res) => {
     if (err) console.log("Error: ", err)
     else response.json(res)
   })
 })
-router.post("/changeRols", (request, response) => {//Convierte a un usuario por su id en admin (AJAX)
+
+router.post("/changeRols", (request, response) => { //Convierte a un usuario por su id en admin (AJAX)
   midao.updateAdmin(request.body.id,(err, res) => {
     if (err) console.log("Error: ", err)
     else response.json(res)
@@ -22,7 +36,7 @@ router.post("/changeRols", (request, response) => {//Convierte a un usuario por 
 })
 
 //SOLICITUDES
-router.get("/solicitudes", (request, response) => {//Llama a vista de usuarios registrados aun pendientes por verificar (AJAX)
+router.get("/solicitudes", (request, response) => { //Llama a vista de usuarios registrados aun pendientes por verificar (AJAX)
   midao.getRequests((err, res) => {
     if (err) console.log("Error: ", err)
     else response.json(res)

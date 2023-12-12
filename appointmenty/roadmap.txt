@@ -66,3 +66,24 @@ ________________________________________________________________________________
 -  A11   No permitir que usuario normal entre en panel admin simplemente escribiendo /admin
 -  A12   PREGUNTAR enviar a todos los de la ucm, o a todos de una facultad
 -  A13   Nueva instalacion CON FOTO y añadir tarjetas de instalacion
+
+-- Añadir feedback cuando NO hay ninguna instalacion para esa facultad y de ese tipo
+-- Añadir la opción de llegar a las reservas desde el dropdown EJEMPLO:
+ 
+EJEMPLO: (Dropdown dentro de dropdown)
+- Nueva reserva
+   - Labs
+   - Salas de grados
+   - Salas de reunion
+   - ...
+- Cerrar sesion 
+
+Listado de usuarios CENTRATE EN ESTA
+Que la vista inicial sea un listado de todos los usuarios
+Antes de ponerte a hacerlo dale importancia a que sea scrollable como ayer,
+que siga el mismo formato de divs etc. Un buen ejemplo es el scrollable del
+correo porque va a tener el mismo formato de lista. Reserva un hueco en la parte de arriba 
+para poner los filtros
+
+En admin y en bookins (routes) tienes los middlewares por si quieres verlos pero deja
+que los acabe yo luego
