@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const dao = require("../public/javascripts/DAO.js");
 const midao = new dao("localhost","root","","UCM_RIU","3306")
+const multer=require('multer');
+const multerFactory= multer({storage: multer.memoryStorage()})
 
 const isLoggedIn = (req, res, next) => {
   if (res.locals.user) return next();
@@ -134,7 +136,8 @@ router.post("/newTypeInstallation", (request, response) => {
   let horaFin = request.body.horaFin
   let tipo = request.body.tipo
   let nombreTipo = request.body.nombreTipo
-  midao.createTypeInstallation(nombreTipo,horaIni, horaFin, tipo, (err,ok) => {
+  let foto =request.body.foto
+  midao.createTypeInstallation(nombreTipo,horaIni, horaFin, tipo,foto, (err,ok) => {
     if(err) console.log("Error: ", err)
     else response.json(ok)
   })
@@ -145,8 +148,9 @@ router.post("/newInstallation", (request, response) => {
   let idFacultad = request.body.idFacultad
   let aforo = request.body.aforoMax
   let idTipo = request.body.tipoInstalacion
+  let foto= request.body.foto
 
-  midao.createInstallation(nombre, idFacultad, aforo, idTipo, (err,ok) => {
+  midao.createInstallation(nombre, idFacultad, aforo, idTipo,foto, (err,ok) => {
     if(err) console.log("Error: ", err)
     else response.json(ok)
   })
@@ -174,6 +178,10 @@ router.get("/listUsers", (request, response) => {
     if(err) console.log("Error: ", err)
     else response.render("listUsers",{users});
   }))
+})
+
+router.post("/photoToServer",multerFactory.single('foto'), (request,response)=>{
+  response.send({img:request.file.buffer})
 })
 
 module.exports = router;

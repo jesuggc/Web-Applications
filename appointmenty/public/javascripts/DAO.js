@@ -364,26 +364,27 @@ class DAO {
         })
     }
 
-    createTypeInstallation(nombre, disponibilidadIni,disponibilidadFin,tipo, callback){
+    createTypeInstallation(nombre, disponibilidadIni,disponibilidadFin,tipo,foto, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "INSERT INTO ucm_aw_riu_tip_tipoinstalacion (nombre, disponibilidadIni,disponibilidadFin,tipo) VALUES (?,?,?,?)"
-                connection.query(stringQuery,[nombre, disponibilidadIni,disponibilidadFin,tipo], function (err, res) {
+                let stringQuery = "INSERT INTO ucm_aw_riu_tip_tipoinstalacion (nombre, disponibilidadIni,disponibilidadFin,tipo,foto) VALUES (?,?,?,?,?)"
+                connection.query(stringQuery,[nombre, disponibilidadIni,disponibilidadFin,tipo,foto], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
-                    else callback(null,res.insertId)
+                    else { 
+                        callback(null,res.insertId)}
                 })
             }
         })
     }
 
-    createInstallation(nombre, idFacultad, aforo, idTipo, callback){
+    createInstallation(nombre, idFacultad, aforo, idTipo,foto, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "INSERT INTO ucm_aw_riu_ins_instalaciones (nombre, idFacultad, aforo, idTipo) VALUES (?,?,?,?)"
-                connection.query(stringQuery,[nombre, idFacultad, aforo, idTipo], function (err, res) {
+                let stringQuery = "INSERT INTO ucm_aw_riu_ins_instalaciones (nombre, idFacultad, aforo, idTipo,foto) VALUES (?,?,?,?,?)"
+                connection.query(stringQuery,[nombre, idFacultad, aforo, idTipo,foto], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else callback(null,res.insertId)

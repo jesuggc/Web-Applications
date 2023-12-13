@@ -4,125 +4,52 @@
   <body>
     <div class="fakeBody pistachio">
       <%-include('partials/header') %>
-      <div class="row">
-        <%-include('partials/adminNavbar') %>
-        <div class="col pistachio mb-4">
+        <div class="row">
+            <%-include('partials/adminNavbar') %>
             <h1 class="ms-4 my-2">Listar usuarios</h1>        
-            <div class="row">
+            <div>
                 <input class="w-75" type="text" placeholder="Escriba aquí:">
             </div>
-            <!-- <div id="rowFiltros"class="row mt-2  d-flex justify-content-between">
-                <span >Filtrar por: </span>
-            
-                 <div contenteditable class="divEditable col-1 mx-5 mb-2  apricot rounded-2" >
-                    <span class="placeHolder">Facultad</span>
-                </div> -->
-            <!-- </div> --> 
-            <div class="row m-4 ">
-                <div id="listar" class="col-9 rounded-4 whitesmoke scrollable-listar ">
-                    
-                    <hr class="mt-0">
-                    <% users.forEach(ele => { %>
-                    <div id="usuarios" class="border-bottom py-1 align-items-center row mx-2 " data-id="<%=ele.id%>">
-                        <div class="col">
-                            <% if (!ele.foto){ %>
-                            <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
-                            <% } else{ %>
-                            <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
-                            <% } %>
-                        </div>
-                        <div class="col"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
-                        <div class="col"><span><%=ele.correo %></span></div>
-                        <div class="col"><span>Curso: <%=ele.curso %>º</span></div>
-                        <div class="col"><span><%=ele.facultad%> </span></div>
-                        <div class="col"><span>Grado de: <%=ele.grado%></span></div>
+            <div class="col-9">
+                <div class=" mb-4">
+                    <div id="usuarios" class="row align-items-center  mx-2">
+                        <div class="col-1"><span>Foto</span></div>
+                        <div class="col-3 "><span>Nombre y apellidos</span></div>
+                        <div class="col-2"><span>Correo</span></div>
+                        <div class="col-1"><span>Curso</span></div>
+                        <div class="col-2"><span>Facultad </span></div>
+                        <div class="col-3"><span>Grado</span></div>
                     </div>
-                    <% }) %>
-                    <br>
                 </div>
-                <div class="col-2 mx-3 d-inline">
-                    <div class="row rounded-4 bg-warning">Nombre</div>
-                    <div class="row rounded-4 bg-warning">Apellidos</div>
-                    <div class="row rounded-4 bg-warning">Facultad</div>
-                    <div class="row rounded-4 bg-warning">Grado</div>
-                    <div class="row rounded-4 bg-warning">Curso</div>
-
-                    <hr>
-
-                    
-                    
+                <div id="listar" class="rounded-4 whitesmoke scrollable-listar">
+                    <% users.forEach(ele => { %>
+                        <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="<%=ele.id%>">
+                            <div class="col-1">
+                                <% if (!ele.foto){ %>
+                                <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
+                                <% } else{ %>
+                                <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                                <% } %>
+                            </div>
+                            <div class="col-3"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
+                            <div class="col-2"><span><%=ele.correo %></span></div>
+                            <div class="col-1"><span><%=ele.curso%>º</span></div>
+                            <div class="col-2"><span><%=ele.facultad%> </span></div>
+                            <div class="col-3"><span><%=ele.grado%></span></div>
+                        </div>
+                    <% }) %>
                 </div>
             </div>
-
-        </div>  
-      </div> 
+            <div class="col-2 mx-3 d-inline">
+                <div class="row rounded-4 bg-warning">Nombre</div>
+                <div class="row rounded-4 bg-warning">Apellidos</div>
+                <div class="row rounded-4 bg-warning">Facultad</div>
+                <div class="row rounded-4 bg-warning">Grado</div>
+                <div class="row rounded-4 bg-warning">Curso</div>
+            </div>
+        </div>
     </div>
-    <script src="/javascripts/mydriver.js"></script>
-    <script>
-        $(".divEditable").on("click", function() {
-            var placeholder = $(".placeHolder");
-            if (placeholder.text().trim() === "Facultad") {
-                $(".placeHolder").html('');;
-            }
-        });
-    
-        $(".divEditable").on("blur", function() {
-            var placeholder = $(".placeHolder");
-            var facNombre = $(this).text().trim();
-            var idFac=null
-            console.log("facNombre", facNombre)
-            if ($(this).text().trim() === "") {
-                placeholder.html("Facultad");
-            }
-            else{
-                $.ajax({
-                    url:"/admin/getFacultades",
-                    type: "GET",
-                    success: function(response) {
-                        response.forEach(ele=>{
-                            if(ele.nombre=== facNombre) idFac=ele.id;
-                        })
-                        if(idFac){
-                            $.ajax({
-                                url:"/admin/getStudents", //Por Fac Id
-                                type: "GET",
-                                data: {idFac},
-                                success: function(res){
-                                    $("#listar").empty()
-                                    res.forEach(ele => { 
-                                        $("#listar").append(`
-                                                <div id="usuarios" class="border-bottom py-1  row mx-2 ">
-                                                <div class="col">`)
-                                                    if (! ele.foto){ 
-                                                        $("#usuarios").append(`<img style="width: 6em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">`)
-                                                    } else{ 
-                                                        $("#usuarios").append(`<img style="width: 6em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/${ele.id}">`)
-                                                    } 
-                                                $("#listar").append(`</div>
-                                                <div class="col"><span>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</span></div>
-                                                <div class="col"><span>${ele.correo }</span></div>
-                                                <div class="col"><span>Curso: ${ele.curso }º</span></div>
-                                                <div class="col"><span>${ele.facultad}, grado de: ${ele.grado}</span></div>
-                                            </div>
-                                            }) 
-                                            <br>
-                                        `)
-                                        $("#usuarios").attr("data-id", ele.id)
-                                        
-                                    })
-                                }
-                            })
-                        }
-                        else{
-                            $("#rowFiltros").append(`<p class="red mx-5">No se encontro esa Facultad<p>`)
-                        }
-                    }
-                })
-                
-            }
-        });
-    </script>
-    
     <%-include('partials/footer') %>
+    <script src="/javascripts/listUsers.js"></script>
   </body>
 </html>

@@ -85,6 +85,7 @@ $("#panel").on("change", "#facultadSelect", function(){
                         </div>
                     </div>
                 `)
+                const imagesq = URL.createObjectURL
                 response.forEach(ele => {
                     $("#lista").append(`<div class="row">${ele.nombre} ${ ele.apellido1} ${ele.apellido2}</div>`)
                 })
