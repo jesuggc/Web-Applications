@@ -330,3 +330,7 @@ body::-webkit-scrollbar {
   text-align: justify;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#showUsers {
+  max-height: 13vh;
+}

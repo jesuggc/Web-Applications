@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <%-include('partials/head') %>
   <body>
     <div class="fakeBody pistachio">
@@ -16,23 +16,14 @@
               <div id="listarArchivados" class="col cursorPointer "><h4>Archivados</h4></div>
             </div>
             <hr class="mt-0">
-            <!-- ----------------------------- -->
-            <div class="border-bottom py-1 rowMail cursorPointer row mx-2" data-id="">
-              <div class="col"><span>Nombre apellido apellido2</span></div>
-              <div class="col"><span>Correo</div>
-              <div class="col"><span>Facultad</div>
-            </div>
-            <div class="border-bottom py-1 rowMail cursorPointer row mx-2" data-id="">
-              <div class="col"><span>Nombre apellido apellido2</span></div>
-              <div class="col"><span>Correo</div>
-              <div class="col"><span>Facultad</div>
-            </div>
-            <div class="border-bottom py-1 rowMail cursorPointer row mx-2" data-id="">
-              <div class="col"><span>Nombre apellido apellido2</span></div>
-              <div class="col"><span>Correo</div>
-              <div class="col"><span>Facultad</div>
-            </div>
-            <!-- ----------------------------- -->
+            <% emails.forEach(ele => { %>
+              <div class="border-bottom py-1 rowMail cursorPointer row mx-2 <%if(ele.leido===0) { %> noLeido <% } else { %> leido <% } %><%if(ele.favorito) { %> favorito <%}%><%if(ele.archivado) { %> archivado d-none <%}%>" data-id="<%=ele.id%>">
+                <div class="col-3"><span><%=ele.admin ? ele.nombreOrigen.toUpperCase() : ele.nombreOrigen%> <%=ele.admin ? ele.apellido1.toUpperCase() : ele.apellido1%> <%=ele.admin ? ele.apellido2.toUpperCase() : ele.apellido2%></span></div>
+                <div class="col-6"><span><%=ele.asunto %></div>
+                <div class="col-2"><span><%=ele.fecha%></div>
+                <div class="col-1"><span><%=ele.hora%></div>
+              </div>
+            <% }) %>
             <br>
           </div>
           <div id="mostrar" class="col d-none rounded-end-4 scrollable whitesmoke">
@@ -46,10 +37,10 @@
               </div>
               <div class="col-10">
                 <div id="nombre" class="row ms-1">
-                  <h5></h5>
+                  <h5>Paco Martinez Ortigueira </h5>
                 </div>
                 <div id="correo" class="row ms-1">
-                  <h5></h5>
+                  <h5>pacoma@ucm.es</h5>
                 </div>
               </div>          
             </div>
@@ -57,7 +48,9 @@
               <div class="col"></div>
               <div class="col"></div>
               <div class="col">
-                <div id="fecha" class="row negrita justify-content-center"></div>
+                <div id="fecha" class="row negrita justify-content-center">
+                  24/05/2023 14:27
+                </div>
                 <hr class="m-0 me-2">
               </div>
             </div>
@@ -74,6 +67,7 @@
             </div>
             <hr>
             <div id="cuerpo" class="text-justify me-2 p-4 row rounded-1 ms-3">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis, eum cupiditate. Maiores facilis adipisci delectus qui. Vero facere omnis repellendus iste aliquid quia quos rem, quibusdam sunt! Impedit, reiciendis cupiditate!
             </div>
             <hr>
           </div>
@@ -101,8 +95,8 @@
 
       </div>
     </div>
-    <script src="/javascripts/mydriver.js"></script>
-    <script src="/javascripts/mails.js"></script>
+    <script src="../javascripts/mydriver.js"></script>
+    <script src="../javascripts/mails.js"></script>
     <%-include('partials/footer') %>
   </body>
 </html>

@@ -189,21 +189,30 @@ router.get("/appearance", (request, response) =>{
 })
 
 router.get("/newAppearance", (request,response)=>{
-  request.app.locals.appearance =request.query.appearance
+  request.app.locals.appearance = request.query.appearance
 })
 router.get("/history",(request,response)=>{
   response.render("history")
 })
 router.get("/historyList", (request,response)=>{
-  let inputSearch = request.query;
+  let inputSearch = request.query.inputSearch;
   midao.getUsersByInput(inputSearch,(err,users) => {
-    response.json(users);
+    if(err) console.log("Error: ", err)
+    else response.json(users);
   })
 })
 router.get("/reservationsList", (request,response)=>{
-  let name = request.query;
+  let name = request.query.name;
   midao.listReservationsByName(name,(err,reservations) => {
-    response.json(reservations);
+    if(err) console.log("Error: ", err)
+    else response.json(reservations);
+  })
+})
+router.get("/getResDetails",(request,response)=>{
+  let id = request.query.id;
+  midao.getResDetailsById(id,(err,details) => {
+    if(err) console.log("Error: ", err)
+    else response.json(details);
   })
 })
 module.exports = router;

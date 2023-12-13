@@ -594,7 +594,7 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=?"
+                let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre, r.cancelado FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=?"
                 connection.query(stringQuery, name, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
