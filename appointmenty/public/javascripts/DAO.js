@@ -577,7 +577,7 @@ class DAO {
                     connection.release();
                     if (err) callback(err, null)
                     else {
-                        callback(null, resultado.map(ele => ({  
+                        callback(null, res.map(ele => ({  
                             id:ele.id,
                             nombre:ele.nombre,
                             apellido1:ele.apellido1,
@@ -595,14 +595,38 @@ class DAO {
             if (err) callback(err, null)
             else {
                 let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=?"
-                connection.query(stringQuery, idTipo, function (err, res) {
+                connection.query(stringQuery, name, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else {
-                        callback(null, resultado.map(ele => ({  
+                        callback(null, res.map(ele => ({  
                             id:ele.id,
                             fechaReserva:ele.fechaReserva,
-                            nombre:ele.nombre
+                            nombre:ele.nombre,
+                            cancelado: ele.cancelado
+                        })))
+                    }
+                })
+            }
+        })
+    }
+
+    getResDetailsById(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas where id=?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        callback(null, res.map(ele => ({  
+                            id:ele.id,
+                            fechaReserva:ele.fechaReserva,
+                            fecha:ele.fecha,
+                            horaIni:ele.horaIni,
+                            horaFin: ele.horaFin,
+                            cancelado: ele.cancelado
                         })))
                     }
                 })
