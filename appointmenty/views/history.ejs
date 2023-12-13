@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html lang="es">
-    <%-include('partials/head') %>
-    <body class="pistachio">
-      <%-include('partials/header')%>
+<html>
+  <%-include('partials/head') %>
+  <body >
+    <div class="fakeBody pistachio"> 
+      <%-include('partials/header') %>
+      <div class="row pistachio ">
+        <%-include('partials/adminNavbar') %>
+          <div id="panel" class=" alignJustify mb-3">
+              <div class="col">
+                <div class="row">
+                  <h1>Buscar usuario:</h1>
+                  <div class="col-4">
+                    <!-- Buscador -->
+                    <input type="text">
+                  </div>
+                  <div class="col-8">
+                    <!-- Mostrar usuario  (scrollable) -->
+                  </div>
+                </div>
+                <div class="row">
+                  <h1>Reservas del usuario:</h1>
+                  <!-- Mostrar reservas (scrollable-x) -->
+                </div>
+                <div class="row">
+                  <h1>Detalles de la reserva</h1>
+                  <div class="col">
+                    <!-- Columna de detalles 1 -->
+                  </div>
+                  <div class="col">
+                    <!-- Columna de detalles 2 -->
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>   
+    </div>   
 
-    </body>
+    <script src="/javascripts/mydriver.js"></script>
     <%-include('partials/footer') %>
+  </body>
 </html>

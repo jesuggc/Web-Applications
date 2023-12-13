@@ -47,6 +47,9 @@ app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/bookings', bookingsRouter);
 
+// app.locals.appearance = {}
+// app.locals.appearance.title="UCM - Reservas"
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render("404")

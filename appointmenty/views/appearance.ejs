@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%-include('partials/head') %>
+  <body >
+    <div class="fakeBody pistachio"> 
+        <%-include('partials/header') %>
+        <div class="row pistachio ">
+            <%-include('partials/adminNavbar') %>
+            <div id="panel" class=" alignJustify mb-3">
+                <div class=" text-center">
+                    <p>Nuevo titulo de pagina</p>
+                    <input id="title" type="text">
+                    <button id="submit" class="btn btn-large">Enviar</button>
+                </div>
+            </div>
+        </div>   
+    </div>   
+    <script src="/javascripts/mydriver.js"></script>
+    <script src="/javascripts/appearance.js"></script>
+
+    <%-include('partials/footer') %>
+  </body>
+</html>

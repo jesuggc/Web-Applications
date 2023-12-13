@@ -184,4 +184,26 @@ router.post("/photoToServer",multerFactory.single('foto'), (request,response)=>{
   response.send({img:request.file.buffer})
 })
 
+router.get("/appearance", (request, response) =>{
+  response.render("appearance")
+})
+
+router.get("/newAppearance", (request,response)=>{
+  request.app.locals.appearance =request.query.appearance
+})
+router.get("/history",(request,response)=>{
+  response.render("history")
+})
+router.get("/historyList", (request,response)=>{
+  let inputSearch = request.query;
+  midao.getUsersByInput(inputSearch,(err,users) => {
+    response.json(users);
+  })
+})
+router.get("/reservationsList", (request,response)=>{
+  let name = request.query;
+  midao.listReservationsByName(name,(err,reservations) => {
+    response.json(reservations);
+  })
+})
 module.exports = router;

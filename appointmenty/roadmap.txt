@@ -54,36 +54,18 @@ ________________________________________________________________________________
 -  C8    Incorporar imagenes en la BBDD -----------------------------------------------------------------------------------------------------
 -  A1    Personalizar apariencia
 -  A9    Historial de reservas
+-  C9    Hacer el footer
 -  A8    Listado de usuarios
 -  A5    Estadisticas y listados
 -  C5    Responsive --> Header Footer VH
 -  A7    Correo lista de espera -
 
 -  U4    Ver reservas pendientes
--  C9    Hacer el footer
 -  C11   Noticias con carousel
 -  A10   Arregla navbar negrita
 -  C13   Añadir favoritos y archivados
--  A13   Nueva instalacion CON FOTO
+-  A13   Nueva instalacion CON FOTO 
 
 -- Añadir feedback cuando NO hay ninguna instalacion para esa facultad y de ese tipo
--- Añadir la opción de llegar a las reservas desde el dropdown EJEMPLO:
+-- Añadir la opción de llegar a las reservas desde el dropdown
 -- Comprobar que todas las fotos tengan alt
- 
-EJEMPLO: (Dropdown dentro de dropdown)
-- Nueva reserva
-   - Labs
-   - Salas de grados
-   - Salas de reunion
-   - ...
-- Cerrar sesion 
-
-Listado de usuarios CENTRATE EN ESTA
-Que la vista inicial sea un listado de todos los usuarios
-Antes de ponerte a hacerlo dale importancia a que sea scrollable como ayer,
-que siga el mismo formato de divs etc. Un buen ejemplo es el scrollable del
-correo porque va a tener el mismo formato de lista. Reserva un hueco en la parte de arriba 
-para poner los filtros
-
-En admin y en bookins (routes) tienes los middlewares por si quieres verlos pero deja
-que los acabe yo luego

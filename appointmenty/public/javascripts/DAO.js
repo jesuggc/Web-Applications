@@ -568,5 +568,47 @@ class DAO {
         })
     }
 
+    getUsersByInput(searchInput,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "Select u.*, f.nombre as nombreFacultad from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id Where (instr(u.nombre, ?) or instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(correo, ?) or instr(f.nombre, ?) > 0) and verificado=1 and admin=0;"
+                connection.query(stringQuery, searchInput, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        callback(null, resultado.map(ele => ({  
+                            id:ele.id,
+                            nombre:ele.nombre,
+                            apellido1:ele.apellido1,
+                            apellido2:ele.apellido2,
+                            correo:ele.correo,
+                            facultad:ele.nombreFacultad
+                        })))
+                    }
+                })
+            }
+        })
+    }
+    listReservationsByName(name, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=?"
+                connection.query(stringQuery, idTipo, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        callback(null, resultado.map(ele => ({  
+                            id:ele.id,
+                            fechaReserva:ele.fechaReserva,
+                            nombre:ele.nombre
+                        })))
+                    }
+                })
+            }
+        })
+    }
+
 }
 module.exports = DAO
