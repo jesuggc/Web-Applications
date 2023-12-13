@@ -573,7 +573,7 @@ class DAO {
             if (err) callback(err, null)
             else {
                 let stringQuery = "Select u.*, f.nombre as nombreFacultad from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id Where (instr(u.nombre, ?) or instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(correo, ?) or instr(f.nombre, ?) > 0) and verificado=1 and admin=0;"
-                connection.query(stringQuery, searchInput, function (err, res) {
+                connection.query(stringQuery, [searchInput,searchInput,searchInput,searchInput,searchInput], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else {
@@ -633,6 +633,31 @@ class DAO {
             }
         })
     }
-
+    getConfiguration(callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT * FROM ucm_aw_riu_con_configuracion"
+                connection.query(stringQuery,  function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        let configuration = {
+                            id:res[0].id,
+                            nombre:res[0].nombre,
+                            numero:res[0].numero,
+                            direccion:res[0].direccion,
+                            correo: res[0].correo,
+                            logo: res[0].logo,
+                            favicon: res[0].favicon,
+                            abreviacion: res[0].abreviacion,
+                            titulo:res[0].titulo
+                        }
+                        callback(null, configuration)
+                    }
+                })
+            }
+        })
+    }
 }
 module.exports = DAO

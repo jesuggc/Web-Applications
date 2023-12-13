@@ -34,11 +34,12 @@ input {
   border-color: black;
 }
 
-a {
-  color: #00B7FF;
+a[href] {
+  /* color: #00B7FF; */
+  text-decoration: none;
 }
 
-a,div {
+a, div {
   text-decoration: none;
 }
 
@@ -258,6 +259,10 @@ body::-webkit-scrollbar {
   overflow-x:auto;
 }
 
+.scrollable-x::-webkit-scrollbar {
+  display: none;
+}
+
 .cursorPointer {
   cursor: pointer;
 }
@@ -282,11 +287,19 @@ body::-webkit-scrollbar {
 }
 
 .installationCard {
-  background-color:white;
+  background-color:whitesmoke;
   height:200px;
   width:200px;
   max-width:200px;
   min-width:200px;
+}
+
+.reservationCard {
+  background-color:whitesmoke;
+  height:150px;
+  width:250px;
+  max-width:150px;
+  min-width:250px;
 }
 
 .mailImage {
@@ -333,4 +346,5 @@ body::-webkit-scrollbar {
 
 #showUsers {
   max-height: 13vh;
+  height: 13vh;
 }

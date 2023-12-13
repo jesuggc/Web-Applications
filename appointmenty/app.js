@@ -10,6 +10,9 @@ var adminRouter = require('./routes/admin');
 var bookingsRouter = require('./routes/bookings');
 var app = express();
 
+const dao = require('./public/javascripts/DAO')
+const midao = new dao("localhost","root","","UCM_RIU","3306");
+
 const session = require("express-session")
 const sessionSQL = require("express-mysql-session")
 const bodyParser = require("body-parser")
@@ -47,8 +50,11 @@ app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/bookings', bookingsRouter);
 
-// app.locals.appearance = {}
-// app.locals.appearance.title="UCM - Reservas"
+
+midao.getConfiguration((err,res)=> {
+  if(err) console.log(err)
+  else app.locals.configuration = res
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
