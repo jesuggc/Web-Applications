@@ -568,12 +568,13 @@ class DAO {
         })
     }
 
+    
     getUsersByInput(searchInput,callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "Select u.*, f.nombre as nombreFacultad from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id Where (instr(u.nombre, ?) or instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(correo, ?) or instr(f.nombre, ?) > 0) and verificado=1 and admin=0;"
-                connection.query(stringQuery, [searchInput,searchInput,searchInput,searchInput,searchInput], function (err, res) {
+                let stringQuery = "Select u.*, f.nombre as nombreFacultad from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id Where (instr(u.nombre, ?) or instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2), ?)or instr(correo, ?) or instr(f.nombre, ?) > 0) and verificado=1 and admin=0;"
+                connection.query(stringQuery, [searchInput,searchInput,searchInput,searchInput,searchInput,searchInput], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else {
@@ -659,5 +660,21 @@ class DAO {
             }
         })
     }
+
+    updateAppearance(titulo, nombre, direccion,numero,correo,abreviacion,logo,favicon, callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+        console.log("Y ahora estoy en el dao?")
+                let stringQuery = "update ucm_aw_riu_con_configuracion set titulo = IFNULL(?,titulo), nombre = IFNULL(?,nombre),direccion = IFNULL(?,direccion),numero = IFNULL(?,numero),correo = IFNULL(?,correo),abreviacion = IFNULL(?,abreviacion),logo = IFNULL(?,logo),favicon = IFNULL(?,favicon) WHERE id=1"
+                connection.query(stringQuery, [titulo,nombre,direccion,numero,correo,abreviacion,logo,favicon], function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null, true)
+                })
+            }
+        })
+    }
+
 }
 module.exports = DAO

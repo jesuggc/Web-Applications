@@ -1,5 +1,5 @@
 $("#userSearcher").on("keyup", function() {
-  var inputSearch = $(this).val().toLowerCase();
+  var inputSearch = $(this).val().toLowerCase().trim();
   console.log(inputSearch)
   $.ajax({
     url: "/admin/historyList",
