@@ -665,7 +665,6 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else { 
-        console.log("Y ahora estoy en el dao?")
                 let stringQuery = "update ucm_aw_riu_con_configuracion set titulo = IFNULL(?,titulo), nombre = IFNULL(?,nombre),direccion = IFNULL(?,direccion),numero = IFNULL(?,numero),correo = IFNULL(?,correo),abreviacion = IFNULL(?,abreviacion),logo = IFNULL(?,logo),favicon = IFNULL(?,favicon) WHERE id=1"
                 connection.query(stringQuery, [titulo,nombre,direccion,numero,correo,abreviacion,logo,favicon], function (err, res) {
                     connection.release();

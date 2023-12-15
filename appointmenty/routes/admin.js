@@ -212,7 +212,8 @@ router.get("/getResDetails",(request,response)=>{
     else response.json(details);
   })
 })
-router.post("/updateAppearance",(request,response)=>{
+router.post("/updateAppearance",(request,response) => {
+  console.log(request.body)
   console.log("Estoy en la ruta update", request.body.nombre)
   midao.updateAppearance( request.body.titulo, request.body.nombre, request.body.direccion, request.body.numero, request.body.correo, request.body.abreviacion, request.body.logo, request.body.favicon, (err,updated)=>{
     if(err) console.log("Error: ", err)
