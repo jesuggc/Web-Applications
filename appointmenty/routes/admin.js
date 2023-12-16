@@ -212,20 +212,26 @@ router.get("/getResDetails",(request,response)=>{
     else response.json(details);
   })
 })
-router.post("/updateAppearance",(request,response) => {
+router.post("/updateAppearance", multerFactory.array("foto",2), (request,response) => {
   console.log(request.body)
-  console.log("Estoy en la ruta update", request.body.nombre)
-  midao.updateAppearance( request.body.titulo, request.body.nombre, request.body.direccion, request.body.numero, request.body.correo, request.body.abreviacion, request.body.logo, request.body.favicon, (err,updated)=>{
+  console.log(request.files)
+  let miObjeto = request.body
+  for (let clave in miObjeto) {
+    if (miObjeto[clave] === '') {
+      miObjeto[clave] = null;
+    }
+  }
+  midao.updateAppearance( request.body.titulo, request.body.nombre, request.body.direccion, request.body.numero, request.body.correo, request.body.abreviacion, request.files[0], request.files[1], (err,updated)=>{
     if(err) console.log("Error: ", err)
     else {
-      request.app.locals.configuration.nombre = request.body.nombre ? request.body.nombre : request.app.locals.configuration.nombre
+      request.app.locals.configuration.nombre = !request.body.nombre ? request.body.nombre : request.app.locals.configuration.nombre
       request.app.locals.configuration.direccion = request.body.direccion ? request.body.direccion : request.app.locals.configuration.direccion
       request.app.locals.configuration.numero = request.body.numero ? request.body.numero : request.app.locals.configuration.numero
       request.app.locals.configuration.titulo = request.body.titulo ? request.body.titulo : request.app.locals.configuration.titulo
       request.app.locals.configuration.correo = request.body.correo ? request.body.correo : request.app.locals.configuration.correo
       request.app.locals.configuration.abreviacion = request.body.abreviacion ? request.body.abreviacion : request.app.locals.configuration.abreviacion
-      request.app.locals.configuration.logo = request.body.logo ? request.body.logo : request.app.locals.configuration.logo
-      request.app.locals.configuration.favicon = request.body.favicon ? request.body.favicon : request.app.locals.configuration.favicon
+      request.app.locals.configuration.logo = request.files[0] ? request.files[0] : request.app.locals.configuration.logo
+      request.app.locals.configuration.favicon = request.files[1] ? request.files[1] : request.app.locals.configuration.favicon
       response.redirect("/admin/appearance")
     } 
   })

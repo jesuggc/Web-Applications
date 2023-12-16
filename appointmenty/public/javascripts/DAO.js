@@ -666,6 +666,8 @@ class DAO {
             if (err) callback(err, null)
             else { 
                 let stringQuery = "update ucm_aw_riu_con_configuracion set titulo = IFNULL(?,titulo), nombre = IFNULL(?,nombre),direccion = IFNULL(?,direccion),numero = IFNULL(?,numero),correo = IFNULL(?,correo),abreviacion = IFNULL(?,abreviacion),logo = IFNULL(?,logo),favicon = IFNULL(?,favicon) WHERE id=1"
+                logo = logo ? logo.buffer : logo
+                favicon = favicon ? favicon.buffer : favicon
                 connection.query(stringQuery, [titulo,nombre,direccion,numero,correo,abreviacion,logo,favicon], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
