@@ -4,49 +4,61 @@
   <body>
     <div class="fakeBody pistachio">
       <%-include('partials/header') %>
-        <div class="row">
+        <div class="row ">
             <%-include('partials/adminNavbar') %>
-            <h1 class="ms-4 my-2">Listar usuarios</h1>        
-            <div>
-                <input class="w-75" type="text" placeholder="Escriba aquí:">
-            </div>
-            <div class="col-9">
-                <div class=" mb-4">
-                    <div id="usuarios" class="row align-items-center  mx-2">
-                        <div class="col-1"><span>Foto</span></div>
-                        <div class="col-3 "><span>Nombre y apellidos</span></div>
-                        <div class="col-2"><span>Correo</span></div>
-                        <div class="col-1"><span>Curso</span></div>
-                        <div class="col-2"><span>Facultad </span></div>
-                        <div class="col-3"><span>Grado</span></div>
+            <div class="row mx-2">
+                <h1>Listar usuarios</h1>    
+
+               
+                <div class="row ">
+                    <div class="col">
+                        <input class="w-100" type="text" placeholder="Escriba aquí:">
+                    </div>
+                    
+                    <div class="col-2 mx-3 d-inline border-start ">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected hidden>Ordenar por...</option>
+                            <option value="1">Nombre</option>
+                            <option value="2">Apellidos</option>
+                            <option value="3">Facultad</option>
+                            <option value="4">Grado</option>
+                            <option value="5">Curso</option>
+                        </select>
                     </div>
                 </div>
-                <div id="listar" class="rounded-4 whitesmoke scrollable-listar">
-                    <% users.forEach(ele => { %>
-                        <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="<%=ele.id%>">
-                            <div class="col-1">
-                                <% if (!ele.foto){ %>
-                                <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
-                                <% } else{ %>
-                                <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
-                                <% } %>
-                            </div>
-                            <div class="col-3"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
-                            <div class="col-2"><span><%=ele.correo %></span></div>
-                            <div class="col-1"><span><%=ele.curso%>º</span></div>
-                            <div class="col-2"><span><%=ele.facultad%> </span></div>
-                            <div class="col-3"><span><%=ele.grado%></span></div>
+                <div class="row  mt-3">
+                    
+                
+                    <div class=" rounded-top-4 py-3 text-white negrita claret mt-2">
+                        <div id="usuarios" class="row  mx-2">
+                            <div class="col-1"><span>Foto</span></div>
+                            <div class="col-3 "><span>Nombre y apellidos</span></div>
+                            <div class="col-2"><span>Correo</span></div>
+                            <div class="col-1"><span>Curso</span></div>
+                            <div class="col-2"><span>Facultad </span></div>
+                            <div class="col-3"><span>Grado</span></div>
                         </div>
-                    <% }) %>
+                    </div>
+                    <div id="listar" class="rounded-bottom-4  whitesmoke scrollable-listar">
+                        <% users.forEach(ele => { %>
+                            <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="<%=ele.id%>">
+                                <div class="col-1">
+                                    <% if (!ele.foto){ %>
+                                    <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
+                                    <% } else{ %>
+                                    <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                                    <% } %>
+                                </div>
+                                <div class="col-3"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
+                                <div class="col-2"><span><%=ele.correo %></span></div>
+                                <div class="col-1"><span><%=ele.curso%>º</span></div>
+                                <div class="col-2"><span><%=ele.facultad%> </span></div>
+                                <div class="col-3"><span><%=ele.grado%></span></div>
+                            </div>
+                        <% }) %>
+                    </div>
                 </div>
-            </div>
-            <div class="col-2 mx-3 d-inline border-start">
-                <div class="row rounded-4 bg-warning">Nombre</div>
-                <div class="row rounded-4 bg-warning">Apellidos</div>
-                <div class="row rounded-4 bg-warning">Facultad</div>
-                <div class="row rounded-4 bg-warning">Grado</div>
-                <div class="row rounded-4 bg-warning">Curso</div>
-            </div>
+            </div> 
         </div>
     </div>
     <%-include('partials/footer') %>

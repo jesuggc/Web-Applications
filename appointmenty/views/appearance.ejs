@@ -7,33 +7,91 @@
         <div class="row pistachio ">
             <%-include('partials/adminNavbar') %>
             <div id="panel" class=" alignJustify mb-3">
-                <div class=" text-center">
-                  <form action="/admin/updateAppearance" method="POST" enctype="multipart/form-data">
-                    <div class="row claret mx-4 rounded-4 ">
-                      <div class="col">
-                        <p>Nuevo titulo de pagina</p>
-                        <input id="title" name="titulo" type="text">
-                        <p>Nuevo nombre de pagina</p>
-                        <input id="nombre" name="nombre" type="text">
-                        <p>Nueva direccion de pagina</p>
-                        <input id="direccion" name="direccion" type="text">
-                        <p>Nueva logo de pagina</p>
-                        <input class="form-control form-control-sm" name="foto" accept="image/png, image/jpg, image/jpeg" type="file" id="formFile">
+
+              <p class="mx-4">A continuación se muestran los campos que puede modificar de la página, rellene solo los campos sobre los que quiera hacer cambios.</p>
+              <form action="/admin/updateAppearance" method="POST" enctype="multipart/form-data">
+                <div class="row claret mx-4 rounded-4 text-white ">
+                  <div class="col my-2">
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo título</span>
                       </div>
-                      <div class="col">
-                        <p>Nuevo telefono de pagina</p>
-                        <input id="numero" name="numero" type="text">
-                        <p>Nuevo correo de pagina</p>
-                        <input id="correo" name="correo" type="text">
-                        <p>Nuevo abreviacion de pagina</p>
-                        <input id="abreviacion" name="abreviacion" type="text">
-                        <p>Nuevo favicon de pagina</p>
-                        <input class="form-control form-control-sm" name="foto" accept="image/png, image/jpg, image/jpeg" type="file" id="formFile">
+                      <div class="col-5">
+                        <input id="title" name="titulo" type="text" class="w-100">
                       </div>
-                      <button type="submit" id="submit" class="btn btn-primary btn-large">Enviar</button>
+                      <div class="col-2"></div>
                     </div>
-                  </form>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo nombre</span>
+                      </div>
+                      <div class="col-5">
+                        <input id="nombre" name="nombre" type="text" class="w-100">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nueva dirección</span>
+                      </div>
+                      <div class="col-5">
+                        <input id="direccion" name="direccion" type="text" class="w-100">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo logo</span>
+                      </div>
+                      <div class="col-5">
+                        <input class=" form-control" name="logo" accept="image/png, image/jpg, image/jpeg" type="file" id="formFile">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                  </div>
+                  <div class="col my-2">
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo teléfono</span>
+                      </div>
+                      <div class="col-5">
+                        <input id="numero" name="numero" type="text" class="w-100">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo correo</span>
+                      </div>
+                      <div class="col-5">
+                        <input id="correo" name="correo" type="text" class="w-100">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo abreviacion</span>
+                      </div>
+                      <div class="col-5">
+                        <input id="abreviacion" name="abreviacion" type="text" class="w-100">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-5 text-end">
+                        <span class="w-100">Nuevo favicon</span>
+                      </div>
+                      <div class="col-5">
+                        <input class=" form-control" name="favicon" accept="image/png, image/jpg, image/jpeg" type="file" id="formFile">
+                      </div>
+                      <div class="col-2"></div>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center mb-4">
+                    <button type="submit" id="submit" class=" w-25 btn btn-primary btn-large">Enviar</button>
+                  </div>
                 </div>
+              </form>
             </div>
         </div>   
     </div>   

@@ -43,7 +43,7 @@ $(".rowMail").on("click", function(){
         $("#mostrar").removeClass("d-none")
 })
 
-$(".btn-close").on("click", ()=>{
+$("#btn-close").on("click", ()=>{
     $("#mostrar").addClass("d-none")
     $("#listar").addClass("rounded-4")
     $("#listar").removeClass("rounded-start-4")

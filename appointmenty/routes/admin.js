@@ -212,28 +212,44 @@ router.get("/getResDetails",(request,response)=>{
     else response.json(details);
   })
 })
-router.post("/updateAppearance", multerFactory.array("foto",2), (request,response) => {
-  console.log(request.body)
-  console.log(request.files)
+router.post("/updateAppearance", multerFactory.fields([{name:"logo"},{name:"favicon"}]), (request,response) => {
+  let favicon = request.files["favicon"] ? request.files["favicon"][0] : null
+  let logo = request.files["logo"] ? request.files["logo"][0] : null
   let miObjeto = request.body
   for (let clave in miObjeto) {
     if (miObjeto[clave] === '') {
       miObjeto[clave] = null;
     }
   }
-  midao.updateAppearance( request.body.titulo, request.body.nombre, request.body.direccion, request.body.numero, request.body.correo, request.body.abreviacion, request.files[0], request.files[1], (err,updated)=>{
+  midao.updateAppearance( request.body.titulo, request.body.nombre, request.body.direccion, request.body.numero, request.body.correo, request.body.abreviacion, logo, favicon, (err,updated)=>{
     if(err) console.log("Error: ", err)
     else {
-      request.app.locals.configuration.nombre = !request.body.nombre ? request.body.nombre : request.app.locals.configuration.nombre
+      request.app.locals.configuration.nombre = request.body.nombre ? request.body.nombre : request.app.locals.configuration.nombre
       request.app.locals.configuration.direccion = request.body.direccion ? request.body.direccion : request.app.locals.configuration.direccion
       request.app.locals.configuration.numero = request.body.numero ? request.body.numero : request.app.locals.configuration.numero
       request.app.locals.configuration.titulo = request.body.titulo ? request.body.titulo : request.app.locals.configuration.titulo
       request.app.locals.configuration.correo = request.body.correo ? request.body.correo : request.app.locals.configuration.correo
       request.app.locals.configuration.abreviacion = request.body.abreviacion ? request.body.abreviacion : request.app.locals.configuration.abreviacion
-      request.app.locals.configuration.logo = request.files[0] ? request.files[0] : request.app.locals.configuration.logo
-      request.app.locals.configuration.favicon = request.files[1] ? request.files[1] : request.app.locals.configuration.favicon
+      request.app.locals.configuration.logo = logo ? logo : request.app.locals.configuration.logo
+      request.app.locals.configuration.favicon = favicon ? favicon : request.app.locals.configuration.favicon
       response.redirect("/admin/appearance")
     } 
   })
 })
+
+
+router.get("/getLogo", (request,response) => {
+  midao.getLogo((err,foto) => {
+    if (err) console.log(err)
+    else response.end(foto)
+  })
+})
+
+router.get("/getFavicon", (request,response) => {
+  midao.getFavicon((err,foto) => {
+    if (err) console.log(err)
+    else response.end(foto)
+  })
+})
+
 module.exports = router;

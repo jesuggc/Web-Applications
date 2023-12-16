@@ -677,5 +677,34 @@ class DAO {
         })
     }
 
+    getLogo(callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT logo FROM ucm_aw_riu_con_configuracion WHERE id = 1"
+                connection.query(stringQuery, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null, res[0].logo)
+                })
+            }
+        })
+    }
+
+    getFavicon(callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT favicon FROM ucm_aw_riu_con_configuracion WHERE id = 1"
+                connection.query(stringQuery, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null, res[0].favicon)
+                })
+            }
+        })
+    }
+    
+
 }
 module.exports = DAO
