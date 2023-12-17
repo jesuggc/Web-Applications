@@ -33,11 +33,12 @@
                     <div class=" rounded-top-4 py-3 text-white negrita claret mt-2">
                         <div id="usuarios" class="row  mx-2">
                             <div class="col-1"><span>Foto</span></div>
-                            <div class="col-3"><span>Nombre y apellidos</span></div>
+                            <div class="col-2"><span>Nombre y apellidos</span></div>
                             <div class="col-2"><span>Correo</span></div>
                             <div class="col-1"><span>Curso</span></div>
                             <div class="col-2"><span>Facultad </span></div>
                             <div class="col-3"><span>Grado</span></div>
+                            <div class="col-1"><span>Estadísticas</span></div>
                         </div>
                     </div>
                     <div id="listar" class="rounded-bottom-4 whitesmoke scrollable-listar">
@@ -50,11 +51,13 @@
                                     <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
                                     <% } %>
                                 </div>
-                                <div class="col-3"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
+                                <div class="col-2"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
                                 <div class="col-2"><span><%=ele.correo %></span></div>
                                 <div class="col-1"><span><%=ele.curso%>º</span></div>
                                 <div class="col-2"><span><%=ele.facultad%> </span></div>
                                 <div class="col-3"><span><%=ele.grado%></span></div>
+                                <div class="col-1"><a href="/admin/stats/<%=ele.id%>"><button>STATS</button></a></div>
+
                             </div>
                         <% }) %>
                     </div>

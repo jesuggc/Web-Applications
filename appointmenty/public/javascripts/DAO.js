@@ -755,7 +755,27 @@ class DAO {
             }
         })
     }
-    
+    getStatsByUserId(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT CONCAT(u.nombre,' ', u.apellido1, ' ', u.apellido2) as nombre,u.foto, COUNT(r.id) as totalReservas, SUM(CASE WHEN r.fechaReserva < CURRENT_DATE THEN 1 ELSE 0 END) as reservasPasadas FROM ucm_aw_riu_usu_usuarios AS u LEFT JOIN ucm_aw_riu_res_reservas AS r ON u.id = r.idUsuario WHERE  u.id = ? GROUP BY nombre"
+              connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        let stats = {
+                            nombre:res[0].nombre,
+                            totalReservas:res[0].totalReservas,
+                            reservasPasadas:res[0].reservasPasadas,
+                            foto:res[0].foto
+                        }
+                        callback(null, stats)
+                    }
+                })
+            }
+        })
+    }
 
 }
 module.exports = DAO

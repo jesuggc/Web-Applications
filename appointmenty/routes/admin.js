@@ -238,9 +238,13 @@ router.get("/filterList", (request,response)=>{
   })
 })
 
-router.get("/stats", (request,response) => {
+router.get("/stats/:id", (request,response) => {
   let id = Number(request.params.id)
-  response.render("stats")
+  midao.getStatsByUserId(id,(err,res) => {
+    if(err) console.log("Error: ", err)
+    else response.render("stats",{id,res})
+  })
+  
 })
 
 router.get("/pertecentageStat", (request,response) => {

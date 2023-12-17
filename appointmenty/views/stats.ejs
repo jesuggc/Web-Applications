@@ -7,11 +7,37 @@
       <div class="row pistachio ">
         <%-include('partials/adminNavbar') %>
           <div id="panel" class=" alignJustify mb-3">
-              <div class=" text-center">
-                  <h1>Estadísticas de: </h1>
-                  <div id="circlesRow" class="row">
-                    
+              <div class=" ">
+                  <h1>Estadísticas de: <%=res.nombre%></h1>
+                  <div class="row">
+                    <div class="col text-center">
+                      <% if (res.foto){%>
+                      <img src="/users/profilePhoto/<%=ele.id%>">
+                      <% } else{ %>
+                        <img src="/images/noPicture.jpg">
+                      <% } %>
+
+                    </div>
+                    <div class="col">
+                      <h2>Reservas totales:  <%=res.totalReservas%></h2>
+                      <h3>Reservas pasadas:  <%=res.reservasPasadas%></h3>
+                      <div class="row bg-info">
+                        <div class="col">
+                          <h4>Asistidas:</h4>
+                          <h4>Canceladas:</h4>
+                          <h4>Horas pendientes:</h4>
+                        </div>
+
+                        <div id="circleAsistidas" class="col">
+                        </div>
+                      </div>
+
+                      <div id="circlesRow" class="row">
+                      </div>
+                      <h3>Reservas pendientes:</h3>
+                    </div>
                   </div>
+                  
               </div>
           </div>
       </div>   
