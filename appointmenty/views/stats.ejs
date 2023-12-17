@@ -4,43 +4,55 @@
   <body >
     <div class="fakeBody pistachio"> 
       <%-include('partials/header') %>
-      <div class="row pistachio ">
-        <%-include('partials/adminNavbar') %>
-          <div id="panel" class=" alignJustify mb-3">
-              <div class=" ">
-                  <h1>Estadísticas de: <%=res.nombre%></h1>
-                  <div class="row">
-                    <div class="col text-center">
-                      <% if (res.foto){%>
-                      <img src="/users/profilePhoto/<%=ele.id%>">
-                      <% } else{ %>
-                        <img src="/images/noPicture.jpg">
-                      <% } %>
-
-                    </div>
-                    <div class="col">
-                      <h2>Reservas totales:  <%=res.totalReservas%></h2>
-                      <h3>Reservas pasadas:  <%=res.reservasPasadas%></h3>
-                      <div class="row bg-info">
-                        <div class="col">
-                          <h4>Asistidas:</h4>
-                          <h4>Canceladas:</h4>
-                          <h4>Horas pendientes:</h4>
-                        </div>
-
-                        <div id="circleAsistidas" class="col">
+        <div class="row pistachio ">
+          <%-include('partials/adminNavbar') %>
+            <div id="panel" class=" alignJustify mb-3" data-id="<%=id%>">
+                <div>
+                    <h1>Estadísticas de: <%=res.nombre%></h1>
+                    <div class="row claret text-white m-2 p-2 rounded-3">
+                      <div class="col-4 text-center d-flex align-items-center justify-content-center">
+                        <div>
+                          <% if (res.foto){%>
+                          <img src="/users/profilePhoto/<%=id%>" class="rounded-circle statsImage" alt="Imagen de perfil del usuario">
+                          <% } else{ %>
+                            <img src="/images/noPicture.jpg" class="rounded-circle statsImage" alt="Imagen de perfil de usuario por defecto">
+                          <% } %>
+                          <h2>Reservas totales:  <%=res.totalReservas%></h2>
                         </div>
                       </div>
+                      <div class="col-8">
+                        <h3>Reservas anteriores:  <%=res.reservasPasadas%></h3>
+                        <div class="row  ">
+                          <div class="col mt-2 text-end">
+                            <h5 id="assisted" data-id="<%=res.atendidas%>">Asistidas: <%=res.atendidas%> reservas</h5>
+                            <h5>Canceladas: <%=res.canceladas%> reservas</h5>
+                            <h5>Horas anteriores: <%=res.horasPasadas%></h5>
+                          </div>
+                          
+                          <div id="circleAsistidas" class="col ">
+                          </div>
+                        </div>
+                        
+                        <div id="circlesRow" class="row">
+                        </div>
+                        <hr>
+                        <div class="row">
+                          
+                            <h3>Reservas pendientes: <%= res.reservasFuturas%></h3>
 
-                      <div id="circlesRow" class="row">
+                          
+                          <div class="col mt-2 text-end">
+                            <h5>Horas pendientes: <%=res.horasPendientes%></h5>
+
+                          </div>
+                          <div class="col"></div>
+                        </div>
                       </div>
-                      <h3>Reservas pendientes:</h3>
                     </div>
-                  </div>
-                  
-              </div>
-          </div>
-      </div>   
+                    
+                </div>
+            </div>
+        </div>   
     </div>
     <script src="/javascripts/circles.js"></script>
     <script src="/javascripts/stats.js"></script>

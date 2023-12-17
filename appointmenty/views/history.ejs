@@ -20,32 +20,35 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <h1>Reservas del usuario:</h1>
+                <div class="row mx-4">
                   <!-------------------->
+                  <h1 id="reservationTitle" class="d-none">Reservas del usuario:</h1>
+                  <p class="noBookingsMsg text-center d-none">Este usuario no ha hecho reservas<p>
                   <div class="row scrollable-x">
-                    <div  class="d-flex justify-content-between ">
-                    <% for (let indice = 0; indice < 20; indice++) { %>
-                      <div class="col instalacion reservationCard text-center mx-1" data-id="">
-                        <div class="row " style="background-color: cadetblue;">
+                    <div  class="cardRow d-flex justify-content-between ">
+                      <% for (let indice = 0; indice < 20; indice++) { %>
+                      <div class="col instalacion reservationCard text-center mx-1 d-flex flex-column align-items-center d-none" data-id="">
+                        <div class="row w-100" style="background-color: cadetblue;">
                           <h3 class="nombreInstalacion">Laboratorio C</h3>
                         </div>
-                        <div class="row bg-success mx-1">
+                        <div class=" cardBody row h-100 w-100 d-flex align-items-end">
                           <h5 class="fechaReserva">17/12/2023</h5>
                         </div>
                       </div>
-                    <% } %>
+                      <% } %>
                     </div>
                   </div>
                   <!-------------------->
                 </div>
-                <div class="row">
-                  <h1>Detalles de la reserva</h1>
-                  <div class="col">
-                    <!-- Columna de detalles 1 -->
-                  </div>
-                  <div class="col">
-                    <!-- Columna de detalles 2 -->
+                <div class="row mx-4 detailsWidth">
+                  <h1 id="detailsTitle" class="d-none ">Detalles de la reserva</h1>
+                  <div class="row text-center claret text-white mx-4 rounded-3 d-flex align-items-center " >
+                    <div class="primera col">
+                      <!-- Columna de detalles 1 -->
+                    </div>
+                    <div class="segunda col">
+                      <!-- Columna de detalles 2 -->
+                    </div>
                   </div>
                 </div>
               </div>

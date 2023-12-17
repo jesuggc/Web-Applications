@@ -192,16 +192,28 @@ router.get("/historyList", (request,response)=>{
 })
 router.get("/reservationsList", (request,response)=>{
   let name = request.query.name;
-  midao.listReservationsByName(name,(err,reservations) => {
+  let ap1 = request.query.ap1;
+  let ap2 = request.query.ap2;
+  midao.listReservationsByName(name,ap1, ap2,(err,reservations) => {
     if(err) console.log("Error: ", err)
-    else response.json(reservations);
+    else{
+      reservations.forEach(ele=>{
+        ele.fechaReserva=ele.fechaReserva.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]  
+      })
+      response.json(reservations);
+  } 
   })
 })
 router.get("/getResDetails",(request,response)=>{
   let id = request.query.id;
   midao.getResDetailsById(id,(err,details) => {
     if(err) console.log("Error: ", err)
-    else response.json(details);
+    else {
+      
+        details.fechaReserva=details.fechaReserva.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]  
+      
+      response.json(details);
+    }
   })
 })
 router.post("/updateAppearance", multerFactory.fields([{name:"logo"},{name:"favicon"}]), (request,response) => {
@@ -248,8 +260,8 @@ router.get("/stats/:id", (request,response) => {
 })
 
 router.get("/pertecentageStat", (request,response) => {
-  let id = Number(request.params.id)
-  midao.getPertencageStat(2 ,(err,res) => {
+  let id = Number(request.query.id)
+  midao.getPertencageStat(id ,(err,res) => {
     if(err) console.log("Error: ", err)
     else response.json(res)
   })

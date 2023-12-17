@@ -34,6 +34,15 @@ $("#facultad").on("change", function() {
         type: "GET",
         data: {idFacultad,idTipo},
         success: function(response) {
+            $("#emptyMessage").remove()
+            if(response.length === 0) {
+                $("#titleRow").append(`
+                <h2 id="emptyMessage" class="red text-center my-5"> No existe ninguna instalación de este tipo en tu facultad </h2>
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="/"><button type="button" class="btn btn-large btn-primary">Volver</button></a> 
+                </div>
+                `)
+            }
             $(".instalacion").addClass("d-none")
             $(".instalacion").each(function(i,ele) {
                 if(i < response.length) {
@@ -94,6 +103,10 @@ $(".hora").on("click", function(e) {
     }
 })
 
+$("#refrescar").on("click", function() {
+    window.location.reload()
+})
+
 $("#calendario").on("change", () => {
     let fecha = $("#calendario").val()
     let idInstalacion = $(".marcado").attr("data-id")
@@ -146,6 +159,19 @@ $(".instalacion").on("click", function()  {
         let idInstalacion = $(".marcado").attr("data-id")
         callBusy(fecha,idInstalacion)
     }
+})
+
+$(".cancelReservation").on("click", function() {
+    let idReserva = $(this).attr("data-id")
+    console.log(idReserva)
+    $.ajax({
+        url: "/bookings/cancelReservation",
+        type: "POST",
+        data: {idReserva},
+        success: function(response) {
+            window.location.reload()
+        } 
+    })
 })
 
 function callBusy(fecha,idInstalacion) {

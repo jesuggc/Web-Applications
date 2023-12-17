@@ -48,38 +48,58 @@
 // });
 
 $(function () {
+    let id = $("#panel").attr("data-id")
     $.ajax({
         url: "/admin/pertecentageStat",
         type: "GET",
-        data: 2,
-        success: function(response) {
+        data: { id },
+        success: function (response) {
             let total = 0
             response.forEach(ele => {
                 total += ele.count
             })
             let circlesArray = new Array(response.length)
-            response.forEach((ele,i) => {
+            response.forEach((ele, i) => {
                 console.log(i)
-                console.log(ele)
-                $("#circlesRow").append(`<div class="col"><div class="circle d-inline" id="circles-${i}"></div><p>${ele.nombre}</p></div>`)
+                console.log("soy ele", ele)
+                $("#circlesRow").append(`<div class="col text-center"><div class="circle d-inline" id="circles-${i}"></div><p>${ele.nombre}</p></div>`)
                 circlesArray[i] = Circles.create({
-                    id:                  `circles-${i}`,
-                    radius:              60,
-                    value:               ele.count,
-                    maxValue:            7,
-                    width:               19,
-                    text:                function(value){console.log(value); return Math.round(this.getPercent()) + '%';},
-                    colors:              ['#D3B6C6', '#4B253A'],
-                    duration:            800,
-                    wrpClass:            'circles-wrp',
-                    textClass:           'circles-text',
-                    valueStrokeClass:    'circles-valueStroke',
+                    id: `circles-${i}`,
+                    radius: 60,
+                    value: ele.count,
+                    maxValue: total,
+                    width: 19,
+                    text: function (value) { console.log(value); return Math.round(this.getPercent()) + '%'; },
+                    colors: ['#FFCAB1', '#e16024'],
+                    duration: 800,
+                    wrpClass: 'circles-wrp',
+                    textClass: 'circles-text',
+                    valueStrokeClass: 'circles-valueStroke',
                     maxValueStrokeClass: 'circles-maxValueStroke',
-                    styleWrapper:        true,
-                    styleText:           true
+                    styleWrapper: true,
+                    styleText: true
                 })
-                
+
             })
-        } 
+            let asistidas=$("#assisted").attr("data-id")
+            $("#circleAsistidas").append(`<div class="circle text-center d-inline" id="circleAssisted"></div><p class="text-start ms-4">Asistidas</p>`)
+                circleAssisted = Circles.create({
+                    id: `circleAssisted`,
+                    radius: 60,
+                    value: asistidas,
+                    maxValue: total,
+                    width: 19,
+                    text: function (value) { console.log(value); return Math.round(this.getPercent()) + '%'; },
+                    colors:['#BFB48F', '#0B5D1E'],
+                    duration: 800,
+                    wrpClass: 'circles-wrp',
+                    textClass: 'circles-text',
+                    valueStrokeClass: 'circles-valueStroke',
+                    maxValueStrokeClass: 'circles-maxValueStroke',
+                    styleWrapper: true,
+                    styleText: true
+                })
+        }
     })
+    
 }) 

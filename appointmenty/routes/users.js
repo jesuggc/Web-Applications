@@ -132,9 +132,9 @@ router.post("/updateEmail", isLoggedIn, (request,response) => {
     else response.json(res)
   }
   if(request.body.action === "fav") {
-    midao.favEmail(id,callback)
+    midao.toggleFavEmail(id,callback)
   } else if (request.body.action === "archive") {
-    midao.archiveEmail(id,callback)
+    midao.toggleArchiveEmail(id,callback)
   } else if (request.body.action === "delete") {
     midao.deleteEmail(id,callback)
   } else {

@@ -55,14 +55,11 @@ dd {
   width: 10em;
   margin: 0 0 0 1em;
 }
-/* ----------FOOTER---------- */
-footer{
-  /* position: absolute;
-  bottom: 0; */
+
+footer {
   width: 100%;
   overflow: hidden;
   box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.25);
-
 }
 
 footer ul{
@@ -145,6 +142,20 @@ footer a{
 
 .scrollable-listar::-webkit-scrollbar { display: none; }
 
+.scrollable-bookings{
+  max-height: 81vh;
+  overflow-y:scroll;
+}
+
+.scrollable-bookings::-webkit-scrollbar { display: none; }
+
+.scrollable-info{
+  max-height: 83vh;
+  overflow-y:scroll;
+}
+
+.scrollable-info::-webkit-scrollbar { display: none; }
+
 .scrollable-correo {
   max-height: 81vh;
   overflow-y:scroll;
@@ -221,6 +232,10 @@ body::-webkit-scrollbar {
 } 
 
 .archivadoT {
+  transition: transform 1.5s ease;
+  transform: translateX(1200px);
+}
+.favoritoT {
   transition: transform 1.5s ease;
   transform: translateX(1200px);
 }
@@ -309,6 +324,10 @@ body::-webkit-scrollbar {
   object-position: center;
 }
 
+.fit-content{
+  width:fit-content;
+}
+
 .divActionsImage {
   width:fit-content;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -338,6 +357,24 @@ body::-webkit-scrollbar {
   height: 10vh;
   max-height: 10vh;
 }
+
+.statsImage{
+  height: 40vh;
+}
+.asistencia {
+  background-color: #0B5D1E;
+}
+.cancelada {
+  background-color: #ff6250;
+}
+
+.centerInfo {
+  height: 88%;
+}
+
+.detailsWidth{
+  width: fit-content;
+}
 /* -------------ID------------- */
 #cuerpo {
   text-align: justify;
@@ -348,3 +385,4 @@ body::-webkit-scrollbar {
   max-height: 13vh;
   height: 13vh;
 }
+

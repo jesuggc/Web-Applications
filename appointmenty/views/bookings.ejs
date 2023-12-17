@@ -4,9 +4,9 @@
   <body>
     <div class="fakeBody pistachio">
       <%-include('partials/header')%>
-      <div class="row pistachio mx-2">
+      <div class="row pistachio  mx-2">
         <h1 id="mainTitle" data-id="<%=idTipo%>">Sistema de reservas</h1>
-        <form>
+        <div class="scrollable-bookings">
             <% if(user.admin === 1) { %>
               <div class="row">
                 <div class="col">
@@ -17,22 +17,26 @@
                 </div>
               </div>
             <% } %>
-          <div class="row">
+          <div id="titleRow" class="row">
             <h1 id="title" data-id="<%=ini%>#<%=fin%>"><%=nombre%> - <%=tipo%></h1>
+            <% if(installations.length === 0) { %>
+              <h2 id="emptyMessage" class="red text-center my-5"> No existe ninguna instalación de este tipo en tu facultad </h2>
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="/"><button type="button" class="btn btn-large btn-primary">Volver</button></a> 
+                </div>
+            <% } %>
           </div>
           <div class="row scrollable-x">
             <div  class="d-flex justify-content-between ">
             <%
-              const limite = 10; // Establece el límite deseado
+              const limite = 10;
               for (let indice = 0; indice < limite; indice++) {
                 const ele = installations[indice] || {};
             %>
               <div class="col instalacion installationCard rounded-5 text-center me-2 <%= indice >= installations.length ? 'd-none' : '' %>" data-id="<%= ele.id || '' %>">
                 <br>
-                <br>
                 <h3 class="nombreInstalacion"><%= ele.nombre || '' %></h1>
-                <br>
-                <h5 class="aforoInstalacion">Aforo máximo: <%= ele.aforo || '' %></h5>
+                <h5 class="aforoInstalacion mt-4">Aforo máximo: <%= ele.aforo || '' %></h5>
               </div>
             <% } %>
             </div>
@@ -47,9 +51,6 @@
               <input id="calendario" type="date" name="dia" placeholder="Día" required>
             </div>
           </div>
-        </form>
-      </div>
-
 
       <div id="horario" class="container d-none">
         <h4 class="my-3">Horas:</h4>
@@ -80,9 +81,28 @@
           <dt class="seleccionado rounded-2"></dt>
           <dd>Seleccionado</dd>
         </dl>
+
+        <h2>Mis reservas:</h2>
+        <div class="col ">
+          <% if(reservas.length === 0) { %>
+            <h2 class="red text-center my-5"> No tienes ninguna reserva </h2>
+
+          <%} %>
+          <% reservas.forEach(ele => { %>
+            <div class=" whitesmoke row text-center p-2 rounded-2 m-2">
+              <div class="col">
+                <h5>Dia <%=ele.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).split(",")[0]%> en <%=ele.nombre%> de <%=ele.ini%>:00 a <%=ele.fin+1%>:00 </h5>
+              </div>
+              <div class="col">
+                <a class="cancelReservation red" data-id="<%=ele.id%>" href="#" ><strong>Cancelar reserva</strong></a>
+              </div>
+            </div>  
+          <% }) %>
+          </div>
       </div>
 
-      
+    </div>
+  </div>
       
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm  modal-dialog-centered">
@@ -94,7 +114,7 @@
               
             </div>
             <div class="modal-footer">
-              <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Entendido</button>
+              <button id="refrescar" type="button" data-bs-dismiss="modal" class="btn btn-primary">Entendido</button>
             </div>
           </div>
         </div>
@@ -113,10 +133,6 @@
         </div>
       </div>
     </div> 
-       
-
-    
-    <script src="/javascripts/mydriver.js"></script>
     <script src="/javascripts/calendar.js"></script>
     <%-include('partials/footer') %>
   </body>

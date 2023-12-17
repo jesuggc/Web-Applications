@@ -28,35 +28,32 @@ router.get('/:id', isLoggedIn, function(req, response, next) {
         else {
           midao.getTipoById(idTipo,(err,tipo) => {
             if(err) console.log(err)
-            else if(installations.length===0) {
+            else {
               let ini=0;
               let fin=0;
-              response.render('bookings',{idTipo,installations,nombre,tipo,ini,fin}); 
-
-            }
-            else {
-              let ini=installations[0].ini;
-              let fin= installations[0].fin;
-              response.render('bookings',{idTipo,installations,nombre,tipo,ini,fin}); 
+              if(installations.length!==0) {
+                ini=installations[0].ini;
+                fin= installations[0].fin;
+              }
+              midao.getNextReservationsById(response.locals.user.id,idTipo, (err,reservas) => {
+                if(err) console.log(err)
+                else response.render('bookings',{idTipo,installations,nombre,tipo,ini,fin,reservas}); 
+              })
             }
           })
         }
       })
     }
   })
-  //   midao.getOptions(((err,options) => {
-  //   if(err) console.log("Error: ", err)
-  //   else {
-  //     options.forEach(ele => {
-  //       ele.imagen = ele.nombre.replace(/\s/g, '').toLowerCase()
-  //     });
-  //     midao.getFacultades(((err,facultades) => {
-  //       if(err) console.log("Error: ", err)
-  //       else response.render('bookings',{options,facultades});
-  //     }))
-  //   } 
-  // }))
 });
+
+router.post('/cancelReservation', (request, response) => {
+  let idReservation = request.body.idReserva
+  midao.cancelReservationById(idReservation,(err,res) => {
+    if(err) console.log(err)
+    else response.json(true)
+  })
+})
 
 router.get('/instalaciones', (request, response) => {
   let facultad = response.locals.user.facultad

@@ -393,11 +393,11 @@ class DAO {
         })
     }
 
-    favEmail(id,callback){
+    toggleFavEmail(id,callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET favorito = 1 WHERE id = ?"
+                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET favorito = CASE WHEN favorito = 1 THEN 0 ELSE 1 END WHERE id = ?"
                 connection.query(stringQuery, id, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
@@ -421,11 +421,11 @@ class DAO {
         })
     }
 
-    archiveEmail(id,callback){
+    toggleArchiveEmail(id,callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET archivado = 1 WHERE id = ?"
+                let stringQuery = "UPDATE ucm_aw_riu_cor_correo SET archivado = CASE WHEN archivado = 1 THEN 0 ELSE 1 END WHERE id = ?"
                 connection.query(stringQuery, id, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
@@ -625,12 +625,12 @@ class DAO {
         })
     }
 
-    listReservationsByName(name, callback){
+    listReservationsByName(name,ap1,ap2, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre, r.cancelado FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=?"
-                connection.query(stringQuery, name, function (err, res) {
+                let stringQuery = "SELECT r.id, r.fechaReserva, i.nombre, r.cancelado FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id  join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id where u.nombre=? AND u.apellido1 =? AND u.apellido2=? AND fechaReserva<CURRENT_DATE ORDER BY r.fechaReserva DESC"
+                connection.query(stringQuery,[ name, ap1,ap2], function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else {
@@ -650,19 +650,24 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else {
-                let stringQuery = "SELECT * FROM ucm_aw_riu_res_reservas where id=?"
+                let stringQuery = "SELECT r.*, f.nombre as nombreFacultad, t.nombre as tipoInstalacion, i.aforo, (r.horaFin+1-r.horaIni) as totalHoras FROM ucm_aw_riu_res_reservas as r join ucm_aw_riu_usu_usuarios as u on r.idUsuario=u.id join ucm_aw_riu_fac_facultades as f on u.facultad=f.id join ucm_aw_riu_ins_instalaciones as i on r.idInstalacion=i.id JOIN ucm_aw_riu_tip_tipoinstalacion as t on i.idTipo=t.id where r.id=?;"
                 connection.query(stringQuery, id, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
                     else {
-                        callback(null, res.map(ele => ({  
-                            id:ele.id,
-                            fechaReserva:ele.fechaReserva,
-                            fecha:ele.fecha,
-                            horaIni:ele.horaIni,
-                            horaFin: ele.horaFin,
-                            cancelado: ele.cancelado
-                        })))
+                        let detalles={
+                            id:res[0].id,
+                            fechaReserva:res[0].fechaReserva,
+                            fecha:res[0].fecha,
+                            horaIni:res[0].horaIni,
+                            horaFin: res[0].horaFin,
+                            cancelado: res[0].cancelado,
+                            nombreFacultad: res[0].nombreFacultad,
+                            tipoInstalacion: res[0].tipoInstalacion,
+                            aforo: res[0].aforo,
+                            totalHoras: res[0].totalHoras
+                        }
+                        callback(null, detalles)
                     }
                 })
             }
@@ -759,7 +764,7 @@ class DAO {
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
             else { 
-                let stringQuery = "SELECT CONCAT(u.nombre,' ', u.apellido1, ' ', u.apellido2) as nombre,u.foto, COUNT(r.id) as totalReservas, SUM(CASE WHEN r.fechaReserva < CURRENT_DATE THEN 1 ELSE 0 END) as reservasPasadas FROM ucm_aw_riu_usu_usuarios AS u LEFT JOIN ucm_aw_riu_res_reservas AS r ON u.id = r.idUsuario WHERE  u.id = ? GROUP BY nombre"
+                let stringQuery = " SELECT CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) as nombre,SUM(CASE WHEN r.fechaReserva < CURRENT_DATE THEN r.horaFin+1 - r.horaIni ELSE 0 END) as horasPasadas, u.foto, COUNT(r.id) as totalReservas,    SUM(CASE WHEN r.fechaReserva > CURRENT_DATE THEN 1 ELSE 0 END) as futurasReservas, SUM(CASE WHEN r.fechaReserva < CURRENT_DATE THEN 1 ELSE 0 END) as reservasPasadas, SUM(CASE WHEN r.cancelado = 1 AND r.fechaReserva < CURRENT_DATE THEN 1 ELSE 0 END) as canceladas, SUM(CASE WHEN r.fechaReserva < CURRENT_DATE AND r.cancelado = 0 THEN 1 ELSE 0 END) as atendidas,SUM(CASE WHEN r.fechaReserva > CURRENT_DATE THEN r.horaFin+1 - r.horaIni ELSE 0 END) as horasPendientes FROM  ucm_aw_riu_usu_usuarios AS u LEFT JOIN ucm_aw_riu_res_reservas AS r ON u.id = r.idUsuario  WHERE u.id = ? GROUP BY nombre; "
               connection.query(stringQuery, id, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
@@ -768,10 +773,51 @@ class DAO {
                             nombre:res[0].nombre,
                             totalReservas:res[0].totalReservas,
                             reservasPasadas:res[0].reservasPasadas,
-                            foto:res[0].foto
+                            foto:res[0].foto,
+                            atendidas: res[0].atendidas,
+                            canceladas: res[0].canceladas,
+                            horasPendientes: res[0].horasPendientes,
+                            reservasFuturas:res[0].futurasReservas,
+                            horasPasadas: res[0].horasPasadas
                         }
                         callback(null, stats)
                     }
+                })
+            }
+        })
+    }
+
+    getNextReservationsById(idUsuario,idTipo,callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT *, r.id AS reservationId FROM ucm_aw_riu_res_reservas AS r JOIN ucm_aw_riu_ins_instalaciones AS i ON r.idInstalacion = i.id WHERE fechaReserva >= CURRENT_DATE and idUsuario = ? AND idTipo = ? AND cancelado = 0"
+                connection.query(stringQuery, [idUsuario,idTipo], function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        callback(null,res.map(ele => ({ 
+                            id:ele.reservationId,
+                            fecha: ele.fechaReserva,
+                            nombre :ele.nombre,
+                            ini: ele.horaIni,
+                            fin: ele.horaFin,
+                        })))
+                    }
+                })
+            }
+        })
+    }
+
+    cancelReservationById(idReserva,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "UPDATE ucm_aw_riu_res_reservas SET cancelado = 1 WHERE id = ?"
+                connection.query(stringQuery, idReserva, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,true)
                 })
             }
         })

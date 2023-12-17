@@ -9,14 +9,14 @@
           <h1 class="ms-4 my-2">Mensajes</h1>        
         </div>
         <div class="row mx-4">
-          <div id="listar" class="col rounded-4 whitesmoke scrollable-correo">
+          <div id="listar" class="col rounded-4 whitesmoke scrollable-correo ">
             <div class="row text-center p-3">
               <div id="listarPrincipal" class="col cursorPointer border-end"><h4>Principal</h4></div>
               <div id="listarFavoritos" class="col cursorPointer border-end"><h4>Favoritos</h4></div>
               <div id="listarArchivados" class="col cursorPointer "><h4>Archivados</h4></div>
             </div>
             <hr class="mt-0">
-            <% emails.forEach(ele => { %>
+            <% emails.forEach((ele,i) => { %>
               <div class="border-bottom py-1 rowMail cursorPointer row mx-2 <%if(ele.leido===0) { %> noLeido <% } else { %> leido <% } %><%if(ele.favorito) { %> favorito <%}%><%if(ele.archivado) { %> archivado d-none <%}%>" data-id="<%=ele.id%>">
                 <div class="col-3"><span><%=ele.admin ? ele.nombreOrigen.toUpperCase() : ele.nombreOrigen%> <%=ele.admin ? ele.apellido1.toUpperCase() : ele.apellido1%> <%=ele.admin ? ele.apellido2.toUpperCase() : ele.apellido2%></span></div>
                 <div class="col-6"><span><%=ele.asunto %></div>
@@ -54,8 +54,8 @@
             </div>
             <div class="row">
               <div class="col">
-                <div class="row d-flex justify-content-center">
-                  <div class="rounded-2 p-2 divActionsImage">
+                <div class="row ms-5 d-flex justify-content-center fit-content">
+                  <div class="rounded-2 p-2 divActionsImage flex-column">
                     <img id="favorito" class="mx-2 actionsImage cursorPointer" src="/images/estrella.png" alt="Icono de favoritos">
                     <img id="archivar" class="mx-2 actionsImage cursorPointer" src="/images/archivar.png" alt="Icono de archivar">
                     <img id="eliminar" class="mx-2 actionsImage cursorPointer" src="/images/eliminar.png" alt="Icono de eliminar">
@@ -86,15 +86,13 @@
         <div contenteditable id="enviarCuerpo" class=" mx-3 d-flex mailBody">
           <p id="holderCuerpo">Cuerpo: </p>
         </div>
-        <br>
-        <div class="d-flex align-items-center mx-4">
+        <div class="d-flex align-items-center mx-4 mt-4">
           <button id="sendMail" type="button" class="btn btn-primary w-100">Enviar mensaje</button>
         </div>
 
       </div>
     </div>
-    <script src="../javascripts/mydriver.js"></script>
-    <script src="../javascripts/mails.js"></script>
+    <script src="/javascripts/mails.js"></script>
     <%-include('partials/footer') %>
   </body>
 </html>
