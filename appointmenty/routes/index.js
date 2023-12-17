@@ -43,4 +43,18 @@ router.get("/informacion", function (request, response) {
   response.render("informacion", {pag})
 });
 
+router.get("/getLogo", (request,response) => {
+  midao.getLogo((err,foto) => {
+    if (err) console.log(err)
+    else response.end(foto)
+  })
+})
+
+router.get("/getFavicon", (request,response) => {
+  midao.getFavicon((err,foto) => {
+    if (err) console.log(err)
+    else response.end(foto)
+  })
+})
+
 module.exports = router;

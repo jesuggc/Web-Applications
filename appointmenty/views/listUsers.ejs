@@ -12,12 +12,13 @@
                
                 <div class="row ">
                     <div class="col">
-                        <input class="w-100" type="text" placeholder="Escriba aquí:">
+                        <input id="searchBar" class="w-100" type="text" placeholder="Escriba aquí:">
                     </div>
                     
                     <div class="col-2 mx-3 d-inline border-start ">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected hidden>Ordenar por...</option>
+                        <select id="option" class="form-select" aria-label="Default select example">
+                            <option selected hidden value="0">Listar por...</option>
+                            <option value="0">Sin filtro</option>
                             <option value="1">Nombre</option>
                             <option value="2">Apellidos</option>
                             <option value="3">Facultad</option>
@@ -32,14 +33,14 @@
                     <div class=" rounded-top-4 py-3 text-white negrita claret mt-2">
                         <div id="usuarios" class="row  mx-2">
                             <div class="col-1"><span>Foto</span></div>
-                            <div class="col-3 "><span>Nombre y apellidos</span></div>
+                            <div class="col-3"><span>Nombre y apellidos</span></div>
                             <div class="col-2"><span>Correo</span></div>
                             <div class="col-1"><span>Curso</span></div>
                             <div class="col-2"><span>Facultad </span></div>
                             <div class="col-3"><span>Grado</span></div>
                         </div>
                     </div>
-                    <div id="listar" class="rounded-bottom-4  whitesmoke scrollable-listar">
+                    <div id="listar" class="rounded-bottom-4 whitesmoke scrollable-listar">
                         <% users.forEach(ele => { %>
                             <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="<%=ele.id%>">
                                 <div class="col-1">

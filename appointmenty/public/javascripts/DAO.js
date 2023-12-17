@@ -584,13 +584,47 @@ class DAO {
                             apellido1:ele.apellido1,
                             apellido2:ele.apellido2,
                             correo:ele.correo,
-                            facultad:ele.nombreFacultad
+                            facultad:ele.nombreFacultad,
+                            foto: ele.foto
                         })))
                     }
                 })
             }
         })
     }
+
+    getUsersByInputFiltered(searchInput,option,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = []
+                stringQuery[0] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(u.nombre, ?) or instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2), ?)or instr(correo, ?) or instr(f.nombre, ?) or instr(g.nombre, ?) or instr(u.curso, ?) > 0) and verificado=1 and admin=0;"
+                stringQuery[1] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(u.nombre, ?) > 0) and verificado=1 and admin=0;"
+                stringQuery[2] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(u.apellido1, ?) or instr(u.apellido2, ?) or instr(CONCAT(u.apellido1, ' ', u.apellido2), ?) > 0) and verificado=1 and admin=0;"
+                stringQuery[3] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(f.nombre, ?) > 0) and verificado=1 and admin=0;"
+                stringQuery[4] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(g.nombre, ?) > 0) and verificado=1 and admin=0;"
+                stringQuery[5] = "Select u.*, f.nombre as nombreFacultad, g.nombre as nombreGrado from ucm_aw_riu_usu_usuarios as u join ucm_aw_riu_fac_facultades as f on u.facultad=f.id JOIN ucm_aw_riu_gra_grados as g on u.grado = g.id Where (instr(u.curso, ?) > 0) and verificado=1 and admin=0;"
+                connection.query(stringQuery[option], [searchInput,searchInput,searchInput,searchInput,searchInput,searchInput,searchInput,searchInput], function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else {
+                        callback(null, res.map(ele => ({  
+                            id:ele.id,
+                            nombre:ele.nombre,
+                            apellido1:ele.apellido1,
+                            apellido2:ele.apellido2,
+                            correo:ele.correo,
+                            facultad:ele.nombreFacultad,
+                            grado: ele.nombreGrado,
+                            curso: ele.curso,
+                            foto: ele.foto
+                        })))
+                    }
+                })
+            }
+        })
+    }
+
     listReservationsByName(name, callback){
         this.pool.getConnection((err, connection) => {
             if (err) callback(err, null)
@@ -700,6 +734,23 @@ class DAO {
                     connection.release();
                     if (err) callback(err, null)
                     else callback(null, res[0].favicon)
+                })
+            }
+        })
+    }
+
+    getPertencageStat(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else { 
+                let stringQuery = "SELECT t.nombre, COUNT(*) as contador FROM ucm_aw_riu_res_reservas AS r JOIN ucm_aw_riu_ins_instalaciones AS i on r.idInstalacion = i.id JOIN ucm_aw_riu_tip_tipoinstalacion AS t ON i.idTipo = t.id WHERE idUsuario = ? AND cancelado = 0 GROUP BY t.nombre"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,  res.map(ele => ({  
+                        nombre:ele.nombre,
+                        count :ele.contador,
+                    })))
                 })
             }
         })

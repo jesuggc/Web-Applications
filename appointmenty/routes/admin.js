@@ -104,14 +104,6 @@ router.get("/rols", (request, response) => {//Llama a vista de usuarios verifica
   })
 })
 
-//STATS
-router.get("/stats", (request, response) => {//Llama a vista de estadisticas (AJAX), presentando un select con todas las facultades
-  midao.getFacultades((err, res) => {
-    if (err) console.log("Error: ", err)
-    else response.json(res)
-  })
-})
-
 router.get("/getStudents", (request, response) => {//Genera en vista de estadisticas una lista de todos los estudiantes en la facultad id (AJAX)
   midao.getStudentsByFacId(request.query.id,(err, res) => {
     if (err) console.log("Error: ", err)
@@ -237,18 +229,25 @@ router.post("/updateAppearance", multerFactory.fields([{name:"logo"},{name:"favi
   })
 })
 
-
-router.get("/getLogo", (request,response) => {
-  midao.getLogo((err,foto) => {
-    if (err) console.log(err)
-    else response.end(foto)
+router.get("/filterList", (request,response)=>{
+  let inputSearch = request.query.inputSearch;
+  let option = request.query.option;
+  midao.getUsersByInputFiltered(inputSearch,option,(err,users) => {
+    if(err) console.log("Error: ", err)
+    else response.json(users);
   })
 })
 
-router.get("/getFavicon", (request,response) => {
-  midao.getFavicon((err,foto) => {
-    if (err) console.log(err)
-    else response.end(foto)
+router.get("/stats", (request,response) => {
+  let id = Number(request.params.id)
+  response.render("stats")
+})
+
+router.get("/pertecentageStat", (request,response) => {
+  let id = Number(request.params.id)
+  midao.getPertencageStat(2 ,(err,res) => {
+    if(err) console.log("Error: ", err)
+    else response.json(res)
   })
 })
 

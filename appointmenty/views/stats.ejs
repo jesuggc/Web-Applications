@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%-include('partials/head') %>
+  <body >
+    <div class="fakeBody pistachio"> 
+      <%-include('partials/header') %>
+      <div class="row pistachio ">
+        <%-include('partials/adminNavbar') %>
+          <div id="panel" class=" alignJustify mb-3">
+              <div class=" text-center">
+                  <h1>Estadísticas de: </h1>
+                  <div id="circlesRow" class="row">
+                    
+                  </div>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <script src="/javascripts/circles.js"></script>
+    <script src="/javascripts/stats.js"></script>
+    <%-include('partials/footer') %>
+  </body>
+</html>
