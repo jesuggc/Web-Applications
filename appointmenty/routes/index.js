@@ -21,6 +21,13 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/headerOptions', function(req, res, next) {
+  midao.getOptions((err,options) => {
+    if(err) console.log("Error: ", err)
+    else res.json(options)
+  })
+});
+
 router.get("/group/:idFacultad", (request, response) => {
   let idFacultad = request.params.idFacultad
   midao.getGrados(idFacultad, (err,resultado)=> {

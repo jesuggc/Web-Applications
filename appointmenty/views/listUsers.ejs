@@ -46,9 +46,9 @@
                             <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="<%=ele.id%>">
                                 <div class="col-1">
                                     <% if (!ele.foto){ %>
-                                    <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg">
+                                    <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="/images/noPicture.jpg" alt="Foto de perfil por defecto">
                                     <% } else{ %>
-                                    <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>">
+                                    <img style="width: 4em; mix-blend-mode:darken;" class="loginImage" src="/users/profilePhoto/<%=ele.id%>" alt="Foto perfil">
                                     <% } %>
                                 </div>
                                 <div class="col-2"><span><%=ele.nombre%> <%=ele.apellido1%> <%=ele.apellido2%></span></div>
