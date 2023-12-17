@@ -1,7 +1,7 @@
 <header class="sticky-top pistachio" >
   <div class="d-flex justify-content-between align-items-center">
-    <div class="align-items-start">
-      <a href="/"><img class="h-auto " style="max-height: 10vh;" src="/getLogo" alt="Logo de la página"></a>
+    <div >
+      <a href="/"><img src="/getLogo" alt="Logo de la página"></a>
 
     </div>
     <% if(!locals.user) { %>
@@ -10,11 +10,11 @@
       </div>
     <% } else { %>  
       <div class="dropdown me-3">
-        <button style="max-height: 10vh;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle mh10vh" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           <%if(!locals.user.foto) { %>
-            <img style="max-height: 8vh;" class="rounded-circle borderProfile" src="/images/noPicture.jpg" alt="Imagen de perfil del usuario por defecto">
+            <img class="rounded-circle borderProfile mh8vh" src="/images/noPicture.jpg" alt="Imagen de perfil del usuario por defecto">
           <%} else {%>  
-            <img style="max-height: 8vh;" class="rounded-circle borderProfile" src="/users/profilePhoto/<%=user.id%>" alt="Imagen de perfil del usuario">
+            <img class="rounded-circle borderProfile mh8vh" src="/users/profilePhoto/<%=user.id%>" alt="Imagen de perfil del usuario">
           <% }%> 
         </button>
         <ul class="dropdown-menu multi-level text-center">

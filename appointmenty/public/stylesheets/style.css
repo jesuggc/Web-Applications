@@ -23,7 +23,7 @@ header {
 }
 
 header img{
-  max-height: 10vh;
+  max-height: 8vh;
 }
 
 input {
@@ -375,6 +375,28 @@ body::-webkit-scrollbar {
 .detailsWidth{
   width: fit-content;
 }
+
+.mh10vh {
+  max-height: 10vh
+}
+.mh8vh {
+  max-height: 8vh
+}
+
+.petitionsImg {
+  width: 12em;
+  mix-blend-mode: darken;
+}
+
+.listImg {
+  width: 4em;
+  mix-blend-mode: darken;
+}
+
+.cadetblue {
+  background-color: cadetblue;
+}
+
 /* -------------ID------------- */
 #cuerpo {
   text-align: justify;

@@ -25,7 +25,7 @@ $("#searchBar").on("keyup", function() {
                     $("#listar").append(`
                     <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="${ele.id}">
                         <div class="col-1">
-                            <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="${ruta} alt="Imagen de perfil del usuario">
+                            <img class="loginImage listImg" src="${ruta} alt="Imagen de perfil del usuario">
                         </div>
                         <div class="col-3"><span>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</span></div>
                         <div class="col-2"><span>${ele.correo}</span></div>
@@ -68,7 +68,7 @@ $("#option").on("change", function() {
                     $("#listar").append(`
                     <div id="usuarios" class="row border-bottom py-1 align-items-center mx-2 " data-id="${ele.id}">
                         <div class="col-1">
-                            <img style="width: 4em;mix-blend-mode: darken;" class="loginImage" src="${ruta}" alt="Imagen de perfil del usuario">
+                            <img class="loginImage listImg" src="${ruta}" alt="Imagen de perfil del usuario">
                         </div>
                         <div class="col-3"><span>${ele.nombre} ${ele.apellido1} ${ele.apellido2}</span></div>
                         <div class="col-2"><span>${ele.correo}</span></div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-12-2023 a las 23:05:59
+-- Tiempo de generación: 17-12-2023 a las 23:54:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,8 +38,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('-kGw2K7Oj2s1ZcBZS_skZVS784fnWcq7', 1702937072, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":2,\"nombre\":\"a\",\"apellido1\":\"a\",\"apellido2\":\"a\",\"correo\":\"a\",\"facultad\":20,\"grado\":113,\"curso\":3,\"verificado\":1,\"admin\":1,\"foto\":null}}'),
-('U9p0EgPanEHi4FDXgV6_HeebwnnHO6L_', 1702936997, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"facultad\":1,\"grado\":1,\"curso\":1,\"verificado\":1,\"admin\":1,\"foto\":null}}');
+('-kGw2K7Oj2s1ZcBZS_skZVS784fnWcq7', 1702939979, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":2,\"nombre\":\"a\",\"apellido1\":\"a\",\"apellido2\":\"a\",\"correo\":\"a\",\"facultad\":20,\"grado\":113,\"curso\":3,\"verificado\":1,\"admin\":1,\"foto\":null}}'),
+('U9p0EgPanEHi4FDXgV6_HeebwnnHO6L_', 1702937610, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":6,\"nombre\":\"admin\",\"apellido1\":\"adminez\",\"apellido2\":\"adminez\",\"correo\":\"admin@ucm.es\",\"facultad\":1,\"grado\":1,\"curso\":1,\"verificado\":1,\"admin\":1,\"foto\":null}}');
 
 -- --------------------------------------------------------
 
@@ -362,8 +362,7 @@ INSERT INTO `ucm_aw_riu_ins_instalaciones` (`id`, `nombre`, `idFacultad`, `aforo
 (16, 'Juzgado F', 12, 25, 1, NULL),
 (17, 'Sala de debate', 12, 8, 3, NULL),
 (18, 'Debates', 18, 3, 2, 0x5b6f626a6563742048544d4c496e707574456c656d656e745d),
-(19, 'Click para modificar\n                    ', 0, 1, 0, 0x756e646566696e6564),
-(20, 'Click para modificar\n                    ', 0, 1, 0, 0x756e646566696e6564);
+(26, 'Click para modifiqwecar\n                        ', 9, 12, 2, 0x5b6f626a6563742048544d4c496e707574456c656d656e745d);
 
 -- --------------------------------------------------------
 
@@ -435,11 +434,7 @@ INSERT INTO `ucm_aw_riu_tip_tipoinstalacion` (`id`, `nombre`, `disponibilidadIni
 (1, 'Laboratorios', 9, 20, 'colectivo', NULL),
 (2, 'Salas de grados', 9, 19, 'colectivo', NULL),
 (3, 'Salas de reunión', 13, 18, 'colectivo', NULL),
-(4, 'Salón de actos', 12, 14, 'colectivo', NULL),
-(6, 'Instalación deportiva', 9, 20, 'colectivo', NULL),
-(7, 'Click para modificar', 9, 20, 'Selecciona una opció', NULL),
-(8, 'Martín', 9, 20, 'individual', 0x5b6f626a6563742048544d4c496e707574456c656d656e745d),
-(9, 'martin', 10, 19, 'individual', 0x5b6f626a6563742048544d4c496e707574456c656d656e745d);
+(4, 'Salón de actos', 12, 14, 'colectivo', NULL);
 
 -- --------------------------------------------------------
 
@@ -580,7 +575,7 @@ ALTER TABLE `ucm_aw_riu_gra_grados`
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_ins_instalaciones`
 --
 ALTER TABLE `ucm_aw_riu_ins_instalaciones`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_res_reservas`
@@ -592,7 +587,7 @@ ALTER TABLE `ucm_aw_riu_res_reservas`
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_tip_tipoinstalacion`
 --
 ALTER TABLE `ucm_aw_riu_tip_tipoinstalacion`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_riu_usu_usuarios`

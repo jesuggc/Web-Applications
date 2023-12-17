@@ -507,19 +507,19 @@ class DAO {
     //     })
     // }
     
-    // getTypeInstallationPhoto(id,callback){
-        //     this.pool.getConnection((err, connection) => {
-        //         if (err) callback(err, null)
-        //         else {
-        //             let stringQuery = "SELECT foto FROM ucm_aw_riu_tip_tipoinstalacion WHERE id = ?"
-        //             connection.query(stringQuery, id, function (err, res) {
-        //                 connection.release();
-        //                 if (err) callback(err, null)
-        //                 else callback(null,res[0].foto)
-        //             })
-        //         }
-        //     })
-        // }
+    getTypeInstallationPhoto(id,callback){
+            this.pool.getConnection((err, connection) => {
+                if (err) callback(err, null)
+                else {
+                    let stringQuery = "SELECT foto FROM ucm_aw_riu_tip_tipoinstalacion WHERE id = ?"
+                    connection.query(stringQuery, id, function (err, res) {
+                        connection.release();
+                        if (err) callback(err, null)
+                        else callback(null,res[0].foto)
+                    })
+                }
+            })
+        }
 
     getIdByEmail(email, callback) {
         this.pool.getConnection((err, connection) => {

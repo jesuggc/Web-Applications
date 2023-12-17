@@ -2,6 +2,7 @@
 <html lang="es">
   <%-include('partials/head') %>
   <body >
+    <div class="fakeBody pistachio">
     <%-include('partials/header') %>
     <div class="row pistachio">
         <%-include('partials/adminNavbar') %>
@@ -13,7 +14,7 @@
                     <h1 id="nombreTipo" contenteditable="true" class="mx-auto color-white">Click para modificar</h1>
                 </div>
             </div>
-            <div class="col-4 ">
+            <div class="col-4">
                 <div class="row my-1">
                     <p>  
                         <span>Disponible desde las </span> <input class="w-25" id="horaIni" type="number" name="numero" value="9" min="9" max="19">
@@ -56,7 +57,6 @@
                 </div>  
                 <div class="row">
                     <p>
-                        <span>Aforo máximo: </span><input class="w-25" id="aforoMax" type="number" name="numero" value="1" min="1">
                         <span>Tipo: </span>
                         <select class="w-50" id="tipoInstalacion" name="tipo">
                             <option hidden selected>Selecciona una opción</option>
@@ -66,19 +66,18 @@
                         </select> 
                     </p>
                 </div>  
-                <div class="row">
-                    <p><span>Imagen: </span><input id="formFile" class="form-control" name="imagen" accept="image/png, image/jpg, image/jpeg" type="file"></p>
-                </div>                
             </div>
-            <div class="col-8"> 
-                <div id="divInstalacion" class="col rounded-5 text-center me-2 installationCard">
+            <div class="col-4"> 
+                <div id="divInstalacion" class="divImage col flex-column rounded-5 text-center me-2 installationCard">
                     <br>
-                    <h3 contenteditable id="nombreInstalacion">Click para modificar</h>
-                    <h5 class="mt-4">Aforo máximo: <span contenteditable id="aforoInstalacion"> 2</span> </h5>
-                  </div>
-            </div> 
-            <div class="d-flex justify-content-center">
-                <button id="newInstallation" class="btn btn-lg btn-primary mb-2" type="submit" >Añadir instalación</button>
+                    <h3 contenteditable id="nombreInstalacion" class="bg-secondary">Click para modificar</h>
+                        <h5 class="mt-4 bg-secondary">Aforo máximo: <span contenteditable id="aforoInstalacion"> 1</span> </h5>
+                    </div>
+                </div>
+                <div class="col-4">
+                    
+                <p><span>Imagen: </span><input id="instalacionFile" class="form-control" name="imagen" accept="image/png, image/jpg, image/jpeg" type="file"></p>
+                <button id="newInstall" class="btn btn-lg btn-primary mb-2" type="submit" >Añadir instalación</button>
             </div> 
         </div>
     </div>   
@@ -94,8 +93,9 @@
           </div>
         </div>
     </div>
-    <script src="/javascripts/admin.js"></script>
-    <script src="/javascripts/newInstallation.js"></script>
-    <%-include('partials/footer') %>
-  </body>
+</div>
+<%-include('partials/footer') %>
+<script src="/javascripts/admin.js"></script>
+<script src="/javascripts/newInstallation.js"></script>
+</body>
 </html>

@@ -64,4 +64,11 @@ router.get("/getFavicon", (request,response) => {
   })
 })
 
+router.get("/optionPhoto/:id", (request,response) => {
+  let id = Number(request.params.id)
+  midao.getTypeInstallationPhoto(id,(err,foto) => {
+    if(err) console.log(err)
+    else response.end(foto)
+  })
+})
 module.exports = router;

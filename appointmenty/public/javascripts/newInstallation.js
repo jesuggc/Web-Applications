@@ -56,13 +56,15 @@ $("#instalacionFile").on("input", function(){
         }
     })
 })
-$("#newInstallation").on("click", () => {
+
+$("#newInstall").on("click", function() {
     let idFacultad = $("#facultad").val().split("#")[0]
-    let aforoMax =  $("#aforoMax").val()
+    let aforoMax =  $("#aforoInstalacion").text()
     let tipoInstalacion =  $("#tipoInstalacion").val()
     let nombreInstalacion = $("#nombreInstalacion").text()
     var inputFile = $('#instalacionFile')[0];
     const formData = new FormData();
+    console.log(inputFile)
     formData.append('foto', inputFile);
     
     $.ajax({
@@ -75,5 +77,5 @@ $("#newInstallation").on("click", () => {
             toastBootstrap.show()
         })
     })
-    console.log(idFacultad,aforoMax,tipoInstalacion,nombreInstalacion)
+    
 })
