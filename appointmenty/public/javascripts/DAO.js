@@ -493,19 +493,19 @@ class DAO {
             }
         })
     }
-    // getInstallationPhoto(id,callback){
-    //     this.pool.getConnection((err, connection) => {
-    //         if (err) callback(err, null)
-    //         else {
-    //             let stringQuery = "SELECT foto FROM ucm_aw_riu_ins_installation WHERE id = ?"
-    //             connection.query(stringQuery, id, function (err, res) {
-    //                 connection.release();
-    //                 if (err) callback(err, null)
-    //                 else callback(null,res[0].foto)
-    //             })
-    //         }
-    //     })
-    // }
+    getInstallationPhoto(id,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(err, null)
+            else {
+                let stringQuery = "SELECT foto FROM ucm_aw_riu_ins_instalaciones WHERE id = ?"
+                connection.query(stringQuery, id, function (err, res) {
+                    connection.release();
+                    if (err) callback(err, null)
+                    else callback(null,res[0].foto)
+                })
+            }
+        })
+    }
     
     getTypeInstallationPhoto(id,callback){
             this.pool.getConnection((err, connection) => {
@@ -515,7 +515,10 @@ class DAO {
                     connection.query(stringQuery, id, function (err, res) {
                         connection.release();
                         if (err) callback(err, null)
-                        else callback(null,res[0].foto)
+                        else {
+                            if(!res[0]) callback(null,null)
+                            else console.log(res[0].foto);callback(null,res[0].foto)
+                        }
                     })
                 }
             })
@@ -559,6 +562,7 @@ class DAO {
                 connection.query(stringQuery, idTipo, function (err, res) {
                     connection.release();
                     if (err) callback(err, null)
+                    else if(res.length === 0) callback(null,null)
                     else {
                         let tipo=res[0].nombre
                         callback(null,tipo)

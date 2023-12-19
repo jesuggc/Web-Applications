@@ -68,7 +68,15 @@ router.get("/optionPhoto/:id", (request,response) => {
   let id = Number(request.params.id)
   midao.getTypeInstallationPhoto(id,(err,foto) => {
     if(err) console.log(err)
-    else response.end(foto)
+    else {
+      let imageUrl = null
+      if(foto) {
+        const imageBase64 = foto.toString('base64');
+        imageUrl = 'data:image/jpeg;base64,' + imageBase64;
+
+      }
+      response.json({imageUrl})
+    } 
   })
 })
 module.exports = router;

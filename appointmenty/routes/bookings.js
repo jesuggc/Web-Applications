@@ -65,6 +65,7 @@ router.get('/instalaciones', (request, response) => {
 })
 
 router.get("/:id/busyHours", (request, response) => {
+  console.log("RUTA ID:", )
   midao.getReservationsByDayAndInstallation(request.query.fecha,request.query.idInstalacion,(err, horas) => {
     if(err) console.log(err)
     else {
@@ -93,11 +94,21 @@ router.post("/:id/createBooking", (request, response) => {
   })
 })
 
-router.get("/installationPhoto/:id", (request,response) => { //Devuelve la foto de una instalacion o sala especifica
+router.get("/:id/installationPhoto/:installationId", (request,response) => { //Devuelve la foto de una instalacion o sala especifica
   let id = Number(request.params.id)
-  midao.getInstallationPhoto(id,(err,foto) => {
+  let installationId = Number(request.params.installationId)
+  midao.getInstallationPhoto(installationId,(err,foto) => {
     if(err) console.log(err)
-    else response.end(foto)
+    // else response.end(foto)
+    else {
+      let imageUrl = null
+      if(foto) {
+        const imageBase64 = foto.toString('base64');
+        imageUrl = 'data:image/jpeg;base64,' + imageBase64;
+
+      }
+      response.json({imageUrl})
+    } 
   })
 })
 

@@ -21,7 +21,7 @@
             <h1 id="title" data-id="<%=ini%>#<%=fin%>"><%=nombre%> - <%=tipo%></h1>
             <% if(installations.length === 0) { %>
               <h2 id="emptyMessage" class="red text-center my-5"> No existe ninguna instalación de este tipo en tu facultad </h2>
-                <div class="d-flex align-items-center justify-content-center">
+                <div id ="emptyDiv" class="d-flex align-items-center justify-content-center">
                     <a href="/"><button type="button" class="btn btn-large btn-primary">Volver</button></a> 
                 </div>
             <% } %>

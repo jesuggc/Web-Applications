@@ -35,10 +35,12 @@ $("#facultad").on("change", function() {
         data: {idFacultad,idTipo},
         success: function(response) {
             $("#emptyMessage").remove()
+            $("#emptyDiv").empty()
+            $("#emptyDiv").remove()
             if(response.length === 0) {
                 $("#titleRow").append(`
                 <h2 id="emptyMessage" class="red text-center my-5"> No existe ninguna instalación de este tipo en tu facultad </h2>
-                <div class="d-flex align-items-center justify-content-center">
+                <div id="emptyDiv" class="d-flex align-items-center justify-content-center">
                     <a href="/"><button type="button" class="btn btn-large btn-primary">Volver</button></a> 
                 </div>
                 `)
@@ -62,6 +64,22 @@ $("#facultad").on("change", function() {
                     $(this).closest(".instalacion").removeClass("d-none")
                 }
             })
+
+            $(".installationCard").each(function (index, element) {
+                if(!$(element).hasClass("d-none")) {
+                    let id = $(element).data("id")
+                    $.ajax({
+                      url: `/bookings/${idTipo}/installationPhoto/${id}`,
+                      method: 'GET',
+                      responseType: 'ArrayBuffer',
+                      success: function (data) {
+                        
+                        let url = data["imageUrl"]
+                        $(element).css("background-image", `url(${url})`)
+                      }
+                    })
+                }
+              })
             
         }
     })
@@ -176,11 +194,13 @@ $(".cancelReservation").on("click", function() {
 
 function callBusy(fecha,idInstalacion) {
     resetBusy()
+    console.log(idTipo)
     $.ajax({
         url: `/bookings/${idTipo}/busyHours`,
         method: "GET",
         data: {fecha,idInstalacion},
         success: function(response) {
+            console.log(response.horas)
             lockBusy(response.horas)
             diaYaReservado = response.diaYaReservado
         }

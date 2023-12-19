@@ -111,7 +111,7 @@ router.get("/getStudents", (request, response) => {//Genera en vista de estadist
   })
 })
 
-router.get("/newInstallation", (request, response) => {
+router.get("/newInstallation",  (request, response) => {
   midao.getOptions(((err,options) => {
     if(err) console.log("Error: ", err)
     else {
@@ -123,29 +123,30 @@ router.get("/newInstallation", (request, response) => {
   }))
 })
 
-router.post("/newTypeInstallation", (request, response) => {
+router.post("/newTypeInstallation", multerFactory.single("foto"), (request, response) => {
   let horaIni = request.body.horaIni
   let horaFin = request.body.horaFin
   let tipo = request.body.tipo
   let nombreTipo = request.body.nombreTipo
-  let foto =request.body.foto
+  let foto =request.file.buffer
+  console.log("TIPO",foto)
   midao.createTypeInstallation(nombreTipo,horaIni, horaFin, tipo,foto, (err,ok) => {
     if(err) console.log("Error: ", err)
     else response.json(ok)
   })
 })
 
-router.post("/newInstallation", (request, response) => {
-  let nombre = request.body.nombreInstalacion
-  let idFacultad = request.body.idFacultad
-  let aforo = request.body.aforoMax
-  let idTipo = request.body.tipoInstalacion
-  let foto= request.body.foto
-
+router.post("/newInstallation", multerFactory.single("foto") ,(request, response) => {
+  let nombre = request.body["nombreInstalacion"].trim()
+  let idFacultad = request.body["idFacultad"]
+  let aforo = request.body["aforoMax"].trim()
+  let idTipo = request.body["tipoInstalacion"]
+  let foto = request.file.buffer
   midao.createInstallation(nombre, idFacultad, aforo, idTipo,foto, (err,ok) => {
     if(err) console.log("Error: ", err)
-    else response.json(ok)
+    else response.json(true)
   })
+ 
 })
 
 router.get("/getFacultades", (request, response) => {
